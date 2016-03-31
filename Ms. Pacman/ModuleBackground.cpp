@@ -59,6 +59,6 @@ update_status ModuleBackground::Update()
 	// Draw everything --------------------------------------
 
 	//App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
-	App->render->Blit(graphics, 0, 0, &map1, 1.0f); // map 1
+	App->render->Blit(graphics, 2, 15, &map1, 1.0f); // map 1
 	return UPDATE_CONTINUE;
 }
