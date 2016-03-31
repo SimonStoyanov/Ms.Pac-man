@@ -27,8 +27,8 @@ bool ModuleWindow::Init()
 	else
 	{
 		//Create window
-		int width = SCREEN_WIDTH * SCREEN_SIZE;
-		int height = SCREEN_HEIGHT * SCREEN_SIZE;
+		int width = SCREEN_WIDTH * 2;
+		int height = SCREEN_HEIGHT * 2;
 		Uint32 flags = SDL_WINDOW_SHOWN;
 
 		if(WIN_FULLSCREEN == true)
@@ -43,7 +43,7 @@ bool ModuleWindow::Init()
 		if(WIN_FULLSCREEN_DESKTOP == true)
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 
-		window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+		window = SDL_CreateWindow("", 7, 31, width, height, flags);
 
 		if(window == NULL)
 		{

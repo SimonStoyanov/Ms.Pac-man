@@ -20,6 +20,25 @@ ModuleBackground::ModuleBackground()
 	map1.y = 1;
 	map1.w = 224;
 	map1.h = 248;
+	/* 
+	// Map 2
+	map2.x = 228;
+	map2.y = 1;
+	map2.w = 224;
+	map2.h = 248;
+
+	// Map 3
+	map3.x = 0;
+	map3.y = 253;
+	map3.w = 224;
+	map3.h = 248;
+
+	// Map 4
+	map4.x = 228;
+	map4.y = 253;
+	map4.w = 224;
+	map4.h = 248;
+	*/
 }
 
 ModuleBackground::~ModuleBackground()
@@ -40,6 +59,6 @@ update_status ModuleBackground::Update()
 	// Draw everything --------------------------------------
 
 	//App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
-	App->render->Blit(graphics, 30, 30, &map1, 1.0f); // map 1
+	App->render->Blit(graphics, 0, 0, &map1, 1.0f); // map 1
 	return UPDATE_CONTINUE;
 }
