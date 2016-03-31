@@ -12,11 +12,29 @@ ModulePlayer::ModulePlayer()
 	position.x = 109;
 	position.y = 209;
 
-	// idle animation
-	idle.PushBack({1, 1, 11, 14});
-	idle.PushBack({18, 1, 13, 14});
-	idle.PushBack({34, 1, 15, 14});
-	idle.speed = 0.25f;
+	// right animation
+	right.PushBack({ 34, 1, 15, 14 });
+	right.PushBack({ 18, 1, 13, 14 });
+	right.PushBack({ 1, 1, 11, 14 });
+	right.speed = 0.25f;
+
+	// left animation
+	left.PushBack({ 34, 35, 15, 14 });
+	left.PushBack({ 18, 35, 13, 14 });
+	left.PushBack({ 1, 35, 11, 14 });
+	left.speed = 0.25f;
+
+	// up animation
+	up.PushBack({ 34, 51, 14, 15 });
+	up.PushBack({ 18, 51, 14, 13 });
+	up.PushBack({ 1, 51, 14, 11 });
+	up.speed = 0.25f;
+
+	// down animation
+	down.PushBack({ 34, 18, 14, 15 });
+	down.PushBack({ 18, 18, 14, 13 });
+	down.PushBack({ 1, 18, 14, 11 });
+	down.speed = 0.25f;
 
 }
 
@@ -29,36 +47,40 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
+	prev_anim = &right;
 	return ret;
 }
 
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	Animation* current_animation = &idle;
+	Animation* current_animation = prev_anim;
 
 	int speed = 1;
 
 	if(App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
-		
+		current_animation = &right;
 		position.x += speed;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
 	{
+		current_animation = &left;
 		position.x -= speed;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
 	{
+		current_animation = &up;
 		position.y -= speed;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_S] == 1)
 	{
+		current_animation = &down;
 		position.y += speed;
 	}
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
-
+	prev_anim = current_animation;
 	App->render->Blit(graphics, position.x, position.y - r.h, &r);
 	
 	return UPDATE_CONTINUE;

@@ -20,7 +20,7 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-	Animation idle;
+	Animation* prev_anim;
 	Animation right;
 	Animation left;
 	Animation up;
