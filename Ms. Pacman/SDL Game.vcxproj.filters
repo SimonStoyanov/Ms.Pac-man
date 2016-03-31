@@ -38,9 +38,6 @@
     <ClInclude Include="ModuleTextures.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleBackground.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModulePlayer.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -49,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleBackground_Map1.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -73,10 +73,10 @@
     <ClCompile Include="Globals.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleBackground.cpp">
+    <ClCompile Include="ModulePlayer.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
+    <ClCompile Include="ModuleBackground_Map1.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

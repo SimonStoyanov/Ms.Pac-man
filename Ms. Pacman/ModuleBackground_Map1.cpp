@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleBackground.h"
+#include "ModuleBackground_Map1.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 

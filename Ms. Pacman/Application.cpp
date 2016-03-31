@@ -3,7 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
-#include "ModuleBackground.h"
+#include "ModuleBackground_Map1.h"
 #include "ModulePlayer.h"
 
 Application::Application()
