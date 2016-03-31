@@ -8,13 +8,8 @@
 
 ModuleBackground::ModuleBackground()
 {
-	/* ground
-	ground.x = 8;
-	ground.y = 391;
-	ground.w = 896;
-	ground.h = 72;
 
-	 Woman Animation
+	/*Woman Animation
 	woman.PushBack({ 625, 17, 32, 56 });
 	woman.PushBack({ 625, 81, 32, 56 });
 	woman.PushBack({ 625, 145, 32, 56 });
@@ -22,9 +17,9 @@ ModuleBackground::ModuleBackground()
 
 	// Map 1
 	map1.x = 0;
-	map1.y = 0;
-	map1.w = 300;
-	map1.h = 300;
+	map1.y = 1;
+	map1.w = 224;
+	map1.h = 248;
 }
 
 ModuleBackground::~ModuleBackground()
