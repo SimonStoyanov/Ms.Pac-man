@@ -19,12 +19,9 @@ public:
 public:
 	
 	SDL_Texture* graphics = nullptr;
-	SDL_Rect ground;
-	SDL_Rect background;
-	SDL_Rect ship;
-	Animation woman;
-	int move_ship = -15;
-	Animation flag;
+	SDL_Rect map1;
+
+	//Animation flag;
 
 };
 
