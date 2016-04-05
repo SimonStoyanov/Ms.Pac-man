@@ -47,7 +47,13 @@
     <ClInclude Include="Animation.h">
       <Filter>Containers</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFadeToBlack.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
     <ClInclude Include="ModuleBackground_Map1.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleBackground_Map2.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
@@ -76,7 +82,13 @@
     <ClCompile Include="ModulePlayer.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleFadeToBlack.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
     <ClCompile Include="ModuleBackground_Map1.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleBackground_Map2.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

@@ -19,9 +19,9 @@ ModulePlayer::ModulePlayer()
 	right.speed = 0.25f;
 
 	// left animation
-	left.PushBack({ 34, 35, 15, 14 });
-	left.PushBack({ 18, 35, 13, 14 });
-	left.PushBack({ 1, 35, 11, 14 });
+	left.PushBack({ 34, 36, 15, 14 });
+	left.PushBack({ 18, 36, 13, 14 });
+	left.PushBack({ 1, 36, 11, 14 });
 	left.speed = 0.25f;
 
 	// up animation
@@ -31,9 +31,9 @@ ModulePlayer::ModulePlayer()
 	up.speed = 0.25f;
 
 	// down animation
-	down.PushBack({ 34, 18, 14, 15 });
-	down.PushBack({ 18, 18, 14, 13 });
-	down.PushBack({ 1, 18, 14, 11 });
+	down.PushBack({ 34, 11, 14, 15 });
+	down.PushBack({ 18, 11, 14, 13 });
+	down.PushBack({ 1, 11, 14, 11 });
 	down.speed = 0.25f;
 
 }
@@ -58,7 +58,7 @@ update_status ModulePlayer::Update()
 
 	int speed = 1;
 
-	if(App->input->keyboard[SDL_SCANCODE_D] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
 		current_animation = &right;
 		position.x += speed;
@@ -82,6 +82,6 @@ update_status ModulePlayer::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
 	App->render->Blit(graphics, position.x, position.y - r.h, &r);
-	
+
 	return UPDATE_CONTINUE;
 }

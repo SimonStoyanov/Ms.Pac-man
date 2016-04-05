@@ -8,8 +8,8 @@
 ModuleRender::ModuleRender() : Module()
 {
 	camera.x = camera.y = 0;
-	camera.w = SCREEN_WIDTH / 2;
-	camera.h = SCREEN_HEIGHT / 2;
+	camera.w = SCREEN_WIDTH;
+	camera.h = SCREEN_HEIGHT;
 }
 
 // Destructor
@@ -57,11 +57,10 @@ update_status ModuleRender::Update()
 	if(App->input->keyboard[SDL_SCANCODE_DOWN] == 1)
 		camera.y -= speed;
 
-	// TODO 1: Make the camera move left and right
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1)
+	if(App->input->keyboard[SDL_SCANCODE_LEFT] == 1)
 		camera.x += speed;
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == 1)
+	if(App->input->keyboard[SDL_SCANCODE_RIGHT] == 1)
 		camera.x -= speed;
 
 	return update_status::UPDATE_CONTINUE;

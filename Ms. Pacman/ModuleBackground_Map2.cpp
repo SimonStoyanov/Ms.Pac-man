@@ -8,10 +8,10 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 
-ModuleBackgroundMap1::ModuleBackgroundMap1()
+ModuleBackgroundMap2::ModuleBackgroundMap2()
 {
 	// Map 1
-	map1 = {0, 0, 224, 248};
+	map2 = { 224, 0, 224, 248 };
 
 	//// flag animation
 	//water.PushBack({8, 447, 283, 9});
@@ -20,41 +20,43 @@ ModuleBackgroundMap1::ModuleBackgroundMap1()
 	//water.speed = 0.02f;
 }
 
-ModuleBackgroundMap1::~ModuleBackgroundMap1()
+ModuleBackgroundMap2::~ModuleBackgroundMap2()
 {}
 
 // Load assets
-bool ModuleBackgroundMap1::Start()
+bool ModuleBackgroundMap2::Start()
 {
-	LOG("Loading maps(1).");
+	LOG("Loading maps(2).");
 	bool ret = true;
 	graphics = App->textures->Load("maps.png");
 
 	// Enable (and properly disable) the player module
 	App->player->Enable();
+
 	return ret;
 }
 
 // Load assets
-bool ModuleBackgroundMap1::CleanUp()
+bool ModuleBackgroundMap2::CleanUp()
 {
-	LOG("Unloading Map1 stage.");
+	LOG("Unloading Map2 stage");
 	return true;
 }
 
 // Update: draw background
-update_status ModuleBackgroundMap1::Update()
+update_status ModuleBackgroundMap2::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 2, 15, &map1, 1.0f); // map 1
-	
+	App->render->Blit(graphics, 2, 15, &map2, 1.0f); // map 1
+
 	//App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation
 
 	// Load scene when press space
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
-		App->fade->FadeToBlack(App->map1, App->map2, 2.0F);
+		App->fade->FadeToBlack(App->map2, App->map1, 2.0F);
 	}
+
 	return UPDATE_CONTINUE;
 }

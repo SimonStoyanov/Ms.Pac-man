@@ -26,7 +26,7 @@ public:
 	Animation up;
 	Animation down;
 	iPoint position;
-	
+
 
 };
 

@@ -1,5 +1,5 @@
-#ifndef __MAP1_H__
-#define __MAP1_H__
+#ifndef __MAP2_H__
+#define __MAP2_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -7,11 +7,11 @@
 
 struct SDL_Texture;
 
-class ModuleBackgroundMap1 : public Module
+class ModuleBackgroundMap2 : public Module
 {
 public:
-	ModuleBackgroundMap1();
-	~ModuleBackgroundMap1();
+	ModuleBackgroundMap2();
+	~ModuleBackgroundMap2();
 
 	bool Start();
 	update_status Update();
@@ -25,7 +25,7 @@ public:
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation water;
-	SDL_Rect map1;
+	SDL_Rect map2;
 };
 
 #endif // __MODULESCENEHONDA_H__
