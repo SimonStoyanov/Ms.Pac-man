@@ -31,9 +31,9 @@ ModulePlayer::ModulePlayer()
 	up.speed = 0.25f;
 
 	// down animation
-	down.PushBack({ 33, 18, 14, 14 });
-	down.PushBack({ 17, 18, 14, 14 });
-	down.PushBack({ 1, 18, 14, 14 });
+	down.PushBack({ 33, 17, 14, 15 });
+	down.PushBack({ 17, 17, 14, 15 });
+	down.PushBack({ 1, 17, 14, 15 });
 	down.speed = 0.25f;
 
 }
