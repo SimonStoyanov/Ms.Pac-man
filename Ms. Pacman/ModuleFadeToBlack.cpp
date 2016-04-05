@@ -28,58 +28,56 @@ bool ModuleFadeToBlack::Start()
 // Update: draw background
 update_status ModuleFadeToBlack::Update()
 {
-	if(start_time > 0)
+	if (current_step == fade_step::none)
+		return UPDATE_CONTINUE;
+
+	Uint32 now = SDL_GetTicks() - start_time;
+	float normalized = MIN(1.0f, (float)now / (float)total_time);
+
+	switch (current_step)
 	{
-		Uint32 now = SDL_GetTicks() - start_time;
-		float normalized = (float) now / (float) total_time;
-		
-		if(normalized > 1.0f)
-			normalized = 1.0f;
-		
-		if(fading_in == false)
-			normalized = 1.0f - normalized;
+	case fade_step::fade_to_black:
+	{
+									 if (now >= total_time)
+									 {
+										 to_disable->Disable();
+										 to_enable->Enable();
+										 total_time += total_time;
+										 start_time = SDL_GetTicks();
+										 current_step = fade_step::fade_from_black;
+									 }
+	} break;
 
-		LOG("%f", normalized);
-		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8) (normalized * 255.0f));
-		SDL_RenderFillRect(App->render->renderer, &screen);
+	case fade_step::fade_from_black:
+	{
+									   normalized = 1.0f - normalized;
 
-		if(now >= total_time)
-		{
-			if(fading_in == true)
-			{
-				// Enable / disable the modules received when FadeToBlacks() gets called
-				if (App->map1->IsEnabled())
-				{
-					App->map1->Disable();
-					App->player->Disable();
-					App->map2->Enable();
-				}
-				else if (App->map2->IsEnabled())
-				{
-					App->map2->Disable();
-					App->player->Disable();
-					App->map1->Enable();
-				}
-				
-				// ---
-				total_time += total_time;
-				start_time = SDL_GetTicks();
-				fading_in = false;
-			}
-			else
-			{
-				start_time = 0;
-			}
-		}
+									   if (now >= total_time)
+										   current_step = fade_step::none;
+	} break;
 	}
+
+	// Finally render the black square with alpha on the screen
+	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
+	SDL_RenderFillRect(App->render->renderer, &screen);
 
 	return UPDATE_CONTINUE;
 }
 
 // Fade to black. At mid point deactivate one module, then activate the other
-void ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float time)
+bool ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float time)
 {
-	fading_in = true;
-	start_time = SDL_GetTicks();
-	total_time = (Uint32) (time * 0.5f * 1000.0f);
+	bool ret = false;
+
+	if (current_step == fade_step::none)
+	{
+		current_step = fade_step::fade_to_black;
+		start_time = SDL_GetTicks();
+		total_time = (Uint32)(time * 0.5f * 1000.0f);
+		to_enable = module_on;
+		to_disable = module_off;
+		ret = true;
+	}
+
+	return ret;
 }

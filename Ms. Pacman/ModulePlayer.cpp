@@ -13,27 +13,27 @@ ModulePlayer::ModulePlayer()
 	position.y = 209;
 
 	// right animation
-	right.PushBack({ 34, 1, 15, 14 });
-	right.PushBack({ 18, 1, 13, 14 });
+	right.PushBack({ 33, 1, 15, 14 });
+	right.PushBack({ 17, 1, 13, 14 });
 	right.PushBack({ 1, 1, 11, 14 });
 	right.speed = 0.25f;
 
 	// left animation
-	left.PushBack({ 34, 36, 15, 14 });
-	left.PushBack({ 18, 36, 13, 14 });
+	left.PushBack({ 33, 36, 15, 14 });
+	left.PushBack({ 17, 36, 13, 14 });
 	left.PushBack({ 1, 36, 11, 14 });
 	left.speed = 0.25f;
 
 	// up animation
-	up.PushBack({ 34, 51, 14, 15 });
-	up.PushBack({ 18, 51, 14, 13 });
+	up.PushBack({ 33, 51, 14, 15 });
+	up.PushBack({ 17, 51, 14, 13 });
 	up.PushBack({ 1, 51, 14, 11 });
 	up.speed = 0.25f;
 
 	// down animation
-	down.PushBack({ 34, 11, 14, 15 });
-	down.PushBack({ 18, 11, 14, 13 });
-	down.PushBack({ 1, 11, 14, 11 });
+	down.PushBack({ 33, 18, 14, 15 });
+	down.PushBack({ 17, 18, 14, 13 });
+	down.PushBack({ 1, 19, 14, 11 });
 	down.speed = 0.25f;
 
 }
