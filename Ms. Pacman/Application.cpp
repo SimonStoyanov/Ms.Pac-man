@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
+#include "ModuleAudio.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
 #include "ModulePlayer.h"
@@ -14,10 +15,11 @@ Application::Application()
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = map1 = new ModuleBackgroundMap1();
-	modules[5] = map2 = new ModuleBackgroundMap2();
-	modules[6] = player = new ModulePlayer();
-	modules[7] = fade = new ModuleFadeToBlack();
+	modules[4] = audio = new ModuleAudio();
+	modules[5] = map1 = new ModuleBackgroundMap1();
+	modules[6] = map2 = new ModuleBackgroundMap2();
+	modules[7] = player = new ModulePlayer();
+	modules[8] = fade = new ModuleFadeToBlack();
 }
 
 
