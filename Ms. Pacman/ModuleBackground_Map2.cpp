@@ -30,7 +30,7 @@ bool ModuleBackgroundMap2::Start()
 	bool ret = true;
 	graphics = App->textures->Load("maps.png");
 
-	// Enable (and properly disable) the player module
+	// Enable and disable modules
 	App->player->Enable();
 
 	return ret;

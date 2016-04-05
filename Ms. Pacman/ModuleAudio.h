@@ -19,8 +19,8 @@ public:
 	bool CleanUp();
 
 public:
-	Mix_Music* intro_audio;
-	Mix_Music* ingame_audio;
+	Mix_Music* start_of_a_game;
+
 
 };
 

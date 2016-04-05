@@ -5,6 +5,7 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleBackground_Map1.h"
 
 
 ModuleAudio::ModuleAudio()
@@ -18,9 +19,16 @@ bool ModuleAudio::Start()
 {
 	LOG("Loading audio");
 
-	//Mix_Init(MIX_INIT_OGG);
-	//Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
-	//intro_audio = Mix_LoadMUS("rtype/intro.ogg");
+	Mix_Init(MIX_INIT_OGG);
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+
+	//the audio is bad for some reason, needs raplacement
+	start_of_a_game = Mix_LoadMUS("start_of_a_game.ogg");
+
+	if (App->map1->IsEnabled())
+	{
+		Mix_PlayMusic(start_of_a_game, 1);
+	}
 
 
 
@@ -34,9 +42,8 @@ bool ModuleAudio::CleanUp()
 
 	Mix_CloseAudio();
 
+	Mix_FreeMusic(start_of_a_game);
 
-	Mix_FreeMusic(intro_audio);
-	Mix_FreeMusic(ingame_audio);
 
 	return true;
 }

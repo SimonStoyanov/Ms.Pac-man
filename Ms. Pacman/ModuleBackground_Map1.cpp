@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleAudio.h"
 
 ModuleBackgroundMap1::ModuleBackgroundMap1()
 {
@@ -30,8 +31,9 @@ bool ModuleBackgroundMap1::Start()
 	bool ret = true;
 	graphics = App->textures->Load("maps.png");
 
-	// Enable (and properly disable) the player module
+	// Enable and disable modules
 	App->player->Enable();
+	App->audio->Enable();
 	return ret;
 }
 
