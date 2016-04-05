@@ -19,9 +19,9 @@ ModulePlayer::ModulePlayer()
 	right.speed = 0.25f;
 
 	// left animation
-	left.PushBack({ 33, 36, 15, 14 });
-	left.PushBack({ 17, 36, 13, 14 });
-	left.PushBack({ 1, 36, 11, 14 });
+	left.PushBack({ 33, 34, 15, 15 });
+	left.PushBack({ 15, 34, 15, 15 });
+	left.PushBack({ 0, 34, 17, 15 });
 	left.speed = 0.25f;
 
 	// up animation
@@ -31,9 +31,9 @@ ModulePlayer::ModulePlayer()
 	up.speed = 0.25f;
 
 	// down animation
-	down.PushBack({ 33, 18, 14, 15 });
-	down.PushBack({ 17, 18, 14, 13 });
-	down.PushBack({ 1, 19, 14, 11 });
+	down.PushBack({ 33, 18, 14, 14 });
+	down.PushBack({ 17, 18, 14, 14 });
+	down.PushBack({ 1, 18, 14, 14 });
 	down.speed = 0.25f;
 
 }
