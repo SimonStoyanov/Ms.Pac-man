@@ -10,7 +10,7 @@
 #include "ModuleBackground_Map2.h"
 
 #include "ModulePlayer.h"
-
+#include "ModuleGhostBlue.h"
 #include "ModuleGhostBlue.h"
 
 Application::Application()
@@ -23,8 +23,9 @@ Application::Application()
 	modules[5] = map1 = new ModuleBackgroundMap1();
 	modules[6] = map2 = new ModuleBackgroundMap2();
 	modules[7] = player = new ModulePlayer();
-	modules[8] = fade = new ModuleFadeToBlack();
-	modules[9] = ghost_blue = new ModuleGhostBlue();
+	modules[8] = ghost_blue = new ModuleGhostBlue();
+
+	modules[9] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
 }
 
 
@@ -39,11 +40,12 @@ bool Application::Init()
 	bool ret = true;
 
 	// Enable
-	player->Enable();
 	App->map1->Enable();
 
 	// Disable
-	App->map2->Disable();
+	player->Disable();
+	map2->Disable();
+	ghost_blue->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

@@ -3,15 +3,14 @@
 #include "Application.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleRender.h"
-#include "ModuleBackground_Map1.h"
-#include "ModuleBackground_Map2.h"
-#include "ModulePlayer.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
 
+#include "ModuleGhostBlue.h"
+
 ModuleFadeToBlack::ModuleFadeToBlack()
 {
-	screen = {0, 0, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE};
+	screen = { 0, 0, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE };
 }
 
 ModuleFadeToBlack::~ModuleFadeToBlack()
@@ -28,56 +27,50 @@ bool ModuleFadeToBlack::Start()
 // Update: draw background
 update_status ModuleFadeToBlack::Update()
 {
-	if (current_step == fade_step::none)
-		return UPDATE_CONTINUE;
-
-	Uint32 now = SDL_GetTicks() - start_time;
-	float normalized = MIN(1.0f, (float)now / (float)total_time);
-
-	switch (current_step)
+	if (start_time > 0)
 	{
-	case fade_step::fade_to_black:
-	{
-									 if (now >= total_time)
-									 {
-										 to_disable->Disable();
-										 to_enable->Enable();
-										 total_time += total_time;
-										 start_time = SDL_GetTicks();
-										 current_step = fade_step::fade_from_black;
-									 }
-	} break;
+		Uint32 now = SDL_GetTicks() - start_time;
+		float normalized = (float)now / (float)total_time;
 
-	case fade_step::fade_from_black:
-	{
-									   normalized = 1.0f - normalized;
+		if (normalized > 1.0f)
+			normalized = 1.0f;
 
-									   if (now >= total_time)
-										   current_step = fade_step::none;
-	} break;
+		if (fading_in == false)
+			normalized = 1.0f - normalized;
+
+		LOG("%f", normalized);
+		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
+		SDL_RenderFillRect(App->render->renderer, &screen);
+
+		if (now >= total_time) 
+		{
+			if (fading_in == true)
+			{
+				// TODO 2: enable / disable the modules received when FadeToBlacks() gets called
+				off->Disable();
+				on->Enable();
+				// ---
+				total_time += total_time;
+				start_time = SDL_GetTicks();
+				fading_in = false;
+			}
+			else
+			{
+				start_time = 0;
+			}
+		}
 	}
-
-	// Finally render the black square with alpha on the screen
-	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
-	SDL_RenderFillRect(App->render->renderer, &screen);
 
 	return UPDATE_CONTINUE;
 }
 
 // Fade to black. At mid point deactivate one module, then activate the other
-bool ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float time)
+void ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float time)
 {
-	bool ret = false;
-
-	if (current_step == fade_step::none)
-	{
-		current_step = fade_step::fade_to_black;
-		start_time = SDL_GetTicks();
-		total_time = (Uint32)(time * 0.5f * 1000.0f);
-		to_enable = module_on;
-		to_disable = module_off;
-		ret = true;
-	}
-
-	return ret;
+	fading_in = true;
+	start_time = SDL_GetTicks();
+	total_time = (Uint32)(time * 0.5f * 1000.0f);
+	on = module_on;
+	off = module_off;
+	
 }

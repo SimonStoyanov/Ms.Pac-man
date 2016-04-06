@@ -35,9 +35,6 @@ ModulePlayer::ModulePlayer()
 	down.PushBack({ 17, 17, 14, 15 });
 	down.PushBack({ 1, 17, 14, 15 });
 	down.speed = 0.25f;
-
-	//
-
 }
 
 ModulePlayer::~ModulePlayer()
@@ -87,3 +84,5 @@ update_status ModulePlayer::Update()
 
 	return UPDATE_CONTINUE;
 }
+
+

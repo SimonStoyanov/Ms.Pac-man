@@ -4,9 +4,13 @@
 #include "ModuleBackground_Map2.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+
+#include "ModulePlayer.h"
+#include "ModuleGhostBlue.h"
+
+
 
 ModuleBackgroundMap2::ModuleBackgroundMap2()
 {
@@ -26,7 +30,7 @@ bool ModuleBackgroundMap2::Start()
 
 	// Enable and disable modules
 	App->player->Enable();
-
+	App->ghost_blue->Enable();
 	return ret;
 }
 
