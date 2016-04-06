@@ -4,10 +4,14 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleFadeToBlack.h"
+
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
+
 #include "ModulePlayer.h"
-#include "ModuleFadeToBlack.h"
+
+#include "ModuleGhostBlue.h"
 
 Application::Application()
 {
@@ -20,6 +24,7 @@ Application::Application()
 	modules[6] = map2 = new ModuleBackgroundMap2();
 	modules[7] = player = new ModulePlayer();
 	modules[8] = fade = new ModuleFadeToBlack();
+	modules[9] = ghost_blue = new ModuleGhostBlue();
 }
 
 

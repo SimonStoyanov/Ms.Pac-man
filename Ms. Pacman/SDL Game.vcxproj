@@ -77,6 +77,10 @@
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleBackground_Map2.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
+    <ClInclude Include="ModuleGhostBlue.h" />
+    <ClInclude Include="ModuleGhostOrange.h" />
+    <ClInclude Include="ModuleGhostPink.h" />
+    <ClInclude Include="ModuleGhostRed.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleRender.h" />
@@ -92,6 +96,10 @@
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleBackground_Map2.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
+    <ClCompile Include="ModuleGhostBlue.cpp" />
+    <ClCompile Include="ModuleGhostOrange.cpp" />
+    <ClCompile Include="ModuleGhostPink.cpp" />
+    <ClCompile Include="ModuleGhostRed.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />

@@ -40,7 +40,7 @@ bool ModuleBackgroundMap1::Start()
 // Load assets
 bool ModuleBackgroundMap1::CleanUp()
 {
-	LOG("Unloading Map1 stage.");
+	LOG("Unloading maps(1) stage.");
 	return true;
 }
 

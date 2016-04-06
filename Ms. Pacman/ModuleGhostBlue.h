@@ -1,5 +1,5 @@
-#ifndef __ModulePlayer_H__
-#define __ModulePlayer_H__
+#ifndef __ModuleGhostBlue_H__
+#define __ModuleGhostBlue_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -8,11 +8,11 @@
 
 struct SDL_Texture;
 
-class ModulePlayer : public Module
+class ModuleGhostBlue : public Module
 {
 public:
-	ModulePlayer();
-	~ModulePlayer();
+	ModuleGhostBlue();
+	~ModuleGhostBlue();
 
 	bool Start();
 	update_status Update();
@@ -25,7 +25,7 @@ public:
 	Animation left;
 	Animation up;
 	Animation down;
-
+	Animation vulnerable;
 	iPoint position;
 
 

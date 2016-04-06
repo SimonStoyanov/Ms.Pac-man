@@ -10,14 +10,8 @@
 
 ModuleBackgroundMap2::ModuleBackgroundMap2()
 {
-	// Map 1
-	map2 = { 224, 0, 224, 248 };
-
-	//// flag animation
-	//water.PushBack({8, 447, 283, 9});
-	//water.PushBack({296, 447, 283, 12});
-	//water.PushBack({588, 447, 283, 18});
-	//water.speed = 0.02f;
+	// Map 2
+	map2 = { 228, 0, 224, 248 };
 }
 
 ModuleBackgroundMap2::~ModuleBackgroundMap2()
@@ -39,7 +33,7 @@ bool ModuleBackgroundMap2::Start()
 // Load assets
 bool ModuleBackgroundMap2::CleanUp()
 {
-	LOG("Unloading Map2 stage");
+	LOG("Unloading maps(2) stage");
 	return true;
 }
 

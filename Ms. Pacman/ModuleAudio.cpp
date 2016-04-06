@@ -22,7 +22,6 @@ bool ModuleAudio::Start()
 	Mix_Init(MIX_INIT_OGG);
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 
-	//the audio is bad for some reason, needs raplacement
 	start_of_a_game = Mix_LoadMUS("start_of_a_game.ogg");
 
 	if (App->map1->IsEnabled())

@@ -9,8 +9,8 @@
 
 ModulePlayer::ModulePlayer()
 {
-	position.x = 109;
-	position.y = 209;
+	position.x = 107;
+	position.y = 211;
 
 	// right animation
 	right.PushBack({ 33, 1, 15, 14 });
@@ -36,6 +36,8 @@ ModulePlayer::ModulePlayer()
 	down.PushBack({ 1, 17, 14, 15 });
 	down.speed = 0.25f;
 
+	//
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -47,7 +49,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
-	prev_anim = &right;
+	prev_anim = &left;
 	return ret;
 }
 
@@ -58,22 +60,22 @@ update_status ModulePlayer::Update()
 
 	int speed = 1;
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &right;
 		position.x += speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &left;
 		position.x -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &up;
 		position.y -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &down;
 		position.y += speed;
