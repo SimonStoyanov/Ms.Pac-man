@@ -28,8 +28,6 @@ ModuleMenu::ModuleMenu()
 	Rectangle.speed = 0.2f;
 
 	// Red Ghost animation
-	red.x = 250;
-	red.y = 158;
 
 	Red_left.PushBack({ 1, 307, 14, 14 });
 	Red_left.PushBack({ 17, 307, 14, 14 });
@@ -40,9 +38,6 @@ ModuleMenu::ModuleMenu()
 	Red_up.speed = 0.2f;
 
 	// Pink Ghost animation
-	pink.x = 250;
-	pink.y = 158;
-
 	Pink_left.PushBack({ 1, 337, 14, 14 });
 	Pink_left.PushBack({ 17, 337, 14, 14 });
 	Pink_left.speed = 0.2f;
@@ -52,9 +47,6 @@ ModuleMenu::ModuleMenu()
 	Pink_up.speed = 0.2f;
 
 	//Blue Ghost animation
-	blue.x = 250;
-	blue.y = 158;
-
 	Blue_left.PushBack({ 1, 352, 14, 14 });
 	Blue_left.PushBack({ 17, 352, 14, 14 });
 	Blue_left.speed = 0.2f;
@@ -64,9 +56,6 @@ ModuleMenu::ModuleMenu()
 	Blue_up.speed = 0.2f;
 
 	//Orange Ghost animation
-	orange.x = 250;
-	orange.y = 158;
-
 	Orange_left.PushBack({ 1, 322, 14, 14 });
 	Orange_left.PushBack({ 17, 322, 14, 14 });
 	Orange_left.speed = 0.2f;
@@ -74,9 +63,6 @@ ModuleMenu::ModuleMenu()
 	Orange_up.PushBack({ 33, 322, 14, 14 });
 	Orange_up.PushBack({ 49, 322, 14, 14 });
 	Orange_up.speed = 0.2f;
-
-	// Time
-	start_time = SDL_GetTicks();
 
 	//from seconds to miliseconds
 	total_time_red = (Uint32)(time_red * 0.5f * 1000.0f);
@@ -99,6 +85,13 @@ bool ModuleMenu::Start()
 	App->player->Disable();
 	App->audio->Disable();
 	App->ghost_blue->Disable();
+
+	// Ghosts start position
+	red.x = pink.x = blue.x = orange.x = 250;
+	red.y = pink.y = blue.y = orange.y = 158;
+
+	// Seting time of the start
+	start_time = SDL_GetTicks();
 
 	return ret;
 }
