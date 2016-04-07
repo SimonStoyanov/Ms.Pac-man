@@ -1,3 +1,4 @@
+#include "SDL/include/SDL_timer.h"
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -26,6 +27,22 @@ ModuleMenu::ModuleMenu()
 	Rectangle.PushBack({ 225, 331, 134, 63 });
 	Rectangle.speed = 0.2f;
 
+	// Red Ghost animation
+	red.x = 250;
+	red.y = 158;
+
+	Red_left.PushBack({ 1, 307, 14, 14 });
+	Red_left.PushBack({ 17, 307, 14, 14 });
+	Red_left.speed = 0.2f;
+
+	Red_up.PushBack({ 33, 307, 14, 14 });
+	Red_up.PushBack({ 49, 307, 14, 14 });
+	Red_up.speed = 0.2f;
+
+	// Time
+	start_time = SDL_GetTicks();
+	total_time_red = (Uint32)(time * 0.5f * 1000.0f);
+
 }
 
 ModuleMenu::~ModuleMenu()
@@ -42,7 +59,7 @@ bool ModuleMenu::Start()
 	App->player->Disable();
 	App->audio->Enable();
 	App->ghost_blue->Disable();
-	
+
 	return ret;
 }
 
@@ -56,12 +73,38 @@ bool ModuleMenu::CleanUp()
 // Update: draw background
 update_status ModuleMenu::Update()
 {
-	// Draw everything --------------------------------------	
-	/*App->render->Blit(graphics, 2, 15, &(Rectangle.GetCurrentFrame()), 1.0f);*/ // Rectangle
-
 	// Draw everything --------------------------------------
+
 	App->render->Blit(graphics, 0, 0, &background, 1.0f);
 	App->render->Blit(graphics, 60, 88, &Rectangle.GetCurrentFrame(), 1.0f);
+
+	// Ghosts animations --------------------------------------
+	float speed_left = 0.1f;
+	float speed_up = 0.1f;
+
+	Uint32 now = SDL_GetTicks() - start_time; //time since start
+	
+	// Red ghost
+	if (now >= total_time_red)
+	{
+		if (red.x>=40) // left
+		{
+			red.x -= speed_left;
+			App->render->Blit(graphics, red.x, red.y, &Red_left.GetCurrentFrame(), 1.0f);
+		}
+		else if (red.y > 89) //up
+		{
+			red.y -= speed_up;
+			App->render->Blit(graphics, red.x, red.y, &Red_up.GetCurrentFrame(), 1.0f);
+		}
+		else // stoped
+		{ 
+			App->render->Blit(graphics, red.x, red.y, &Red_up.GetCurrentFrame(), 1.0f); 
+		} 
+
+	}
+
+	// Red ghost
 
 	//Fade To Black
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
