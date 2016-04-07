@@ -18,6 +18,11 @@ ModuleBackgroundMap2::ModuleBackgroundMap2()
 {
 	// Map 2
 	map2 = { 228, 0, 224, 248 };
+
+	// PowerPill
+	PowerPill.PushBack({ 0, 520, 7, 6 });
+	PowerPill.PushBack({ 0, 505, 1, 1 });
+	PowerPill.speed = 0.035f;
 }
 
 ModuleBackgroundMap2::~ModuleBackgroundMap2()
@@ -48,8 +53,11 @@ update_status ModuleBackgroundMap2::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 1, 15, &map2, 1.0f); // map 1
+	App->render->Blit(graphics, 9, 49, &(PowerPill.GetCurrentFrame()), 1.0f);
+	App->render->Blit(graphics, 209, 49, &(PowerPill.GetCurrentFrame()), 1.0f);
+	App->render->Blit(graphics, 9, 226, &(PowerPill.GetCurrentFrame()), 1.0f);
+	App->render->Blit(graphics, 209, 226, &(PowerPill.GetCurrentFrame()), 1.0f);
 
-	//App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation
 
 	// Load scene when press space
 

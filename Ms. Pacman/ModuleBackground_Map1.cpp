@@ -17,11 +17,10 @@ ModuleBackgroundMap1::ModuleBackgroundMap1()
 	// Map 1
 	map1 = {0, 0, 224, 248};
 
-	//// flag animation
-	//water.PushBack({8, 447, 283, 9});
-	//water.PushBack({296, 447, 283, 12});
-	//water.PushBack({588, 447, 283, 18});
-	//water.speed = 0.02f;
+	// Power Pills
+	PowerPill.PushBack({ 0, 508, 7, 6 });
+	PowerPill.PushBack({ 0, 505, 1, 1 });
+	PowerPill.speed = 0.035f;
 }
 
 ModuleBackgroundMap1::~ModuleBackgroundMap1()
@@ -53,7 +52,10 @@ update_status ModuleBackgroundMap1::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 1, 15, &map1, 1.0f); // map 1
-
+	App->render->Blit(graphics, 9, 31, &(PowerPill.GetCurrentFrame()), 1);
+	App->render->Blit(graphics, 209, 31, &(PowerPill.GetCurrentFrame()), 1);
+	App->render->Blit(graphics, 209, 231, &(PowerPill.GetCurrentFrame()), 1);
+	App->render->Blit(graphics, 9, 231, &(PowerPill.GetCurrentFrame()), 1);
 	// Load scene when press space
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
