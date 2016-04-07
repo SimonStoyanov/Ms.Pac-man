@@ -15,16 +15,16 @@
 ModuleBackgroundMap1::ModuleBackgroundMap1()
 {
 	// Map 1
-<<<<<<< HEAD
+
 	map1 = { 0, 0, 224, 248 };
-=======
+
 	map1 = {0, 0, 224, 248};
 
 	// Power Pills
 	PowerPill.PushBack({ 0, 508, 7, 6 });
 	PowerPill.PushBack({ 0, 505, 1, 1 });
 	PowerPill.speed = 0.035f;
->>>>>>> origin/master
+
 }
 
 ModuleBackgroundMap1::~ModuleBackgroundMap1()
