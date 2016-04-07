@@ -24,12 +24,19 @@ bool ModuleAudio::Start()
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 
 	start_of_a_game = Mix_LoadMUS("start_of_a_game.ogg");
+	wakawaka = Mix_LoadWAV("wakawaka.wav");
 
 	if (App->map1->IsEnabled())
 	{
 		Mix_PlayMusic(start_of_a_game, 1);
+		Mix_PlayChannel(0, wakawaka, 1);
+		
 	}
-
+	if (App->player->wakawaka == true)
+	{
+		Mix_PlayChannel(1, wakawaka, 1);
+	}
+	App->player->wakawaka = false;
 	return true;
 }
 

@@ -28,7 +28,7 @@ public:
 
 	iPoint position;
 
-
+	bool wakawaka;
 };
 
 #endif

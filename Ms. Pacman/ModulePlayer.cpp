@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleAudio.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -61,22 +62,27 @@ update_status ModulePlayer::Update()
 	{
 		current_animation = &right;
 		position.x += speed;
+		wakawaka = true;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &left;
 		position.x -= speed;
+		wakawaka = true;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &up;
 		position.y -= speed;
+		wakawaka = true;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &down;
 		position.y += speed;
+		wakawaka = true;
 	}
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;

@@ -15,13 +15,7 @@
 ModuleBackgroundMap1::ModuleBackgroundMap1()
 {
 	// Map 1
-	map1 = {0, 0, 224, 248};
-
-	//// flag animation
-	//water.PushBack({8, 447, 283, 9});
-	//water.PushBack({296, 447, 283, 12});
-	//water.PushBack({588, 447, 283, 18});
-	//water.speed = 0.02f;
+	map1 = { 0, 0, 224, 248 };
 }
 
 ModuleBackgroundMap1::~ModuleBackgroundMap1()

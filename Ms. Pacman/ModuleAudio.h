@@ -20,6 +20,7 @@ public:
 
 public:
 	Mix_Music* start_of_a_game;
+	Mix_Chunk* wakawaka;
 
 
 };
