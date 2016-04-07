@@ -32,19 +32,27 @@ public:
 
 	Animation Blue_up;
 	Animation Blue_left;
+	iPoint blue;
+
 	Animation Orange_up;
 	Animation Orange_left;
+	iPoint orange;
+
 	Animation Pink_up;
 	Animation Pink_left;
+	iPoint pink;
 	
 	SDL_Rect background;
 
 	Uint32 start_time = 0;
 	Uint32 total_time_red = 0;
+	float time_red = 1.0f; // red timer
 	Uint32 total_time_blue = 0;
+	float time_blue = 6.0f; // blue timer
 	Uint32 total_time_orange = 0;
+	float time_orange = 2.0f; // orange timer
 	Uint32 total_time_pink = 0;
-	float time = 2.0f;
+	float time_pink = 7.0f; // pink timer
 };
 
 #endif

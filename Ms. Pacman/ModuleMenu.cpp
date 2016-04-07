@@ -39,10 +39,26 @@ ModuleMenu::ModuleMenu()
 	Red_up.PushBack({ 49, 307, 14, 14 });
 	Red_up.speed = 0.2f;
 
+	// Pink Ghost animation
+	pink.x = 250;
+	pink.y = 158;
+
+	Pink_left.PushBack({ 1, 337, 14, 14 });
+	Pink_left.PushBack({ 17, 337, 14, 14 });
+	Pink_left.speed = 0.2f;
+
+	Pink_up.PushBack({ 33, 337, 14, 14 });
+	Pink_up.PushBack({ 49, 337, 14, 14 });
+	Pink_up.speed = 0.2f;
+
 	// Time
 	start_time = SDL_GetTicks();
-	total_time_red = (Uint32)(time * 0.5f * 1000.0f);
 
+	//from seconds to miliseconds
+	total_time_red = (Uint32)(time_red * 0.5f * 1000.0f);
+	total_time_blue = (Uint32)(time_blue * 0.5f * 1000.0f);
+	total_time_orange = (Uint32)(time_orange * 0.5f * 1000.0f);
+	total_time_pink = (Uint32)(time_pink * 0.5f * 1000.0f);
 }
 
 ModuleMenu::~ModuleMenu()
@@ -101,10 +117,27 @@ update_status ModuleMenu::Update()
 		{ 
 			App->render->Blit(graphics, red.x, red.y, &Red_up.GetCurrentFrame(), 1.0f); 
 		} 
-
 	}
 
-	// Red ghost
+	// Pink ghost
+	if (now >= total_time_pink)
+	{
+		if (pink.x >= 40) // left
+		{
+			pink.x -= speed_left;
+			App->render->Blit(graphics, pink.x, pink.y, &Pink_left.GetCurrentFrame(), 1.0f);
+		}
+		else if (pink.y > 105) //up
+		{
+			pink.y -= speed_up;
+			App->render->Blit(graphics, pink.x, pink.y, &Pink_up.GetCurrentFrame(), 1.0f);
+		}
+		else // stoped
+		{
+			App->render->Blit(graphics, pink.x, pink.y, &Pink_up.GetCurrentFrame(), 1.0f);
+		}
+
+	}
 
 	//Fade To Black
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
