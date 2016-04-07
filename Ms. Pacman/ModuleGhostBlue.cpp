@@ -19,8 +19,8 @@ ModuleGhostBlue::ModuleGhostBlue()
 	right.speed = 0.10f;
 
 	// left animation
-	left.PushBack({ 1, 112, 14, 14 });
-	left.PushBack({ 17, 112, 14, 14 });
+	left.PushBack({ 113, 112, 14, 14 });
+	left.PushBack({ 97, 112, 14, 14 });
 	left.speed = 0.10f;
 
 	// up animation
