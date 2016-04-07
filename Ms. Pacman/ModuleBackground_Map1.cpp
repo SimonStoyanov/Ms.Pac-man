@@ -24,7 +24,6 @@ ModuleBackgroundMap1::ModuleBackgroundMap1()
 	PowerPill.PushBack({ 0, 508, 7, 6 });
 	PowerPill.PushBack({ 0, 505, 1, 1 });
 	PowerPill.speed = 0.035f;
-
 }
 
 ModuleBackgroundMap1::~ModuleBackgroundMap1()

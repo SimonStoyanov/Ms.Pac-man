@@ -8,6 +8,7 @@
 
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
+#include "ModuleMenu.h"
 #include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
@@ -48,6 +49,9 @@ update_status ModuleEndScreen::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 0, 0, &map1, 1.0f); // end_screen
-
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	{
+		App->fade->FadeToBlack(App->end_screen, App->menu, 2.0f);
+	}
 	return UPDATE_CONTINUE;
 }

@@ -28,15 +28,9 @@ bool ModuleAudio::Start()
 
 	if (App->map1->IsEnabled())
 	{
-		Mix_PlayMusic(start_of_a_game, 1);
-		Mix_PlayChannel(0, wakawaka, 1);
-		
+		Mix_PlayMusic(start_of_a_game, 1);	
 	}
-	if (App->player->wakawaka == true)
-	{
-		Mix_PlayChannel(1, wakawaka, 1);
-	}
-	App->player->wakawaka = false;
+
 	return true;
 }
 
@@ -46,9 +40,8 @@ bool ModuleAudio::CleanUp()
 	LOG("Unloading space scene");
 
 	Mix_CloseAudio();
-
 	Mix_FreeMusic(start_of_a_game);
-
+	Mix_FreeChunk(wakawaka);
 
 	return true;
 }
@@ -56,5 +49,10 @@ bool ModuleAudio::CleanUp()
 // Update: draw background
 update_status ModuleAudio::Update()
 {
+	/*if (App->player->wakawaka == true)
+	{
+		Mix_PlayChannel(-1, wakawaka, 0);
+	}
+	App->player->wakawaka = false;*/
 	return UPDATE_CONTINUE;
 }
