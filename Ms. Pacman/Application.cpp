@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 
+#include "ModuleMenu.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
 
@@ -20,12 +21,14 @@ Application::Application()
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = audio = new ModuleAudio();
-	modules[5] = map1 = new ModuleBackgroundMap1();
-	modules[6] = map2 = new ModuleBackgroundMap2();
-	modules[7] = player = new ModulePlayer();
-	modules[8] = ghost_blue = new ModuleGhostBlue();
+	modules[5] = menu = new ModuleMenu();
+	modules[6] = map1 = new ModuleBackgroundMap1();
+	modules[7] = map2 = new ModuleBackgroundMap2();
+	
+	modules[8] = player = new ModulePlayer();
+	modules[9] = ghost_blue = new ModuleGhostBlue();
 
-	modules[9] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
+	modules[10] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
 }
 
 
@@ -40,10 +43,11 @@ bool Application::Init()
 	bool ret = true;
 
 	// Enable
-	App->map1->Enable();
+	App->menu->Enable();
 
 	// Disable
 	player->Disable();
+	map1->Disable();
 	map2->Disable();
 	ghost_blue->Disable();
 

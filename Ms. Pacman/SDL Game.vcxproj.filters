@@ -71,6 +71,9 @@
     <ClInclude Include="ModuleGhostOrange.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleMenu.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -119,6 +122,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleGhostOrange.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleMenu.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

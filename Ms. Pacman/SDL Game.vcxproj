@@ -82,6 +82,7 @@
     <ClInclude Include="ModuleGhostPink.h" />
     <ClInclude Include="ModuleGhostRed.h" />
     <ClInclude Include="ModuleInput.h" />
+    <ClInclude Include="ModuleMenu.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleBackground_Map1.h" />
@@ -101,6 +102,7 @@
     <ClCompile Include="ModuleGhostPink.cpp" />
     <ClCompile Include="ModuleGhostRed.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleMenu.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleBackground_Map1.cpp" />

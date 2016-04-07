@@ -1,5 +1,5 @@
-#ifndef __MAP2_H__
-#define __MAP2_H__
+#ifndef __MENU_H__
+#define __MENU_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -7,11 +7,11 @@
 
 struct SDL_Texture;
 
-class ModuleBackgroundMap2 : public Module
+class ModuleMenu : public Module
 {
 public:
-	ModuleBackgroundMap2();
-	~ModuleBackgroundMap2();
+	ModuleMenu();
+	~ModuleMenu();
 
 	bool Start();
 	update_status Update();
@@ -20,12 +20,8 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-	SDL_Rect ground;
-	SDL_Rect roof;
-	SDL_Rect foreground;
+	Animation Rectangle;
 	SDL_Rect background;
-	Animation water;
-	SDL_Rect map2;
 };
 
 #endif
