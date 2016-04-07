@@ -51,7 +51,7 @@ public:
 	Uint32 total_time_blue = 0;
 	float time_blue = 13.0f; // blue timer
 	Uint32 total_time_orange = 0;
-	float time_orange = 30.0f; // orange timer
+	float time_orange = 19.0f; // orange timer
 	Uint32 total_time_pink = 0;
 	float time_pink = 7.0f; // pink timer
 };

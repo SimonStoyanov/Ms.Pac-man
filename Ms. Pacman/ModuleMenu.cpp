@@ -63,6 +63,18 @@ ModuleMenu::ModuleMenu()
 	Blue_up.PushBack({ 49, 352, 14, 14 });
 	Blue_up.speed = 0.2f;
 
+	//Orange Ghost animation
+	orange.x = 250;
+	orange.y = 158;
+
+	Orange_left.PushBack({ 1, 322, 14, 14 });
+	Orange_left.PushBack({ 17, 322, 14, 14 });
+	Orange_left.speed = 0.2f;
+
+	Orange_up.PushBack({ 33, 322, 14, 14 });
+	Orange_up.PushBack({ 49, 322, 14, 14 });
+	Orange_up.speed = 0.2f;
+
 	// Time
 	start_time = SDL_GetTicks();
 
@@ -150,6 +162,7 @@ update_status ModuleMenu::Update()
 		}
 
 	}
+
 	// Blue ghost
 	if (now >= total_time_blue)
 	{
@@ -167,7 +180,25 @@ update_status ModuleMenu::Update()
 		{
 			App->render->Blit(graphics, blue.x, blue.y, &Blue_up.GetCurrentFrame(), 1.0f);
 		}
+	}
 
+	// Orange ghost
+	if (now >= total_time_orange)
+	{
+		if (orange.x >= 40) // left
+		{
+			orange.x -= speed_left;
+			App->render->Blit(graphics, orange.x, orange.y, &Orange_left.GetCurrentFrame(), 1.0f);
+		}
+		else if (orange.y > 137) //up
+		{
+			orange.y -= speed_up;
+			App->render->Blit(graphics, orange.x, orange.y, &Orange_up.GetCurrentFrame(), 1.0f);
+		}
+		else // stoped
+		{
+			App->render->Blit(graphics, orange.x, orange.y, &Orange_up.GetCurrentFrame(), 1.0f);
+		}
 	}
 
 	//Fade To Black
