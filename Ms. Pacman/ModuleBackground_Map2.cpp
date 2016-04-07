@@ -1,11 +1,13 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleBackground_Map1.h"
-#include "ModuleBackground_Map2.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+
+#include "ModuleBackground_Map1.h"
+#include "ModuleBackground_Map2.h"
+#include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
@@ -53,7 +55,7 @@ update_status ModuleBackgroundMap2::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
-		App->fade->FadeToBlack(App->map2, App->map1, 2.0F);
+		App->fade->FadeToBlack(App->map2, App->end_screen, 2.0F);
 	}
 
 	return UPDATE_CONTINUE;

@@ -6,6 +6,7 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleBackground_Map1.h"
+#include "ModuleEndScreen.h"
 
 
 ModuleAudio::ModuleAudio()
