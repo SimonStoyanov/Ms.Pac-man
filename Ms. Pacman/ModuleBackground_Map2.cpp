@@ -28,7 +28,7 @@ bool ModuleBackgroundMap2::Start()
 {
 	LOG("Loading maps(2).");
 	bool ret = true;
-	graphics = App->textures->Load("maps.png");
+	graphics = App->textures->Load("void_maps.png");
 
 	// Enable and disable modules
 	App->player->Enable();
@@ -47,7 +47,7 @@ bool ModuleBackgroundMap2::CleanUp()
 update_status ModuleBackgroundMap2::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 2, 15, &map2, 1.0f); // map 1
+	App->render->Blit(graphics, 1, 15, &map2, 1.0f); // map 1
 
 	//App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation
 

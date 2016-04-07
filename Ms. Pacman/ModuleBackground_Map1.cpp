@@ -32,7 +32,7 @@ bool ModuleBackgroundMap1::Start()
 {
 	LOG("Loading maps(1).");
 	bool ret = true;
-	graphics = App->textures->Load("maps.png");
+	graphics = App->textures->Load("void_maps.png");
 
 	// Enable and disable modules
 	App->player->Enable();
@@ -52,7 +52,7 @@ bool ModuleBackgroundMap1::CleanUp()
 update_status ModuleBackgroundMap1::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 2, 15, &map1, 1.0f); // map 1
+	App->render->Blit(graphics, 1, 15, &map1, 1.0f); // map 1
 
 	// Load scene when press space
 
