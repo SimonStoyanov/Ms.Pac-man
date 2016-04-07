@@ -51,6 +51,18 @@ ModuleMenu::ModuleMenu()
 	Pink_up.PushBack({ 49, 337, 14, 14 });
 	Pink_up.speed = 0.2f;
 
+	//Blue Ghost animation
+	blue.x = 250;
+	blue.y = 158;
+
+	Blue_left.PushBack({ 1, 352, 14, 14 });
+	Blue_left.PushBack({ 17, 352, 14, 14 });
+	Blue_left.speed = 0.2f;
+
+	Blue_up.PushBack({ 33, 352, 14, 14 });
+	Blue_up.PushBack({ 49, 352, 14, 14 });
+	Blue_up.speed = 0.2f;
+
 	// Time
 	start_time = SDL_GetTicks();
 
@@ -135,6 +147,25 @@ update_status ModuleMenu::Update()
 		else // stoped
 		{
 			App->render->Blit(graphics, pink.x, pink.y, &Pink_up.GetCurrentFrame(), 1.0f);
+		}
+
+	}
+	// Blue ghost
+	if (now >= total_time_blue)
+	{
+		if (blue.x >= 40) // left
+		{
+			blue.x -= speed_left;
+			App->render->Blit(graphics, blue.x, blue.y, &Blue_left.GetCurrentFrame(), 1.0f);
+		}
+		else if (blue.y > 121) //up
+		{
+			blue.y -= speed_up;
+			App->render->Blit(graphics, blue.x, blue.y, &Blue_up.GetCurrentFrame(), 1.0f);
+		}
+		else // stoped
+		{
+			App->render->Blit(graphics, blue.x, blue.y, &Blue_up.GetCurrentFrame(), 1.0f);
 		}
 
 	}
