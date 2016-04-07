@@ -97,7 +97,7 @@ bool ModuleMenu::Start()
 
 	// Enable and disable modules
 	App->player->Disable();
-	App->audio->Enable();
+	App->audio->Disable();
 	App->ghost_blue->Disable();
 
 	return ret;

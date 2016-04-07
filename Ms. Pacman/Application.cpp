@@ -48,6 +48,8 @@ bool Application::Init()
 	App->menu->Enable();
 
 	// Disable
+	audio->Disable();
+
 	map1->Disable();
 	map2->Disable();
 	end_screen->Disable();

@@ -30,8 +30,6 @@ bool ModuleAudio::Start()
 		Mix_PlayMusic(start_of_a_game, 1);
 	}
 
-
-
 	return true;
 }
 
@@ -51,7 +49,5 @@ bool ModuleAudio::CleanUp()
 // Update: draw background
 update_status ModuleAudio::Update()
 {
-	// Draw everything --------------------------------------
-
 	return UPDATE_CONTINUE;
 }
