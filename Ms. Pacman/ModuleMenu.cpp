@@ -18,11 +18,12 @@ ModuleMenu::ModuleMenu()
 	background = { 0, 0, 224, 288 };
 
 	// Rectangle Animation
-	Rectangle.PushBack({ 0, 0, 0, 0 });
-	Rectangle.PushBack({ 0, 0, 0, 0 });
-	Rectangle.PushBack({ 0, 0, 0, 0 });
-	Rectangle.PushBack({ 0, 0, 0, 0 });
-	Rectangle.PushBack({ 0, 0, 0, 0 });
+	Rectangle.PushBack({ 225, 1, 134, 63 });
+	Rectangle.PushBack({ 225, 67, 134, 63 });
+	Rectangle.PushBack({ 225, 133, 134, 63 });
+	Rectangle.PushBack({ 225, 199, 134, 63 });
+	Rectangle.PushBack({ 225, 265, 134, 63 });
+	Rectangle.PushBack({ 225, 331, 134, 63 });
 	Rectangle.speed = 0.2f;
 
 }
@@ -60,6 +61,7 @@ update_status ModuleMenu::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background, 1.0f);
+	App->render->Blit(graphics, 60, 88, &Rectangle.GetCurrentFrame(), 1.0f);
 
 	//Fade To Black
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
