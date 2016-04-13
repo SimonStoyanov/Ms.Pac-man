@@ -18,9 +18,6 @@ ModuleBackgroundMap1::ModuleBackgroundMap1()
 	// Map 1
 
 	map1 = { 0, 0, 224, 248 };
-	
-	// Pills
-	Dot1 = { 1, 516, 2, 2 };
 
 	// Power Pills
 	PowerPill.PushBack({ 0, 508, 7, 6 });

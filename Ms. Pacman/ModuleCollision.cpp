@@ -14,6 +14,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_WALL][COLLIDER_PILL] = false;
 	matrix[COLLIDER_WALL][COLLIDER_POWER_PILL] = false;
 	matrix[COLLIDER_WALL][COLLIDER_FRUITS] = true;
+	matrix[COLLIDER_WALL][COLLIDER_TELEPORT] = false; 
+	matrix[COLLIDER_WALL][COLLIDER_RELENT] = false;
 
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
@@ -21,6 +23,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER][COLLIDER_PILL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_POWER_PILL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_FRUITS] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_TELEPORT] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_RELENT] = false;
 
 	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
@@ -28,6 +32,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_ENEMY][COLLIDER_PILL] = false;
 	matrix[COLLIDER_ENEMY][COLLIDER_POWER_PILL] = false;
 	matrix[COLLIDER_ENEMY][COLLIDER_FRUITS] = false;
+	matrix[COLLIDER_ENEMY][COLLIDER_TELEPORT] = true;
+	matrix[COLLIDER_ENEMY][COLLIDER_RELENT] = true;
 
 	matrix[COLLIDER_PILL][COLLIDER_WALL] = false;
 	matrix[COLLIDER_PILL][COLLIDER_PLAYER] = true;
@@ -35,6 +41,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PILL][COLLIDER_PILL] = false;
 	matrix[COLLIDER_PILL][COLLIDER_POWER_PILL] = false;
 	matrix[COLLIDER_PILL][COLLIDER_FRUITS] = false;
+	matrix[COLLIDER_PILL][COLLIDER_TELEPORT] = false;
+	matrix[COLLIDER_PILL][COLLIDER_RELENT] = false;
 
 	matrix[COLLIDER_POWER_PILL][COLLIDER_WALL] = false;
 	matrix[COLLIDER_POWER_PILL][COLLIDER_PLAYER] = true;
@@ -42,6 +50,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_POWER_PILL][COLLIDER_PILL] = false;
 	matrix[COLLIDER_POWER_PILL][COLLIDER_POWER_PILL] = false;
 	matrix[COLLIDER_POWER_PILL][COLLIDER_FRUITS] = false;
+	matrix[COLLIDER_POWER_PILL][COLLIDER_TELEPORT] = false;
+	matrix[COLLIDER_POWER_PILL][COLLIDER_RELENT] = false;
 
 	matrix[COLLIDER_FRUITS][COLLIDER_WALL] = true;
 	matrix[COLLIDER_FRUITS][COLLIDER_PLAYER] = true;
@@ -49,6 +59,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_FRUITS][COLLIDER_PILL] = false;
 	matrix[COLLIDER_FRUITS][COLLIDER_POWER_PILL] = false;
 	matrix[COLLIDER_FRUITS][COLLIDER_FRUITS] = false;
+	matrix[COLLIDER_FRUITS][COLLIDER_TELEPORT] = true;
+	matrix[COLLIDER_FRUITS][COLLIDER_RELENT] = false;
 }
 
 // Destructor
