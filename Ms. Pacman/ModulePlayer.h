@@ -28,6 +28,9 @@ public:
 
 	iPoint position;
 
+	Collider* player_collision;
+	void OnCollision(Collider* c1, Collider* c2);
+
 	bool wakawaka;
 };
 

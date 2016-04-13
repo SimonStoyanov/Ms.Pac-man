@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
+#include "ModuleCollision.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -48,6 +49,9 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
 	prev_anim = &left;
+	
+	player_collision = App->collision->AddCollider({ position.x - 50, position.y - 50, 15, 14 }, COLLIDER_PLAYER, this);
+
 	return ret;
 }
 
@@ -83,6 +87,8 @@ update_status ModulePlayer::Update()
 		wakawaka = true;
 	}
 
+	player_collision->SetPos(position.x, position.y - 15);
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
@@ -91,4 +97,11 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
+	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
+	if (c1 != nullptr && c2->type == COLLIDER_PILL){
+		LOG("HOIIIII I'M TEEMEEE");
+		c2->to_delete = true;
+	}
+}
 

@@ -22,6 +22,11 @@ public:
 	SDL_Texture* graphics = nullptr;
 	Animation PowerPill;
 	SDL_Rect map1;
+	SDL_Rect Dot1;
+
+	Collider* collision = nullptr;
+	Collider* Dot_coll = nullptr;
+
 };
 
 #endif 

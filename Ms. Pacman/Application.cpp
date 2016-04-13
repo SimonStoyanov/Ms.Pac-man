@@ -55,6 +55,7 @@ bool Application::Init()
 	map1->Disable();
 	map2->Disable();
 	end_screen->Disable();
+	collision->Disable();
 
 	ghost_blue->Disable();
 	player->Disable();
