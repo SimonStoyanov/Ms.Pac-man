@@ -39,7 +39,6 @@ public:
 		}
 	}
 
-	void ModulePillsMap1::OnCollision(Collider* c1, Collider* c2);
 };
 
 #endif 

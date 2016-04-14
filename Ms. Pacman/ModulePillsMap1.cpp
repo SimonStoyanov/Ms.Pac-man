@@ -38,9 +38,10 @@ bool ModulePillsMap1::Start()
 	// Enable and disable modules
 
 	// Collisions
-
-	_PDot[0] = App->collision->AddCollider({ 10, 31, 6, 6 }, COLLIDER_PILL);
-	_PDot[1] = App->collision->AddCollider({ 10, 231, 2, 2 }, COLLIDER_PILL);
+	_PDot[0] = App->collision->AddCollider({ 10, 31, 6, 6 }, COLLIDER_POWER_PILL, this);
+	_PDot[1] = App->collision->AddCollider({ 210, 31, 6, 6 }, COLLIDER_POWER_PILL, this);
+	_PDot[2] = App->collision->AddCollider({ 10, 231, 6, 6 }, COLLIDER_POWER_PILL, this);
+	_PDot[3] = App->collision->AddCollider({ 210, 231, 6, 6 }, COLLIDER_POWER_PILL, this);
 
 	return ret;
 }
@@ -56,13 +57,22 @@ bool ModulePillsMap1::CleanUp()
 update_status ModulePillsMap1::Update()
 {
 	// Draw everything --------------------------------------
-	if (!_PDot[0]->to_delete)
-		App->render->Blit(graphics, 9, 31, &(PDot.GetCurrentFrame()), 1);
-	
-
-	App->render->Blit(graphics, 209, 31, &(PDot.GetCurrentFrame()), 1);
-	App->render->Blit(graphics, 209, 231, &(PDot.GetCurrentFrame()), 1);
-	App->render->Blit(graphics, 9, 231, &(PDot.GetCurrentFrame()), 1);
+	if (_PDot[0]->to_delete == false){
+		App->render->Blit(graphics, 9, 31, &(PDot.GetCurrentFrame()), 1.0f);
+	}
+	else;
+	if (_PDot[1]->to_delete == false){
+		App->render->Blit(graphics, 209, 31, &(PDot.GetCurrentFrame()), 1.0f);
+	}
+	else;
+	if (_PDot[2]->to_delete == false){
+		App->render->Blit(graphics, 9, 231, &(PDot.GetCurrentFrame()), 1.0f);
+	}
+	else;
+	if (_PDot[3]->to_delete == false){
+		App->render->Blit(graphics, 209, 231, &(PDot.GetCurrentFrame()), 1.0f);
+	}
+	else;
 
 	
 	// Load scene when press space
@@ -74,13 +84,9 @@ update_status ModulePillsMap1::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModulePillsMap1::OnCollision(Collider* c1, Collider* c2){
-	LOG("\n\n\n------------------Peneeeeeeeeeeeeeeee----------------------\n\n\n");
-	for (int i = 0; i <= 220; i++)
-	{
-		if (c1 != nullptr && c2 == _PDot[i] && c1->type == COLLIDER_PLAYER)
-		{
-			_PDot[i]->to_delete == true;
-		}
+void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
+	LOG("\n\n\n------------------Player: I've collided----------------------\n\n\n");
+	if (c1 != nullptr && c2->type == COLLIDER_POWER_PILL){
+		c2->to_delete = true;
 	}
 }
