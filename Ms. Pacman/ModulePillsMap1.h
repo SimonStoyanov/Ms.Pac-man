@@ -6,6 +6,7 @@
 #include "Globals.h"
 
 struct SDL_Texture;
+struct Collider;
 
 class ModulePillsMap1 : public Module
 {
@@ -20,7 +21,6 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-	Animation PowerPill;
 
 	// 220 pills and 4 PowerPills
 	SDL_Rect Dot[220];
@@ -30,7 +30,8 @@ public:
 			_Dot[i] = nullptr;
 		}
 	}
-	SDL_Rect PDot[4];
+
+	Animation PDot;
 	Collider* _PDot[4];
 	void _PDot_to_nullptr(){
 		for (int i = 0; i < 4; i++){
@@ -38,7 +39,7 @@ public:
 		}
 	}
 
-
+	void ModulePillsMap1::OnCollision(Collider* c1, Collider* c2);
 };
 
 #endif 

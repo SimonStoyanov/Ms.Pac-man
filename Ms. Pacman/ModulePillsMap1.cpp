@@ -17,9 +17,12 @@
 ModulePillsMap1::ModulePillsMap1()
 {
 	// Power Pills
-	PowerPill.PushBack({ 0, 508, 7, 6 });
-	PowerPill.PushBack({ 0, 505, 1, 1 });
-	PowerPill.speed = 0.035f;
+	PDot.PushBack({ 0, 508, 7, 6 });
+	PDot.PushBack({ 0, 505, 1, 1 });
+	PDot.speed = 0.035f;
+
+	_PDot_to_nullptr();
+	_Dot_to_nullptr();
 }
 
 ModulePillsMap1::~ModulePillsMap1()
@@ -33,14 +36,12 @@ bool ModulePillsMap1::Start()
 	graphics = App->textures->Load("void_maps.png");
 
 	// Enable and disable modules
-	App->player->Enable();
-	App->audio->Enable();
-	App->ghost_blue->Enable();
-	App->collision->Enable();
 
 	// Collisions
 
-	//Dot_coll = App->collision->AddCollider({ 50, 50, 2, 2 }, COLLIDER_PILL);
+	_PDot[0] = App->collision->AddCollider({ 10, 31, 6, 6 }, COLLIDER_PILL);
+	_PDot[1] = App->collision->AddCollider({ 10, 231, 2, 2 }, COLLIDER_PILL);
+
 	return ret;
 }
 
@@ -54,11 +55,14 @@ bool ModulePillsMap1::CleanUp()
 // Update: draw background
 update_status ModulePillsMap1::Update()
 {
-	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 9, 31, &(PowerPill.GetCurrentFrame()), 1);
-	App->render->Blit(graphics, 209, 31, &(PowerPill.GetCurrentFrame()), 1);
-	App->render->Blit(graphics, 209, 231, &(PowerPill.GetCurrentFrame()), 1);
-	App->render->Blit(graphics, 9, 231, &(PowerPill.GetCurrentFrame()), 1);
+	// Draw everything --------------------------------------
+	if (!_PDot[0]->to_delete)
+		App->render->Blit(graphics, 9, 31, &(PDot.GetCurrentFrame()), 1);
+	
+
+	App->render->Blit(graphics, 209, 31, &(PDot.GetCurrentFrame()), 1);
+	App->render->Blit(graphics, 209, 231, &(PDot.GetCurrentFrame()), 1);
+	App->render->Blit(graphics, 9, 231, &(PDot.GetCurrentFrame()), 1);
 
 	
 	// Load scene when press space
@@ -68,4 +72,15 @@ update_status ModulePillsMap1::Update()
 		App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
 	}
 	return UPDATE_CONTINUE;
+}
+
+void ModulePillsMap1::OnCollision(Collider* c1, Collider* c2){
+	LOG("\n\n\n------------------Peneeeeeeeeeeeeeeee----------------------\n\n\n");
+	for (int i = 0; i <= 220; i++)
+	{
+		if (c1 != nullptr && c2 == _PDot[i] && c1->type == COLLIDER_PLAYER)
+		{
+			_PDot[i]->to_delete == true;
+		}
+	}
 }

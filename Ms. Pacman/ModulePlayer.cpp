@@ -98,7 +98,7 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
-	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
+	LOG("\n\n\n------------------Player: I've collided----------------------\n\n\n");
 	if (c1 != nullptr && c2->type == COLLIDER_PILL){
 		LOG("HOIIIII I'M TEEMEEE");
 		c2->to_delete = true;

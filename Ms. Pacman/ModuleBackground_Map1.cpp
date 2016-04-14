@@ -7,6 +7,8 @@
 #include "ModuleInput.h"
 #include "ModuleCollision.h"
 
+#include "ModulePillsMap1.h"
+
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
 
@@ -40,10 +42,10 @@ bool ModuleBackgroundMap1::Start()
 	App->audio->Enable();
 	App->ghost_blue->Enable();
 	App->collision->Enable();
+	App->mapPills1->Enable();
 
 	// Collisions
 
-	Dot_coll = App->collision->AddCollider({ 50, 50, 2, 2 }, COLLIDER_PILL);
 	return ret;
 }
 
@@ -59,14 +61,6 @@ update_status ModuleBackgroundMap1::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 1, 15, &map1, 1.0f); // map 1
-	App->render->Blit(graphics, 9, 31, &(PowerPill.GetCurrentFrame()), 1);
-	App->render->Blit(graphics, 209, 31, &(PowerPill.GetCurrentFrame()), 1);
-	App->render->Blit(graphics, 209, 231, &(PowerPill.GetCurrentFrame()), 1);
-	App->render->Blit(graphics, 9, 231, &(PowerPill.GetCurrentFrame()), 1);
-	
-	if (Dot_coll->to_delete == false){
-		App->render->Blit(graphics, 50, 50, &Dot1, 1.0f);
-	}
 	
 	// Load scene when press space
 
