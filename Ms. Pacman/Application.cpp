@@ -5,7 +5,6 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleCollision.h"
 
 #include "ModuleMenu.h"
 #include "ModuleBackground_Map1.h"
@@ -29,14 +28,13 @@ Application::Application()
 	modules[6] = map1 = new ModuleBackgroundMap1();
 	modules[7] = map2 = new ModuleBackgroundMap2();
 	modules[8] = end_screen = new ModuleEndScreen();
-	modules[9] = collision = new ModuleCollision();
 	
-	modules[10] = mapPills1 = new ModulePillsMap1();
+	modules[9] = mapPills1 = new ModulePillsMap1();
 
-	modules[11] = player = new ModulePlayer();
-	modules[12] = ghost_blue = new ModuleGhostBlue();
+	modules[10] = player = new ModulePlayer();
+	modules[11] = ghost_blue = new ModuleGhostBlue();
 
-	modules[13] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
+	modules[12] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
 }
 
 
@@ -60,7 +58,6 @@ bool Application::Init()
 	map1->Disable();
 	map2->Disable();
 	end_screen->Disable();
-	collision->Disable();
 
 	ghost_blue->Disable();
 	player->Disable();

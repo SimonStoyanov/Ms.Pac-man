@@ -1,7 +1,6 @@
 #ifndef __MODULE_H__
 #define __MODULE_H__
 
-struct Collider;
 
 class Module
 {
@@ -38,8 +37,6 @@ public:
 		}
 	}
 
-	// Callbacks ---
-	virtual void OnCollision(Collider*, Collider*) {}
 
 };
 

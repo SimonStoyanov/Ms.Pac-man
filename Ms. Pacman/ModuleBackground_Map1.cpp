@@ -5,7 +5,6 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
-#include "ModuleCollision.h"
 
 #include "ModulePillsMap1.h"
 
@@ -41,10 +40,7 @@ bool ModuleBackgroundMap1::Start()
 	App->player->Enable();
 	App->audio->Enable();
 	App->ghost_blue->Enable();
-	App->collision->Enable();
 	App->mapPills1->Enable();
-
-	// Collisions
 
 	return ret;
 }

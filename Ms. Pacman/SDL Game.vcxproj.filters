@@ -92,9 +92,6 @@
     <ClInclude Include="ModuleFadeToBlack.h">
       <Filter>Modules\Background</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleCollision.h">
-      <Filter>Modules\Miscellaneous</Filter>
-    </ClInclude>
     <ClInclude Include="ModulePillsMap1.h">
       <Filter>Modules\Pill%27s Map</Filter>
     </ClInclude>
@@ -153,9 +150,6 @@
     </ClCompile>
     <ClCompile Include="ModuleFadeToBlack.cpp">
       <Filter>Modules\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleCollision.cpp">
-      <Filter>Modules\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="ModulePillsMap1.cpp">
       <Filter>Modules\Pill%27s Map</Filter>
