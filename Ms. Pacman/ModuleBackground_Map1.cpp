@@ -24,6 +24,10 @@ ModuleBackgroundMap1::ModuleBackgroundMap1()
 	PowerPill.PushBack({ 0, 508, 7, 6 });
 	PowerPill.PushBack({ 0, 505, 1, 1 });
 	PowerPill.speed = 0.035f;
+
+	//Map tiles
+	tile0 = { 0, 0, 8, 8 };
+	tile1 = { 9, 0, 8, 8 };
 }
 
 ModuleBackgroundMap1::~ModuleBackgroundMap1()
