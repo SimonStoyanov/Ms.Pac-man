@@ -20,7 +20,7 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-
+	char map1[31][28];
 	// 220 pills and 4 PowerPills
 	
 	
