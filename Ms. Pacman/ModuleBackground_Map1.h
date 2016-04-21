@@ -53,10 +53,14 @@ public:
 	SDL_Rect tile24;
 	SDL_Rect tile25;
 	SDL_Rect tile26;
+	SDL_Rect tile27;
 	SDL_Rect tilePILL;
 	SDL_Rect tilepill;
 	SDL_Rect tilehouse;
 
+	//iPoint player_tile_position;
+
+	char map1[31][28];
 };
 
 #endif 
