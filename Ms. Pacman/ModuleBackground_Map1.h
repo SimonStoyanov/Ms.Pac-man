@@ -21,10 +21,12 @@ public:
 
 	SDL_Texture* graphics = nullptr;
 	Animation PowerPill;
-	SDL_Rect map1;
+	
 	SDL_Rect Dot1;
 
-	//Map tiles
+	char map1[31][27];
+	// 220 pills and 4 PowerPills
+
 	SDL_Rect tile0;
 	SDL_Rect tile1;
 	SDL_Rect tile2;
@@ -52,9 +54,9 @@ public:
 	SDL_Rect tile24;
 	SDL_Rect tile25;
 	SDL_Rect tile26;
-	SDL_Rect tile27;
-	SDL_Rect tile28;
-	SDL_Rect tile29;
+	SDL_Rect tilePILL;
+	SDL_Rect tilepill;
+	SDL_Rect tilehouse;
 
 };
 
