@@ -24,7 +24,6 @@ public:
 	
 	SDL_Rect Dot1;
 
-	char map1[31][27];
 	// 220 pills and 4 PowerPills
 
 	SDL_Rect tile0;
