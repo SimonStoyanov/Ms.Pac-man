@@ -27,6 +27,7 @@ public:
 	Animation down;
 
 	iPoint position;
+	iPoint player_tile;
 
 
 	bool wakawaka;
