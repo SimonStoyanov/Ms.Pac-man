@@ -5,6 +5,8 @@
 #include "Animation.h"
 #include "Globals.h"
 
+#define DISTANCE 0
+
 struct SDL_Texture;
 
 class ModuleBackgroundMap1 : public Module

@@ -14,7 +14,6 @@
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
 
-#define DISTANCE 0
 
 ModuleBackgroundMap1::ModuleBackgroundMap1()
 {
@@ -205,12 +204,20 @@ update_status ModuleBackgroundMap1::Update()
 				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCE, &tile27);
 				break; 
 			}
-
-			int a = App->player->position.x; a += 10;
-			int b = App->player->position.y; b -= 10;
-			map1[b/8][a/8] = 0;
 		}
 		i++;
+	}
+
+	switch (map1[App->player->player_tile.y][App->player->player_tile.x])
+	{
+	case 27:
+		map1[App->player->player_tile.y][App->player->player_tile.x] = 0;
+		break;
+	case 28:
+		map1[App->player->player_tile.y][App->player->player_tile.x] = 0;
+			break;
+	default:
+		break;
 	}
 	
 	// Load scene when press space

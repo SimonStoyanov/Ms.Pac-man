@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
+#include "ModuleBackground_Map1.h"
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -12,7 +13,7 @@
 ModulePlayer::ModulePlayer()
 {
 	position.x = 107;
-	position.y = 211;
+	position.y = 196 + DISTANCE;
 
 	// right animation
 	right.PushBack({ 33, 1, 15, 14 });
@@ -63,28 +64,46 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
-		current_animation = &right;
-		position.x += speed;
-		wakawaka = true;
+		if (App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 0 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 28 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 27)
+		{
+			current_animation = &right;
+			position.x += speed;
+			wakawaka = true;
+		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
-		current_animation = &left;
-		position.x -= speed;
-		wakawaka = true;
+		if (App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 0 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 28 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 27)
+		{
+			current_animation = &left;
+			position.x -= speed;
+			wakawaka = true;
+		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
-		current_animation = &up;
-		position.y -= speed;
-		wakawaka = true;
+		if (App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 0 || App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 28 || App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 27)
+		{
+			current_animation = &up;
+			position.y -= speed;
+			wakawaka = true;
+		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
-		current_animation = &down;
-		position.y += speed;
-		wakawaka = true;
+		if (App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 0 || App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 28 || App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 27)
+		{
+			current_animation = &down;
+			position.y += speed;
+			wakawaka = true;
+		}
 	}
+
+	int x = position.x; x += 10;
+	int y = position.y; y -= 5;
+
+	player_tile.x = (x / 8);
+	player_tile.y = (y / 8);
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
