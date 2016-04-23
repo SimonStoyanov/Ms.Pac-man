@@ -27,7 +27,9 @@ public:
 	Animation down;
 
 	iPoint position;
-	iPoint player_tile;
+	iPoint player_up_left_tiles;
+	iPoint player_down_right_tiles;
+	iPoint player_middle_tiles;
 
 	bool go_up = false;
 	bool go_down = false;
