@@ -29,6 +29,12 @@ public:
 	iPoint position;
 	iPoint player_tile;
 
+	bool go_up = false;
+	bool go_down = false;
+	bool go_left = true;
+	bool go_right = false;
+	
+
 
 	bool wakawaka;
 };

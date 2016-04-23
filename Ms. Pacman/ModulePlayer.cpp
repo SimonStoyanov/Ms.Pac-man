@@ -66,36 +66,70 @@ update_status ModulePlayer::Update()
 	{
 		if (App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 0 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 28 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 27)
 		{
-			current_animation = &right;
-			position.x += speed;
-			wakawaka = true;
+			go_right = true; go_left = false; go_up = false; go_down = false;
 		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		if (App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 0 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 28 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 27)
 		{
-			current_animation = &left;
-			position.x -= speed;
-			wakawaka = true;
+			go_left = true; go_right = false; go_up = false; go_down = false;
 		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		if (App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 0 || App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 28 || App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 27)
 		{
-			current_animation = &up;
-			position.y -= speed;
-			wakawaka = true;
+			go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
 		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		if (App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 0 || App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 28 || App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 27)
 		{
+			go_down = true; go_right = false; go_left = false; go_up = false;
+		}
+	}
+
+	if (go_right)
+	{
+		if (App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 0 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 28 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 27)
+		{
+			current_animation = &right;
+			position.x += speed;
+			wakawaka = true;
+			go_left = false; go_up = false; go_down = false;
+		}
+	}
+	if (go_left)
+	{
+		if (App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 0 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 28 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 27)
+		{
+			current_animation = &left;
+			position.x -= speed;
+			wakawaka = true;
+			go_right = false; go_up = false; go_down = false;
+		}
+
+	}
+	if (go_up)
+	{
+		if (App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 0 || App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 28 || App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 27)
+		{
+			current_animation = &up;
+			position.y -= speed;
+			wakawaka = true;
+			go_right = false; go_left = false; go_up = true; go_down = false;
+		}
+	}
+	if (go_down)
+	{
+		if (App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 0 || App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 28 || App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 27)
+		{
 			current_animation = &down;
 			position.y += speed;
 			wakawaka = true;
+			go_right = false; go_left = false; go_up = false;
 		}
 	}
 
