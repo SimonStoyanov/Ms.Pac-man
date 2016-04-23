@@ -60,6 +60,7 @@ update_status ModulePlayer::Update()
 {
 	Animation* current_animation = prev_anim;
 
+	// Movement---------------------------------------
 	int speed = 1;
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
@@ -95,42 +96,54 @@ update_status ModulePlayer::Update()
 	{
 		if (App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 0 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 28 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x + 1] == 27)
 		{
+			right.speed = 0.25f;
 			current_animation = &right;
 			position.x += speed;
 			wakawaka = true;
 			go_left = false; go_up = false; go_down = false;
 		}
+		else
+			right.speed = 0.00000001f;
 	}
 	if (go_left)
 	{
 		if (App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 0 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 28 || App->map1->map1[App->player->player_tile.y][App->player->player_tile.x - 1] == 27)
 		{
+			left.speed = 0.25f;
 			current_animation = &left;
 			position.x -= speed;
 			wakawaka = true;
 			go_right = false; go_up = false; go_down = false;
 		}
+		else
+			left.speed = 0.00000001f;
 
 	}
 	if (go_up)
 	{
 		if (App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 0 || App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 28 || App->map1->map1[App->player->player_tile.y - 1][App->player->player_tile.x] == 27)
 		{
+			up.speed = 0.25f;
 			current_animation = &up;
 			position.y -= speed;
 			wakawaka = true;
 			go_right = false; go_left = false; go_up = true; go_down = false;
 		}
+		else
+			up.speed = 0.00000001f;
 	}
 	if (go_down)
 	{
 		if (App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 0 || App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 28 || App->map1->map1[App->player->player_tile.y + 1][App->player->player_tile.x] == 27)
 		{
+			down.speed = 0.25f;
 			current_animation = &down;
 			position.y += speed;
 			wakawaka = true;
 			go_right = false; go_left = false; go_up = false;
 		}
+		else
+			down.speed = 0.00000001f;
 	}
 
 	int x = position.x; x += 10;
