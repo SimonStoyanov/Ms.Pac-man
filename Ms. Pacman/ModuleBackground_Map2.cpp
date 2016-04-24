@@ -104,109 +104,109 @@ update_status ModuleBackgroundMap2::Update()
 			switch (map2[j][i])
 			{
 			case 0:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile0);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile0);
 				break;
 			case 1:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile1);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile1);
 				break;
 			case 2:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile2);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile2);
 				break;
 			case 3:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile3);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile3);
 				break;
 			case 4:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile4);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile4);
 				break;
 			case 5:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile5);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile5);
 				break;
 			case 6:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile6);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile6);
 				break;
 			case 7:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile7);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile7);
 				break;
 			case 8:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile8);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile8);
 				break;
 			case 9:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile9);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile9);
 				break;
 			case 10:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile10);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile10);
 				break;
 			case 11:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile11);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile11);
 				break;
 			case 12:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile12);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile12);
 				break;
 			case 13:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile13);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile13);
 				break;
 			case 14:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile14);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile14);
 				break;
 			case 15:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile15);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile15);
 				break;
 			case 16:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile16);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile16);
 				break;
 			case 17:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile17);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile17);
 				break;
 			case 18:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile18);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile18);
 				break;
 			case 19:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile19);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile19);
 				break;
 			case 20:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile20);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile20);
 				break;
 			case 21:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile21);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile21);
 				break;
 			case 22:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile22);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile22);
 				break;
 			case 23:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile23);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile23);
 				break;
 			case 24:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile24);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile24);
 				break;
 			case 25:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile25);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile25);
 				break;
 			case 26:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile26);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile26);
 				break;
 			case 27:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tilePILL);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tilePILL);
 				break;
 			case 28:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tilepill);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tilepill);
 				break;
 			case 29:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tilehouse);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tilehouse);
 				break;
 			case 30:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile27);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile27);
 				break;
 			case 31:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile28);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile28);
 				break;
 			case 32:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile29);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile29);
 				break;
 			case 33:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile30);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile30);
 				break;
 			case 34:
-				App->render->Blit(graphics, i * 8, j * 8 + DISTANCE, &tile31);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile31);
 				break;
 			}
 		}

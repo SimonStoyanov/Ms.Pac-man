@@ -12,8 +12,8 @@
 
 ModulePlayer::ModulePlayer() 
 {
-	position.x = 106; //106
-	position.y = 195 + DISTANCE; //195
+	position.x = 105; //105
+	position.y = 195; //195
 
 	test = { 3, 120, 1, 1 };
 
@@ -40,6 +40,8 @@ ModulePlayer::ModulePlayer()
 	down.PushBack({ 17, 17, 14, 15 });
 	down.PushBack({ 1, 17, 14, 15 });
 	down.speed = 0.25f;
+
+	total_time = (Uint32)(total_t * 0.5f * 1000.0f);
 }
 
 ModulePlayer::~ModulePlayer()
@@ -53,6 +55,7 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
 	prev_anim = &left;
 	
+	start_time = SDL_GetTicks();
 
 	return ret;
 }
@@ -62,126 +65,159 @@ update_status ModulePlayer::Update()
 {
 	Animation* current_animation = prev_anim;
 
-	// Movement---------------------------------------
-	int speed = 1;
+	Uint32 now = SDL_GetTicks() - start_time;
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
-	{
-		if (App->map1->map1[p_right.y][p_right.x + 1] == 0 || App->map1->map1[p_right.y][p_right.x + 1] == 28 || App->map1->map1[p_right.y][p_right.x + 1] == 27)
-		{
-			if ((position.x + 7) == (p_mid.x * 8) + 3 && (position.y - 7) == (p_mid.y * 8) + 4 || go_left == true)
-			{
-				go_right = true; go_left = false; go_up = false; go_down = false;
-			}
-		}
 
-	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
-	{
-		if (App->map1->map1[p_left.y][p_left.x - 1] == 0 || App->map1->map1[p_left.y][p_left.x - 1] == 28 || App->map1->map1[p_left.y][p_left.x - 1] == 27)
-		{
-			if ((position.x + 7) == (p_mid.x * 8) + 3 && (position.y - 7) == (p_mid.y * 8) + 4 || go_right == true)
-			{
-				go_left = true; go_right = false; go_up = false; go_down = false;
-			}
-		}
-	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
-	{
-		if (App->map1->map1[p_up.y - 1][p_up.x] == 0 || App->map1->map1[p_up.y - 1][p_up.x] == 28 || App->map1->map1[p_up.y - 1][p_up.x] == 27)
-		{
-			if ((position.x + 7) == (p_mid.x * 8) + 3 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true)
-			{
-				go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
-			}
-		}
-	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
-	{
-		if (App->map1->map1[p_down.y + 1][p_down.x] == 0 || App->map1->map1[p_down.y + 1][p_down.x] == 28 || App->map1->map1[p_down.y + 1][p_down.x] == 27)
-		{
-			if ((position.x + 7) == (p_mid.x * 8) + 3 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true)
-			{
-				go_down = true; go_right = false; go_left = false; go_up = false;
-			}
-		}
-	}
-
-	if (go_right)
-	{
-		if (App->map1->map1[p_right.y][p_right.x + 1] == 0 || App->map1->map1[p_right.y][p_right.x + 1] == 28 || App->map1->map1[p_right.y][p_right.x + 1] == 27)
-		{
-			right.speed = 0.25f;
-			current_animation = &right;
-			position.x += speed;
-			wakawaka = true;
-			go_left = false; go_up = false; go_down = false;
-		}
-		else
-			right.speed = 0.00000001f;
-	}
-	if (go_left)
-	{
-		if (App->map1->map1[p_left.y][p_left.x - 1] == 0 || App->map1->map1[p_left.y][p_left.x - 1] == 28 || App->map1->map1[p_left.y][p_left.x - 1] == 27)
-		{
-			left.speed = 0.25f;
-			current_animation = &left;
-			position.x -= speed;
-			wakawaka = true;
-			go_right = false; go_up = false; go_down = false;
-		}
-		else
-			left.speed = 0.00000001f;
-	}
-	if (go_up)
-	{
-		if (App->map1->map1[p_up.y - 1][p_up.x] == 0 || App->map1->map1[p_up.y - 1][p_up.x] == 28 || App->map1->map1[p_up.y - 1][p_up.x] == 27)
-		{
-			up.speed = 0.25f;
-			current_animation = &up;
-			position.y -= speed;
-			wakawaka = true;
-			go_right = false; go_left = false; go_up = true; go_down = false;
-		}
-		else
-			up.speed = 0.00000001f;
-	}
-	if (go_down)
-	{
-		if (App->map1->map1[p_down.y + 1][p_down.x] == 0 || App->map1->map1[p_down.y + 1][p_down.x] == 28 || App->map1->map1[p_down.y + 1][p_down.x] == 27)
-		{
-				down.speed = 0.25f;
-				current_animation = &down;
-				position.y += speed;
-				wakawaka = true;
-				go_right = false; go_left = false; go_up = false;
-		}
-		else
-			down.speed = 0.00000001f;
-	}
-
+	// Player tile collision detectors ------------------------------
 	p_up.x = (position.x + 7) / 8;
 	p_up.y = (position.y - 4) / 8;
 
 	p_down.x = (position.x + 7) / 8;
 	p_down.y = (position.y - 11) / 8;
 
-	p_left.x = (position.x + 11) / 8;
+	p_left.x = (position.x + 10) / 8;
 	p_left.y = (position.y - 7) / 8;
 
-	p_right.x = (position.x + 4) / 8;
+	p_right.x = (position.x + 3) / 8;
 	p_right.y = (position.y - 7) / 8;
 
 	p_mid.x = (position.x + 6) / 8;
 	p_mid.y = (position.y - 7) / 8;
 
+	// Movement ---------------------------------------
+	int speed = 1;
+	if (App->map1->IsEnabled() == true)
+	{
+		if (total_time <= now)
+		{
+			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) // right
+			{
+				// What is the next tile
+				if (App->map1->map1[p_right.y][p_right.x + 1] == 0 || App->map1->map1[p_right.y][p_right.x + 1] == 28 || App->map1->map1[p_right.y][p_right.x + 1] == 27)
+				{
+					// Is the player near the center-pixel of the tile?
+					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_left == true)
+					{
+						position.y = (p_mid.y * 8) + 4 + 7; // Re-position to the center of the tile
+						go_right = true; go_left = false; go_up = false; go_down = false;
+					}
+				}
+			}
+			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) // left
+			{
+				// What is the next tile
+				if (App->map1->map1[p_left.y][p_left.x - 1] == 0 || App->map1->map1[p_left.y][p_left.x - 1] == 28 || App->map1->map1[p_left.y][p_left.x - 1] == 27)
+				{
+					// Is the player near the center-pixel of the tile?
+					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_right == true)
+					{
+						position.y = (p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
+						go_left = true; go_right = false; go_up = false; go_down = false;
+					}
+				}
+			}
+			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) // up
+			{
+				// What is the next tile
+				if (App->map1->map1[p_up.y - 1][p_up.x] == 0 || App->map1->map1[p_up.y - 1][p_up.x] == 28 || App->map1->map1[p_up.y - 1][p_up.x] == 27)
+				{
+					// Is the player near the center-pixel of the tile?
+					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true)
+					{
+						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
+						go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
+					}
+				}
+			}
+			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) // down
+			{
+				// What is the next tile
+				if (App->map1->map1[p_down.y + 1][p_down.x] == 0 || App->map1->map1[p_down.y + 1][p_down.x] == 28 || App->map1->map1[p_down.y + 1][p_down.x] == 27)
+				{	
+					// Is the player near the center-pixel of the tile?
+					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true)
+					{
+						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
+						go_down = true; go_right = false; go_left = false; go_up = false;
+					}
+				}
+			}
+
+			if (go_right)
+			{
+				// What is the next tile
+				if (App->map1->map1[p_right.y][p_right.x + 1] == 0 || App->map1->map1[p_right.y][p_right.x + 1] == 28 || App->map1->map1[p_right.y][p_right.x + 1] == 27)
+				{
+					right.speed = 0.25f;
+					current_animation = &right;
+					position.x += speed;
+					wakawaka = true;
+
+					go_left = false; go_up = false; go_down = false;
+				}
+				else
+					right.speed = 0.0f;
+			}
+			if (go_left)
+			{
+				// What is the next tile
+				if (App->map1->map1[p_left.y][p_left.x - 1] == 0 || App->map1->map1[p_left.y][p_left.x - 1] == 28 || App->map1->map1[p_left.y][p_left.x - 1] == 27)
+				{
+					left.speed = 0.25f;
+					current_animation = &left;
+					position.x -= speed;
+					wakawaka = true;
+					go_right = false; go_up = false; go_down = false;
+				}
+				else
+					left.speed = 0.0f;
+			}
+			if (go_up)
+			{
+				// What is the next tile
+				if (App->map1->map1[p_up.y - 1][p_up.x] == 0 || App->map1->map1[p_up.y - 1][p_up.x] == 28 || App->map1->map1[p_up.y - 1][p_up.x] == 27)
+				{
+					up.speed = 0.25f;
+					current_animation = &up;
+					position.y -= speed;
+					wakawaka = true;
+					go_right = false; go_left = false; go_down = false;
+				}
+				else
+					up.speed = 0.0f;
+			}
+			if (go_down)
+			{
+				// What is the next tile
+				if (App->map1->map1[p_down.y + 1][p_down.x] == 0 || App->map1->map1[p_down.y + 1][p_down.x] == 28 || App->map1->map1[p_down.y + 1][p_down.x] == 27)
+				{
+					down.speed = 0.25f;
+					current_animation = &down;
+					position.y += speed;
+					wakawaka = true;
+					go_right = false; go_left = false; go_up = false;
+				}
+				else
+					down.speed = 0.0f;
+			}
+		}
+		else{ /*left.speed = 0.0f;*/ }
+	}
+	else{}
+
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
 
-	App->render->Blit(graphics, (position.x +7), (position.y - 7), &test, 1.0f); //
-	App->render->Blit(graphics, (p_mid.x * 8) + 3, (p_mid.y * 8) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (position.x +7), (position.y - 7), &test, 1.0f); //
+	//App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (p_up.x * 8) + 4, (p_up.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+
+	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 -r.h, &r);
 
 	return UPDATE_CONTINUE;
 }

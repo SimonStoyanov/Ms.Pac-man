@@ -40,7 +40,9 @@ public:
 
 	SDL_Rect test;
 	
-
+	Uint32 start_time = 0;
+	Uint32 total_time = 0;
+	float total_t = 9.5f;
 
 	bool wakawaka;
 };

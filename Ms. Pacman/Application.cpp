@@ -11,8 +11,6 @@
 #include "ModuleBackground_Map2.h"
 #include "ModuleEndScreen.h"
 
-#include "ModulePillsMap1.h"
-
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostBlue.h"
@@ -28,13 +26,12 @@ Application::Application()
 	modules[6] = map1 = new ModuleBackgroundMap1();
 	modules[7] = map2 = new ModuleBackgroundMap2();
 	modules[8] = end_screen = new ModuleEndScreen();
-	
-	modules[9] = mapPills1 = new ModulePillsMap1();
 
-	modules[10] = player = new ModulePlayer();
-	modules[11] = ghost_blue = new ModuleGhostBlue();
 
-	modules[12] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
+	modules[9] = player = new ModulePlayer();
+	modules[10] = ghost_blue = new ModuleGhostBlue();
+
+	modules[11] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
 }
 
 
@@ -54,7 +51,6 @@ bool Application::Init()
 	// Disable
 	audio->Disable();
 
-	mapPills1->Disable();
 	map1->Disable();
 	map2->Disable();
 	end_screen->Disable();

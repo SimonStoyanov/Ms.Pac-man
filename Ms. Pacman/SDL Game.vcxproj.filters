@@ -24,9 +24,6 @@
     <Filter Include="Modules\Miscellaneous">
       <UniqueIdentifier>{9aa873a2-c3c4-48c9-bcdc-da900c51388f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Pill%27s Map">
-      <UniqueIdentifier>{3f29a349-cc3f-4495-9027-dbe7435fdc19}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemLeaks.h">
@@ -92,9 +89,6 @@
     <ClInclude Include="ModuleFadeToBlack.h">
       <Filter>Modules\Background</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePillsMap1.h">
-      <Filter>Modules\Pill%27s Map</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -150,9 +144,6 @@
     </ClCompile>
     <ClCompile Include="ModuleFadeToBlack.cpp">
       <Filter>Modules\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePillsMap1.cpp">
-      <Filter>Modules\Pill%27s Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

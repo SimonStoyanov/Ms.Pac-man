@@ -78,7 +78,6 @@ int main(int argc, char* argv[])
 				state = MAIN_EXIT;
 
 			} break;
-
 		}
 	}
 

@@ -5,7 +5,7 @@
 #include "Animation.h"
 #include "Globals.h"
 
-#define DISTANCE 0
+#define DISTANCEM1 8 //nomes multiples de 8
 
 struct SDL_Texture;
 
@@ -26,10 +26,10 @@ public:
 	
 	SDL_Rect Dot1;
 
-	int eaten_dots = 0;
+	// Eaten dots
+	int eaten_pills = 0;
 
-	// 220 pills and 4 PowerPills
-
+	// Tiles
 	SDL_Rect tile0;
 	SDL_Rect tile1;
 	SDL_Rect tile2;
@@ -62,9 +62,10 @@ public:
 	SDL_Rect tilepill;
 	SDL_Rect tilehouse;
 
-	//iPoint player_tile_position;
-
+	// Map array
 	char map1[31][28];
+
+
 };
 
 #endif 
