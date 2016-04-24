@@ -24,6 +24,8 @@ public:
 
 	SDL_Rect Dot1;
 
+	int eaten_dots = 0;
+
 	// 220 pills and 4 PowerPills
 
 	SDL_Rect tile0;

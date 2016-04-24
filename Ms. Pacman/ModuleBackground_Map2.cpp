@@ -213,13 +213,15 @@ update_status ModuleBackgroundMap2::Update()
 		i++;
 	}
 
-	switch (map2[App->player->player_tile.y][App->player->player_tile.x])
+	switch (map2[App->player->p_mid.y][App->player->p_mid.x])
 	{
 	case 27:
-		map2[App->player->player_tile.y][App->player->player_tile.x] = 0;
+		map2[App->player->p_mid.y][App->player->p_mid.x] = 0;
+		eaten_dots++;
 		break;
 	case 28:
-		map2[App->player->player_tile.y][App->player->player_tile.x] = 0;
+		map2[App->player->p_mid.y][App->player->p_mid.x] = 0;
+		eaten_dots++;
 		break;
 	default:
 		break;
