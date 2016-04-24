@@ -27,14 +27,17 @@ public:
 	Animation down;
 
 	iPoint position;
-	iPoint player_up_left_tiles;
-	iPoint player_down_right_tiles;
-	iPoint player_middle_tiles;
+	iPoint p_up;
+	iPoint p_down;
+	iPoint p_left;
+	iPoint p_right;
 
 	bool go_up = false;
 	bool go_down = false;
 	bool go_left = true;
 	bool go_right = false;
+
+	SDL_Rect test;
 	
 
 
