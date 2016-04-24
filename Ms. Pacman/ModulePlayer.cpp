@@ -117,7 +117,6 @@ update_status ModulePlayer::Update()
 		}
 		else
 			left.speed = 0.00000001f;
-
 	}
 	if (go_up)
 	{

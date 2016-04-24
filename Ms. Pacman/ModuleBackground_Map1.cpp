@@ -212,10 +212,12 @@ update_status ModuleBackgroundMap1::Update()
 	{
 	case 27:
 		map1[App->player->player_middle_tiles.y][App->player->player_middle_tiles.x] = 0;
+		eaten_dots++;
 		break;
 	case 28:
 		map1[App->player->player_middle_tiles.y][App->player->player_middle_tiles.x] = 0;
-			break;
+		eaten_dots++;
+		break;
 	default:
 		break;
 	}
