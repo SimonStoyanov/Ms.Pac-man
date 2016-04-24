@@ -17,7 +17,6 @@
 
 ModuleBackgroundMap1::ModuleBackgroundMap1()
 {
-
 	tile0 = { 74, 0, 8, 8 };	tile1 = { 0, 0, 8, 8 };		tile2 = { 9, 0, 8, 8 };		tile3 = { 18, 0, 8, 8 };	tile4 = { 27, 0, 8, 8 };	tile5 = { 0, 9, 8, 8 };
 	tile6 = { 9, 9, 8, 8 };		tile7 = { 0, 18, 8, 8 };	tile8 = { 9, 18, 8, 8 };	tile9 = { 18, 18, 8, 8 };	tile10 = { 27, 18, 8, 8 };	tile11 = { 0, 27, 8, 8 };
 	tile12 = { 9, 27, 8, 8 };	tile13 = { 18, 27, 8, 8 };	tile14 = { 27, 27, 8, 8 };	tile15 = { 37, 0, 8, 8 };	tile16 = { 46, 0, 8, 8 };	tile17 = { 55, 0, 8, 8 };
@@ -204,6 +203,7 @@ update_status ModuleBackgroundMap1::Update()
 				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCE, &tile27);
 				break; 
 			}
+
 		}
 		i++;
 	}
