@@ -67,36 +67,49 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
-	if (App->map1->map1[p_down.y][p_down.x+1] == 0 || App->map1->map1[p_down.y][p_down.x+1] == 28 || App->map1->map1[p_down.y][p_down.x+1] == 27 && App->map1->map1[p_up.y][p_right.x + 1] == 0 ||  App->map1->map1[p_up.y][p_up.x + 1] == 27 ||  App->map1->map1[p_up.y-1][p_up.x + 1] == 28)
+		if (App->map1->map1[p_right.y][p_right.x + 1] == 0 || App->map1->map1[p_right.y][p_right.x + 1] == 28 || App->map1->map1[p_right.y][p_right.x + 1] == 27)
 		{
-			go_right = true; go_left = false; go_up = false; go_down = false;
+			if ((position.x + 7) == (p_mid.x * 8) + 3 && (position.y - 7) == (p_mid.y * 8) + 4 || go_left == true)
+			{
+				go_right = true; go_left = false; go_up = false; go_down = false;
+			}
 		}
+
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
-		if (App->map1->map1[p_down.y][p_down.x-1] == 0 || App->map1->map1[p_down.y][p_down.x-1] == 28 || App->map1->map1[p_down.y][p_down.x-1] == 27 && App->map1->map1[p_up.y][p_right.x - 1] == 0 ||  App->map1->map1[p_up.y][p_up.x - 1] == 27 ||  App->map1->map1[p_up.y-1][p_up.x - 1] == 28)
+		if (App->map1->map1[p_left.y][p_left.x - 1] == 0 || App->map1->map1[p_left.y][p_left.x - 1] == 28 || App->map1->map1[p_left.y][p_left.x - 1] == 27)
 		{
-			go_left = true; go_right = false; go_up = false; go_down = false;
+			if ((position.x + 7) == (p_mid.x * 8) + 3 && (position.y - 7) == (p_mid.y * 8) + 4 || go_right == true)
+			{
+				go_left = true; go_right = false; go_up = false; go_down = false;
+			}
 		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
-			if(App->map1->map1[p_left.y-1][p_left.x] == 0 || App->map1->map1[p_left.y-1][p_left.x] == 28 || App->map1->map1[p_left.y-1][p_left.x] == 27 && App->map1->map1[p_right.y-1][p_right.x] == 0 ||  App->map1->map1[p_right.y-1][p_right.x] == 27 ||  App->map1->map1[p_right.y-1][p_right.x] == 28)
+		if (App->map1->map1[p_up.y - 1][p_up.x] == 0 || App->map1->map1[p_up.y - 1][p_up.x] == 28 || App->map1->map1[p_up.y - 1][p_up.x] == 27)
 		{
-			go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
+			if ((position.x + 7) == (p_mid.x * 8) + 3 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true)
+			{
+				go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
+			}
 		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
-		if (App->map1->map1[p_left.y+1][p_left.x] == 0 || App->map1->map1[p_left.y+1][p_left.x] == 28 || App->map1->map1[p_left.y+1][p_left.x] == 27 && App->map1->map1[p_right.y+1][p_right.x] == 0 ||  App->map1->map1[p_right.y+1][p_right.x] == 27 ||  App->map1->map1[p_right.y+1][p_right.x] == 28)
+		if (App->map1->map1[p_down.y + 1][p_down.x] == 0 || App->map1->map1[p_down.y + 1][p_down.x] == 28 || App->map1->map1[p_down.y + 1][p_down.x] == 27)
 		{
-			go_down = true; go_right = false; go_left = false; go_up = false;
+			if ((position.x + 7) == (p_mid.x * 8) + 3 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true)
+			{
+				go_down = true; go_right = false; go_left = false; go_up = false;
+			}
 		}
 	}
 
 	if (go_right)
 	{
-		if (App->map1->map1[p_down.y][p_down.x+1] == 0 || App->map1->map1[p_down.y][p_down.x+1] == 28 || App->map1->map1[p_down.y][p_down.x+1] == 27 && App->map1->map1[p_up.y][p_right.x + 1] == 0 ||  App->map1->map1[p_up.y][p_up.x + 1] == 27 ||  App->map1->map1[p_up.y-1][p_up.x + 1] == 28)
+		if (App->map1->map1[p_right.y][p_right.x + 1] == 0 || App->map1->map1[p_right.y][p_right.x + 1] == 28 || App->map1->map1[p_right.y][p_right.x + 1] == 27)
 		{
 			right.speed = 0.25f;
 			current_animation = &right;
@@ -109,7 +122,7 @@ update_status ModulePlayer::Update()
 	}
 	if (go_left)
 	{
-		if (App->map1->map1[p_down.y][p_down.x-1] == 0 || App->map1->map1[p_down.y][p_down.x-1] == 28 || App->map1->map1[p_down.y][p_down.x-1] == 27 && App->map1->map1[p_up.y][p_right.x - 1] == 0 ||  App->map1->map1[p_up.y][p_up.x - 1] == 27 ||  App->map1->map1[p_up.y-1][p_up.x - 1] == 28)
+		if (App->map1->map1[p_left.y][p_left.x - 1] == 0 || App->map1->map1[p_left.y][p_left.x - 1] == 28 || App->map1->map1[p_left.y][p_left.x - 1] == 27)
 		{
 			left.speed = 0.25f;
 			current_animation = &left;
@@ -122,7 +135,7 @@ update_status ModulePlayer::Update()
 	}
 	if (go_up)
 	{
-		if(App->map1->map1[p_left.y-1][p_left.x] == 0 || App->map1->map1[p_left.y-1][p_left.x] == 28 || App->map1->map1[p_left.y-1][p_left.x] == 27 && App->map1->map1[p_right.y-1][p_right.x] == 0 ||  App->map1->map1[p_right.y-1][p_right.x] == 27 ||  App->map1->map1[p_right.y-1][p_right.x] == 28)
+		if (App->map1->map1[p_up.y - 1][p_up.x] == 0 || App->map1->map1[p_up.y - 1][p_up.x] == 28 || App->map1->map1[p_up.y - 1][p_up.x] == 27)
 		{
 			up.speed = 0.25f;
 			current_animation = &up;
@@ -135,36 +148,40 @@ update_status ModulePlayer::Update()
 	}
 	if (go_down)
 	{
-		if (App->map1->map1[p_left.y+1][p_left.x] == 0 || App->map1->map1[p_left.y+1][p_left.x] == 28 || App->map1->map1[p_left.y+1][p_left.x] == 27 && App->map1->map1[p_right.y+1][p_right.x] == 0 ||  App->map1->map1[p_right.y+1][p_right.x] == 27 ||  App->map1->map1[p_right.y+1][p_right.x] == 28)
+		if (App->map1->map1[p_down.y + 1][p_down.x] == 0 || App->map1->map1[p_down.y + 1][p_down.x] == 28 || App->map1->map1[p_down.y + 1][p_down.x] == 27)
 		{
-			down.speed = 0.25f;
-			current_animation = &down;
-			position.y += speed;
-			wakawaka = true;
-			go_right = false; go_left = false; go_up = false;
+				down.speed = 0.25f;
+				current_animation = &down;
+				position.y += speed;
+				wakawaka = true;
+				go_right = false; go_left = false; go_up = false;
 		}
 		else
 			down.speed = 0.00000001f;
 	}
 
-	p_up.x = (position.x + 8) / 8;
-	p_up.y = (position.y - 10) / 8;
+	p_up.x = (position.x + 7) / 8;
+	p_up.y = (position.y - 4) / 8;
 
-	p_down.x = (position.x + 8) / 8;
-	p_down.y = (position.y - 4) / 8;
+	p_down.x = (position.x + 7) / 8;
+	p_down.y = (position.y - 11) / 8;
 
-	p_left.x = (position.x + 4) / 8;
+	p_left.x = (position.x + 11) / 8;
 	p_left.y = (position.y - 7) / 8;
 
-	p_right.x = (position.x + 8) / 8;
+	p_right.x = (position.x + 4) / 8;
 	p_right.y = (position.y - 7) / 8;
+
+	p_mid.x = (position.x + 6) / 8;
+	p_mid.y = (position.y - 7) / 8;
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
 	App->render->Blit(graphics, position.x, position.y - r.h, &r);
 
-	App->render->Blit(graphics, p_down.x, p_down.y, &test, 1.0f); //
+	App->render->Blit(graphics, (position.x +7), (position.y - 7), &test, 1.0f); //
+	App->render->Blit(graphics, (p_mid.x * 8) + 3, (p_mid.y * 8) + 4, &test, 1.0f); //
 
 	return UPDATE_CONTINUE;
 }

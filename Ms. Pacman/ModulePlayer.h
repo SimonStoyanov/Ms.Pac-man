@@ -31,6 +31,7 @@ public:
 	iPoint p_down;
 	iPoint p_left;
 	iPoint p_right;
+	iPoint p_mid;
 
 	bool go_up = false;
 	bool go_down = false;

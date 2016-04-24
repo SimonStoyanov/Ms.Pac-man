@@ -208,19 +208,19 @@ update_status ModuleBackgroundMap1::Update()
 		i++;
 	}
 
-	/*switch (map1[App->player->player_middle_tiles.y][App->player->player_middle_tiles.x])
+	switch (map1[App->player->p_mid.y][App->player->p_mid.x])
 	{
 	case 27:
-		map1[App->player->player_middle_tiles.y][App->player->player_middle_tiles.x] = 0;
+		map1[App->player->p_mid.y][App->player->p_mid.x] = 0;
 		eaten_dots++;
 		break;
 	case 28:
-		map1[App->player->player_middle_tiles.y][App->player->player_middle_tiles.x] = 0;
+		map1[App->player->p_mid.y][App->player->p_mid.x] = 0;
 		eaten_dots++;
 		break;
 	default:
 		break;
-	}*/
+	}
 	
 	// Load scene when press space
 
