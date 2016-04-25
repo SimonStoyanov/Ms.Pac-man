@@ -89,6 +89,9 @@
     <ClInclude Include="ModuleFadeToBlack.h">
       <Filter>Modules\Background</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleUI.h">
+      <Filter>Modules\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -143,6 +146,9 @@
       <Filter>Modules\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFadeToBlack.cpp">
+      <Filter>Modules\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleUI.cpp">
       <Filter>Modules\Background</Filter>
     </ClCompile>
   </ItemGroup>

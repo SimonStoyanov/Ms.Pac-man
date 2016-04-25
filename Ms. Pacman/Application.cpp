@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 
+#include "ModuleUI.h"
 #include "ModuleMenu.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
@@ -27,11 +28,12 @@ Application::Application()
 	modules[7] = map2 = new ModuleBackgroundMap2();
 	modules[8] = end_screen = new ModuleEndScreen();
 
+	modules[9] = UI = new ModuleUI();
 
-	modules[9] = player = new ModulePlayer();
-	modules[10] = ghost_blue = new ModuleGhostBlue();
+	modules[10] = player = new ModulePlayer();
+	modules[11] = ghost_blue = new ModuleGhostBlue();
 
-	modules[11] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
+	modules[12] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
 }
 
 

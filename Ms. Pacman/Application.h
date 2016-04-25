@@ -18,6 +18,7 @@ class ModulePlayer;
 class ModuleFadeToBlack;
 class Module;
 class ModuleGhostBlue;
+class ModuleUI;
 
 class Application
 {
@@ -36,7 +37,7 @@ public:
 	ModulePlayer* player;
 	ModuleFadeToBlack* fade;
 	ModuleGhostBlue* ghost_blue;
-
+	ModuleUI* UI;
 public:
 
 	Application();
