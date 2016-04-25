@@ -39,40 +39,43 @@ bool ModuleBackgroundMap1::Start()
 	App->audio->Enable();
 	App->ghost_blue->Enable();
 
+	App->player->position.x = 105; //105
+	App->player->position.y = 195; //195
+
 	// Temporal map
 	char tmp_map[31][28]
 	{	//1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
-		{ 1,  7,  7,  7,  7,  7,  7,  5,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  5,  6,  7,  7,  7,  7,  7,  7,  2 }, //1
-		{ 8,  28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 10 }, //2
-		{ 8,  27, 11, 17, 17, 12, 28, 15, 16, 28, 11, 17, 17, 17, 17, 17, 17, 12, 28, 15, 16, 28, 11, 17, 17, 12, 27, 10 }, //3
-		{ 8,  28, 13, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 18, 18, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 14, 28, 10 }, //4
-		{ 8,  28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28,  28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //5
-		{ 3,  9,  12, 28, 11, 12, 28, 11, 17, 17, 17, 12, 28, 11, 12, 28, 11, 17, 17, 17, 12, 28, 11, 12, 28, 11, 9,  4 }, //6
-		{ 0,  0,  8,  28, 15, 16, 28, 15, 30, 30, 30, 16, 28, 15, 16, 28, 15, 30, 30, 30, 16, 28, 15, 16, 28, 10, 0,  0 }, //7
-		{ 7,  7,  14, 28, 15, 16, 28, 13, 18, 18, 18, 14, 28, 15, 16, 28, 13, 18, 18, 18, 14, 28, 15, 16, 28, 13, 7,  7 }, //8
-		{ 0,  0,  0,  28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 0,  0,  0 }, //9
-		{ 9,  9,  12, 28, 15, 23, 17, 17, 12, 0,  11, 17, 17, 24, 23, 17, 17, 12, 0,  11, 17, 17, 24, 16, 28, 11, 9,  9 }, //10
-		{ 0,  0,  8,  28, 13, 18, 18, 18, 14, 0,  13, 18, 18, 18, 18, 18, 18, 14, 0,  13, 18, 18, 18, 14, 28, 10, 0,  0 }, //11
-		{ 0,  0,  8,  28, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  28, 10, 0,  0 }, //12
-		{ 0,  0,  8,  28, 11, 17, 17, 17, 12, 0,  19, 9,  9,  29, 29, 9,  9,  20, 0,  11, 17, 17, 17, 12, 28, 10, 0,  0 }, //13
-		{ 0,  0,  8,  28, 15, 25, 18, 18, 14, 0,  10, 0,  0,  0,  0,  0,  0,  8,  0,  13, 18, 18, 26, 16, 28, 10, 0,  0 }, //14
-		{ 0,  0,  8,  28, 15, 16, 0,  0,  0,  0,  10, 0,  0,  0,  0,  0,  0,  8,  0,  0,  0,  0,  15, 16, 28, 10, 0,  0 }, //15
-		{ 0,  0,  8,  28, 15, 16, 0,  11, 12, 0,  10, 0,  0,  0,  0,  0,  0,  8,  0,  11, 12, 0,  15, 16, 28, 10, 0,  0 }, //16
-		{ 7,  7,  14, 28, 13, 14, 0,  15, 16, 0,  21, 7,  7,  7,  7,  7,  7,  22, 0,  15, 16, 0,  13, 14, 28, 13, 7,  7 }, //17
-		{ 0,  0,  0,  28, 0,  0,  0,  15, 16, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  15, 16, 0,  0,  0,  28, 0,  0,  0 }, //18
-		{ 9,  9,  12, 28, 11, 17, 17, 24, 23, 17, 17, 12, 0,  11, 12, 0,  11, 17, 17, 24, 23, 17, 17, 12, 28, 11, 9,  9 }, //19
-		{ 0,  0,  8,  28, 13, 18, 18, 18, 18, 18, 18, 14, 0,  15, 16, 0,  13, 18, 18, 18, 18, 18, 18, 14, 28, 10, 0,  0 }, //20
-		{ 0,  0,  8,  28, 28, 28, 28, 28, 28, 28, 0,  0,  0,  15, 16, 0,  0,  0,  28, 28, 28, 28, 28, 28, 28, 10, 0,  0 }, //21
-		{ 0,  0,  8,  28, 11, 17, 17, 17, 12, 28, 11, 17, 17, 24, 23, 17, 17, 12, 28, 11, 17, 17, 17, 12, 28, 10, 0,  0 }, //22
-		{ 1,  7,  14, 28, 13, 18, 18, 18, 14, 28, 13, 18, 18, 18, 18, 18, 18, 14, 28, 13, 18, 18, 18, 14, 28, 13, 7,  2}, //23
-		{ 8,  28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 0,  0,  28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //24
-		{ 8,  28, 11, 17, 17, 12, 28, 11, 17, 17, 17, 12, 28, 11, 12, 28, 11, 17, 17, 17, 12, 28, 11, 17, 17, 12, 28, 10 }, //25
-		{ 8,  28, 15, 30, 30, 16, 28, 15, 25, 18, 18, 14, 28, 15, 16, 28, 13, 18, 18, 26, 16, 28, 15, 30, 30, 16, 28, 10 }, //26
-		{ 8,  28, 15, 30, 30, 16, 28, 15, 16, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 15, 16, 28, 15, 30, 30, 16, 28, 10 }, //27
-		{ 8,  27, 15, 30, 30, 16, 28, 15, 16, 28, 11, 17, 17, 24, 23, 17, 17, 12, 28, 15, 16, 28, 15, 30, 30, 16, 27, 10 }, //28
-		{ 8,  28, 13, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 18, 18, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 14, 28, 10 }, //29
-		{ 8,  28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //30
-		{ 3,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  4, } //31
+		{ 1, 7, 7, 7, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7, 2 }, //1
+		{ 8, 28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 10 }, //2
+		{ 8, 27, 11, 17, 17, 12, 28, 15, 16, 28, 11, 17, 17, 17, 17, 17, 17, 12, 28, 15, 16, 28, 11, 17, 17, 12, 27, 10 }, //3
+		{ 8, 28, 13, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 18, 18, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 14, 28, 10 }, //4
+		{ 8, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //5
+		{ 3, 9, 12, 28, 11, 12, 28, 11, 17, 17, 17, 12, 28, 11, 12, 28, 11, 17, 17, 17, 12, 28, 11, 12, 28, 11, 9, 4 }, //6
+		{ 0, 0, 8, 28, 15, 16, 28, 15, 30, 30, 30, 16, 28, 15, 16, 28, 15, 30, 30, 30, 16, 28, 15, 16, 28, 10, 0, 0 }, //7
+		{ 7, 7, 14, 28, 15, 16, 28, 13, 18, 18, 18, 14, 28, 15, 16, 28, 13, 18, 18, 18, 14, 28, 15, 16, 28, 13, 7, 7 }, //8
+		{ 0, 0, 0, 28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 0, 0, 0 }, //9
+		{ 9, 9, 12, 28, 15, 23, 17, 17, 12, 0, 11, 17, 17, 24, 23, 17, 17, 12, 0, 11, 17, 17, 24, 16, 28, 11, 9, 9 }, //10
+		{ 0, 0, 8, 28, 13, 18, 18, 18, 14, 0, 13, 18, 18, 18, 18, 18, 18, 14, 0, 13, 18, 18, 18, 14, 28, 10, 0, 0 }, //11
+		{ 0, 0, 8, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 10, 0, 0 }, //12
+		{ 0, 0, 8, 28, 11, 17, 17, 17, 12, 0, 19, 9, 9, 29, 29, 9, 9, 20, 0, 11, 17, 17, 17, 12, 28, 10, 0, 0 }, //13
+		{ 0, 0, 8, 28, 15, 25, 18, 18, 14, 0, 10, 0, 0, 0, 0, 0, 0, 8, 0, 13, 18, 18, 26, 16, 28, 10, 0, 0 }, //14
+		{ 0, 0, 8, 28, 15, 16, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 15, 16, 28, 10, 0, 0 }, //15
+		{ 0, 0, 8, 28, 15, 16, 0, 11, 12, 0, 10, 0, 0, 0, 0, 0, 0, 8, 0, 11, 12, 0, 15, 16, 28, 10, 0, 0 }, //16
+		{ 7, 7, 14, 28, 13, 14, 0, 15, 16, 0, 21, 7, 7, 7, 7, 7, 7, 22, 0, 15, 16, 0, 13, 14, 28, 13, 7, 7 }, //17
+		{ 0, 0, 0, 28, 0, 0, 0, 15, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 16, 0, 0, 0, 28, 0, 0, 0 }, //18
+		{ 9, 9, 12, 28, 11, 17, 17, 24, 23, 17, 17, 12, 0, 11, 12, 0, 11, 17, 17, 24, 23, 17, 17, 12, 28, 11, 9, 9 }, //19
+		{ 0, 0, 8, 28, 13, 18, 18, 18, 18, 18, 18, 14, 0, 15, 16, 0, 13, 18, 18, 18, 18, 18, 18, 14, 28, 10, 0, 0 }, //20
+		{ 0, 0, 8, 28, 28, 28, 28, 28, 28, 28, 0, 0, 0, 15, 16, 0, 0, 0, 28, 28, 28, 28, 28, 28, 28, 10, 0, 0 }, //21
+		{ 0, 0, 8, 28, 11, 17, 17, 17, 12, 28, 11, 17, 17, 24, 23, 17, 17, 12, 28, 11, 17, 17, 17, 12, 28, 10, 0, 0 }, //22
+		{ 1, 7, 14, 28, 13, 18, 18, 18, 14, 28, 13, 18, 18, 18, 18, 18, 18, 14, 28, 13, 18, 18, 18, 14, 28, 13, 7, 2 }, //23
+		{ 8, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 0, 0, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //24
+		{ 8, 28, 11, 17, 17, 12, 28, 11, 17, 17, 17, 12, 28, 11, 12, 28, 11, 17, 17, 17, 12, 28, 11, 17, 17, 12, 28, 10 }, //25
+		{ 8, 28, 15, 30, 30, 16, 28, 15, 25, 18, 18, 14, 28, 15, 16, 28, 13, 18, 18, 26, 16, 28, 15, 30, 30, 16, 28, 10 }, //26
+		{ 8, 28, 15, 30, 30, 16, 28, 15, 16, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 15, 16, 28, 15, 30, 30, 16, 28, 10 }, //27
+		{ 8, 27, 15, 30, 30, 16, 28, 15, 16, 28, 11, 17, 17, 24, 23, 17, 17, 12, 28, 15, 16, 28, 15, 30, 30, 16, 27, 10 }, //28
+		{ 8, 28, 13, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 18, 18, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 14, 28, 10 }, //29
+		{ 8, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //30
+		{ 3, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 4, } //31
 
 	};
 
@@ -81,7 +84,7 @@ bool ModuleBackgroundMap1::Start()
 	{
 		for (int y = 0; y < 28; y++)
 		{
-			map1[i][y] = tmp_map[i][y];
+			g_map[i][y] = tmp_map[i][y];
 		}
 	}
 	return ret;
@@ -104,101 +107,101 @@ update_status ModuleBackgroundMap1::Update()
 	{
 		for (int j = 0; j < 31; j++)
 		{
-			switch (map1[j][i])
+			switch (g_map[j][i])
 			{
 			case 0:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile0);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile0);
 				break;
 			case 1:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile1);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile1);
 				break;
 			case 2:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile2);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile2);
 				break;
 			case 3:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile3);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile3);
 				break;
 			case 4:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile4);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile4);
 				break;
 			case 5:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile5);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile5);
 				break;
 			case 6:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile6);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile6);
 				break;
 			case 7:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile7);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile7);
 				break;
 			case 8:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile8);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile8);
 				break;
 			case 9:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile9);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile9);
 				break;
 			case 10:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile10);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile10);
 				break;
 			case 11:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile11);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile11);
 				break;
 			case 12:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile12);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile12);
 				break;
 			case 13:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile13);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile13);
 				break;
 			case 14:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile14);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile14);
 				break;
 			case 15:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile15);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile15);
 				break;
 			case 16:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile16);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile16);
 				break;
 			case 17:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile17);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile17);
 				break;
 			case 18:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile18);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile18);
 				break;
 			case 19:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile19);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile19);
 				break;
 			case 20:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile20);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile20);
 				break;
 			case 21:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile21);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile21);
 				break;
 			case 22:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile22);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile22);
 				break;
 			case 23:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile23);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile23);
 				break;
 			case 24:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile24);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile24);
 				break;
 			case 25:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile25);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile25);
 				break;
 			case 26:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile26);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile26);
 				break;
 			case 27:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tilePILL);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tilePILL);
 				break;
 			case 28:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tilepill);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tilepill);
 				break;
 			case 29:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tilehouse);
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tilehouse);
 				break;
 			case 30:
-				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile27);
-				break; 
+				App->render->Blit(graphics, i * 8, j * 8 + DISTANCEM1, &tile27);
+				break;
 			}
 
 		}
@@ -206,20 +209,20 @@ update_status ModuleBackgroundMap1::Update()
 	}
 
 	// Eat pills
-	switch (map1[App->player->p_mid.y][App->player->p_mid.x])
+	switch (g_map[App->player->p_mid.y][App->player->p_mid.x])
 	{
 	case 27:
-		map1[App->player->p_mid.y][App->player->p_mid.x] = 0;
+		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
 		eaten_pills++;
 		break;
 	case 28:
-		map1[App->player->p_mid.y][App->player->p_mid.x] = 0;
+		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
 		eaten_pills++;
 		break;
 	default:
 		break;
 	}
-	
+
 	// Load scene when all the pills are taken
 	//if (eaten_pills <= 220)
 	//{

@@ -5,7 +5,7 @@
 #include "Animation.h"
 #include "Globals.h"
 
-#define DISTANCEM1 8 //nomes multiples de 8
+#define DISTANCEM1 24 //nomes multiples de 8
 
 struct SDL_Texture;
 
@@ -23,7 +23,7 @@ public:
 
 	SDL_Texture* graphics = nullptr;
 	Animation PowerPill;
-	
+
 	SDL_Rect Dot1;
 
 	// Eaten dots
@@ -63,7 +63,7 @@ public:
 	SDL_Rect tilehouse;
 
 	// Map array
-	char map1[31][28];
+	char g_map[31][28];
 
 
 };
