@@ -81,7 +81,7 @@ bool ModuleBackgroundMap1::Start()
 	{
 		for (int y = 0; y < 28; y++)
 		{
-			map1[i][y] = tmp_map[i][y];
+			g_map[i][y] = tmp_map[i][y];
 		}
 	}
 	return ret;
@@ -104,7 +104,7 @@ update_status ModuleBackgroundMap1::Update()
 	{
 		for (int j = 0; j < 31; j++)
 		{
-			switch (map1[j][i])
+			switch (g_map[j][i])
 			{
 			case 0:
 				App->render->Blit(graphics,   i * 8 , j * 8 + DISTANCEM1, &tile0);
@@ -206,14 +206,14 @@ update_status ModuleBackgroundMap1::Update()
 	}
 
 	// Eat pills
-	switch (map1[App->player->p_mid.y][App->player->p_mid.x])
+	switch (g_map[App->player->p_mid.y][App->player->p_mid.x])
 	{
 	case 27:
-		map1[App->player->p_mid.y][App->player->p_mid.x] = 0;
+		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
 		eaten_pills++;
 		break;
 	case 28:
-		map1[App->player->p_mid.y][App->player->p_mid.x] = 0;
+		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
 		eaten_pills++;
 		break;
 	default:

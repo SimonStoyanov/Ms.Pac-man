@@ -26,7 +26,30 @@ public:
 	Animation up;
 	Animation down;
 	Animation vulnerable;
+
 	iPoint position;
+	iPoint p_up;
+	iPoint p_down;
+	iPoint p_left;
+	iPoint p_right;
+	iPoint p_mid;
+
+	bool go_up = false;
+	bool go_down = false;
+	bool go_left = true;
+	bool go_right = false;
+
+	// Ghost Random Input
+	bool ghost_up = false;
+	bool ghost_down = false;
+	bool ghost_left = false;
+	bool ghost_right = false;
+	bool change_direction = true;
+
+
+	Uint32 start_time = 0;
+	Uint32 total_time = 0;
+	float total_t = 9.5f;
 
 
 };
