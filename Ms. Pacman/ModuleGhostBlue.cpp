@@ -84,7 +84,7 @@ update_status ModuleGhostBlue::Update()
 	Uint32 now = SDL_GetTicks() - start_time;
 
 
-	//Random direction --------------------------------
+	////Random direction --------------------------------
 
 	srand(time(NULL));
 
@@ -193,7 +193,7 @@ update_status ModuleGhostBlue::Update()
 
 
 
-	// Player tile collision detectors ----------------
+	// Player tile collision detectors ------------------------------
 	p_up.x = (position.x + 7) / 8;
 	p_up.y = (position.y - 4) / 8;
 
@@ -215,16 +215,16 @@ update_status ModuleGhostBlue::Update()
 	{
 		if (total_time <= now)
 		{
-			//Check input -----------------
 			if (ghost_right) // right
 			{
 				// What is the next tile
 				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || go_left == true)
+					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_left == true)
 					{
-						go_right; go_left = false; go_up = false; go_down = false; ghost_left = false; ghost_up = false; ghost_down = false;
+						position.y = (p_mid.y * 8) + 4 + 7; // Re-position to the center of the tile
+						go_right = true; go_left = false; go_up = false; go_down = false;
 					}
 				}
 			}
@@ -234,9 +234,10 @@ update_status ModuleGhostBlue::Update()
 				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || go_right == true)
+					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_right == true)
 					{
-						go_left = true; go_right = false; go_up = false; go_down = false; ghost_right = false; ghost_up = false; ghost_down = false;
+						position.y = (p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
+						go_left = true; go_right = false; go_up = false; go_down = false;
 					}
 				}
 			}
@@ -246,9 +247,10 @@ update_status ModuleGhostBlue::Update()
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true)
+					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true)
 					{
-						go_up = true; go_right = false; go_left = false; go_down = false; ghost_left = false; ghost_right = false; ghost_down = false;
+						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
+						go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
 					}
 				}
 			}
@@ -258,15 +260,14 @@ update_status ModuleGhostBlue::Update()
 				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true)
+					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true)
 					{
-						go_down = true; go_right = false; go_left = false; go_up = false; ghost_up = false; ghost_left = false; ghost_right = false;
+						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
+						go_down = true; go_right = false; go_left = false; go_up = false;
 					}
 				}
 			}
 
-
-			//Check move -----------------
 			if (go_right)
 			{
 				// What is the next tile
@@ -281,7 +282,6 @@ update_status ModuleGhostBlue::Update()
 				else
 					right.speed = 0.0f;
 			}
-
 			if (go_left)
 			{
 				// What is the next tile
