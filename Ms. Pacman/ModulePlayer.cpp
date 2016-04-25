@@ -24,8 +24,8 @@ ModulePlayer::ModulePlayer()
 	right.speed = 0.25f;
 
 	// left animation
-	left.PushBack({ 15, 34, 15, 15 });
 	left.PushBack({ 33, 34, 15, 15 });
+	left.PushBack({ 15, 34, 15, 15 });
 	left.PushBack({ 0, 34, 17, 15 });
 	left.speed = 0.25f;
 
@@ -86,14 +86,14 @@ update_status ModulePlayer::Update()
 
 	// Movement ---------------------------------------
 	int speed = 1;
-	if (1)
+	if (App->map1->IsEnabled() == true)
 	{
 		if (total_time <= now)
 		{
 			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) // right
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
+				if (App->map1->map1[p_right.y][p_right.x + 1] == 0 || App->map1->map1[p_right.y][p_right.x + 1] == 28 || App->map1->map1[p_right.y][p_right.x + 1] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
 					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_left == true)
@@ -106,7 +106,7 @@ update_status ModulePlayer::Update()
 			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) // left
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
+				if (App->map1->map1[p_left.y][p_left.x - 1] == 0 || App->map1->map1[p_left.y][p_left.x - 1] == 28 || App->map1->map1[p_left.y][p_left.x - 1] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
 					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_right == true)
@@ -119,7 +119,7 @@ update_status ModulePlayer::Update()
 			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) // up
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
+				if (App->map1->map1[p_up.y - 1][p_up.x] == 0 || App->map1->map1[p_up.y - 1][p_up.x] == 28 || App->map1->map1[p_up.y - 1][p_up.x] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
 					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true)
@@ -132,7 +132,7 @@ update_status ModulePlayer::Update()
 			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) // down
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
+				if (App->map1->map1[p_down.y + 1][p_down.x] == 0 || App->map1->map1[p_down.y + 1][p_down.x] == 28 || App->map1->map1[p_down.y + 1][p_down.x] == 27)
 				{	
 					// Is the player near the center-pixel of the tile?
 					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true)
@@ -146,7 +146,7 @@ update_status ModulePlayer::Update()
 			if (go_right)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
+				if (App->map1->map1[p_right.y][p_right.x + 1] == 0 || App->map1->map1[p_right.y][p_right.x + 1] == 28 || App->map1->map1[p_right.y][p_right.x + 1] == 27)
 				{
 					right.speed = 0.25f;
 					current_animation = &right;
@@ -161,7 +161,7 @@ update_status ModulePlayer::Update()
 			if (go_left)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
+				if (App->map1->map1[p_left.y][p_left.x - 1] == 0 || App->map1->map1[p_left.y][p_left.x - 1] == 28 || App->map1->map1[p_left.y][p_left.x - 1] == 27)
 				{
 					left.speed = 0.25f;
 					current_animation = &left;
@@ -175,7 +175,7 @@ update_status ModulePlayer::Update()
 			if (go_up)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
+				if (App->map1->map1[p_up.y - 1][p_up.x] == 0 || App->map1->map1[p_up.y - 1][p_up.x] == 28 || App->map1->map1[p_up.y - 1][p_up.x] == 27)
 				{
 					up.speed = 0.25f;
 					current_animation = &up;
@@ -189,7 +189,7 @@ update_status ModulePlayer::Update()
 			if (go_down)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
+				if (App->map1->map1[p_down.y + 1][p_down.x] == 0 || App->map1->map1[p_down.y + 1][p_down.x] == 28 || App->map1->map1[p_down.y + 1][p_down.x] == 27)
 				{
 					down.speed = 0.25f;
 					current_animation = &down;
@@ -201,7 +201,7 @@ update_status ModulePlayer::Update()
 					down.speed = 0.0f;
 			}
 		}
-		else{ left.speed = 0.0f; }
+		else{ /*left.speed = 0.0f;*/ }
 	}
 	else{}
 
