@@ -63,6 +63,7 @@ public:
 	Uint32 total_time = 0;
 	float total_t = 9.5f;
 
+	Collider* enemy_collision = nullptr;
 
 };
 

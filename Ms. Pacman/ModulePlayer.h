@@ -44,6 +44,9 @@ public:
 	Uint32 total_time = 0;
 	float total_t = 9.5f;
 
+	Collider* player_collision;
+	void OnCollision(Collider* c1, Collider* c2);
+
 	bool wakawaka;
 };
 

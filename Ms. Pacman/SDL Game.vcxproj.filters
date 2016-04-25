@@ -92,6 +92,9 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Modules\Background</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleCollision.h">
+      <Filter>Modules\Miscellaneous</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -150,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Modules\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCollision.cpp">
+      <Filter>Modules\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

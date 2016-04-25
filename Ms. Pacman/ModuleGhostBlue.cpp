@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleCollision.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleAudio.h"
@@ -19,7 +20,10 @@ ModuleGhostBlue::ModuleGhostBlue()
 
 	position.x = 105; //105
 	position.y = 99;
-
+	
+	// collision
+	enemy_collision = App->collision->AddCollider({ 50, 50, 8, 8 }, COLLIDER_ENEMY, this);
+	
 	// right animation
 	right.PushBack({ 1, 112, 14, 14 });
 	right.PushBack({ 17, 112, 14, 14 });
@@ -40,7 +44,7 @@ ModuleGhostBlue::ModuleGhostBlue()
 	down.PushBack({ 49, 112, 14, 14 });
 	down.speed = 0.10f;
 
-	//vulnerable animation
+	// vulnerable animation
 	vulnerable.PushBack({ 1, 127, 14, 14 });
 	vulnerable.PushBack({ 17, 127, 14, 14 });
 	vulnerable.speed = 0.10f;
@@ -83,7 +87,6 @@ update_status ModuleGhostBlue::Update()
 
 	Uint32 now = SDL_GetTicks() - start_time;
 
-
 	////Random direction --------------------------------
 
 	srand(time(NULL));
@@ -107,7 +110,7 @@ update_status ModuleGhostBlue::Update()
 			can_go_left = true;
 		}
 	}
-	else{ can_go_left = true; }
+	else{ can_go_left = false; }
 
 	// up
 	if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
@@ -138,7 +141,7 @@ update_status ModuleGhostBlue::Update()
 		}
 		else
 		{
-				change_direction = true;
+			change_direction = true;
 		}
 	}
 	if (can_go_up == true || can_go_down == true)
@@ -149,7 +152,7 @@ update_status ModuleGhostBlue::Update()
 		}
 		else
 		{
-				change_direction = true;
+			change_direction = true;
 		}
 	}
 	else{ change_direction = false; }
@@ -347,6 +350,11 @@ update_status ModuleGhostBlue::Update()
 	App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
 	App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 	App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+
+	if (enemy_collision->to_delete == true){
+		position.x = 105;
+		position.y = 99;
+	}
 
 	return UPDATE_CONTINUE;
 }

@@ -48,14 +48,14 @@ bool ModuleUI::Start()
 	};
 	
 	char tmp_mapGAME[5][28]
-{	//1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
-		{ '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' }, //1
-		{ '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' }, //2
+	{	//1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
+		{ '_','_','_', 1, 'U','P','_','_','_','H','I','G','H','_','S','C','O','R','E', '_','_','_','_','_','_', '_','_','_'}, //1
+		{ '_','_','_','_','_', 0,  0, '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_', '_','_','_','_' }, //2
 		{ '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' }, //3
 		//-------------------------------------------------------------------------------------------------------------//
 		//-------------------------------------------------------------------------------------------------------------//
 		{ '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' }, //4
-		{ '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' }  //5
+		{ '_', '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' }  //5
 	};
 	// Passing map to the header
 	for (int i = 0; i < 5; i++)
@@ -87,14 +87,14 @@ bool ModuleUI::CleanUp()
 update_status ModuleUI::Update()
 {
 	// Draw everything --------------------------------------	
-	int i = 0, var = 0;
+	int i = 0;
 	if (App->menu->IsEnabled()){
 		while (i < 28)
 		{
-			for (int j = 0; j < 5; j++, var++)
+			for (int j = 0, var = 0; j < 5; j++, var++)
 			{
 				if (j == 3){
-					var = 29;
+					var = 34;
 				}
 				switch (mapMENU[j][i])
 				{
@@ -175,78 +175,81 @@ update_status ModuleUI::Update()
 	else{
 		while (i < 28)
 		{
-			for (int j = 0; j < 5; j++)
+			for (int j = 0, var = 0; j < 5; j++, var++)
 			{
+				if (j == 3){
+					var = 34;
+				}
 				switch (mapUI[j][i])
 				{
 				case 0:
-					App->render->Blit(graphics, i * 8, j * 8, &tile0);
+					App->render->Blit(graphics, i * 8, var * 8, &tile0);
 					break;
 				case 1:
-					App->render->Blit(graphics, i * 8, j * 8, &tile1);
+					App->render->Blit(graphics, i * 8, var * 8, &tile1);
 					break;
 				case 2:
-					App->render->Blit(graphics, i * 8, j * 8, &tile2);
+					App->render->Blit(graphics, i * 8, var * 8, &tile2);
 					break;
 				case 3:
-					App->render->Blit(graphics, i * 8, j * 8, &tile3);
+					App->render->Blit(graphics, i * 8, var * 8, &tile3);
 					break;
 				case 4:
-					App->render->Blit(graphics, i * 8, j * 8, &tile4);
+					App->render->Blit(graphics, i * 8, var * 8, &tile4);
 					break;
 				case 5:
-					App->render->Blit(graphics, i * 8, j * 8, &tile5);
+					App->render->Blit(graphics, i * 8, var * 8, &tile5);
 					break;
 				case 6:
-					App->render->Blit(graphics, i * 8, j * 8, &tile6);
+					App->render->Blit(graphics, i * 8, var * 8, &tile6);
 					break;
 				case 7:
-					App->render->Blit(graphics, i * 8, j * 8, &tile7);
+					App->render->Blit(graphics, i * 8, var * 8, &tile7);
 					break;
 				case 8:
-					App->render->Blit(graphics, i * 8, j * 8, &tile8);
+					App->render->Blit(graphics, i * 8, var * 8, &tile8);
 					break;
 				case 9:
-					App->render->Blit(graphics, i * 8, j * 8, &tile9);
+					App->render->Blit(graphics, i * 8, var * 8, &tile9);
 					break;
 				case '_':
-					App->render->Blit(graphics, i * 8, j * 8, &tile_);
+					App->render->Blit(graphics, i * 8, var * 8, &tile_);
 					break;
 				case 'H':
-					App->render->Blit(graphics, i * 8, j * 8, &tileH);
+					App->render->Blit(graphics, i * 8, var * 8, &tileH);
 					break;
 				case 'I':
-					App->render->Blit(graphics, i * 8, j * 8, &tileI);
+					App->render->Blit(graphics, i * 8, var * 8, &tileI);
 					break;
 				case 'G':
-					App->render->Blit(graphics, i * 8, j * 8, &tileG);
+					App->render->Blit(graphics, i * 8, var * 8, &tileG);
 					break;
 				case 'S':
-					App->render->Blit(graphics, i * 8, j * 8, &tileS);
+					App->render->Blit(graphics, i * 8, var * 8, &tileS);
 					break;
 				case 'C':
-					App->render->Blit(graphics, i * 8, j * 8, &tileC);
+					App->render->Blit(graphics, i * 8, var * 8, &tileC);
 					break;
 				case 'O':
-					App->render->Blit(graphics, i * 8, j * 8, &tileO);
+					App->render->Blit(graphics, i * 8, var * 8, &tileO);
 					break;
 				case 'R':
-					App->render->Blit(graphics, i * 8, j * 8, &tileR);
+					App->render->Blit(graphics, i * 8, var * 8, &tileR);
 					break;
 				case 'E':
-					App->render->Blit(graphics, i * 8, j * 8, &tileE);
+					App->render->Blit(graphics, i * 8, var * 8, &tileE);
 					break;
 				case 'U':
-					App->render->Blit(graphics, i * 8, j * 8, &tileU);
+					App->render->Blit(graphics, i * 8, var * 8, &tileU);
 					break;
 				case 'P':
-					App->render->Blit(graphics, i * 8, j * 8, &tileP);
+					App->render->Blit(graphics, i * 8, var * 8, &tileP);
 					break;
 				case 'D':
-					App->render->Blit(graphics, i * 8, j * 8, &tileD);
+					App->render->Blit(graphics, i * 8, var * 8, &tileD);
 					break;
 				case 'T':
-					App->render->Blit(graphics, i * 8, j * 8, &tileT);
+					App->render->Blit(graphics, i * 8, var * 8, &tileT);
 					break;
 				}
 			}

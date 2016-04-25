@@ -6,7 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 
-
+#include "ModuleCollision.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
 
@@ -38,6 +38,7 @@ bool ModuleBackgroundMap1::Start()
 	App->player->Enable();
 	App->audio->Enable();
 	App->ghost_blue->Enable();
+	App->collision->Enable();
 
 	App->player->position.x = 105; //105
 	App->player->position.y = 195; //195

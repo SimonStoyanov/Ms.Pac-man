@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 
+#include "ModuleCollision.h"
 #include "ModuleUI.h"
 #include "ModuleMenu.h"
 #include "ModuleBackground_Map1.h"
@@ -18,22 +19,21 @@
 
 Application::Application()
 {
-	modules[0] = window = new ModuleWindow();
-	modules[1] = render = new ModuleRender();
-	modules[2] = input = new ModuleInput();
-	modules[3] = textures = new ModuleTextures();
-	modules[4] = audio = new ModuleAudio();
-	modules[5] = menu = new ModuleMenu();
-	modules[6] = map1 = new ModuleBackgroundMap1();
-	modules[7] = map2 = new ModuleBackgroundMap2();
-	modules[8] = end_screen = new ModuleEndScreen();
-
-	modules[9] = UI = new ModuleUI();
-
-	modules[10] = player = new ModulePlayer();
-	modules[11] = ghost_blue = new ModuleGhostBlue();
-
-	modules[12] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
+	int i = 0;
+	modules[i++] = window = new ModuleWindow();
+	modules[i++] = render = new ModuleRender();
+	modules[i++] = input = new ModuleInput();
+	modules[i++] = textures = new ModuleTextures();
+	modules[i++] = audio = new ModuleAudio();
+	modules[i++] = menu = new ModuleMenu();
+	modules[i++] = map1 = new ModuleBackgroundMap1();
+	modules[i++] = map2 = new ModuleBackgroundMap2();
+	modules[i++] = end_screen = new ModuleEndScreen();
+	modules[i++] = UI = new ModuleUI();
+	modules[i++] = collision = new ModuleCollision();
+	modules[i++] = player = new ModulePlayer();
+	modules[i++] = ghost_blue = new ModuleGhostBlue();
+	modules[i++] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
 }
 
 
@@ -56,7 +56,7 @@ bool Application::Init()
 	map1->Disable();
 	map2->Disable();
 	end_screen->Disable();
-
+	collision->Disable();
 	ghost_blue->Disable();
 	player->Disable();
 
