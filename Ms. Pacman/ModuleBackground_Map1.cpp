@@ -41,7 +41,7 @@ bool ModuleBackgroundMap1::Start()
 
 	// Temporal map
 	char tmp_map[31][28]
-	{	//1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28
+	{	//1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
 		{ 1,  7,  7,  7,  7,  7,  7,  5,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  5,  6,  7,  7,  7,  7,  7,  7,  2 }, //1
 		{ 8,  28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 10 }, //2
 		{ 8,  27, 11, 17, 17, 12, 28, 15, 16, 28, 11, 17, 17, 17, 17, 17, 17, 12, 28, 15, 16, 28, 11, 17, 17, 12, 27, 10 }, //3
@@ -220,10 +220,11 @@ update_status ModuleBackgroundMap1::Update()
 		break;
 	}
 	
-	if (eaten_pills <= 220)
-	{
-		App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
-	}
+	// Load scene when all the pills are taken
+	//if (eaten_pills <= 220)
+	//{
+	//	App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
+	//}
 
 	// Load scene when press space
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
