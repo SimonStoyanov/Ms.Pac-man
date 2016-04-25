@@ -27,6 +27,8 @@ public:
 	Animation down;
 	Animation vulnerable;
 
+	SDL_Rect test;
+
 	iPoint position;
 	iPoint p_up;
 	iPoint p_down;
@@ -34,18 +36,28 @@ public:
 	iPoint p_right;
 	iPoint p_mid;
 
+	// Ghost Movement
 	bool go_up = false;
 	bool go_down = false;
-	bool go_left = true;
+	bool go_left = false;
 	bool go_right = false;
 
-	// Ghost Random Input
 	bool ghost_up = false;
 	bool ghost_down = false;
 	bool ghost_left = false;
 	bool ghost_right = false;
+
+	// Ghost Random Input
+	bool can_go_up = false;
+	bool can_go_down = false;
+	bool can_go_left = false;
+	bool can_go_right = false;
+
 	bool change_direction = false;
 
+	bool cont = false;
+
+	int tmp;
 
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
