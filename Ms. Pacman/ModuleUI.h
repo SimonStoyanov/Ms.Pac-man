@@ -53,7 +53,7 @@ public:
 	char mapUI[5][28];
 
 	//Puntuation
-	int points = 0;
+	int points[7];
 
 	int digit1;
 	int digit2;
