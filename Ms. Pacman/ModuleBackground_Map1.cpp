@@ -13,6 +13,7 @@
 
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
+#include "ModuleGhostOrange.h"
 
 
 ModuleBackgroundMap1::ModuleBackgroundMap1()
@@ -42,10 +43,14 @@ bool ModuleBackgroundMap1::Start()
 	App->ghost_blue->position.x = 105; //105
 	App->ghost_blue->position.y = 99; //99
 
+	App->ghost_orange->position.x = 105;
+	App->ghost_orange->position.y = 99;
+
 	// Enable and disable modules ---------
 	App->player->Enable();
 	App->audio->Enable();
 	App->ghost_blue->Enable();
+	App->ghost_orange->Enable();
 	App->collision->Enable();
 
 	// Temporal map ----------
@@ -346,6 +351,8 @@ update_status ModuleBackgroundMap1::Update()
 
 		// Points
 		eaten_pills++;
+
+		// Provisional Code Simon Pls my eyes
 		if (App->UI->points[5] == 9 && App->UI->points[4] == 11){
 			App->UI->points[4] = 1;
 			App->UI->points[5] = 0;
@@ -420,7 +427,7 @@ update_status ModuleBackgroundMap1::Update()
 	}
 
 	// Load scene when all the pills are taken
-	if (eaten_pills <= 220)
+	if (eaten_pills <= 223)
 	{
 		App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
 	}

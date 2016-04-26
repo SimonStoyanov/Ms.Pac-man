@@ -8,6 +8,7 @@
 #include "ModuleBackground_Map1.h"
 #include "ModuleCollision.h"
 #include "ModuleGhostBlue.h"
+#include "ModuleGhostOrange.h"
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA

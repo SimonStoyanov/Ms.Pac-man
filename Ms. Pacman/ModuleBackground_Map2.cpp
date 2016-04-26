@@ -261,14 +261,14 @@ update_status ModuleBackgroundMap2::Update()
 		break;
 	}
 
-	if (eaten_pills <= 220)
+	if (eaten_pills <= 240)
 	{
 		App->fade->FadeToBlack(App->map2, App->end_screen, 2.0f);
 	}
 
 	// Load scene when press space
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	else if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
 		App->fade->FadeToBlack(App->map2, App->end_screen, 2.0F);
 	}
