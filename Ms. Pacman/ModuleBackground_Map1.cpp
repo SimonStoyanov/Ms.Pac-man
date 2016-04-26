@@ -108,6 +108,7 @@ bool ModuleBackgroundMap1::CleanUp()
 	LOG("Unloading maps(1) stage.");
 	App->player->Disable();
 	App->ghost_blue->Disable();
+	App->ghost_orange->Disable();
 	App->audio->Disable();
 	App->collision->Disable();
 	return true;

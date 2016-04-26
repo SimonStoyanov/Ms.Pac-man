@@ -14,6 +14,7 @@
 
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
+#include "ModuleGhostOrange.h"
 
 
 
@@ -104,6 +105,7 @@ bool ModuleBackgroundMap2::CleanUp()
 {
 	App->player->Disable();
 	App->ghost_blue->Disable();
+	App->ghost_orange->Disable();
 	App->audio->Disable();
 	App->collision->Disable();
 	LOG("Unloading maps(2) stage");

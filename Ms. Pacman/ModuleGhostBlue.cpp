@@ -91,7 +91,7 @@ update_status ModuleGhostBlue::Update()
 	// Collision ------------
 	enemy_collision->SetPos(position.x+4, position.y+14);
 
-	//Random direction --------------------------------
+	//Random direction ----------------------------------------
 
 	srand(time(NULL));
 
@@ -161,13 +161,14 @@ update_status ModuleGhostBlue::Update()
 	}
 	else{ change_direction = false; }
 
-	//choose direction -------------
+	// Choose direction -------------------
 	if (change_direction)
 	{
 		cont = false;
 		while (cont == false)
 		{
 			tmp = rand() % 4 + 1;
+
 			if (can_go_right && tmp == 4)
 			{
 				position.y = (p_mid.y * 8) + 4 + 7;
