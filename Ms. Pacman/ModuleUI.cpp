@@ -23,6 +23,14 @@ ModuleUI::ModuleUI()
 	tileH = { 1, 1, 8, 8 };			tileI = { 9, 1, 8, 8 };			tileG = { 17, 1, 8, 8 };		tileS = { 25, 1, 8, 8 };		tileC = { 33, 1, 8, 8 };
 	tileO = { 41, 1, 8, 8 };		tileR = { 49, 1, 8, 8 };		tileE = { 57, 1, 8, 8 };		tile_ = { 81, 9, 8, 8 };		tileU = { 81, 1, 8, 8 };
 	tileP = { 89, 1, 8, 8 };		tileD = { 65, 1, 8, 8 };		tileT = { 73, 1, 8, 8 };
+	
+	points[0] = 11; 
+	points[1] = 11; 
+	points[2] = 11; 
+	points[3] = 11; 
+	points[4] = 11;
+	points[5] = 0;
+	points[6] = 0;
 }
 
 ModuleUI::~ModuleUI()
@@ -50,7 +58,7 @@ bool ModuleUI::Start()
 	char tmp_mapGAME[5][28]
 	{	//1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
 		{ '_','_','_', 1, 'U','P','_','_','_','H','I','G','H','_','S','C','O','R','E', '_','_','_','_','_','_', '_','_','_'}, //1
-		{ '_','_','_','_','_', 0,  0, '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_', '_','_','_','_' }, //2
+		{ 'x','x','x','x','x','x','x', '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_', '_','_','_','_' }, //2
 		{ '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' }, //3
 		//-------------------------------------------------------------------------------------------------------------//
 		//-------------------------------------------------------------------------------------------------------------//
@@ -250,6 +258,45 @@ update_status ModuleUI::Update()
 					break;
 				case 'T':
 					App->render->Blit(graphics, i * 8, var * 8, &tileT);
+					break;
+				case 'x':
+					for (int i = 0; i < 7; ++i){
+						switch (points[i]){
+						case 0:
+							App->render->Blit(graphics, i * 8, var * 8, &tile0);
+							break;
+						case 1:
+							App->render->Blit(graphics, i * 8, var * 8, &tile1);
+							break;
+						case 2:
+							App->render->Blit(graphics, i * 8, var * 8, &tile2);
+							break;
+						case 3:
+							App->render->Blit(graphics, i * 8, var * 8, &tile3);
+							break;
+						case 4:
+							App->render->Blit(graphics, i * 8, var * 8, &tile4);
+							break;
+						case 5:
+							App->render->Blit(graphics, i * 8, var * 8, &tile5);
+							break;
+						case 6:
+							App->render->Blit(graphics, i * 8, var * 8, &tile6);
+							break;
+						case 7:
+							App->render->Blit(graphics, i * 8, var * 8, &tile7);
+							break;
+						case 8:
+							App->render->Blit(graphics, i * 8, var * 8, &tile8);
+							break;
+						case 9:
+							App->render->Blit(graphics, i * 8, var * 8, &tile9);
+							break;
+						case 11:
+							App->render->Blit(graphics, i * 8, var * 8, &tile_);
+							break;
+						}
+					}
 					break;
 				}
 			}

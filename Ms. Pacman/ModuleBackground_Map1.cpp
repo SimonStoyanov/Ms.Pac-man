@@ -223,7 +223,7 @@ update_status ModuleBackgroundMap1::Update()
 
 		// Points
 		eaten_pills++;
-		App->UI->points += 10;
+		
 
 		break;
 	case 28:
@@ -232,7 +232,73 @@ update_status ModuleBackgroundMap1::Update()
 
 		// Points
 		eaten_pills++;
-		App->UI->points += 10;
+		if (App->UI->points[5] == 9 && App->UI->points[4] == 11){
+			App->UI->points[4] = 1;
+			App->UI->points[5] = 0;
+		}
+		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 11){
+			App->UI->points[3] = 1;
+			App->UI->points[4] = 0;
+			App->UI->points[5] = 0;
+		}
+		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 11){
+			App->UI->points[2] = 1;
+			App->UI->points[3] = 0;
+			App->UI->points[4] = 0;
+			App->UI->points[5] = 0;
+		}
+		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 11){
+			App->UI->points[1] = 1;
+			App->UI->points[2] = 0;
+			App->UI->points[3] = 0;
+			App->UI->points[4] = 0;
+			App->UI->points[5] = 0;
+		}
+		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 9 && App->UI->points[0] == 11){
+			App->UI->points[0] = 1;
+			App->UI->points[1] = 0;
+			App->UI->points[2] = 0;
+			App->UI->points[3] = 0;
+			App->UI->points[4] = 0;
+			App->UI->points[5] = 0;
+		}
+		else if (App->UI->points[5] != 9){
+			App->UI->points[5] += 1;
+		}
+		else{
+			if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 9){
+				App->UI->points[0] += 1;
+				App->UI->points[1] = 0;
+				App->UI->points[2] = 0;
+				App->UI->points[3] = 0;
+				App->UI->points[4] = 0;
+				App->UI->points[5] = 0;
+			}
+			else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9){
+				App->UI->points[1] += 1;
+				App->UI->points[2] = 0;
+				App->UI->points[3] = 0;
+				App->UI->points[4] = 0;
+				App->UI->points[5] = 0;
+			}
+			else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9){
+				App->UI->points[2] += 1;
+				App->UI->points[3] = 0;
+				App->UI->points[4] = 0;
+				App->UI->points[5] = 0;
+			}
+			else if (App->UI->points[5] == 9 && App->UI->points[4] == 9){
+				App->UI->points[3] += 1;
+				App->UI->points[4] = 0;
+				App->UI->points[5] = 0;
+			}
+			else if (App->UI->points[5] == 9){
+				App->UI->points[4] += 1;
+				App->UI->points[5] = 0;
+			}
+		}
+		
+
 
 		break;
 	default:
