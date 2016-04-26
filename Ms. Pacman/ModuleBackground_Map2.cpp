@@ -4,6 +4,9 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleAudio.h"
+#include "ModuleCollision.h"
+#include "ModuleUI.h"
 
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
@@ -34,11 +37,19 @@ bool ModuleBackgroundMap2::Start()
 	bool ret = true;
 	graphics = App->textures->Load("Tileset 2.png");
 
-	// Enable and disable modules
-	App->player->Enable();
-
+	// Positions ---------------
 	App->player->position.x = 105; //105
 	App->player->position.y = 195; //195
+
+	App->ghost_blue->position.x = 105; //105
+	App->ghost_blue->position.y = 99; //99
+
+	// Enable and disable modules ---------
+	App->player->Enable();
+	App->audio->Enable();
+	App->ghost_blue->Enable();
+	App->collision->Enable();
+
 	App->player->go_left = true; App->player->go_right = false;  App->player->go_up = false;  App->player->go_down = false;
 
 	// Temporal map
@@ -91,6 +102,10 @@ bool ModuleBackgroundMap2::Start()
 // Load assets
 bool ModuleBackgroundMap2::CleanUp()
 {
+	App->player->Disable();
+	App->ghost_blue->Disable();
+	App->audio->Disable();
+	App->collision->Disable();
 	LOG("Unloading maps(2) stage");
 	return true;
 }
@@ -217,15 +232,30 @@ update_status ModuleBackgroundMap2::Update()
 		i++;
 	}
 
+	// Eat pills
 	switch (App->map1->g_map[App->player->p_mid.y][App->player->p_mid.x])
 	{
 	case 27:
+		// Change tile
 		App->map1->g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
-		eaten_dots++;
+
+		// Vulnerable
+		App->ghost_blue->passed_time = App->ghost_blue->now;
+		App->ghost_blue->is_vulnerable = true;
+
+		// Points
+		eaten_pills++;
+		App->UI->points += 50;
+
 		break;
 	case 28:
+		// Change tile
 		App->map1->g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
-		eaten_dots++;
+
+		// Points
+		eaten_pills++;
+		App->UI->points += 10;
+
 		break;
 	default:
 		break;

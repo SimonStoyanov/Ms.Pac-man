@@ -49,7 +49,6 @@ update_status ModuleFadeToBlack::Update()
 			if (fading_in == true)
 			{
 				// TODO 2: enable / disable the modules received when FadeToBlacks() gets called
-				App->player->Disable();
 				off->Disable();
 				on->Enable();
 				// ---

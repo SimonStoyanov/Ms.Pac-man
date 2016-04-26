@@ -35,16 +35,20 @@ bool ModuleBackgroundMap1::Start()
 	bool ret = true;
 	graphics = App->textures->Load("Tileset 1.png");
 
-	// Enable and disable modules
+	// Positions ---------------
+	App->player->position.x = 105; //105
+	App->player->position.y = 195; //195
+
+	App->ghost_blue->position.x = 105; //105
+	App->ghost_blue->position.y = 99; //99
+
+	// Enable and disable modules ---------
 	App->player->Enable();
 	App->audio->Enable();
 	App->ghost_blue->Enable();
 	App->collision->Enable();
 
-	App->player->position.x = 105; //105
-	App->player->position.y = 195; //195
-
-	// Temporal map
+	// Temporal map ----------
 	char tmp_map[31][28]
 	{	//1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
 		{ 1, 7, 7, 7, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7, 2 }, //1
@@ -81,7 +85,7 @@ bool ModuleBackgroundMap1::Start()
 
 	};
 
-	// Passing map to the header
+	// Passing map to the header --------
 	for (int i = 0; i < 31; i++)
 	{
 		for (int y = 0; y < 28; y++)
@@ -97,6 +101,10 @@ bool ModuleBackgroundMap1::Start()
 bool ModuleBackgroundMap1::CleanUp()
 {
 	LOG("Unloading maps(1) stage.");
+	App->player->Disable();
+	App->ghost_blue->Disable();
+	App->audio->Disable();
+	App->collision->Disable();
 	return true;
 }
 
@@ -223,7 +231,7 @@ update_status ModuleBackgroundMap1::Update()
 
 		// Points
 		eaten_pills++;
-		App->UI->points += 10;
+		App->UI->points += 50;
 
 		break;
 	case 28:

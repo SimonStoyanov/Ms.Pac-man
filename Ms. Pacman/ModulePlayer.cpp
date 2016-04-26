@@ -14,9 +14,6 @@
 
 ModulePlayer::ModulePlayer()
 {
-	position.x = 105; //105
-	position.y = 195; //195
-
 	test = { 3, 120, 1, 1 };
 
 	// right animation
@@ -47,7 +44,9 @@ ModulePlayer::ModulePlayer()
 }
 
 ModulePlayer::~ModulePlayer()
-{}
+{
+}
+
 
 // Load assets
 bool ModulePlayer::Start()
@@ -127,7 +126,7 @@ update_status ModulePlayer::Update()
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true)
+					if (((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true) && position.x < 208 && position.x > 2)
 					{
 						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
@@ -140,7 +139,7 @@ update_status ModulePlayer::Update()
 				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true)
+					if (((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true) && position.x < 208 && position.x > 2)
 					{
 						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_down = true; go_right = false; go_left = false; go_up = false;
@@ -151,13 +150,14 @@ update_status ModulePlayer::Update()
 			if (go_right)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27 || position.x >= 210)
+				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27 || position.x >= 213)
 				{
 					right.speed = 0.25f;
 					current_animation = &right;
 					position.x += speed;
 					wakawaka = true;
 
+					// Tunel teleport
 					if (position.x >= 220)
 					{
 						position.x = -10;
@@ -179,6 +179,7 @@ update_status ModulePlayer::Update()
 					wakawaka = true;
 					go_right = false; go_up = false; go_down = false;
 
+					// Tunel teleport
 					if (position.x <= -10)
 					{
 						position.x = 220;
@@ -231,7 +232,9 @@ update_status ModulePlayer::Update()
 	//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	App->render->Blit(graphics, 10, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+
+	App->render->Blit(graphics, position.x, position.y + DISTANCEM1, &test, 1.0f); //
+	App->render->Blit(graphics, 3, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
 	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r);
 
@@ -249,6 +252,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ENEMY && App->ghost_blue->is_vulnerable)
 	{
+		App->ghost_blue->enemy_collision->to_delete = true;
+		App->ghost_blue->Disable();
+
 		App->ghost_blue->position.x = 105;
 		App->ghost_blue->position.y = 99;
 	}

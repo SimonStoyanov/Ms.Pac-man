@@ -65,9 +65,12 @@ public:
 	SDL_Rect tile29;
 	SDL_Rect tile30;
 	SDL_Rect tile31;
-	//iPoint player_tile_position;
 
+	//iPoint player_tile_position;
 	char map2[31][28];
+
+
+	int eaten_pills = 0;
 };
 
 #endif

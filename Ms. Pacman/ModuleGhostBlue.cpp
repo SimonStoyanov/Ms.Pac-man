@@ -19,12 +19,6 @@ ModuleGhostBlue::ModuleGhostBlue()
 {
 	test = { 3, 120, 1, 1 };
 
-	position.x = 105; //105
-	position.y = 99;
-	
-	// collision
-
-	
 	// right animation
 	right.PushBack({ 1, 112, 14, 14 });
 	right.PushBack({ 17, 112, 14, 14 });
@@ -56,7 +50,9 @@ ModuleGhostBlue::ModuleGhostBlue()
 }
 
 ModuleGhostBlue::~ModuleGhostBlue()
-{}
+{
+	enemy_collision = nullptr;
+}
 
 // Load assets
 bool ModuleGhostBlue::Start()
