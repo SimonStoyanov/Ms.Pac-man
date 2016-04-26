@@ -282,13 +282,18 @@ update_status ModuleGhostBlue::Update()
 			if (go_right)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
+				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27 || position.x >= 210)
 				{
 					right.speed = 0.25f;
 
 					if (!is_vulnerable)
 					{
 						current_animation = &right;
+					}
+
+					if (position.x >= 220)
+					{
+						position.x = -10;
 					}
 
 					position.x += speed;
@@ -299,13 +304,18 @@ update_status ModuleGhostBlue::Update()
 			if (go_left)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
+				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27 || position.x <= 0)
 				{
 					left.speed = 0.25f;
 
 					if (!is_vulnerable)
 					{
 						current_animation = &left;
+					}
+
+					if (position.x <= -10)
+					{
+						position.x = 220;
 					}
 
 					position.x -= speed;

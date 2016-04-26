@@ -171,7 +171,7 @@ update_status ModulePlayer::Update()
 			if (go_left)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27 || position.x <= 10)
+				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27 || position.x <= 0)
 				{
 					left.speed = 0.25f;
 					current_animation = &left;
