@@ -55,13 +55,21 @@ public:
 
 	bool change_direction = false;
 
+	// Logic variables 
 	bool cont = false;
-
 	int tmp;
 
-	Uint32 start_time = 0;
+	// Ghost start moving time variables
+	Uint32 now;
+	float time_stoped = 9.5f;  //varaible to change start time
 	Uint32 total_time = 0;
-	float total_t = 9.5f;
+	Uint32 start_time = 0;
+
+	// Ghost vulnerable variables
+	Uint32 total_time_vuln = 0;
+	float time_vulnerable = 5.0f;  //varaible to change vulnerable time
+	float passed_time;
+	bool is_vulnerable = false;
 
 	Collider* enemy_collision = nullptr;
 

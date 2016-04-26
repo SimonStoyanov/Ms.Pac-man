@@ -104,7 +104,7 @@ void ModuleCollision::DebugDraw()
 		switch (colliders[i]->type)
 		{
 		case COLLIDER_NONE: // white
-			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);  
 			break;
 		case COLLIDER_PLAYER: // green
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);

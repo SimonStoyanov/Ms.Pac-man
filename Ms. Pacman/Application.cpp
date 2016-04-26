@@ -30,9 +30,10 @@ Application::Application()
 	modules[i++] = map2 = new ModuleBackgroundMap2();
 	modules[i++] = end_screen = new ModuleEndScreen();
 	modules[i++] = UI = new ModuleUI();
-	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = ghost_blue = new ModuleGhostBlue();
+
+	modules[i++] = collision = new ModuleCollision(); //it has to be the second last one
 	modules[i++] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
 }
 

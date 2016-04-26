@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 
+
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleGhostBlue::ModuleGhostBlue()
@@ -22,7 +23,7 @@ ModuleGhostBlue::ModuleGhostBlue()
 	position.y = 99;
 	
 	// collision
-	enemy_collision = App->collision->AddCollider({ 50, 50, 8, 8 }, COLLIDER_ENEMY, this);
+
 	
 	// right animation
 	right.PushBack({ 1, 112, 14, 14 });
@@ -48,6 +49,9 @@ ModuleGhostBlue::ModuleGhostBlue()
 	vulnerable.PushBack({ 1, 127, 14, 14 });
 	vulnerable.PushBack({ 17, 127, 14, 14 });
 	vulnerable.speed = 0.10f;
+
+	total_time_vuln = (Uint32)(time_vulnerable * 0.5f * 1000.0f);
+	total_time = (Uint32)(time_stoped * 0.5f * 1000.0f);
 
 }
 
@@ -75,6 +79,7 @@ bool ModuleGhostBlue::Start()
 		go_right = true;
 	}
 
+	enemy_collision = App->collision->AddCollider({ 50, 50, 8, 8 }, COLLIDER_ENEMY, this);
 
 	return ret;
 
@@ -85,13 +90,16 @@ update_status ModuleGhostBlue::Update()
 {
 	Animation* current_animation = prev_anim;
 
-	Uint32 now = SDL_GetTicks() - start_time;
+	now = SDL_GetTicks() - App->player->start_time;
 
-	////Random direction --------------------------------
+	// Collision ------------
+	enemy_collision->SetPos(position.x+4, position.y+14);
+
+	//Random direction --------------------------------
 
 	srand(time(NULL));
 
-	// What is the next tile
+	// What is the next tile --------------
 	// right
 	if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 	{
@@ -157,14 +165,14 @@ update_status ModuleGhostBlue::Update()
 	}
 	else{ change_direction = false; }
 
-	//choose direction
+	//choose direction -------------
 	if (change_direction)
 	{
 		cont = false;
 		while (cont == false)
 		{
 			tmp = rand() % 4 + 1;
-			if (can_go_right && tmp == 1)
+			if (can_go_right && tmp == 4)
 			{
 				position.y = (p_mid.y * 8) + 4 + 7;
 				ghost_right = true; cont = true;
@@ -185,7 +193,7 @@ update_status ModuleGhostBlue::Update()
 			}
 			else{ ghost_up = false; }
 
-			if (can_go_down && tmp == 4)
+			if (can_go_down && tmp == 1)
 			{
 				position.x = (p_mid.x * 8) + 4 - 7;
 				ghost_down = true; cont = true;
@@ -214,9 +222,9 @@ update_status ModuleGhostBlue::Update()
 
 	// Movement ---------------------------------------
 	int speed = 1;
-	if (1)
+	if (now >= total_time)
 	{
-		if (total_time <= now)
+		if (1)
 		{
 			if (ghost_right) // right
 			{
@@ -277,13 +285,16 @@ update_status ModuleGhostBlue::Update()
 				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 				{
 					right.speed = 0.25f;
-					current_animation = &right;
+
+					if (!is_vulnerable)
+					{
+						current_animation = &right;
+					}
+
 					position.x += speed;
 
 					go_left = false; go_up = false; go_down = false;
 				}
-				else
-					right.speed = 0.0f;
 			}
 			if (go_left)
 			{
@@ -291,12 +302,15 @@ update_status ModuleGhostBlue::Update()
 				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 				{
 					left.speed = 0.25f;
-					current_animation = &left;
+
+					if (!is_vulnerable)
+					{
+						current_animation = &left;
+					}
+
 					position.x -= speed;
 					go_right = false; go_up = false; go_down = false;
 				}
-				else
-					left.speed = 0.0f;
 			}
 			if (go_up)
 			{
@@ -304,12 +318,15 @@ update_status ModuleGhostBlue::Update()
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
 					up.speed = 0.25f;
-					current_animation = &up;
+
+					if (!is_vulnerable)
+					{
+						current_animation = &up;
+					}
+
 					position.y -= speed;
 					go_right = false; go_left = false; go_down = false;
 				}
-				else
-					up.speed = 0.0f;
 			}
 			if (go_down)
 			{
@@ -317,29 +334,34 @@ update_status ModuleGhostBlue::Update()
 				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 				{
 					down.speed = 0.25f;
-					current_animation = &down;
+
+					if (!is_vulnerable)
+					{
+						current_animation = &down;
+					}
+
 					position.y += speed;
 					go_right = false; go_left = false; go_up = false;
 				}
-				else
-					down.speed = 0.0f;
 			}
 		}
-		else{ left.speed = 0.0f; }
 	}
 	else{}
 
 
-
-	// Draw everything --------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_REPEAT)
+	if (is_vulnerable &&  now < total_time_vuln + passed_time)
 	{
 		current_animation = &vulnerable;
 	}
 	else
 	{
-		current_animation = &up;
+		is_vulnerable = false;
 	}
+
+
+
+	// Draw everything --------------------------------------
+
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
 	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r);

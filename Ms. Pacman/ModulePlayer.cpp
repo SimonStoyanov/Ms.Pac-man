@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleCollision.h"
+#include "ModuleGhostBlue.h"
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -70,8 +71,9 @@ update_status ModulePlayer::Update()
 
 	Uint32 now = SDL_GetTicks() - start_time;
 
+	player_collision->SetPos(position.x, position.y+9);
 
-	// Player tile collision detectors ------------------------------
+	// Player tile collision detectors with tiles ------
 	p_up.x = (position.x + 7) / 8;
 	p_up.y = (position.y - 4) / 8;
 
@@ -227,9 +229,17 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
-	if (c1 != nullptr && c2->type == COLLIDER_ENEMY){
-		LOG("HOIIIII I'M TEEMEEE");
-		c2->to_delete = true;
+	if (c1 != nullptr && c2->type == COLLIDER_ENEMY && !App->ghost_blue->is_vulnerable)
+	{
+		position.x = 105; //105
+		position.y = 195; //195
+		go_left = true;
+
+	}
+	else if (c1 != nullptr && c2->type == COLLIDER_ENEMY && App->ghost_blue->is_vulnerable)
+	{
+		App->ghost_blue->position.x = 105;
+		App->ghost_blue->position.y = 99;
 	}
 }
 

@@ -215,6 +215,8 @@ update_status ModuleBackgroundMap1::Update()
 	case 27:
 		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
 		eaten_pills++;
+		App->ghost_blue->passed_time = App->ghost_blue->now;
+		App->ghost_blue->is_vulnerable = true;
 		break;
 	case 28:
 		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
