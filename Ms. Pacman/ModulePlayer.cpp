@@ -151,12 +151,17 @@ update_status ModulePlayer::Update()
 			if (go_right)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
+				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27 || position.x >= 210)
 				{
 					right.speed = 0.25f;
 					current_animation = &right;
 					position.x += speed;
 					wakawaka = true;
+
+					if (position.x >= 220)
+					{
+						position.x = -10;
+					}
 
 					go_left = false; go_up = false; go_down = false;
 				}
@@ -166,13 +171,18 @@ update_status ModulePlayer::Update()
 			if (go_left)
 			{
 				// What is the next tile
-				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
+				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27 || position.x <= 10)
 				{
 					left.speed = 0.25f;
 					current_animation = &left;
 					position.x -= speed;
 					wakawaka = true;
 					go_right = false; go_up = false; go_down = false;
+
+					if (position.x <= -10)
+					{
+						position.x = 220;
+					}
 				}
 				else
 					left.speed = 0.0f;
@@ -221,6 +231,7 @@ update_status ModulePlayer::Update()
 	//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	App->render->Blit(graphics, 10, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
 	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r);
 
