@@ -15,6 +15,8 @@
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostOrange.h"
+#include "ModuleGhostPink.h"
+#include "ModuleGhostRed.h"
 
 
 
@@ -45,10 +47,22 @@ bool ModuleBackgroundMap2::Start()
 	App->ghost_blue->position.x = 105; //105
 	App->ghost_blue->position.y = 99; //99
 
-	// Enable and disable modules ---------
+	App->ghost_orange->position.x = 105;
+	App->ghost_orange->position.y = 99;
+
+	App->ghost_pink->position.x = 105;
+	App->ghost_pink->position.y = 99;
+
+	App->ghost_red->position.x = 105;
+	App->ghost_red->position.y = 99;
+
+	// Enable modules ---------
 	App->player->Enable();
 	App->audio->Enable();
 	App->ghost_blue->Enable();
+	App->ghost_orange->Enable();
+	App->ghost_pink->Enable();
+	App->ghost_red->Enable();
 	App->collision->Enable();
 
 	App->player->go_left = true; App->player->go_right = false;  App->player->go_up = false;  App->player->go_down = false;
@@ -103,12 +117,17 @@ bool ModuleBackgroundMap2::Start()
 // Load assets
 bool ModuleBackgroundMap2::CleanUp()
 {
+	LOG("Unloading maps(2) stage");
+
+	// Disable modules ---------
 	App->player->Disable();
 	App->ghost_blue->Disable();
 	App->ghost_orange->Disable();
+	App->ghost_pink->Disable();
+	App->ghost_red->Disable();
 	App->audio->Disable();
 	App->collision->Disable();
-	LOG("Unloading maps(2) stage");
+
 	return true;
 }
 
@@ -243,7 +262,15 @@ update_status ModuleBackgroundMap2::Update()
 
 		// Vulnerable
 		App->ghost_blue->passed_time = App->ghost_blue->now;
+		App->ghost_orange->passed_time = App->ghost_orange->now;
+		App->ghost_pink->passed_time = App->ghost_pink->now;
+		App->ghost_red->passed_time = App->ghost_red->now;
+
 		App->ghost_blue->is_vulnerable = true;
+		App->ghost_orange->is_vulnerable = true;
+		App->ghost_pink->is_vulnerable = true;
+		App->ghost_red->is_vulnerable = true;
+
 
 		// Points
 		eaten_pills++;

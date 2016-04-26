@@ -13,6 +13,8 @@
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostOrange.h"
+#include "ModuleGhostPink.h"
+#include "ModuleGhostRed.h"
 
 ModuleMenu::ModuleMenu()
 {
@@ -87,6 +89,8 @@ bool ModuleMenu::Start()
 	App->audio->Disable();
 	App->ghost_blue->Disable();
 	App->ghost_orange->Disable();
+	App->ghost_pink->Disable();
+	App->ghost_red->Disable();
 
 	// Ghosts start position
 	red.x = pink.x = blue.x = orange.x = 250;

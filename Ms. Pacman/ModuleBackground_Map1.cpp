@@ -14,6 +14,8 @@
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostOrange.h"
+#include "ModuleGhostPink.h"
+#include "ModuleGhostRed.h"
 
 
 ModuleBackgroundMap1::ModuleBackgroundMap1()
@@ -46,11 +48,19 @@ bool ModuleBackgroundMap1::Start()
 	App->ghost_orange->position.x = 105;
 	App->ghost_orange->position.y = 99;
 
+	App->ghost_pink->position.x = 105;
+	App->ghost_pink->position.y = 99;
+
+	App->ghost_red->position.x = 105;
+	App->ghost_red->position.y = 99;
+
 	// Enable and disable modules ---------
 	App->player->Enable();
 	App->audio->Enable();
 	App->ghost_blue->Enable();
 	App->ghost_orange->Enable();
+	App->ghost_pink->Enable();
+	App->ghost_red->Enable();
 	App->collision->Enable();
 
 	// Temporal map ----------
@@ -106,11 +116,15 @@ bool ModuleBackgroundMap1::Start()
 bool ModuleBackgroundMap1::CleanUp()
 {
 	LOG("Unloading maps(1) stage.");
+
 	App->player->Disable();
 	App->ghost_blue->Disable();
 	App->ghost_orange->Disable();
+	App->ghost_pink->Disable();
+	App->ghost_red->Disable();
 	App->audio->Disable();
 	App->collision->Disable();
+
 	return true;
 }
 
@@ -233,12 +247,19 @@ update_status ModuleBackgroundMap1::Update()
 
 		// Vulnerable
 		App->ghost_blue->passed_time = App->ghost_blue->now;
+		App->ghost_orange->passed_time = App->ghost_orange->now;
+		App->ghost_pink->passed_time = App->ghost_pink->now;
+		App->ghost_red->passed_time = App->ghost_red->now;
+
 		App->ghost_blue->is_vulnerable = true;
+		App->ghost_orange->is_vulnerable = true;
+		App->ghost_pink->is_vulnerable = true;
+		App->ghost_red->is_vulnerable = true;
 
 		// Points
 		eaten_pills++;
 
-
+		//
 		if (App->UI->points[5] >= 5 && App->UI->points[4] == 11){
 			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
 			if (App->UI->points[5] == 6) App->UI->points[5] = 1;

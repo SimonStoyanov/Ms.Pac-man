@@ -61,7 +61,7 @@ public:
 
 	// Ghost start moving time variables
 	Uint32 now;
-	float time_stoped = 14.0f;  //varaible to change start time
+	float time_stoped = 15.0f;  //varaible to change start time
 	Uint32 total_time = 0;
 	Uint32 start_time = 0;
 

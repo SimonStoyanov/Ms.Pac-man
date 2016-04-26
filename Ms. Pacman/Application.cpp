@@ -16,6 +16,8 @@
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostOrange.h"
+#include "ModuleGhostPink.h"
+#include "ModuleGhostRed.h"
 
 Application::Application()
 {
@@ -33,6 +35,8 @@ Application::Application()
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = ghost_blue = new ModuleGhostBlue();
 	modules[i++] = ghost_orange = new ModuleGhostOrange();
+	modules[i++] = ghost_pink = new ModuleGhostPink();
+	modules[i++] = ghost_red = new ModuleGhostRed();
 
 	modules[i++] = collision = new ModuleCollision(); //it has to be the second last one
 	modules[i++] = fade = new ModuleFadeToBlack(); //it has to be always the last one 

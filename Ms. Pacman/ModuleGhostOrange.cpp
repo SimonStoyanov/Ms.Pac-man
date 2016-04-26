@@ -12,10 +12,6 @@
 #include <time.h>
 #include <stdlib.h>
 
-
-
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModuleGhostOrange::ModuleGhostOrange()
 {
 	test = { 3, 120, 1, 1 };
@@ -63,7 +59,7 @@ bool ModuleGhostOrange::Start()
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
 	prev_anim = &up;
 
-	srand(time(NULL));
+	srand(time(NULL) * 213);
 
 	tmp = rand() % 2 + 1;
 

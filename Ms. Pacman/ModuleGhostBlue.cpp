@@ -11,10 +11,6 @@
 #include <time.h>
 #include <stdlib.h>
 
-
-
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModuleGhostBlue::ModuleGhostBlue()
 {
 	test = { 3, 120, 1, 1 };
@@ -62,7 +58,7 @@ bool ModuleGhostBlue::Start()
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
 	prev_anim = &up;
 
-	srand(time(NULL));
+	srand(time(NULL) * 10003);
 
 	tmp = rand() % 2 + 1;
 
