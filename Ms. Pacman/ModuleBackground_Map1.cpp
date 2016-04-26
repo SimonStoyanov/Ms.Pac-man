@@ -5,6 +5,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
+#include "ModuleUI.h"
 
 #include "ModuleCollision.h"
 #include "ModuleBackground_Map1.h"
@@ -213,14 +214,26 @@ update_status ModuleBackgroundMap1::Update()
 	switch (g_map[App->player->p_mid.y][App->player->p_mid.x])
 	{
 	case 27:
+		// Change tile
 		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
-		eaten_pills++;
+
+		// Vulnerable
 		App->ghost_blue->passed_time = App->ghost_blue->now;
 		App->ghost_blue->is_vulnerable = true;
+
+		// Points
+		eaten_pills++;
+		App->UI->points += 10;
+
 		break;
 	case 28:
+		// Change tile
 		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
+
+		// Points
 		eaten_pills++;
+		App->UI->points += 10;
+
 		break;
 	default:
 		break;
