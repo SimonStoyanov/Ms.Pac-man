@@ -245,7 +245,7 @@ update_status ModuleBackgroundMap2::Update()
 
 		// Points
 		eaten_pills++;
-		App->UI->points += 50;
+
 
 		break;
 	case 28:
@@ -254,12 +254,18 @@ update_status ModuleBackgroundMap2::Update()
 
 		// Points
 		eaten_pills++;
-		App->UI->points += 10;
+
 
 		break;
 	default:
 		break;
 	}
+
+	if (eaten_pills <= 220)
+	{
+		App->fade->FadeToBlack(App->map2, App->end_screen, 2.0f);
+	}
+
 	// Load scene when press space
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)

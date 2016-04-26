@@ -233,8 +233,8 @@ update_status ModulePlayer::Update()
 	//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
-	App->render->Blit(graphics, position.x, position.y + DISTANCEM1, &test, 1.0f); //
-	App->render->Blit(graphics, 3, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, position.x, position.y + DISTANCEM1, &test, 1.0f); //
+	//App->render->Blit(graphics, 3, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
 	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r);
 
@@ -254,6 +254,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	{
 		App->ghost_blue->enemy_collision->to_delete = true;
 		App->ghost_blue->Disable();
+		App->ghost_blue->Enable();
 
 		App->ghost_blue->position.x = 105;
 		App->ghost_blue->position.y = 99;

@@ -231,9 +231,8 @@ update_status ModuleBackgroundMap1::Update()
 
 		// Points
 		eaten_pills++;
-<<<<<<< HEAD
-		App->UI->points += 50;
-=======
+
+
 		if (App->UI->points[5] >= 5 && App->UI->points[4] == 11){
 			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
 			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
@@ -339,7 +338,6 @@ update_status ModuleBackgroundMap1::Update()
 				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
 			}
 		}
->>>>>>> origin/master
 
 		break;
 	case 28:
@@ -422,10 +420,10 @@ update_status ModuleBackgroundMap1::Update()
 	}
 
 	// Load scene when all the pills are taken
-	//if (eaten_pills <= 220)
-	//{
-	//	App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
-	//}
+	if (eaten_pills <= 220)
+	{
+		App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
+	}
 
 	// Load scene when press space
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
