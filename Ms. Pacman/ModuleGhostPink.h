@@ -68,7 +68,7 @@ public:
 
 	// Ghost vulnerable variables
 	Uint32 total_time_vuln = 0;
-	float time_vulnerable = 6.0f;  //varaible to change vulnerable time
+	float time_vulnerable = 9.0f;  //varaible to change vulnerable time
 	float passed_time;
 	bool is_vulnerable = false;
 

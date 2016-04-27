@@ -37,8 +37,8 @@ ModuleGhostRed::ModuleGhostRed()
 	up.speed = 0.10f;
 
 	// down animation
-	down.PushBack({ 33, 66, 14, 14 });
-	down.PushBack({ 49, 66, 14, 14 });
+	down.PushBack({ 33, 66, 14, 15 });
+	down.PushBack({ 49, 66, 14, 15 });
 	down.speed = 0.10f;
 
 	// vulnerable animation
