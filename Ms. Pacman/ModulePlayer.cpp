@@ -255,6 +255,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		position.y = 195; //195
 		go_left = true;
 
+		lifes--;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{

@@ -46,6 +46,12 @@ public:
 	SDL_Rect tileP;
 	SDL_Rect tileD;
 	SDL_Rect tileT;
+
+	SDL_Rect pacman1;
+	SDL_Rect pacman2;
+	SDL_Rect pacman3;
+	SDL_Rect pacman4;
+
 	
 
 	// Map array
@@ -64,7 +70,7 @@ public:
 	int digit7;
 
 	//Credit
-	int credit = 1;
+	int credit = 0;
 	int cd1 = 0;
 	int cd2 = 0;
 

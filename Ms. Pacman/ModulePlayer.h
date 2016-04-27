@@ -40,6 +40,8 @@ public:
 
 	SDL_Rect test;
 	
+	int lifes = 5;
+
 	//Start
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
