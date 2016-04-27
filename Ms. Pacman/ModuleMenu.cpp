@@ -227,7 +227,7 @@ update_status ModuleMenu::Update()
 	}
 
 	//Fade To Black
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->UI->credit > 0)
 	{
 		App->fade->FadeToBlack(App->menu, App->map1, 2.0f);
 	}

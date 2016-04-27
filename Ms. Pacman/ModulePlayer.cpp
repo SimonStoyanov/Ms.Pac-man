@@ -23,25 +23,25 @@ ModulePlayer::ModulePlayer()
 	right.PushBack({ 33, 1, 15, 14 });
 	right.PushBack({ 17, 1, 13, 14 });
 	right.PushBack({ 1, 1, 11, 14 });
-	right.speed = 0.25f;
+	right.speed = 0.3f;
 
 	// left animation
 	left.PushBack({ 15, 34, 15, 15 });
 	left.PushBack({ 33, 34, 15, 15 });
 	left.PushBack({ 0, 34, 17, 15 });
-	left.speed = 0.25f;
+	left.speed = 0.3f;
 
 	// up animation
 	up.PushBack({ 33, 51, 14, 15 });
 	up.PushBack({ 17, 51, 14, 13 });
 	up.PushBack({ 1, 51, 14, 11 });
-	up.speed = 0.25f;
+	up.speed = 0.3f;
 
 	// down animation
 	down.PushBack({ 33, 17, 14, 15 });
 	down.PushBack({ 17, 17, 14, 15 });
 	down.PushBack({ 1, 17, 14, 15 });
-	down.speed = 0.25f;
+	down.speed = 0.3f;
 
 	total_time = (Uint32)(total_t * 0.5f * 1000.0f);
 }
@@ -155,7 +155,7 @@ update_status ModulePlayer::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27 || position.x >= 213)
 				{
-					right.speed = 0.25f;
+					right.speed = 0.3f;
 					current_animation = &right;
 					position.x += speed;
 					wakawaka = true;
@@ -176,7 +176,7 @@ update_status ModulePlayer::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27 || position.x <= 0)
 				{
-					left.speed = 0.25f;
+					left.speed = 0.3f;
 					current_animation = &left;
 					position.x -= speed;
 					wakawaka = true;
@@ -196,7 +196,7 @@ update_status ModulePlayer::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
-					up.speed = 0.25f;
+					up.speed = 0.3f;
 					current_animation = &up;
 					position.y -= speed;
 					wakawaka = true;
@@ -210,7 +210,7 @@ update_status ModulePlayer::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 				{
-					down.speed = 0.25f;
+					down.speed = 0.3f;
 					current_animation = &down;
 					position.y += speed;
 					wakawaka = true;
