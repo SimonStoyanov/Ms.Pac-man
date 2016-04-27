@@ -6,6 +6,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
+#include "ModuleUI.h"
 
 #include "ModuleBackground_Map1.h"
 #include "ModuleMenu.h"
@@ -218,6 +219,11 @@ update_status ModuleMenu::Update()
 		{
 			App->render->Blit(graphics, pacman.x, pacman.y, &Pacman_left.GetCurrentFrame(), 1.0f);
 		}
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN)
+	{
+		App->UI->credit++;
 	}
 
 	//Fade To Black

@@ -305,6 +305,32 @@ update_status ModuleUI::Update()
 	}
 
 
+	// Credit
+	int tmp_credit = credit;
+	if (tmp_credit <= 99)
+	{
+		int digits = 0;
+		int tmp;
+		while (tmp_credit > 0)
+		{
+			tmp_credit /= 10;
+			digits++;
+		}
+
+		if (digits == 1)
+		{
+			mapMENU[4][11] = credit;
+		}
+		else
+		{
+			cd1 = credit % 10;
+			cd2 = (credit / 10) % 10;
+			mapMENU[4][10] = cd2;
+			mapMENU[4][11] = cd1;
+
+		}
+	}
+
 	return UPDATE_CONTINUE;
 
 }

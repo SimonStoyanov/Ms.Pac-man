@@ -63,6 +63,10 @@ public:
 	int digit6;
 	int digit7;
 
+	//Credit
+	int credit = 1;
+	int cd1 = 0;
+	int cd2 = 0;
 
 };
 
