@@ -8,23 +8,62 @@ ModuleCollision::ModuleCollision()
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
 
+	// Player
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_BLUE] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_ORANGE] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_PINK] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_RED] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_FRUIT] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_TELEPORT] = true;
 
-	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
-	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_ENEMY][COLLIDER_FRUIT] = false;
-	matrix[COLLIDER_ENEMY][COLLIDER_TELEPORT] = true;
+	// Blue Ghost
+	matrix[COLLIDER_BLUE][COLLIDER_ORANGE] = false;
+	matrix[COLLIDER_BLUE][COLLIDER_PINK] = false;
+	matrix[COLLIDER_BLUE][COLLIDER_RED] = true;
+	matrix[COLLIDER_BLUE][COLLIDER_FRUIT] = false;
+	matrix[COLLIDER_BLUE][COLLIDER_TELEPORT] = true;
+	matrix[COLLIDER_BLUE][COLLIDER_PLAYER] = true;
 
+	// Orange Ghost
+	matrix[COLLIDER_ORANGE][COLLIDER_BLUE] = false;
+	matrix[COLLIDER_ORANGE][COLLIDER_PINK] = false;
+	matrix[COLLIDER_ORANGE][COLLIDER_RED] = true;
+	matrix[COLLIDER_ORANGE][COLLIDER_FRUIT] = false;
+	matrix[COLLIDER_ORANGE][COLLIDER_TELEPORT] = true;
+	matrix[COLLIDER_ORANGE][COLLIDER_PLAYER] = true;
+
+	// Pink Ghost
+	matrix[COLLIDER_PINK][COLLIDER_BLUE] = false;
+	matrix[COLLIDER_PINK][COLLIDER_ORANGE] = false;
+	matrix[COLLIDER_PINK][COLLIDER_RED] = true;
+	matrix[COLLIDER_PINK][COLLIDER_FRUIT] = false;
+	matrix[COLLIDER_PINK][COLLIDER_TELEPORT] = true;
+	matrix[COLLIDER_PINK][COLLIDER_PLAYER] = true;
+
+	// Red Ghost
+	matrix[COLLIDER_RED][COLLIDER_BLUE] = false;
+	matrix[COLLIDER_RED][COLLIDER_ORANGE] = false;
+	matrix[COLLIDER_RED][COLLIDER_PINK] = true;
+	matrix[COLLIDER_RED][COLLIDER_FRUIT] = false;
+	matrix[COLLIDER_RED][COLLIDER_TELEPORT] = true;
+	matrix[COLLIDER_RED][COLLIDER_PLAYER] = true;
+
+	// Fruits
 	matrix[COLLIDER_FRUIT][COLLIDER_FRUIT] = false;
-	matrix[COLLIDER_FRUIT][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_FRUIT][COLLIDER_BLUE] = false;
+	matrix[COLLIDER_FRUIT][COLLIDER_ORANGE] = false;
+	matrix[COLLIDER_FRUIT][COLLIDER_PINK] = false;
+	matrix[COLLIDER_FRUIT][COLLIDER_RED] = false;
 	matrix[COLLIDER_FRUIT][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_FRUIT][COLLIDER_TELEPORT] = true;
 
+	// Teleport
 	matrix[COLLIDER_TELEPORT][COLLIDER_TELEPORT] = false;
-	matrix[COLLIDER_TELEPORT][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_TELEPORT][COLLIDER_BLUE] = true;
+	matrix[COLLIDER_TELEPORT][COLLIDER_ORANGE] = true;
+	matrix[COLLIDER_TELEPORT][COLLIDER_PINK] = true;
+	matrix[COLLIDER_TELEPORT][COLLIDER_RED] = true;
 	matrix[COLLIDER_TELEPORT][COLLIDER_FRUIT] = true;
 	matrix[COLLIDER_TELEPORT][COLLIDER_PLAYER] = true;
 }
@@ -109,7 +148,16 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_PLAYER: // green
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
-		case COLLIDER_ENEMY: // red
+		case COLLIDER_BLUE: // red
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			break;
+		case COLLIDER_ORANGE: // red
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			break;
+		case COLLIDER_PINK: // red
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			break;
+		case COLLIDER_RED: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
 		case COLLIDER_FRUIT: // yellow

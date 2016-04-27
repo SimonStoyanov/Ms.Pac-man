@@ -9,6 +9,8 @@
 #include "ModuleCollision.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostOrange.h"
+#include "ModuleGhostPink.h"
+#include "ModuleGhostRed.h"
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -244,14 +246,17 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
-	if (c1 != nullptr && c2->type == COLLIDER_ENEMY && !App->ghost_blue->is_vulnerable)
+	if ((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) || 
+		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
+		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
+		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable))
 	{
 		position.x = 105; //105
 		position.y = 195; //195
 		go_left = true;
 
 	}
-	else if (c1 != nullptr && c2->type == COLLIDER_ENEMY && App->ghost_blue->is_vulnerable)
+	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
 		App->ghost_blue->enemy_collision->to_delete = true;
 		App->ghost_blue->Disable();

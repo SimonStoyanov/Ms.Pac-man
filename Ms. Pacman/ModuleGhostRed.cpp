@@ -73,7 +73,7 @@ bool ModuleGhostRed::Start()
 		go_right = true;
 	}
 
-	enemy_collision = App->collision->AddCollider({ 50, 50, 8, 8 }, COLLIDER_ENEMY, this);
+	enemy_collision = App->collision->AddCollider({ 50, 50, 8, 8 }, COLLIDER_RED, this);
 
 	return ret;
 

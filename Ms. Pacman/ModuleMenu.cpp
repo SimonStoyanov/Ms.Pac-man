@@ -71,7 +71,7 @@ ModuleMenu::ModuleMenu()
 	Pacman_left.PushBack({ 38, 368, 15, 15 });
 	Pacman_left.PushBack({ 20, 368, 15, 15 });
 	Pacman_left.PushBack({ 5, 368, 15, 15 });
-	Pacman_left.speed = 0.25f;
+	Pacman_left.speed = 0.2f;
 
 	//from seconds to miliseconds
 	total_time_red = (Uint32)(time_red * 0.5f * 1000.0f);
@@ -112,7 +112,7 @@ bool ModuleMenu::Start()
 // Load assets
 bool ModuleMenu::CleanUp()
 {
-	LOG("Unloading  Menu.");
+	LOG("Unloading Menu.");
 	return true;
 }
 
@@ -209,7 +209,7 @@ update_status ModuleMenu::Update()
 
 	if (now >= total_time_pacman)
 	{
-		if (pacman.x >= 115) // left
+		if (pacman.x >= 116) // left
 		{
 			pacman.x -= speed_left;
 			App->render->Blit(graphics, pacman.x, pacman.y, &Pacman_left.GetCurrentFrame(), 1.0f);
