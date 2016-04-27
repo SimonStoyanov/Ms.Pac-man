@@ -1,3 +1,7 @@
+#include <iostream>
+#include <random>
+using namespace std;
+
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -100,6 +104,7 @@ update_status  ModuleGhostPink::Update()
 		{
 			can_go_right = true;
 		}
+		else{ can_go_right = false; }
 	}
 	else{ can_go_right = false; }
 
@@ -110,6 +115,7 @@ update_status  ModuleGhostPink::Update()
 		{
 			can_go_left = true;
 		}
+		else{ can_go_left = false; }
 	}
 	else{ can_go_left = false; }
 
@@ -120,6 +126,7 @@ update_status  ModuleGhostPink::Update()
 		{
 			can_go_up = true;
 		}
+		else{ can_go_up = false; }
 	}
 	else{ can_go_up = false; }
 
@@ -130,6 +137,7 @@ update_status  ModuleGhostPink::Update()
 		{
 			can_go_down = true;
 		}
+		else{ can_go_down = false; }
 	}
 	else{ can_go_down = false; }
 
@@ -158,13 +166,16 @@ update_status  ModuleGhostPink::Update()
 	}
 	else{ change_direction = false; }
 
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<> dis(1, 5);
 	// Choose direction -------------------
 	if (change_direction)
 	{
 		cont = false;
 		while (cont == false)
 		{
-			tmp = rand() % 4 + 1;
+			tmp = dis(gen);
 
 			if (can_go_right && tmp == 4)
 			{
@@ -187,7 +198,7 @@ update_status  ModuleGhostPink::Update()
 			}
 			else{ ghost_up = false; }
 
-			if (can_go_down && tmp == 1)
+			if (can_go_down && (tmp == 1 || tmp == 5))
 			{
 				position.x = (p_mid.x * 8) + 4 - 7;
 				ghost_down = true; cont = true;
