@@ -45,6 +45,13 @@ ModuleGhostOrange::ModuleGhostOrange()
 	vulnerable.PushBack({ 17, 127, 14, 14 });
 	vulnerable.speed = 0.10f;
 
+	//end of vulnerable
+	vulnerable_end.PushBack({ 1, 127, 14, 14 });
+	vulnerable_end.PushBack({ 17, 127, 14, 14 });
+	vulnerable_end.PushBack({ 33, 127, 14, 14 });
+	vulnerable_end.PushBack({ 49, 127, 14, 14 });
+	vulnerable_end.speed = 0.10f;
+
 	total_time_vuln = (Uint32)(time_vulnerable * 0.5f * 1000.0f);
 	total_time = (Uint32)(time_stoped * 0.5f * 1000.0f);
 
@@ -168,8 +175,9 @@ update_status ModuleGhostOrange::Update()
 
 	random_device rd;
 	mt19937 gen(rd());
-	uniform_int_distribution<> dis(1, 4);
-	//choose direction -------------
+	uniform_int_distribution<> dis(1, 5);
+
+	// Choose direction Radom -------------------
 	if (change_direction)
 	{
 		cont = false;
@@ -183,7 +191,7 @@ update_status ModuleGhostOrange::Update()
 			}
 			else{ ghost_right = false; }
 
-			if (can_go_left && tmp == 2)
+			if (can_go_left && (tmp == 2 || tmp == 5))
 			{
 				position.y = (p_mid.y * 8) + 4 + 7;
 				ghost_left = true; cont = true;
@@ -363,13 +371,22 @@ update_status ModuleGhostOrange::Update()
 	else{}
 
 
-	if (is_vulnerable &&  now < total_time_vuln + passed_time)
-	{
-	current_animation = &vulnerable;
-	}
-	else
+	//Ghost vulnerable animation control -----------------
+	if (is_vulnerable &&  now > total_time_vuln + passed_time)
 	{
 		is_vulnerable = false;
+	}
+	else if (is_vulnerable && (total_time_vuln + passed_time) - now < 3.0f * 0.5f * 1000.0)
+	{
+		current_animation = &vulnerable_end;
+	}
+	else if (is_vulnerable && (total_time_vuln + passed_time) - now < 1.0f * 0.5f * 1000.0)
+	{
+		vulnerable_end.speed = 0.20f;
+	}
+	else if (is_vulnerable &&  now < total_time_vuln + passed_time)
+	{
+		current_animation = &vulnerable;
 	}
 
 

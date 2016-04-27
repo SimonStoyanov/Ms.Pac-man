@@ -26,6 +26,7 @@ public:
 	Animation up;
 	Animation down;
 	Animation vulnerable;
+	Animation vulnerable_end;
 
 	SDL_Rect test;
 

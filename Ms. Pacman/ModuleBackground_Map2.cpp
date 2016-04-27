@@ -45,16 +45,17 @@ bool ModuleBackgroundMap2::Start()
 	App->player->position.y = 195; //195
 
 	App->ghost_blue->position.x = 105; //105
-	App->ghost_blue->position.y = 199; //99
+	App->ghost_blue->position.y = 99; //99
 
 	App->ghost_orange->position.x = 105;
-	App->ghost_orange->position.y = 199;
+	App->ghost_orange->position.y = 99;
 
 	App->ghost_pink->position.x = 105;
-	App->ghost_pink->position.y = 199;
+	App->ghost_pink->position.y = 99;
 
 	App->ghost_red->position.x = 105;
-	App->ghost_red->position.y = 199;
+	App->ghost_red->position.y = 99;
+
 
 	// Enable modules ---------
 	App->player->Enable();
