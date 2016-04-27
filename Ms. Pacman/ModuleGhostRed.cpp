@@ -38,8 +38,8 @@ ModuleGhostRed::ModuleGhostRed()
 	down.speed = 0.10f;
 
 	// vulnerable animation
-	vulnerable.PushBack({ 1, 66, 14, 14 });
-	vulnerable.PushBack({ 17, 66, 14, 14 });
+	vulnerable.PushBack({ 1, 127, 14, 14 });
+	vulnerable.PushBack({ 17, 127, 14, 14 });
 	vulnerable.speed = 0.10f;
 
 	total_time_vuln = (Uint32)(time_vulnerable * 0.5f * 1000.0f);

@@ -67,11 +67,18 @@ ModuleMenu::ModuleMenu()
 	Orange_up.PushBack({ 49, 322, 14, 14 });
 	Orange_up.speed = 0.2f;
 
+	//Pacman animation
+	Pacman_left.PushBack({ 38, 368, 15, 15 });
+	Pacman_left.PushBack({ 20, 368, 15, 15 });
+	Pacman_left.PushBack({ 5, 368, 15, 15 });
+	Pacman_left.speed = 0.25f;
+
 	//from seconds to miliseconds
 	total_time_red = (Uint32)(time_red * 0.5f * 1000.0f);
 	total_time_blue = (Uint32)(time_blue * 0.5f * 1000.0f);
 	total_time_orange = (Uint32)(time_orange * 0.5f * 1000.0f);
 	total_time_pink = (Uint32)(time_pink * 0.5f * 1000.0f);
+	total_time_pacman = (Uint32)(time_pacman * 0.5f * 1000.0f);
 }
 
 ModuleMenu::~ModuleMenu()
@@ -93,8 +100,8 @@ bool ModuleMenu::Start()
 	App->ghost_red->Disable();
 
 	// Ghosts start position
-	red.x = pink.x = blue.x = orange.x = 250;
-	red.y = pink.y = blue.y = orange.y = 158;
+	red.x = pink.x = blue.x = orange.x = pacman.x = 250;
+	red.y = pink.y = blue.y = orange.y = pacman.y = 158;
 
 	// Seting time of the start
 	start_time = SDL_GetTicks();
@@ -197,6 +204,19 @@ update_status ModuleMenu::Update()
 		else // stoped
 		{
 			App->render->Blit(graphics, orange.x, orange.y, &Orange_up.GetCurrentFrame(), 1.0f);
+		}
+	}
+
+	if (now >= total_time_pacman)
+	{
+		if (pacman.x >= 115) // left
+		{
+			pacman.x -= speed_left;
+			App->render->Blit(graphics, pacman.x, pacman.y, &Pacman_left.GetCurrentFrame(), 1.0f);
+		}
+		else // stoped
+		{
+			App->render->Blit(graphics, pacman.x, pacman.y, &Pacman_left.GetCurrentFrame(), 1.0f);
 		}
 	}
 

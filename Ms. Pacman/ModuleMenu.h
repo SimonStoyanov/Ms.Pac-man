@@ -41,19 +41,26 @@ public:
 	Animation Pink_up;
 	Animation Pink_left;
 	iPoint pink;
+
+	Animation Pacman_up;
+	Animation Pacman_left;
+	iPoint pacman;
 	
 	SDL_Rect background;
 
 	//Time control
 	Uint32 start_time = 0;
 	Uint32 total_time_red = 0;
-	float time_red = 1.0f; // red timer
+	float time_red = 0.0f; // red timer
 	Uint32 total_time_blue = 0;
-	float time_blue = 13.0f; // blue timer
+	float time_blue = 10.0f; // blue timer
 	Uint32 total_time_orange = 0;
-	float time_orange = 19.0f; // orange timer
+	float time_orange = 15.0f; // orange timer
 	Uint32 total_time_pink = 0;
-	float time_pink = 7.0f; // pink timer
+	float time_pink = 5.0f; // pink timer
+	Uint32 total_time_pacman = 0;
+	float time_pacman = 20.0f; // pacman timer
+
 };
 
 #endif

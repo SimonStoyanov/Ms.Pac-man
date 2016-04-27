@@ -37,8 +37,8 @@ ModuleGhostOrange::ModuleGhostOrange()
 	down.speed = 0.10f;
 
 	// vulnerable animation
-	vulnerable.PushBack({ 1, 82, 14, 14 });
-	vulnerable.PushBack({ 17, 82, 14, 14 });
+	vulnerable.PushBack({ 1, 127, 14, 14 });
+	vulnerable.PushBack({ 17, 127, 14, 14 });
 	vulnerable.speed = 0.10f;
 
 	total_time_vuln = (Uint32)(time_vulnerable * 0.5f * 1000.0f);
@@ -354,7 +354,7 @@ update_status ModuleGhostOrange::Update()
 
 	if (is_vulnerable &&  now < total_time_vuln + passed_time)
 	{
-		current_animation = &vulnerable;
+	current_animation = &vulnerable;
 	}
 	else
 	{
