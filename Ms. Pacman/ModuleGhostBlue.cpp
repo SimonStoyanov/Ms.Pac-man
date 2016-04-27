@@ -132,7 +132,7 @@ update_status ModuleGhostBlue::Update()
 	}
 	else{ can_go_down = false; }
 
-	// Is the player on an intersection and on the right pixel ?
+	// Is the player on an intersection?
 	if (can_go_left == true || can_go_right == true)
 	{
 		if (can_go_up == false && can_go_down == false)

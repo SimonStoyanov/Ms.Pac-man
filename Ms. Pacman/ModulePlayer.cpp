@@ -265,5 +265,32 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_blue->position.x = 105;
 		App->ghost_blue->position.y = 99;
 	}
+	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
+	{
+		App->ghost_orange->enemy_collision->to_delete = true;
+		App->ghost_orange->Disable();
+		App->ghost_orange->Enable();
+
+		App->ghost_orange->position.x = 105;
+		App->ghost_orange->position.y = 99;
+	}
+	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
+	{
+		App->ghost_pink->enemy_collision->to_delete = true;
+		App->ghost_pink->Disable();
+		App->ghost_pink->Enable();
+
+		App->ghost_pink->position.x = 105;
+		App->ghost_pink->position.y = 99;
+	}
+	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
+	{
+		App->ghost_red->enemy_collision->to_delete = true;
+		App->ghost_red->Disable();
+		App->ghost_red->Enable();
+
+		App->ghost_red->position.x = 105;
+		App->ghost_red->position.y = 99;
+	}
 }
 
