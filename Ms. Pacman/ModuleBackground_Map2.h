@@ -69,7 +69,6 @@ public:
 	//iPoint player_tile_position;
 	char map2[31][28];
 
-
 	int eaten_pills = 0;
 };
 

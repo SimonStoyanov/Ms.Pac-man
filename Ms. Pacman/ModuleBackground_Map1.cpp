@@ -440,16 +440,13 @@ update_status ModuleBackgroundMap1::Update()
 				App->UI->points[5] = 0;
 			}
 		}
-		
-
-
 		break;
 	default:
 		break;
 	}
 
 	// Load scene when all the pills are taken
-	if (eaten_pills <= 223)
+	if (eaten_pills <= 1)//223
 	{
 		App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
 	}
