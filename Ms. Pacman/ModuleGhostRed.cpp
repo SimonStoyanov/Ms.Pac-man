@@ -181,39 +181,34 @@ update_status ModuleGhostRed::Update()
 	// Choose direction -------------------
 	if (change_direction)
 	{
-		cont = false;
-		while (cont == false)
-		{
-			tmp = dis(gen);
-
-			if (can_go_right && tmp == 4)
+			if (can_go_right && App->player->position.x - position.x > 0)
 			{
 				position.y = (p_mid.y * 8) + 4 + 7;
-				ghost_right = true; cont = true;
+				ghost_right = true; 
 			}
-			else{ ghost_right = false; }
-
-			if (can_go_left && tmp == 2)
+			else{ ghost_right = false;}
+			if (can_go_left &&  App->player->position.x - position.x <= 0 && ghost_right == false)
 			{
 				position.y = (p_mid.y * 8) + 4 + 7;
-				ghost_left = true; cont = true;
+				ghost_left = true;
 			}
-			else{ ghost_left = false; }
+			else{ ghost_left = false;}
 
-			if (can_go_up && tmp == 3)
+			if (can_go_up && App->player->position.y < position.y && !ghost_right && !ghost_left)
 			{
 				position.x = (p_mid.x * 8) + 4 - 7;
-				ghost_up = true; cont = true;
+				ghost_up = true;
 			}
 			else{ ghost_up = false; }
 
-			if (can_go_down && (tmp == 1 || tmp == 5))
+			if (can_go_down && App->player->position.y > position.y && ghost_up == false && !ghost_right && !ghost_left)
 			{
 				position.x = (p_mid.x * 8) + 4 - 7;
-				ghost_down = true; cont = true;
+				ghost_down = true;
 			}
 			else{ ghost_down = false; }
-		}
+			
+
 	}
 
 
