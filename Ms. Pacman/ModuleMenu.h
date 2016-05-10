@@ -28,23 +28,23 @@ public:
 	//Ghosts
 	Animation Red_up;
 	Animation Red_left;
-	iPoint red;
+	fPoint red;
 
 	Animation Blue_up;
 	Animation Blue_left;
-	iPoint blue;
+	fPoint blue;
 
 	Animation Orange_up;
 	Animation Orange_left;
-	iPoint orange;
+	fPoint orange;
 
 	Animation Pink_up;
 	Animation Pink_left;
-	iPoint pink;
+	fPoint pink;
 
 	Animation Pacman_up;
 	Animation Pacman_left;
-	iPoint pacman;
+	fPoint pacman;
 	
 	SDL_Rect background;
 

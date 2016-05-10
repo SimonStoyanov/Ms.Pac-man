@@ -69,7 +69,7 @@ bool ModuleGhostBlue::Start()
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
 	prev_anim = &up;
 
-	srand(time(NULL) * 10003);
+	srand(time(NULL));
 
 	tmp = rand() % 2 + 1;
 

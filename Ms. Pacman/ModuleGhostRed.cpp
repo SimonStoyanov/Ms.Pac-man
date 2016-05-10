@@ -105,7 +105,7 @@ update_status ModuleGhostRed::Update()
 	// right
 	if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 	{
-		if ((position.y - 7) >= (p_mid.y * 8) + 2 && (position.y - 7) <= (p_mid.y * 8) + 6 && (position.x + 7) == (p_mid.x * 8) + 4)
+		if ((int)(position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) >= (p_mid.y * 8) + 2 && (position.y - 7) <= (p_mid.y * 8) + 6)
 		{
 			can_go_right = true;
 		}
@@ -116,7 +116,7 @@ update_status ModuleGhostRed::Update()
 	// left
 	if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 	{
-		if ((position.y - 7) >= (p_mid.y * 8) + 2 && (position.y - 7) <= (p_mid.y * 8) + 6 && (position.x + 7) == (p_mid.x * 8) + 4)
+		if ((int)(position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) >= (p_mid.y * 8) + 2 && (position.y - 7) <= (p_mid.y * 8) + 6)
 		{
 			can_go_left = true;
 		}
@@ -127,7 +127,7 @@ update_status ModuleGhostRed::Update()
 	// up
 	if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 	{
-		if ((position.x + 7) >= (p_mid.x * 8) + 2 && (position.x + 7) <= (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if ((int)(position.x + 7) >= (p_mid.x * 8) + 2 && (position.x + 7) <= (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4)
 		{
 			can_go_up = true;
 		}
@@ -369,7 +369,7 @@ update_status ModuleGhostRed::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	float speed = 1.2f;
+	float speed = 1.0f;
 	if (now >= total_time)
 	{
 		if (1)
@@ -393,7 +393,7 @@ update_status ModuleGhostRed::Update()
 				{
 					// Is the player near the center-pixel of the tile?
 					
-						position.y = (p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
+						position.y = (int)(p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
 						go_left = true; go_right = false; go_up = false; go_down = false;
 					
 				}
@@ -405,7 +405,7 @@ update_status ModuleGhostRed::Update()
 				{
 					// Is the player near the center-pixel of the tile?
 	
-						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
+						position.x = (int)(p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
 					
 				}
@@ -417,7 +417,7 @@ update_status ModuleGhostRed::Update()
 				{
 					// Is the player near the center-pixel of the tile?
 				
-						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
+						position.x = (int)(p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_down = true; go_right = false; go_left = false; go_up = false;
 					
 				}
