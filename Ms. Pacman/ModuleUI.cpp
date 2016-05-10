@@ -318,7 +318,7 @@ update_status ModuleUI::Update()
 	}
 
 
-	// Credit
+	// Credit Sistem
  	int tmp_credit = credit;
 	if (tmp_credit <= 99)
 	{
@@ -329,11 +329,7 @@ update_status ModuleUI::Update()
 			tmp_credit /= 10;
 			digits++;
 		}
-
-		if (credit == 0)
-		{
-		}
-		else if (digits == 1)
+		if (digits == 1)
 		{
 			mapMENU[4][11] = credit;
 		}

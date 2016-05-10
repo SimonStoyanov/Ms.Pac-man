@@ -105,7 +105,7 @@ update_status ModuleGhostRed::Update()
 	// right
 	if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 	{
-		if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if ((position.x + 7) >= (p_mid.x * 8) + 3.8 && (position.y - 7) <= (p_mid.y * 8) + 4.2 && (position.x + 7) == (p_mid.x * 8) + 4)
 		{
 			can_go_right = true;
 		}
@@ -116,7 +116,7 @@ update_status ModuleGhostRed::Update()
 	// left
 	if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 	{
-		if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if ((position.x + 7) >= (p_mid.x * 8) + 3.8 && (position.y - 7) <= (p_mid.y * 8) + 4.2 && (position.x + 7) == (p_mid.x * 8) + 4)
 		{
 			can_go_left = true;
 		}
@@ -127,7 +127,7 @@ update_status ModuleGhostRed::Update()
 	// up
 	if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 	{
-		if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if ((position.x + 7) >= (p_mid.x * 8) + 3.8 && (position.y - 7) <= (p_mid.y * 8) + 4.2 && (position.y - 7) == (p_mid.y * 8) + 4)
 		{
 			can_go_up = true;
 		}
@@ -138,7 +138,7 @@ update_status ModuleGhostRed::Update()
 	// down
 	if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 	{
-		if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if ((position.x + 7) >= (p_mid.x * 8) + 3.8 && (position.y - 7) <= (p_mid.y * 8) + 4.2 && (position.y - 7) == (p_mid.y * 8) + 4)
 		{
 			can_go_down = true;
 		}
@@ -171,7 +171,7 @@ update_status ModuleGhostRed::Update()
 	}
 	else{ change_direction = false; }
 
-	// Want to go --------------
+	// Want to go -----------------------------
 	if (App->player->position.x + 7 > position.x) //is right
 	{
 		if (position.y > App->player->position.y - 7) // is up
@@ -217,7 +217,7 @@ update_status ModuleGhostRed::Update()
 		}
 	}
 
-	// Choose direction -------------------
+	// Choose direction ----------------------------
 	if (change_direction)
 	{
 		if (want_go_right) // try go right
@@ -369,7 +369,7 @@ update_status ModuleGhostRed::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	int speed = 1;
+	float speed = 1.0f;
 	if (now >= total_time)
 	{
 		if (1)
@@ -380,11 +380,10 @@ update_status ModuleGhostRed::Update()
 				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_left == true)
-					{
+					
 						position.y = (p_mid.y * 8) + 4 + 7; // Re-position to the center of the tile
 						go_right = true; go_left = false; go_up = false; go_down = false;
-					}
+					
 				}
 			}
 			if (ghost_left) // left
@@ -393,11 +392,10 @@ update_status ModuleGhostRed::Update()
 				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_right == true)
-					{
+					
 						position.y = (p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
 						go_left = true; go_right = false; go_up = false; go_down = false;
-					}
+					
 				}
 			}
 			if (ghost_up) // up
@@ -406,11 +404,10 @@ update_status ModuleGhostRed::Update()
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true)
-					{
+	
 						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
-					}
+					
 				}
 			}
 			if (ghost_down) // down
@@ -419,11 +416,10 @@ update_status ModuleGhostRed::Update()
 				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true)
-					{
+				
 						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_down = true; go_right = false; go_left = false; go_up = false;
-					}
+					
 				}
 			}
 

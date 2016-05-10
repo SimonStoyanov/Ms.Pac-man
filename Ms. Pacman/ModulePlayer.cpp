@@ -11,6 +11,8 @@
 #include "ModuleGhostOrange.h"
 #include "ModuleGhostPink.h"
 #include "ModuleGhostRed.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleMenu.h"
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -92,18 +94,18 @@ update_status ModulePlayer::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	int speed = 1;
+	float speed = 1.2f;
 	if (1)
 	{
 		if (total_time <= now)
 		{
-			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) // right
+			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] == false && App->input->keyboard[SDL_SCANCODE_A] == false && App->input->keyboard[SDL_SCANCODE_W] == false) // right
 			{
 				// What is the next tile
 				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_left == true)
+					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) >= (p_mid.y * 8) + 2 && (position.y - 7) <= (p_mid.y * 8) + 6 || go_left == true)
 					{
 						position.y = (p_mid.y * 8) + 4 + 7; // Re-position to the center of the tile
 						go_right = true; go_left = false; go_up = false; go_down = false;
@@ -116,33 +118,33 @@ update_status ModulePlayer::Update()
 				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_right == true)
+					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) >= (p_mid.y * 8) + 2 && (position.y - 7) <= (p_mid.y * 8) + 6 || go_right == true)
 					{
 						position.y = (p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
 						go_left = true; go_right = false; go_up = false; go_down = false;
 					}
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) // up
+			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A] == false && App->input->keyboard[SDL_SCANCODE_S] == false && App->input->keyboard[SDL_SCANCODE_D] == false) // up
 			{
 				// What is the next tile
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if (((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true) && position.x < 208 && position.x > 2)
+					if (((position.x + 7) >= (p_mid.x * 8) + 2 && (position.x + 7) <= (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true) && position.x < 208 && position.x > 2)
 					{
 						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
 					}
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) // down
+			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A] == false) // down
 			{
 				// What is the next tile
 				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 				{
 					// Is the player near the center-pixel of the tile?
-					if (((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true) && position.x < 208 && position.x > 2)
+					if (((position.x + 7) >= (p_mid.x * 8) + 2 && (position.x + 7) <= (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true) && position.x < 208 && position.x > 2)
 					{
 						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_down = true; go_right = false; go_left = false; go_up = false;
@@ -224,6 +226,11 @@ update_status ModulePlayer::Update()
 	}
 	else{}
 
+	//if (lifes == 0 && App->map1->IsEnabled())
+	//{
+	//	App->fade->FadeToBlack(App->map1, App->menu, 0.0f);
+	//}
+
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
@@ -255,7 +262,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		position.y = 195; //195
 		go_left = true;
 
+		if (lifes > 0)
 		lifes--;
+		
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{

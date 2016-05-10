@@ -26,7 +26,7 @@ public:
 	Animation up;
 	Animation down;
 
-	iPoint position;
+	fPoint position;
 	iPoint p_up;
 	iPoint p_down;
 	iPoint p_left;

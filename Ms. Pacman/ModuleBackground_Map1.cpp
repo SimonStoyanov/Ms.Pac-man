@@ -6,8 +6,9 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 #include "ModuleUI.h"
-
 #include "ModuleCollision.h"
+
+#include "ModuleMenu.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
 
@@ -444,6 +445,7 @@ update_status ModuleBackgroundMap1::Update()
 	default:
 		break;
 	}
+
 
 	// Load scene when all the pills are taken
 	if (eaten_pills <= 223)
