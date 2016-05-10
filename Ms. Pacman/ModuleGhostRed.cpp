@@ -105,7 +105,7 @@ update_status ModuleGhostRed::Update()
 	// right
 	if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 	{
-		if ((position.x + 7) >= (p_mid.x * 8) + 3.8 && (position.y - 7) <= (p_mid.y * 8) + 4.2 && (position.x + 7) == (p_mid.x * 8) + 4)
+		if ((position.y - 7) >= (p_mid.y * 8) + 2 && (position.y - 7) <= (p_mid.y * 8) + 6 && (position.x + 7) == (p_mid.x * 8) + 4)
 		{
 			can_go_right = true;
 		}
@@ -116,7 +116,7 @@ update_status ModuleGhostRed::Update()
 	// left
 	if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 	{
-		if ((position.x + 7) >= (p_mid.x * 8) + 3.8 && (position.y - 7) <= (p_mid.y * 8) + 4.2 && (position.x + 7) == (p_mid.x * 8) + 4)
+		if ((position.y - 7) >= (p_mid.y * 8) + 2 && (position.y - 7) <= (p_mid.y * 8) + 6 && (position.x + 7) == (p_mid.x * 8) + 4)
 		{
 			can_go_left = true;
 		}
@@ -127,7 +127,7 @@ update_status ModuleGhostRed::Update()
 	// up
 	if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 	{
-		if ((position.x + 7) >= (p_mid.x * 8) + 3.8 && (position.y - 7) <= (p_mid.y * 8) + 4.2 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if ((position.x + 7) >= (p_mid.x * 8) + 2 && (position.x + 7) <= (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4)
 		{
 			can_go_up = true;
 		}
@@ -138,7 +138,7 @@ update_status ModuleGhostRed::Update()
 	// down
 	if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 	{
-		if ((position.x + 7) >= (p_mid.x * 8) + 3.8 && (position.y - 7) <= (p_mid.y * 8) + 4.2 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if ((position.x + 7) >= (p_mid.x * 8) + 2 && (position.x + 7) <= (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4)
 		{
 			can_go_down = true;
 		}
@@ -369,7 +369,7 @@ update_status ModuleGhostRed::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	float speed = 1.0f;
+	float speed = 1.2f;
 	if (now >= total_time)
 	{
 		if (1)
