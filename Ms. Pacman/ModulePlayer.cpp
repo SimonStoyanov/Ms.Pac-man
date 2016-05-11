@@ -249,7 +249,8 @@ update_status ModulePlayer::Update()
 		App->player->is_dead = false;
 		go_left = true;
 		speed = 1;
-		//App->ghost_red->Enable();
+
+		App->ghost_red->Enable();
 
 	
 		if (lifes > 0)
@@ -290,6 +291,7 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
+
 	if ((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) || 
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
@@ -301,8 +303,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		is_dead = true;
 
 		// Red ghost
-		App->ghost_red->speed = 0;
 		App->ghost_red->enemy_collision->to_delete = true;
+		App->ghost_red->speed = 0;
 		App->ghost_red->passed_time = App->ghost_red->now;
 
 		// Player

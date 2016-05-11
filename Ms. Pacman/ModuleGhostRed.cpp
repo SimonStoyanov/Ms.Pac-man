@@ -61,8 +61,14 @@ ModuleGhostRed::ModuleGhostRed()
 
 ModuleGhostRed::~ModuleGhostRed()
 {
-	enemy_collision = nullptr;
+}
 
+bool ModuleGhostRed::CleanUp()
+{
+	enemy_collision = nullptr;
+	App->textures->Unload(graphics);
+
+	return true;
 }
 
 // Load assets
