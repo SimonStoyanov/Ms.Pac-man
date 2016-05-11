@@ -39,8 +39,8 @@ bool ModuleAudio::CleanUp()
 {
 	LOG("Unloading space scene");
 
-	Mix_CloseAudio();
-	Mix_FreeMusic(start_of_a_game);
+	/*Mix_CloseAudio();
+	Mix_FreeMusic(start_of_a_game);*/
 	//Mix_FreeChunk(wakawaka);
 
 	return true;

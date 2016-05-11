@@ -19,12 +19,15 @@ public:
 
 public:
 
+	Animation* current_animation;
+
 	SDL_Texture* graphics = nullptr;
 	Animation* prev_anim;
 	Animation right;
 	Animation left;
 	Animation up;
 	Animation down;
+	Animation dead;
 
 	fPoint position;
 	iPoint p_up;
@@ -32,6 +35,8 @@ public:
 	iPoint p_left;
 	iPoint p_right;
 	iPoint p_mid;
+
+	float speed = 1.2f;
 
 	bool go_up = false;
 	bool go_down = false;
@@ -41,6 +46,14 @@ public:
 	SDL_Rect test;
 	
 	int lifes = 5;
+
+	Uint32 now;
+
+	//Die 
+	bool is_dead = false;
+	float time_dead = 3; //varaible to change dead time
+	Uint32 total_time_dead = 0;
+	float passed_time;
 
 	//Start
 	Uint32 start_time = 0;
