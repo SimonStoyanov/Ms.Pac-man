@@ -226,10 +226,10 @@ update_status ModulePlayer::Update()
 	}
 	else{}
 
-	//if (lifes == 0 && App->map1->IsEnabled())
-	//{
-	//	App->fade->FadeToBlack(App->map1, App->menu, 0.0f);
-	//}
+	if (lifes == 0 && App->map1->IsEnabled())
+	{
+		App->fade->FadeToBlack(App->map1, App->menu, 0.0f);
+	}
 
 
 	// Draw everything --------------------------------------

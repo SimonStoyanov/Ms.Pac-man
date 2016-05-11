@@ -126,8 +126,8 @@ update_status ModuleMenu::Update()
 	App->render->Blit(graphics, 60, 88, &Rectangle.GetCurrentFrame(), 1.0f);
 
 	// Ghosts animations --------------------------------------
-	float speed_left = 0.1f;
-	float speed_up = 0.1f;
+	float speed_left = 1.0f;
+	float speed_up = 0.8f;
 
 	Uint32 now = SDL_GetTicks() - start_time; //time since start
 	
