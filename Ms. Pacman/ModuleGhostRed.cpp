@@ -74,6 +74,7 @@ bool ModuleGhostRed::Start()
 
 	srand(time(NULL) * 754);
 
+	//Starting random direction
 	tmp = rand() % 2 + 1;
 
 	if (tmp == 1)
@@ -109,9 +110,9 @@ update_status ModuleGhostRed::Update()
 		{
 			can_go_right = true;
 		}
-		else{ can_go_right = false; }
+		else can_go_right = false; 
 	}
-	else{ can_go_right = false; }
+	else can_go_right = false; 
 
 	// left
 	if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
@@ -122,7 +123,7 @@ update_status ModuleGhostRed::Update()
 		}
 		else{ can_go_left = false; }
 	}
-	else{ can_go_left = false; }
+	else can_go_left = false; 
 
 	// up
 	if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
@@ -131,9 +132,9 @@ update_status ModuleGhostRed::Update()
 		{
 			can_go_up = true;
 		}
-		else{ can_go_up = false; }
+		else can_go_up = false; 
 	}
-	else{ can_go_up = false; }
+	else can_go_up = false; 
 
 	// down
 	if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
@@ -142,11 +143,11 @@ update_status ModuleGhostRed::Update()
 		{
 			can_go_down = true;
 		}
-		else{ can_go_down = false; }
+		else can_go_down = false; 
 	}
-	else{ can_go_down = false; }
+	else can_go_down = false; 
 
-	// Is the player on an intersection ------------------
+	// Is the player on an intersection change direction ------------------
 	if (can_go_left == true || can_go_right == true)
 	{
 		if (can_go_up == false && can_go_down == false)
@@ -154,9 +155,8 @@ update_status ModuleGhostRed::Update()
 			change_direction = false;
 		}
 		else
-		{
 			change_direction = true;
-		}
+		
 	}
 	if (can_go_up == true || can_go_down == true)
 	{
@@ -165,13 +165,11 @@ update_status ModuleGhostRed::Update()
 			change_direction = false;
 		}
 		else
-		{
 			change_direction = true;
-		}
 	}
-	else{ change_direction = false; }
+	else change_direction = false; 
 
-	// Want to go -----------------------------
+	// Want to go / Where is the target -----------------------------
 	if (App->player->position.x + 7 > position.x) //is right
 	{
 		if (position.y > App->player->position.y - 7) // is up
@@ -180,10 +178,7 @@ update_status ModuleGhostRed::Update()
 			{
 				want_go_up = true; want_go_down = false; want_go_left = false; want_go_right = false;
 			}
-			else
-			{
-				want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false;
-			}
+			else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false;}
 		}
 		else // is down 
 		{
@@ -191,10 +186,7 @@ update_status ModuleGhostRed::Update()
 			{
 				want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
 			}
-			else
-			{
-				want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false;
-			}
+			else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false;}
 		}
 	}
 	else // is left
@@ -232,10 +224,7 @@ update_status ModuleGhostRed::Update()
 				{
 					ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
 				}
-				else
-				{
-					ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
-				}
+				else{ ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;}
 			}
 			else if (can_go_up && !ghost_down)
 			{
@@ -245,78 +234,62 @@ update_status ModuleGhostRed::Update()
 			{
 				ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
 			}
-			else
+			else{ ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;}
+		}
+
+		//-------
+		else if (want_go_left) // try go left
+		{
+			if (can_go_left && !ghost_right)
 			{
 				ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
 			}
-		}
-
-
-	else if (want_go_left) // try go left
-	{
-		if (can_go_left && !ghost_right)
-		{
-			ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
-		}
-		else if (can_go_up && can_go_down)
-		{
-			if (position.y > App->player->position.y - 7)
+			else if (can_go_up && can_go_down)
+			{
+				if (position.y > App->player->position.y - 7)
+				{
+					ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
+				}
+				else{ ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;}
+			}
+			else if (can_go_up && !ghost_down)
 			{
 				ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
 			}
-			else
+			else if (can_go_down && !ghost_up)
 			{
 				ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
 			}
+			else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;}
 		}
-		else if (can_go_up && !ghost_down)
-		{
-			ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
-		}
-		else if (can_go_down && !ghost_up)
-		{
-			ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
-		}
-		else
-		{
-			ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
-		}
-	}
 
-	else if (want_go_up) // try go up
-	{ 
-		if (can_go_up && !ghost_down )
-		{
-			ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
-		}
-		else if (can_go_left && can_go_right)
-		{
-			if (position.x > App->player->position.x + 7)
+		//-------
+		else if (want_go_up) // try go up
+		{ 
+			if (can_go_up && !ghost_down )
 			{
-				ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+				ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
 			}
-			else
+			else if (can_go_left && can_go_right)
 			{
-				ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
+				if (position.x > App->player->position.x + 7)
+				{
+					ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+				}
+				else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;}
 			}
-		}
-		else if (can_go_left && !ghost_right)
-		{
-
+			else if (can_go_left && !ghost_right)
+			{
 			ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
-		}
-		else if (can_go_right && !ghost_left)
-		{
-
+			}
+			else if (can_go_right && !ghost_left)
+			{
 			ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
+			}
+			else{ghost_down = true; ghost_up = false; ghost_right = false; ghost_left = false;}
 		}
-		else
-		{
-			ghost_down = true; ghost_up = false; ghost_right = false; ghost_left = false;
-		}
-	}
 
-
+		//-------
 		else if (want_go_down) // try go down
 		{
 			if (can_go_down && !ghost_up)
@@ -329,10 +302,7 @@ update_status ModuleGhostRed::Update()
 				{
 					ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
 				}
-				else
-				{
-					ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
-				}
+				else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;}
 			}
 			else if (can_go_left && !ghost_right)
 			{
@@ -342,15 +312,9 @@ update_status ModuleGhostRed::Update()
 			{
 				ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
 			}
-			else
-			{
-				ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
-			}
+			else{ ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;}
 		}
-
 	}
-
-
 
 	// Player tile collision detectors ------------------------------
 	p_up.x = (position.x + 7) / 8;
@@ -372,6 +336,7 @@ update_status ModuleGhostRed::Update()
 	float speed = 1.5f;
 	if (now >= total_time)
 	{
+		// What direction are we changing
 		if (1)
 		{
 			if (ghost_right) // right
@@ -379,11 +344,8 @@ update_status ModuleGhostRed::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 				{
-					// Is the player near the center-pixel of the tile?
-					
 						position.y = (p_mid.y * 8) + 4 + 7; // Re-position to the center of the tile
 						go_right = true; go_left = false; go_up = false; go_down = false;
-					
 				}
 			}
 			if (ghost_left) // left
@@ -391,11 +353,8 @@ update_status ModuleGhostRed::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 				{
-					// Is the player near the center-pixel of the tile?
-					
 						position.y = (int)(p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
 						go_left = true; go_right = false; go_up = false; go_down = false;
-					
 				}
 			}
 			if (ghost_up) // up
@@ -403,11 +362,8 @@ update_status ModuleGhostRed::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
-					// Is the player near the center-pixel of the tile?
-	
 						position.x = (int)(p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
-					
 				}
 			}
 			if (ghost_down) // down
@@ -415,14 +371,12 @@ update_status ModuleGhostRed::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 				{
-					// Is the player near the center-pixel of the tile?
-				
 						position.x = (int)(p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_down = true; go_right = false; go_left = false; go_up = false;
-					
 				}
 			}
 
+			// Move
 			if (go_right)
 			{
 				// What is the next tile
@@ -430,15 +384,9 @@ update_status ModuleGhostRed::Update()
 				{
 					right.speed = 0.25f;
 
-					if (!is_vulnerable)
-					{
-						current_animation = &right;
-					}
+					if (!is_vulnerable){current_animation = &right;}
 
-					if (position.x >= 220)
-					{
-						position.x = -10;
-					}
+					if (position.x >= 220){position.x = -10;}
 
 					position.x += speed;
 
@@ -452,17 +400,12 @@ update_status ModuleGhostRed::Update()
 				{
 					left.speed = 0.25f;
 
-					if (!is_vulnerable)
-					{
-						current_animation = &left;
-					}
+					if (!is_vulnerable){current_animation = &left;}
 
-					if (position.x <= -10)
-					{
-						position.x = 220;
-					}
+					if (position.x <= -10){position.x = 220;}
 
 					position.x -= speed;
+
 					go_right = false; go_up = false; go_down = false;
 				}
 			}
@@ -474,11 +417,10 @@ update_status ModuleGhostRed::Update()
 					up.speed = 0.25f;
 
 					if (!is_vulnerable)
-					{
-						current_animation = &up;
-					}
+					{current_animation = &up;}
 
 					position.y -= speed;
+
 					go_right = false; go_left = false; go_down = false;
 				}
 			}
@@ -490,15 +432,15 @@ update_status ModuleGhostRed::Update()
 					down.speed = 0.25f;
 
 					if (!is_vulnerable)
-					{
-						current_animation = &down;
-					}
+					{current_animation = &down;}
 
 					position.y += speed;
+
 					go_right = false; go_left = false; go_up = false;
 				}
 			}
 		}
+		else{}
 	}
 	else{}
 
@@ -520,8 +462,6 @@ update_status ModuleGhostRed::Update()
 	{
 		current_animation = &vulnerable;
 	}
-
-
 
 	// Draw everything --------------------------------------
 

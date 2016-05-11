@@ -1,6 +1,8 @@
 #ifndef __ModuleGhostRed_H__
 #define __ModuleGhostRed_H__
 
+#include "Globals.h"
+#include "Application.h"
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
@@ -78,6 +80,9 @@ public:
 	bool is_vulnerable = false;
 
 	Collider* enemy_collision = nullptr;
+	void WhatIsNextTile();
+
+
 
 };
 
