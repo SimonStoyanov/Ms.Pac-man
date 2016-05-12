@@ -39,8 +39,6 @@ public:
 	iPoint p_right;
 	iPoint p_mid;
 
-	float speed = 1.0f;
-
 	// Ghost core Movement
 	bool go_up = false;
 	bool go_down = false;

@@ -45,20 +45,13 @@ ModulePlayer::ModulePlayer()
 	down.PushBack({ 1, 17, 14, 15 });
 	down.speed = 0.3f;
 
-	// dead animation
-	dead.PushBack({ 17, 1, 13, 14 });
-	dead.PushBack({ 17, 17, 14, 15 });
-	dead.PushBack({ 33, 34, 15, 15 });
-	dead.PushBack({ 17, 51, 14, 13 });
-	dead.speed = 0.1f;
-
 	total_time = (Uint32)(total_t * 0.5f * 1000.0f);
-	total_time_dead = (Uint32)(time_dead * 0.5f * 1000.0f);
 }
 
 ModulePlayer::~ModulePlayer()
 {
 }
+
 
 // Load assets
 bool ModulePlayer::Start()
@@ -78,9 +71,9 @@ bool ModulePlayer::Start()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	current_animation = prev_anim;
+	Animation* current_animation = prev_anim;
 
-	now = SDL_GetTicks() - start_time;
+	Uint32 now = SDL_GetTicks() - start_time;
 
 	player_collision->SetPos(position.x, position.y+9);
 
@@ -101,7 +94,8 @@ update_status ModulePlayer::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	if (!is_dead)
+	float speed = 1.2f;
+	if (1)
 	{
 		if (total_time <= now)
 		{
@@ -230,42 +224,11 @@ update_status ModulePlayer::Update()
 		}
 		else{ left.speed = 0.0f; }
 	}
-	else{ down.speed = 0; up.speed = false; right.speed = false; left.speed = false; }
+	else{}
 
-
-
-
-	// Go to menu when no lifes ----------
 	if (lifes == 0 && App->map1->IsEnabled())
 	{
-		//App->fade->FadeToBlack(App->map1, App->menu, 0.0f);
-	}
-
-	// Player dead -----------------------
-	if (App->player->is_dead && (now - passed_time) > (6 * 0.5f * 1000.0f))
-	{
-		App->player->position.x = 105; //105
-		App->player->position.y = 195; //195
-		App->player->is_dead = false;
-		go_left = true;
-		speed = 1;
-		//App->ghost_red->Enable();
-
-	
-		if (lifes > 0)
-			lifes--;
-	}
-	else if (App->player->is_dead && (now - passed_time) > (5 * 0.5f * 1000.0f))
-	{
-		dead.speed = 0;
-	}
-	else if (App->player->is_dead && (now - passed_time) > (4 * 0.5f * 1000.0f))
-	{
-		current_animation = &dead;
-	}
-	else if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f))
-	{
-		App->ghost_red->Disable();
+		App->fade->FadeToBlack(App->map1, App->menu, 0.0f);
 	}
 
 
@@ -295,19 +258,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable))
 	{
+		position.x = 105; //105
+		position.y = 195; //195
 		go_left = true;
 
-		// Player dies --------------------------
-		is_dead = true;
-
-		// Red ghost
-		App->ghost_red->speed = 0;
-		App->ghost_red->enemy_collision->to_delete = true;
-		App->ghost_red->passed_time = App->ghost_red->now;
-
-		// Player
-		App->player->speed = 0;
-		App->player->passed_time = App->player->now;
+		if (lifes > 0)
+		lifes--;
+		
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{

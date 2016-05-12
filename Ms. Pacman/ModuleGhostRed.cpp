@@ -62,13 +62,12 @@ ModuleGhostRed::ModuleGhostRed()
 ModuleGhostRed::~ModuleGhostRed()
 {
 	enemy_collision = nullptr;
-
 }
 
 // Load assets
 bool ModuleGhostRed::Start()
 {
-	LOG("Loading red ghost textures");
+	LOG("Loading blue ghost textures");
 	bool ret = true;
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
 	prev_anim = &up;
@@ -334,6 +333,7 @@ update_status ModuleGhostRed::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
+	float speed = 1.5f;
 	if (now >= total_time)
 	{
 		// What direction are we changing
@@ -463,19 +463,6 @@ update_status ModuleGhostRed::Update()
 		current_animation = &vulnerable;
 	}
 
-	// Player is hit -----------------------
-	//if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f)) // 3 seconds until deaspear
-	//{
-	//	
-	//}
-
-	// Ghost is hit ------------------------
-	if (enemy_collision->to_delete == true)
-	{
-		position.x = 105;
-		position.y = 99;
-	}
-
 	// Draw everything --------------------------------------
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
@@ -488,6 +475,11 @@ update_status ModuleGhostRed::Update()
 	//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+
+	if (enemy_collision->to_delete == true){
+		position.x = 105;
+		position.y = 99;
+	}
 
 	return UPDATE_CONTINUE;
 }
