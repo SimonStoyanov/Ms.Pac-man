@@ -18,6 +18,7 @@ public:
 	update_status Update();
 
 public:
+	float speed = 1.2f;
 
 	SDL_Texture* graphics = nullptr;
 	Animation* prev_anim;
@@ -25,6 +26,7 @@ public:
 	Animation left;
 	Animation up;
 	Animation down;
+	Animation dead;
 
 	fPoint position;
 	iPoint p_up;
@@ -42,10 +44,14 @@ public:
 	
 	int lifes = 5;
 
+	Uint32 now;
 	//Start
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
 	float total_t = 9.5f;
+	
+	bool is_dead = false;
+	float passed_time;
 
 	Collider* player_collision;
 	void OnCollision(Collider* c1, Collider* c2);

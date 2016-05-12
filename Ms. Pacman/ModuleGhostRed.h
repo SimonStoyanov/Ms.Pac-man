@@ -18,8 +18,11 @@ public:
 
 	bool Start();
 	update_status Update();
+	bool CleanUp();
 
 public:
+
+	float speed = 1.5f;
 
 	SDL_Texture* graphics = nullptr;
 	Animation* prev_anim;
@@ -66,6 +69,7 @@ public:
 	// Logic variables 
 	bool cont = false;
 	int tmp;
+	bool can_see = true;
 
 	// Ghost start moving time variables
 	Uint32 now;
@@ -80,9 +84,8 @@ public:
 	bool is_vulnerable = false;
 
 	Collider* enemy_collision = nullptr;
-	void WhatIsNextTile();
 
-
+	bool player_dead = false;
 
 };
 

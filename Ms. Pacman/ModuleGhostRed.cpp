@@ -64,6 +64,12 @@ ModuleGhostRed::~ModuleGhostRed()
 	enemy_collision = nullptr;
 }
 
+bool ModuleGhostRed::CleanUp()
+{
+	App->textures->Unload(graphics);
+	return true;
+}
+
 // Load assets
 bool ModuleGhostRed::Start()
 {
@@ -333,11 +339,10 @@ update_status ModuleGhostRed::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	float speed = 1.5f;
 	if (now >= total_time)
 	{
 		// What direction are we changing
-		if (1)
+		if (speed != 0)
 		{
 			if (ghost_right) // right
 			{
@@ -440,7 +445,7 @@ update_status ModuleGhostRed::Update()
 				}
 			}
 		}
-		else{}
+		else{ down.speed = 0; up.speed = 0; left.speed = 0; right.speed = 0; }
 	}
 	else{}
 
@@ -467,7 +472,7 @@ update_status ModuleGhostRed::Update()
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
-	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r);
+	if (can_see){ App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r);}
 
 	//App->render->Blit(graphics, (position.x +7), (position.y - 7) + DISTANCEM1, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //

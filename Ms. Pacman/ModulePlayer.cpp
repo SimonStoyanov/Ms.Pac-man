@@ -45,6 +45,13 @@ ModulePlayer::ModulePlayer()
 	down.PushBack({ 1, 17, 14, 15 });
 	down.speed = 0.3f;
 
+	// dead animation
+	dead.PushBack({ 17, 1, 13, 14 });
+	dead.PushBack({ 17, 17, 14, 15 });
+	dead.PushBack({ 33, 34, 15, 15 });
+	dead.PushBack({ 17, 51, 14, 13 });
+	dead.speed = 0.3f;
+
 	total_time = (Uint32)(total_t * 0.5f * 1000.0f);
 }
 
@@ -73,7 +80,7 @@ update_status ModulePlayer::Update()
 {
 	Animation* current_animation = prev_anim;
 
-	Uint32 now = SDL_GetTicks() - start_time;
+	now = SDL_GetTicks() - start_time;
 
 	player_collision->SetPos(position.x, position.y+9);
 
@@ -94,8 +101,7 @@ update_status ModulePlayer::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	float speed = 1.2f;
-	if (1)
+	if (!is_dead)
 	{
 		if (total_time <= now)
 		{
@@ -224,11 +230,12 @@ update_status ModulePlayer::Update()
 		}
 		else{ left.speed = 0.0f; }
 	}
-	else{}
+	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
 
+	// Change scene when dies
 	if (lifes == 0 && App->map1->IsEnabled())
 	{
-		App->fade->FadeToBlack(App->map1, App->menu, 0.0f);
+		//App->fade->FadeToBlack(App->map1, App->menu, 0.0f);
 	}
 
 
@@ -236,7 +243,7 @@ update_status ModulePlayer::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
 
-	App->render->Blit(graphics, (position.x +7), (position.y - 7 + DISTANCEM1), &test, 1.0f); //
+	//App->render->Blit(graphics, (position.x +7), (position.y - 7 + DISTANCEM1), &test, 1.0f);
 	//App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_up.x * 8) + 4, (p_up.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
@@ -246,7 +253,49 @@ update_status ModulePlayer::Update()
 	//App->render->Blit(graphics, position.x, position.y + DISTANCEM1, &test, 1.0f); //
 	//App->render->Blit(graphics, 3, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
-	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r);
+	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
+
+
+	// Player die -----------------------------
+	if (App->player->is_dead && (now - passed_time) > (7 * 0.5f * 1000.0f))
+	{
+		// Start everithing again 
+		//Red
+		App->ghost_red->player_dead = false; //
+		App->ghost_red->position.x = 105;
+		App->ghost_red->position.y = 99;
+		App->ghost_red->can_see = true;
+		App->ghost_red->speed = 1.0f;
+
+		//Player
+		App->player->position.x = 105; //105
+		App->player->position.y = 195; //195
+		App->player->is_dead = false; //
+		go_left = true; go_right = false;
+		speed = 1.0f;
+
+	}
+	else if (App->player->is_dead && (now - passed_time) > (6 * 0.5f * 1000.0f))
+	{
+		// Ghost red reset
+		App->ghost_red->enemy_collision->to_delete = true;
+		App->ghost_red->Disable();
+		App->ghost_red->Enable();
+
+		// Player reset
+
+	}
+	else if (App->player->is_dead && (now - passed_time) > (3.5 * 0.5f * 1000.0f))
+	{
+		current_animation = &left;
+	}
+	else if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f))
+	{
+		if (App->ghost_red->can_see)
+		{
+			App->ghost_red->can_see = false;
+		}
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -258,12 +307,22 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable))
 	{
-		position.x = 105; //105
-		position.y = 195; //195
-		go_left = true;
+		// Player die -------------------
 
-		if (lifes > 0)
-		lifes--;
+		if (!App->ghost_red->player_dead)
+		{
+			passed_time = now;
+			App->ghost_red->player_dead = true;
+			App->player->is_dead = true;
+
+			if (lifes > 0)
+				lifes--;
+		}
+
+		App->ghost_red->speed = 0;
+		App->player->speed = 0;
+
+		// -------------------------------
 		
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
