@@ -48,6 +48,15 @@ public:
 	
 	SDL_Rect background;
 
+	SDL_Rect Blinky;
+	SDL_Rect Pinky;
+	SDL_Rect Sue;
+	SDL_Rect Inky;
+	SDL_Rect Starring;
+	SDL_Rect With;
+	SDL_Rect MsPacMan;
+	SDL_Rect voidspace;
+
 	//Time control
 	Uint32 start_time = 0;
 	Uint32 total_time_red = 0;

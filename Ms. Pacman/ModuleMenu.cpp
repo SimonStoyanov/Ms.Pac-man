@@ -21,6 +21,14 @@ ModuleMenu::ModuleMenu()
 {
 	// Background
 	background = { 0, 0, 224, 288 };
+	With = { 111, 307, 32, 8 };
+	Blinky = { 64, 307, 46, 8 };
+	Sue = { 64, 322, 23, 9 };
+	Pinky = { 64, 337, 38, 8 };
+	Inky = { 64, 351, 30, 8 };
+	Starring = { 111 , 316, 62, 8 };
+	MsPacMan = { 64, 367, 77, 8 };
+	voidspace = { 86, 457, 77, 9 };
 
 	// Rectangle Animation
 	Rectangle.PushBack({ 225, 1, 134, 63 });
@@ -134,6 +142,8 @@ update_status ModuleMenu::Update()
 	// Red ghost
 	if (now >= total_time_red)
 	{
+		App->render->Blit(graphics, 82, 102, &With, 1.0f);
+		App->render->Blit(graphics, 106, 131, &Blinky, 1.0f);
 		if (red.x>=40) // left
 		{
 			red.x -= speed_left;
@@ -155,6 +165,9 @@ update_status ModuleMenu::Update()
 	{
 		if (pink.x >= 40) // left
 		{
+			App->render->Blit(graphics, 82, 102, &voidspace, 1.0f);
+			App->render->Blit(graphics, 106, 131, &voidspace, 1.0f);
+			App->render->Blit(graphics, 106, 131, &Pinky, 1.0f);
 			pink.x -= speed_left;
 			App->render->Blit(graphics, pink.x, pink.y, &Pink_left.GetCurrentFrame(), 1.0f);
 		}
@@ -175,6 +188,8 @@ update_status ModuleMenu::Update()
 	{
 		if (blue.x >= 40) // left
 		{
+			App->render->Blit(graphics, 106, 131, &voidspace, 1.0f);
+			App->render->Blit(graphics, 114, 131, &Inky, 1.0f);
 			blue.x -= speed_left;
 			App->render->Blit(graphics, blue.x, blue.y, &Blue_left.GetCurrentFrame(), 1.0f);
 		}
@@ -194,6 +209,8 @@ update_status ModuleMenu::Update()
 	{
 		if (orange.x >= 40) // left
 		{
+			App->render->Blit(graphics, 114, 131, &voidspace, 1.0f);
+			App->render->Blit(graphics, 118, 131, &Sue, 1.0f);
 			orange.x -= speed_left;
 			App->render->Blit(graphics, orange.x, orange.y, &Orange_left.GetCurrentFrame(), 1.0f);
 		}
@@ -212,6 +229,9 @@ update_status ModuleMenu::Update()
 	{
 		if (pacman.x >= 116) // left
 		{
+			App->render->Blit(graphics, 82, 131, &voidspace, 1.0f);
+			App->render->Blit(graphics, 82, 102, &Starring, 1.0f);
+			App->render->Blit(graphics, 82, 131, &MsPacMan, 1.0f);
 			pacman.x -= speed_left;
 			App->render->Blit(graphics, pacman.x, pacman.y, &Pacman_left.GetCurrentFrame(), 1.0f);
 		}
