@@ -258,114 +258,114 @@ update_status ModuleBackgroundMap1::Update()
 		App->ghost_red->is_vulnerable = true;
 
 		// Points
-		eaten_pills++;
+		App->UI->score += 5;
 
-		//
-		if (App->UI->points[5] >= 5 && App->UI->points[4] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 1;
-		}
-		else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 0;
-			App->UI->points[3] = 1;
-		}
-		else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[2] = 1;
-		}
-		else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5 && App->UI->points[1] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[2] = 0;
-			App->UI->points[1] = 1;
-		}
-		else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5 && App->UI->points[1] >= 5 && App->UI->points[0] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[2] = 0;
-			App->UI->points[1] = 0;
-			App->UI->points[0] = 1;
-		}
-		else if (App->UI->points[5] <= 4){
-			App->UI->points[5] += 5;
-		}
-		else{
-			if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5 && App->UI->points[1] >= 5){
-				App->UI->points[0] += 1;
-				App->UI->points[1] = 0;
-				App->UI->points[2] = 0;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-			else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5){
-				App->UI->points[1] += 1;
-				App->UI->points[2] = 0;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-			else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5){
-				App->UI->points[2] += 1;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-			else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5){
-				App->UI->points[3] += 1;
-				App->UI->points[4] = 0;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-			else if (App->UI->points[5] >= 5){
-				App->UI->points[4] += 1;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-		}
+		////
+		//if (App->UI->points[5] >= 5 && App->UI->points[4] == 11){
+		//	if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//	if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//	if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//	if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//	if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	App->UI->points[4] = 1;
+		//}
+		//else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] == 11){
+		//	if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//	if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//	if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//	if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//	if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	App->UI->points[4] = 0;
+		//	App->UI->points[3] = 1;
+		//}
+		//else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] == 11){
+		//	if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//	if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//	if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//	if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//	if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	App->UI->points[4] = 0;
+		//	App->UI->points[3] = 0;
+		//	App->UI->points[2] = 1;
+		//}
+		//else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5 && App->UI->points[1] == 11){
+		//	if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//	if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//	if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//	if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//	if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	App->UI->points[4] = 0;
+		//	App->UI->points[3] = 0;
+		//	App->UI->points[2] = 0;
+		//	App->UI->points[1] = 1;
+		//}
+		//else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5 && App->UI->points[1] >= 5 && App->UI->points[0] == 11){
+		//	if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//	if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//	if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//	if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//	if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	App->UI->points[4] = 0;
+		//	App->UI->points[3] = 0;
+		//	App->UI->points[2] = 0;
+		//	App->UI->points[1] = 0;
+		//	App->UI->points[0] = 1;
+		//}
+		//else if (App->UI->points[5] <= 4){
+		//	App->UI->points[5] += 5;
+		//}
+		//else{
+		//	if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5 && App->UI->points[1] >= 5){
+		//		App->UI->points[0] += 1;
+		//		App->UI->points[1] = 0;
+		//		App->UI->points[2] = 0;
+		//		App->UI->points[3] = 0;
+		//		App->UI->points[4] = 0;
+		//		if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//		if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//		if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//		if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//		if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	}
+		//	else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5){
+		//		App->UI->points[1] += 1;
+		//		App->UI->points[2] = 0;
+		//		App->UI->points[3] = 0;
+		//		App->UI->points[4] = 0;
+		//		if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//		if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//		if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//		if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//		if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	}
+		//	else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5){
+		//		App->UI->points[2] += 1;
+		//		App->UI->points[3] = 0;
+		//		App->UI->points[4] = 0;
+		//		if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//		if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//		if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//		if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//		if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	}
+		//	else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5){
+		//		App->UI->points[3] += 1;
+		//		App->UI->points[4] = 0;
+		//		if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//		if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//		if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//		if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//		if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	}
+		//	else if (App->UI->points[5] >= 5){
+		//		App->UI->points[4] += 1;
+		//		if (App->UI->points[5] == 5) App->UI->points[5] = 0;
+		//		if (App->UI->points[5] == 6) App->UI->points[5] = 1;
+		//		if (App->UI->points[5] == 7) App->UI->points[5] = 2;
+		//		if (App->UI->points[5] == 8) App->UI->points[5] = 3;
+		//		if (App->UI->points[5] == 9) App->UI->points[5] = 4;
+		//	}
+		//}
 
 		break;
 	case 28:
@@ -373,74 +373,74 @@ update_status ModuleBackgroundMap1::Update()
 		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
 
 		// Points
-		eaten_pills++;
+		App->UI->score++;
 
-		// Provisional Code Simon Pls my eyes
-		if (App->UI->points[5] == 9 && App->UI->points[4] == 11){
-			App->UI->points[4] = 1;
-			App->UI->points[5] = 0;
-		}
-		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 11){
-			App->UI->points[3] = 1;
-			App->UI->points[4] = 0;
-			App->UI->points[5] = 0;
-		}
-		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 11){
-			App->UI->points[2] = 1;
-			App->UI->points[3] = 0;
-			App->UI->points[4] = 0;
-			App->UI->points[5] = 0;
-		}
-		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 11){
-			App->UI->points[1] = 1;
-			App->UI->points[2] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[4] = 0;
-			App->UI->points[5] = 0;
-		}
-		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 9 && App->UI->points[0] == 11){
-			App->UI->points[0] = 1;
-			App->UI->points[1] = 0;
-			App->UI->points[2] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[4] = 0;
-			App->UI->points[5] = 0;
-		}
-		else if (App->UI->points[5] != 9){
-			App->UI->points[5] += 1;
-		}
-		else{
-			if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 9){
-				App->UI->points[0] += 1;
-				App->UI->points[1] = 0;
-				App->UI->points[2] = 0;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				App->UI->points[5] = 0;
-			}
-			else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9){
-				App->UI->points[1] += 1;
-				App->UI->points[2] = 0;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				App->UI->points[5] = 0;
-			}
-			else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9){
-				App->UI->points[2] += 1;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				App->UI->points[5] = 0;
-			}
-			else if (App->UI->points[5] == 9 && App->UI->points[4] == 9){
-				App->UI->points[3] += 1;
-				App->UI->points[4] = 0;
-				App->UI->points[5] = 0;
-			}
-			else if (App->UI->points[5] == 9){
-				App->UI->points[4] += 1;
-				App->UI->points[5] = 0;
-			}
-		}
+		//// Provisional Code Simon Pls my eyes
+		//if (App->UI->points[5] == 9 && App->UI->points[4] == 11){
+		//	App->UI->points[4] = 1;
+		//	App->UI->points[5] = 0;
+		//}
+		//else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 11){
+		//	App->UI->points[3] = 1;
+		//	App->UI->points[4] = 0;
+		//	App->UI->points[5] = 0;
+		//}
+		//else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 11){
+		//	App->UI->points[2] = 1;
+		//	App->UI->points[3] = 0;
+		//	App->UI->points[4] = 0;
+		//	App->UI->points[5] = 0;
+		//}
+		//else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 11){
+		//	App->UI->points[1] = 1;
+		//	App->UI->points[2] = 0;
+		//	App->UI->points[3] = 0;
+		//	App->UI->points[4] = 0;
+		//	App->UI->points[5] = 0;
+		//}
+		//else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 9 && App->UI->points[0] == 11){
+		//	App->UI->points[0] = 1;
+		//	App->UI->points[1] = 0;
+		//	App->UI->points[2] = 0;
+		//	App->UI->points[3] = 0;
+		//	App->UI->points[4] = 0;
+		//	App->UI->points[5] = 0;
+		//}
+		//else if (App->UI->points[5] != 9){
+		//	App->UI->points[5] += 1;
+		//}
+		//else{
+		//	if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 9){
+		//		App->UI->points[0] += 1;
+		//		App->UI->points[1] = 0;
+		//		App->UI->points[2] = 0;
+		//		App->UI->points[3] = 0;
+		//		App->UI->points[4] = 0;
+		//		App->UI->points[5] = 0;
+		//	}
+		//	else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9){
+		//		App->UI->points[1] += 1;
+		//		App->UI->points[2] = 0;
+		//		App->UI->points[3] = 0;
+		//		App->UI->points[4] = 0;
+		//		App->UI->points[5] = 0;
+		//	}
+		//	else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9){
+		//		App->UI->points[2] += 1;
+		//		App->UI->points[3] = 0;
+		//		App->UI->points[4] = 0;
+		//		App->UI->points[5] = 0;
+		//	}
+		//	else if (App->UI->points[5] == 9 && App->UI->points[4] == 9){
+		//		App->UI->points[3] += 1;
+		//		App->UI->points[4] = 0;
+		//		App->UI->points[5] = 0;
+		//	}
+		//	else if (App->UI->points[5] == 9){
+		//		App->UI->points[4] += 1;
+		//		App->UI->points[5] = 0;
+		//	}
+		//}
 		break;
 	default:
 		break;

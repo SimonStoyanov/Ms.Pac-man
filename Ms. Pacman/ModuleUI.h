@@ -74,6 +74,16 @@ public:
 	int cd1 = 0;
 	int cd2 = 0;
 
+	// Score
+	int score = 0;
+	int sc1 = 0;
+	int sc2 = 0;
+	int sc3 = 0;
+	int sc4 = 0;
+	int sc5 = 0;
+	int sc6 = 0;
+	int sc7 = 0;
+
 };
 
 #endif 

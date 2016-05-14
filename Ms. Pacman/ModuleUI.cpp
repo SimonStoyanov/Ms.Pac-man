@@ -322,14 +322,14 @@ update_status ModuleUI::Update()
  	int tmp_credit = credit;
 	if (tmp_credit <= 99)
 	{
-		int digits = 0;
+		int cddigits = 0;
 		int tmp;
 		while (tmp_credit > 0)
 		{
 			tmp_credit /= 10;
-			digits++;
+			cddigits++;
 		}
-		if (digits == 1)
+		if (cddigits == 1)
 		{
 			mapMENU[4][11] = credit;
 		}
@@ -339,6 +339,64 @@ update_status ModuleUI::Update()
 			cd2 = (credit / 10) % 10;
 			mapMENU[4][10] = cd2;
 			mapMENU[4][11] = cd1;
+		}
+	}
+
+	// Score
+	int tmp_score = score;
+	if (tmp_score <= 9999999)
+	{
+		int scdigits = 0;
+		int tmp;
+		while (tmp_score > 0)
+		{
+			tmp_score /= 10;
+			scdigits++;
+		}
+		if (scdigits == 1)
+		{
+			mapUI[1][6] = score;
+		}
+		else if (scdigits == 2)
+		{
+			mapUI[1][5] = score;
+		}
+		else if (scdigits == 3)
+		{
+			mapUI[1][4] = score;
+		}
+		else if (scdigits == 4)
+		{
+			mapUI[1][3] = score;
+		}
+		else if (scdigits == 5)
+		{
+			mapUI[1][2] = score;
+		}
+		else if (scdigits == 6)
+		{
+			mapUI[1][1] = score;
+		}
+		else if (scdigits == 7)
+		{
+			mapUI[1][0] = score;
+		}
+		else
+		{
+			sc1 = score % 10;
+			sc2 = (score / 10) % 10;
+			sc3 = (score / 100) % 10;
+			sc4 = (score / 1000) % 10;
+			sc5 = (score / 10000) % 10;
+			sc6 = (score / 100000) % 10;
+			sc7 = (score / 1000000) % 10;
+			mapUI[1][0] = sc7;
+			mapUI[1][1] = sc6;
+			mapUI[1][2] = sc5;
+			mapUI[1][3] = sc4;
+			mapUI[1][4] = sc3;			
+			mapUI[1][5] = sc2;
+			mapUI[1][6] = sc1;
 
 		}
 	}
