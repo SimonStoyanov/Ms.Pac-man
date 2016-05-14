@@ -22,7 +22,8 @@ public:
 
 public:
 
-	float speed = 1.5f;
+	float speed = 1.0f;
+	float extra_speed = 0;
 
 	SDL_Texture* graphics = nullptr;
 	Animation* prev_anim;
@@ -86,6 +87,12 @@ public:
 	Collider* enemy_collision = nullptr;
 
 	bool player_dead = false;
+
+	void reset_directions()
+	{
+		can_go_left = false;
+		go_down = false;
+	}
 
 };
 

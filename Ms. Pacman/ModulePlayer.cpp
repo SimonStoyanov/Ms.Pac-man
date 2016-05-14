@@ -68,7 +68,7 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
 	prev_anim = &left;
 	
-	player_collision = App->collision->AddCollider({ position.x - 50, position.y - 50, 15, 14 }, COLLIDER_PLAYER, this);
+	player_collision = App->collision->AddCollider({ position.x - 50, position.y - 50, 10, 10 }, COLLIDER_PLAYER, this);
 
 	start_time = SDL_GetTicks();
 
@@ -82,7 +82,7 @@ update_status ModulePlayer::Update()
 
 	now = SDL_GetTicks() - start_time;
 
-	player_collision->SetPos(position.x, position.y+9);
+	player_collision->SetPos(position.x + 3, position.y+11);
 
 	// Player tile collision detectors with tiles ------
 	p_up.x = (position.x + 7) / 8;
@@ -239,6 +239,52 @@ update_status ModulePlayer::Update()
 	}
 
 
+	 //Player die -----------------------------
+	if (App->player->is_dead && (now - passed_time) > (10 * 0.5f * 1000.0f))
+	{
+		// Start everithing again 
+		//Red
+		App->ghost_red->position.x = 105;
+		App->ghost_red->position.y = 99;
+		App->ghost_red->player_dead = false; //Only on red ghost.
+		App->ghost_red->can_see = true;
+		App->ghost_red->speed = 1.0f;
+		App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = false; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
+
+		//Player
+		App->player->position.x = 105; //105
+		App->player->position.y = 195; //195
+		App->player->is_dead = false; //
+		go_left = true; go_right = false;
+		speed = 1.0f;
+
+	}
+	else if (App->player->is_dead && (now - passed_time) > (8 * 0.5f * 1000.0f))
+	{
+		// Ghost red reset
+		App->ghost_red->enemy_collision->to_delete = true;
+		App->ghost_red->Disable();
+		App->textures->last_texture--; //Carefull with that. Could cause future errors.
+		App->ghost_red->Enable();
+	}
+	else if (App->player->is_dead && (now - passed_time) > (5.9 * 0.5f * 1000.0f))
+	{
+		dead.speed = 0; //Stop dead animation
+	}
+	else if (App->player->is_dead && (now - passed_time) > (3.5 * 0.5f * 1000.0f))
+	{
+		dead.speed = 0.3f;
+		current_animation = &dead;
+	}
+	else if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f))
+	{
+		if (App->ghost_red->can_see)
+		{
+			App->ghost_red->can_see = false;
+		}
+	}
+
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
@@ -254,48 +300,6 @@ update_status ModulePlayer::Update()
 	//App->render->Blit(graphics, 3, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
 	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
-
-
-	// Player die -----------------------------
-	if (App->player->is_dead && (now - passed_time) > (7 * 0.5f * 1000.0f))
-	{
-		// Start everithing again 
-		//Red
-		App->ghost_red->player_dead = false; //
-		App->ghost_red->position.x = 105;
-		App->ghost_red->position.y = 99;
-		App->ghost_red->can_see = true;
-		App->ghost_red->speed = 1.0f;
-
-		//Player
-		App->player->position.x = 105; //105
-		App->player->position.y = 195; //195
-		App->player->is_dead = false; //
-		go_left = true; go_right = false;
-		speed = 1.0f;
-
-	}
-	else if (App->player->is_dead && (now - passed_time) > (6 * 0.5f * 1000.0f))
-	{
-		// Ghost red reset
-		App->ghost_red->enemy_collision->to_delete = true;
-		App->ghost_red->Disable();
-		App->ghost_red->Enable();
-
-		// Player reset
-
-	}
-	else if (App->player->is_dead && (now - passed_time) > (3.5 * 0.5f * 1000.0f))
-	{
-		current_animation = &left;
-	}
-	else if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f))
-	{
-		if (App->ghost_red->can_see)
-		{
-			App->ghost_red->can_see = false;
-		}
-	}
 
 	return UPDATE_CONTINUE;
 }
@@ -360,6 +364,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_red->position.x = 105;
 		App->ghost_red->position.y = 99;
+		App->ghost_red->ghost_up = false;
+		App->ghost_red->ghost_down = false;
+		if (App->ghost_red->ghost_left = true)
+			App->ghost_red->ghost_right = false;
+		else
+			App->ghost_red->ghost_left = true;
+		
 	}
 }
 

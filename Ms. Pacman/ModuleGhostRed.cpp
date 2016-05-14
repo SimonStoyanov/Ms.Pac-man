@@ -61,19 +61,23 @@ ModuleGhostRed::ModuleGhostRed()
 
 ModuleGhostRed::~ModuleGhostRed()
 {
-	enemy_collision = nullptr;
 }
 
 bool ModuleGhostRed::CleanUp()
 {
+	LOG("Red ghost CleanUp");
 	App->textures->Unload(graphics);
+	ghost_down = false; 
+	ghost_left = false; 
+	ghost_right = false; 
+	ghost_up = false;
 	return true;
 }
 
 // Load assets
 bool ModuleGhostRed::Start()
 {
-	LOG("Loading blue ghost textures");
+	LOG("Loading red ghost textures");
 	bool ret = true;
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
 	prev_anim = &up;
@@ -112,7 +116,7 @@ update_status ModuleGhostRed::Update()
 	// right
 	if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 	{
-		if (((int)position.x + 7) == (p_mid.x * 8) + 4 && ((int)position.y - 7) >= (p_mid.y * 8) + 2 && ((int)position.y - 7) <= (p_mid.y * 8) + 6)
+		if (((int)position.x + 7) == (p_mid.x * 8) + 4 && ((int)position.y - 7) >= (p_mid.y * 8) + 3 && ((int)position.y - 7) <= (p_mid.y * 8) + 5)
 		{
 			can_go_right = true;
 		}
@@ -123,7 +127,7 @@ update_status ModuleGhostRed::Update()
 	// left
 	if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 	{
-		if (((int)position.x + 7) == (p_mid.x * 8) + 4 && ((int)position.y - 7) >= (p_mid.y * 8) + 2 && ((int)position.y - 7) <= (p_mid.y * 8) + 6)
+		if (((int)position.x + 7) == (p_mid.x * 8) + 4 && ((int)position.y - 7) >= (p_mid.y * 8) + 3 && ((int)position.y - 7) <= (p_mid.y * 8) + 5)
 		{
 			can_go_left = true;
 		}
@@ -134,7 +138,7 @@ update_status ModuleGhostRed::Update()
 	// up
 	if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 	{
-		if (((int)position.x + 7) >= (p_mid.x * 8) + 2 && ((int)position.x + 7) <= (p_mid.x * 8) + 6 && ((int)position.y - 7) == (p_mid.y * 8) + 4)
+		if (((int)position.x + 7) >= (p_mid.x * 8) + 3 && ((int)position.x + 7) <= (p_mid.x * 8) + 5 && ((int)position.y - 7) == (p_mid.y * 8) + 4)
 		{
 			can_go_up = true;
 		}
@@ -145,7 +149,7 @@ update_status ModuleGhostRed::Update()
 	// down
 	if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 	{
-		if (((int)position.x + 7) >= (p_mid.x * 8) + 2 && ((int)position.x + 7) <= (p_mid.x * 8) + 6 && ((int)position.y - 7) == (p_mid.y * 8) + 4)
+		if (((int)position.x + 7) >= (p_mid.x * 8) + 3 && ((int)position.x + 7) <= (p_mid.x * 8) + 5 && ((int)position.y - 7) == (p_mid.y * 8) + 4)
 		{
 			can_go_down = true;
 		}
@@ -393,7 +397,7 @@ update_status ModuleGhostRed::Update()
 
 					if (position.x >= 220){position.x = -10;}
 
-					position.x += speed;
+					position.x += speed + extra_speed;
 
 					go_left = false; go_up = false; go_down = false;
 				}
@@ -409,14 +413,14 @@ update_status ModuleGhostRed::Update()
 
 					if (position.x <= -10){position.x = 220;}
 
-					position.x -= speed;
+					position.x -= speed + extra_speed;
 
 					go_right = false; go_up = false; go_down = false;
 				}
 			}
 			if (go_up)
 			{
-				// What is the next tile
+				// What is the next tilec
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
 					up.speed = 0.25f;
@@ -424,7 +428,7 @@ update_status ModuleGhostRed::Update()
 					if (!is_vulnerable)
 					{current_animation = &up;}
 
-					position.y -= speed;
+					position.y -= speed + extra_speed;
 
 					go_right = false; go_left = false; go_down = false;
 				}
@@ -439,7 +443,7 @@ update_status ModuleGhostRed::Update()
 					if (!is_vulnerable)
 					{current_animation = &down;}
 
-					position.y += speed;
+					position.y += speed + extra_speed;
 
 					go_right = false; go_left = false; go_up = false;
 				}

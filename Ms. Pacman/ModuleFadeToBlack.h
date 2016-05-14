@@ -12,7 +12,7 @@ public:
 
 	bool Start();
 	update_status Update();
-	void FadeToBlack(Module* module_off, Module* module_on, float time = 2.0f);
+	void FadeToBlack(Module* module_off, Module* module_on, float time);
 	Module* off;
 	Module* on;
 
