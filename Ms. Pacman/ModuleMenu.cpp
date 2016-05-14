@@ -142,10 +142,10 @@ update_status ModuleMenu::Update()
 	// Red ghost
 	if (now >= total_time_red)
 	{
-		App->render->Blit(graphics, 82, 102, &With, 1.0f);
-		App->render->Blit(graphics, 106, 131, &Blinky, 1.0f);
 		if (red.x>=40) // left
 		{
+			App->render->Blit(graphics, 82, 102, &With, 1.0f);
+			App->render->Blit(graphics, 106, 131, &Blinky, 1.0f);
 			red.x -= speed_left;
 			App->render->Blit(graphics, red.x, red.y, &Red_left.GetCurrentFrame(), 1.0f);
 		}
@@ -227,11 +227,11 @@ update_status ModuleMenu::Update()
 
 	if (now >= total_time_pacman)
 	{
+		App->render->Blit(graphics, 82, 131, &voidspace, 1.0f);
+		App->render->Blit(graphics, 82, 102, &Starring, 1.0f);
+		App->render->Blit(graphics, 82, 131, &MsPacMan, 1.0f);
 		if (pacman.x >= 116) // left
 		{
-			App->render->Blit(graphics, 82, 131, &voidspace, 1.0f);
-			App->render->Blit(graphics, 82, 102, &Starring, 1.0f);
-			App->render->Blit(graphics, 82, 131, &MsPacMan, 1.0f);
 			pacman.x -= speed_left;
 			App->render->Blit(graphics, pacman.x, pacman.y, &Pacman_left.GetCurrentFrame(), 1.0f);
 		}
