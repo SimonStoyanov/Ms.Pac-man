@@ -95,6 +95,9 @@
     <ClInclude Include="ModuleCollision.h">
       <Filter>Modules\Miscellaneous</Filter>
     </ClInclude>
+    <ClInclude Include="ModulePlayer2.h">
+      <Filter>Modules\Player &amp; NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -156,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="ModuleCollision.cpp">
       <Filter>Modules\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer2.cpp">
+      <Filter>Modules\Player &amp; NPC</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

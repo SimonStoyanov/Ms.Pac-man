@@ -84,7 +84,6 @@ public:
 
 	Collider* enemy_collision = nullptr;
 
-	bool player_dead = false;
 
 };
 

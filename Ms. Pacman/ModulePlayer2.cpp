@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
+#include "ModulePlayer2.h"
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleBackground_Map1.h"
@@ -19,7 +20,7 @@
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModulePlayer::ModulePlayer()
+ModulePlayer2::ModulePlayer2()
 {
 	test = { 3, 120, 1, 1 };
 
@@ -53,39 +54,36 @@ ModulePlayer::ModulePlayer()
 	dead.PushBack({ 33, 34, 15, 15 });
 	dead.PushBack({ 17, 51, 14, 13 });
 	dead.speed = 0.3f;
-
-	total_time = (Uint32)(total_t * 0.5f * 1000.0f);
-	total_time_ghosts_random = (Uint32)(total_t_g_r * 0.5f * 1000.0f);
 }
 
-ModulePlayer::~ModulePlayer()
+ModulePlayer2::~ModulePlayer2()
 {
 }
 
 
 // Load assets
-bool ModulePlayer::Start()
+bool ModulePlayer2::Start()
 {
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
 	prev_anim = &left;
-	
+
 	player_collision = App->collision->AddCollider({ position.x - 50, position.y - 50, 10, 10 }, COLLIDER_PLAYER, this);
 
-	start_time = SDL_GetTicks();
+	App->player->start_time = SDL_GetTicks();
 
 	return ret;
 }
 
 // Update: draw background
-update_status ModulePlayer::Update()
+update_status ModulePlayer2::Update()
 {
 	Animation* current_animation = prev_anim;
 
-	now = SDL_GetTicks() - start_time;
+	App->player->now = SDL_GetTicks() - App->player->start_time;
 
-	player_collision->SetPos(position.x + 3, position.y+11);
+	player_collision->SetPos(position.x + 3, position.y + 11);
 
 	// Player tile collision detectors with tiles ------
 	p_up.x = (position.x + 7) / 8;
@@ -103,15 +101,11 @@ update_status ModulePlayer::Update()
 	p_mid.x = (position.x + 6) / 8;
 	p_mid.y = (position.y - 7) / 8;
 
-	if (total_time_ghosts_random <= now)
-	{
-		ghost_random = false;
-	}
 
 	// Movement ---------------------------------------
-	if (!is_dead)
+	if (!App->player->is_dead)
 	{
-		if (total_time <= now)
+		if (App->player->total_time <= App->player->now)
 		{
 			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] == false && App->input->keyboard[SDL_SCANCODE_A] == false && App->input->keyboard[SDL_SCANCODE_W] == false) // right
 			{
@@ -174,7 +168,7 @@ update_status ModulePlayer::Update()
 					right.speed = 0.3f;
 					current_animation = &right;
 					position.x += speed;
-					wakawaka = true;
+
 
 					// Tunel teleport
 					if (position.x >= 220)
@@ -195,7 +189,7 @@ update_status ModulePlayer::Update()
 					left.speed = 0.3f;
 					current_animation = &left;
 					position.x -= speed;
-					wakawaka = true;
+		
 					go_right = false; go_up = false; go_down = false;
 
 					// Tunel teleport
@@ -215,7 +209,7 @@ update_status ModulePlayer::Update()
 					up.speed = 0.3f;
 					current_animation = &up;
 					position.y -= speed;
-					wakawaka = true;
+				
 					go_right = false; go_left = false; go_down = false;
 				}
 				else
@@ -229,7 +223,7 @@ update_status ModulePlayer::Update()
 					down.speed = 0.3f;
 					current_animation = &down;
 					position.y += speed;
-					wakawaka = true;
+			
 					go_right = false; go_left = false; go_up = false;
 				}
 				else
@@ -247,8 +241,8 @@ update_status ModulePlayer::Update()
 	}
 
 
-	 //Player die -----------------------------
-	if (App->player->is_dead && (now - passed_time) > (10 * 0.5f * 1000.0f))
+	//Player die -----------------------------
+	if (App->player->is_dead && (App->player->now - App->player->passed_time) > (10 * 0.5f * 1000.0f))
 	{
 		// Start everithing again 
 		//Red
@@ -288,7 +282,7 @@ update_status ModulePlayer::Update()
 		speed = 1.0f;
 
 	}
-	else if (App->player->is_dead && (now - passed_time) > (8 * 0.5f * 1000.0f))
+	else if (App->player->is_dead && (App->player->now - App->player->passed_time) > (8 * 0.5f * 1000.0f))
 	{
 		// Ghost red reset
 		App->ghost_red->enemy_collision->to_delete = true;
@@ -314,21 +308,21 @@ update_status ModulePlayer::Update()
 		App->textures->last_texture--; //Carefull with that. Could cause future errors.
 		App->ghost_blue->Enable();
 	}
-	else if (App->player->is_dead && (now - passed_time) > (5.9 * 0.5f * 1000.0f))
+	else if (App->player->is_dead && (App->player->now - App->player->passed_time) > (5.9 * 0.5f * 1000.0f))
 	{
 		dead.speed = 0; //Stop dead animation
 	}
-	else if (App->player->is_dead && (now - passed_time) > (3.5 * 0.5f * 1000.0f))
+	else if (App->player->is_dead && (App->player->now - App->player->passed_time) > (3.5 * 0.5f * 1000.0f))
 	{
 		dead.speed = 0.3f;
 		current_animation = &dead;
 	}
-	else if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f))
+	else if (App->player->is_dead && (App->player->now - App->player->passed_time) > (3 * 0.5f * 1000.0f))
 	{
-			App->ghost_red->can_see = false;
-			App->ghost_orange->can_see = false;
-			App->ghost_pink->can_see = false;
-			App->ghost_blue->can_see = false;
+		App->ghost_red->can_see = false;
+		App->ghost_orange->can_see = false;
+		App->ghost_pink->can_see = false;
+		App->ghost_blue->can_see = false;
 	}
 
 
@@ -351,9 +345,9 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
+void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
-	if ((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) || 
+	if ((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable))
@@ -361,7 +355,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		// Player die -------------------
 		if (!App->ghost_red->player_dead)
 		{
-			passed_time = now;
+			App->player->passed_time = App->player->now;
 			App->ghost_red->player_dead = true; //only on red
 			App->player->is_dead = true;
 
@@ -376,7 +370,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		App->player->speed = 0;
 
 		// -------------------------------
-		
+
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
@@ -396,11 +390,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_blue->Disable();
 		App->ghost_blue->Enable();
 
-		App->ghost_blue->is_vulnerable = false;
-
 		App->ghost_blue->position.x = 105;
 		App->ghost_blue->position.y = 99;
-		
+
 		eaten_ghost++;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
@@ -421,11 +413,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_orange->Disable();
 		App->ghost_orange->Enable();
 
-		App->ghost_orange->is_vulnerable = false;
-
 		App->ghost_orange->position.x = 105;
 		App->ghost_orange->position.y = 99;
-		
+
 		eaten_ghost++;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
@@ -446,11 +436,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_pink->Disable();
 		App->ghost_pink->Enable();
 
-		App->ghost_pink->is_vulnerable = false;
-
 		App->ghost_pink->position.x = 105;
 		App->ghost_pink->position.y = 99;
-		
+
 		eaten_ghost++;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
@@ -471,8 +459,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_red->Disable();
 		App->ghost_red->Enable();
 
-		App->ghost_red->is_vulnerable = false;
-		
 		App->ghost_red->position.x = 105;
 		App->ghost_red->position.y = 99;
 		App->ghost_red->ghost_up = false;
@@ -481,7 +467,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			App->ghost_red->ghost_right = false;
 		else
 			App->ghost_red->ghost_left = true;
-		
+
 		eaten_ghost++;
 	}
 }

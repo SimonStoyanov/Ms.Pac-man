@@ -59,7 +59,7 @@ ModuleGhostOrange::ModuleGhostOrange()
 
 ModuleGhostOrange::~ModuleGhostOrange()
 {
-	
+	enemy_collision = nullptr;
 }
 
 bool ModuleGhostOrange::CleanUp()

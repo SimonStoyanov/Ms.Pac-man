@@ -61,6 +61,7 @@ ModuleGhostRed::ModuleGhostRed()
 
 ModuleGhostRed::~ModuleGhostRed()
 {
+	enemy_collision = nullptr;
 }
 
 bool ModuleGhostRed::CleanUp()
@@ -71,6 +72,7 @@ bool ModuleGhostRed::CleanUp()
 	ghost_left = false; 
 	ghost_right = false; 
 	ghost_up = false;
+
 	return true;
 }
 

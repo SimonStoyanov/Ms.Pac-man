@@ -14,6 +14,7 @@
 #include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostOrange.h"
 #include "ModuleGhostPink.h"
@@ -33,6 +34,7 @@ Application::Application()
 	modules[i++] = end_screen = new ModuleEndScreen();
 	modules[i++] = UI = new ModuleUI();
 	modules[i++] = player = new ModulePlayer();
+	modules[i++] = player2 = new ModulePlayer2();
 	modules[i++] = ghost_blue = new ModuleGhostBlue();
 	modules[i++] = ghost_orange = new ModuleGhostOrange();
 	modules[i++] = ghost_pink = new ModuleGhostPink();
