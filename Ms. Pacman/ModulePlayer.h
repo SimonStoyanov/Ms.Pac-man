@@ -48,8 +48,13 @@ public:
 	//Start
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
-	float total_t = 9.5f;
+	float total_t = 9.5f; // time since start that player starts moving
 	
+	//Random ghosts
+	Uint32 total_time_ghosts_random = 0;
+	float total_t_g_r = 25.0f; // time since start that the ghosts are random
+	bool ghost_random = true;
+
 	bool is_dead = false;
 	float passed_time;
 
@@ -59,6 +64,7 @@ public:
 	bool wakawaka;
 
 	int eaten_ghost = 0;
+	
 };
 
 #endif

@@ -179,153 +179,202 @@ update_status ModuleGhostRed::Update()
 	}
 	else change_direction = false; 
 
-	// Want to go / Where is the target -----------------------------
-	if (App->player->position.x + 7 > position.x) //is right
+	// Ghosts follows the player
+	if (App->player->ghost_random == false)
 	{
-		if (position.y > App->player->position.y - 7) // is up
+		// Want to go / Where is the target -----------------------------
+		if (App->player->position.x + 7 > position.x) //is right
 		{
-			if (position.y - App->player->position.y -7 > App->player->position.x + 7 - position.x)
+			if (position.y > App->player->position.y - 7) // is up
 			{
-				want_go_up = true; want_go_down = false; want_go_left = false; want_go_right = false;
+				if (position.y - App->player->position.y - 7 > App->player->position.x + 7 - position.x)
+				{
+					want_go_up = true; want_go_down = false; want_go_left = false; want_go_right = false;
+				}
+				else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false; }
 			}
-			else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false;}
+			else // is down 
+			{
+				if (App->player->position.y - 7 - position.y > App->player->position.x + 7 - position.x)
+				{
+					want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
+				}
+				else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false; }
+			}
 		}
-		else // is down 
+		else // is left
 		{
-			if (App->player->position.y - 7 - position.y > App->player->position.x + 7 - position.x)
+			if (position.y > App->player->position.y - 7) // is up
 			{
-				want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
+				if (position.y - App->player->position.y - 7 > position.x - App->player->position.x + 7)
+				{
+					want_go_up = true;  want_go_down = false; want_go_left = false; want_go_right = false;
+				}
+				else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
 			}
-			else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false;}
-		}
-	}
-	else // is left
-	{
-		if (position.y > App->player->position.y - 7) // is up
-		{
-			if (position.y - App->player->position.y - 7 > position.x - App->player->position.x + 7)
+			else // is down 
 			{
-				want_go_up = true;  want_go_down = false; want_go_left = false; want_go_right = false;
+				if (App->player->position.y - 7 - position.y > position.x - App->player->position.x + 7)
+				{
+					want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
+				}
+				else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
 			}
-			else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
 		}
-		else // is down 
-		{
-			if (App->player->position.y - 7 - position.y > position.x - App->player->position.x + 7)
-			{
-				want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
-			}
-			else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
-		}
-	}
 
-	// Choose direction ----------------------------
-	if (change_direction)
-	{
-		if (want_go_right) // try go right
+		// Choose direction ----------------------------
+		if (change_direction)
 		{
-			if (can_go_right && !ghost_left)
+			if (want_go_right) // try go right
 			{
-				ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
-			}
-			else if (can_go_up && can_go_down)
-			{
-				if (position.y > App->player->position.y - 7)
+				if (can_go_right && !ghost_left)
+				{
+					ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
+				}
+				else if (can_go_up && can_go_down)
+				{
+					if (position.y > App->player->position.y - 7)
+					{
+						ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
+					}
+					else{ ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false; }
+				}
+				else if (can_go_up && !ghost_down)
 				{
 					ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
 				}
-				else{ ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;}
+				else if (can_go_down && !ghost_up)
+				{
+					ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
+				}
+				else{ ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false; }
 			}
-			else if (can_go_up && !ghost_down)
-			{
-				ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
-			}
-			else if (can_go_down && !ghost_up)
-			{
-				ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
-			}
-			else{ ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;}
-		}
 
-		//-------
-		else if (want_go_left) // try go left
-		{
-			if (can_go_left && !ghost_right)
+			//-------
+			else if (want_go_left) // try go left
 			{
-				ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
-			}
-			else if (can_go_up && can_go_down)
-			{
-				if (position.y > App->player->position.y - 7)
+				if (can_go_left && !ghost_right)
+				{
+					ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+				}
+				else if (can_go_up && can_go_down)
+				{
+					if (position.y > App->player->position.y - 7)
+					{
+						ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
+					}
+					else{ ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false; }
+				}
+				else if (can_go_up && !ghost_down)
 				{
 					ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
 				}
-				else{ ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;}
+				else if (can_go_down && !ghost_up)
+				{
+					ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
+				}
+				else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false; }
 			}
-			else if (can_go_up && !ghost_down)
-			{
-				ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
-			}
-			else if (can_go_down && !ghost_up)
-			{
-				ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
-			}
-			else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;}
-		}
 
-		//-------
-		else if (want_go_up) // try go up
-		{ 
-			if (can_go_up && !ghost_down )
+			//-------
+			else if (want_go_up) // try go up
 			{
-				ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
-			}
-			else if (can_go_left && can_go_right)
-			{
-				if (position.x > App->player->position.x + 7)
+				if (can_go_up && !ghost_down)
+				{
+					ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
+				}
+				else if (can_go_left && can_go_right)
+				{
+					if (position.x > App->player->position.x + 7)
+					{
+						ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+					}
+					else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false; }
+				}
+				else if (can_go_left && !ghost_right)
 				{
 					ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
 				}
-				else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;}
+				else if (can_go_right && !ghost_left)
+				{
+					ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
+				}
+				else{ ghost_down = true; ghost_up = false; ghost_right = false; ghost_left = false; }
 			}
-			else if (can_go_left && !ghost_right)
-			{
-			ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
-			}
-			else if (can_go_right && !ghost_left)
-			{
-			ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
-			}
-			else{ghost_down = true; ghost_up = false; ghost_right = false; ghost_left = false;}
-		}
 
-		//-------
-		else if (want_go_down) // try go down
-		{
-			if (can_go_down && !ghost_up)
+			//-------
+			else if (want_go_down) // try go down
 			{
-				ghost_down = true; ghost_up = false; ghost_right = false; ghost_left = false;
-			}
-			else if (can_go_left && can_go_right)
-			{
-				if (position.x > App->player->position.x + 7)
+				if (can_go_down && !ghost_up)
+				{
+					ghost_down = true; ghost_up = false; ghost_right = false; ghost_left = false;
+				}
+				else if (can_go_left && can_go_right)
+				{
+					if (position.x > App->player->position.x + 7)
+					{
+						ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+					}
+					else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false; }
+				}
+				else if (can_go_left && !ghost_right)
 				{
 					ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
 				}
-				else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;}
+				else if (can_go_right && !ghost_left)
+				{
+					ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
+				}
+				else{ ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false; }
 			}
-			else if (can_go_left && !ghost_right)
-			{
-				ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
-			}
-			else if (can_go_right && !ghost_left)
-			{
-				ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
-			}
-			else{ ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;}
 		}
 	}
 
+	// Ghost random ----------
+	else
+	{
+		random_device rd;
+		mt19937 gen(rd());
+		uniform_int_distribution<> dis(1, 4);
+
+		// Choose direction Radom -------------------
+		if (change_direction)
+		{
+			cont = false;
+			while (cont == false)
+			{
+				tmp = dis(gen);
+
+				if (can_go_right && tmp == 4)
+				{
+					position.y = (p_mid.y * 8) + 4 + 7;
+					ghost_right = true; cont = true;
+				}
+				else{ ghost_right = false; }
+
+				if (can_go_left && tmp == 2)
+				{
+					position.y = (p_mid.y * 8) + 4 + 7;
+					ghost_left = true; cont = true;
+				}
+				else{ ghost_left = false; }
+
+				if (can_go_up && tmp == 3)
+				{
+					position.x = (p_mid.x * 8) + 4 - 7;
+					ghost_up = true; cont = true;
+				}
+				else{ ghost_up = false; }
+
+				if (can_go_down && (tmp == 1))
+				{
+					position.x = (p_mid.x * 8) + 4 - 7;
+					ghost_down = true; cont = true;
+				}
+				else{ ghost_down = false; }
+			}
+		}
+	}
 	// Player tile collision detectors ------------------------------
 	p_up.x = (position.x + 7) / 8;
 	p_up.y = (position.y - 4) / 8;

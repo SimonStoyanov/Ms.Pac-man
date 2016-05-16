@@ -55,6 +55,7 @@ ModulePlayer::ModulePlayer()
 	dead.speed = 0.3f;
 
 	total_time = (Uint32)(total_t * 0.5f * 1000.0f);
+	total_time_ghosts_random = (Uint32)(total_t_g_r * 0.5f * 1000.0f);
 }
 
 ModulePlayer::~ModulePlayer()
@@ -101,6 +102,11 @@ update_status ModulePlayer::Update()
 
 	p_mid.x = (position.x + 6) / 8;
 	p_mid.y = (position.y - 7) / 8;
+
+	if (total_time_ghosts_random <= now)
+	{
+		ghost_random = false;
+	}
 
 	// Movement ---------------------------------------
 	if (!is_dead)

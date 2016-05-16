@@ -93,6 +93,7 @@ public:
 		can_go_left = false;
 		go_down = false;
 	}
+	
 
 };
 
