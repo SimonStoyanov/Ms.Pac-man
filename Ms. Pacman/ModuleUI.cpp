@@ -357,27 +357,27 @@ update_status ModuleUI::Update()
 		{
 			mapUI[1][6] = score;
 		}
-		else if (scdigits == 2)
+		if (scdigits == 2)
 		{
 			mapUI[1][5] = score;
 		}
-		else if (scdigits == 3)
+		if (scdigits == 3)
 		{
 			mapUI[1][4] = score;
 		}
-		else if (scdigits == 4)
+		if (scdigits == 4)
 		{
 			mapUI[1][3] = score;
 		}
-		else if (scdigits == 5)
+		if (scdigits == 5)
 		{
 			mapUI[1][2] = score;
 		}
-		else if (scdigits == 6)
+		if (scdigits == 6)
 		{
 			mapUI[1][1] = score;
 		}
-		else if (scdigits == 7)
+		if (scdigits == 7)
 		{
 			mapUI[1][0] = score;
 		}
