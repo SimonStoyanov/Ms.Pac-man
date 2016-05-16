@@ -16,8 +16,12 @@ public:
 
 	bool Start();
 	update_status Update();
+	bool CleanUp();
 
 public:
+
+	float speed = 1.0f;
+	float extra_speed = 0;
 
 	SDL_Texture* graphics = nullptr;
 	Animation* prev_anim;
@@ -30,14 +34,14 @@ public:
 
 	SDL_Rect test;
 
-	iPoint position;
+	fPoint position;
 	iPoint p_up;
 	iPoint p_down;
 	iPoint p_left;
 	iPoint p_right;
 	iPoint p_mid;
 
-	// Ghost Movement
+	// Ghost core Movement
 	bool go_up = false;
 	bool go_down = false;
 	bool go_left = false;
@@ -48,21 +52,27 @@ public:
 	bool ghost_left = false;
 	bool ghost_right = false;
 
-	// Ghost Random Input
+	// Choosing direction
 	bool can_go_up = false;
 	bool can_go_down = false;
 	bool can_go_left = false;
 	bool can_go_right = false;
+
+	bool want_go_up = false;
+	bool want_go_down = false;
+	bool want_go_left = false;
+	bool want_go_right = false;
 
 	bool change_direction = false;
 
 	// Logic variables 
 	bool cont = false;
 	int tmp;
+	bool can_see = true;
 
 	// Ghost start moving time variables
 	Uint32 now;
-	float time_stoped = 15.0f;  //varaible to change start time
+	float time_stoped = 6.0f;  //varaible to change start time
 	Uint32 total_time = 0;
 	Uint32 start_time = 0;
 
@@ -73,6 +83,8 @@ public:
 	bool is_vulnerable = false;
 
 	Collider* enemy_collision = nullptr;
+
+	bool player_dead = false;
 
 };
 

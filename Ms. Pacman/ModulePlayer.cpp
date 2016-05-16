@@ -259,6 +259,14 @@ update_status ModulePlayer::Update()
 		App->ghost_red->speed = 1.0f;
 		App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = false; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
 
+		//Orange
+		App->ghost_orange->position.x = 105;
+		App->ghost_orange->position.y = 99;
+		App->ghost_orange->player_dead = false; //Only on orange ghost.
+		App->ghost_orange->can_see = true;
+		App->ghost_orange->speed = 1.0f;
+		App->ghost_orange->ghost_down = false; App->ghost_orange->ghost_left = false; App->ghost_orange->ghost_right = false; App->ghost_orange->ghost_up = false;
+
 		//Player
 		App->player->position.x = 105; //105
 		App->player->position.y = 195; //195
@@ -274,6 +282,12 @@ update_status ModulePlayer::Update()
 		App->ghost_red->Disable();
 		App->textures->last_texture--; //Carefull with that. Could cause future errors.
 		App->ghost_red->Enable();
+
+		// Ghost orange reset
+		App->ghost_orange->enemy_collision->to_delete = true;
+		App->ghost_orange->Disable();
+		App->textures->last_texture--; //Carefull with that. Could cause future errors.
+		App->ghost_orange->Enable();
 	}
 	else if (App->player->is_dead && (now - passed_time) > (5.9 * 0.5f * 1000.0f))
 	{
@@ -289,6 +303,7 @@ update_status ModulePlayer::Update()
 		if (App->ghost_red->can_see)
 		{
 			App->ghost_red->can_see = false;
+			App->ghost_orange->can_see = false;
 		}
 	}
 
@@ -320,11 +335,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable))
 	{
 		// Player die -------------------
-
 		if (!App->ghost_red->player_dead)
 		{
 			passed_time = now;
-			App->ghost_red->player_dead = true;
+			App->ghost_red->player_dead = true; //only on red
 			App->player->is_dead = true;
 
 			if (lifes > 0)
@@ -332,11 +346,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		}
 
 		App->ghost_red->speed = 0;
+		App->ghost_orange->speed = 0;
 		App->player->speed = 0;
-		
-		
-		
-				
+
 		// -------------------------------
 		
 	}

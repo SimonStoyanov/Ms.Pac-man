@@ -180,45 +180,91 @@ update_status ModuleGhostRed::Update()
 	else change_direction = false; 
 
 	// Ghosts follows the player
+	// Ghosts follows the player
 	if (App->player->ghost_random == false)
 	{
-		// Want to go / Where is the target -----------------------------
-		if (App->player->position.x + 7 > position.x) //is right
+		if (is_vulnerable == false)
 		{
-			if (position.y > App->player->position.y - 7) // is up
+			// Want to go to the player / Where is the target -----------------------------
+			if (App->player->position.x + 7 > position.x) //is right
 			{
-				if (position.y - App->player->position.y - 7 > App->player->position.x + 7 - position.x)
+				if (position.y > App->player->position.y - 7) // is up
 				{
-					want_go_up = true; want_go_down = false; want_go_left = false; want_go_right = false;
+					if (position.y - App->player->position.y - 7 > App->player->position.x + 7 - position.x)
+					{
+						want_go_up = true; want_go_down = false; want_go_left = false; want_go_right = false;
+					}
+					else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false; }
 				}
-				else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false; }
+				else // is down 
+				{
+					if (App->player->position.y - 7 - position.y > App->player->position.x + 7 - position.x)
+					{
+						want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
+					}
+					else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false; }
+				}
 			}
-			else // is down 
+			else // is left
 			{
-				if (App->player->position.y - 7 - position.y > App->player->position.x + 7 - position.x)
+				if (position.y > App->player->position.y - 7) // is up
 				{
-					want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
+					if (position.y - App->player->position.y - 7 > position.x - App->player->position.x + 7)
+					{
+						want_go_up = true;  want_go_down = false; want_go_left = false; want_go_right = false;
+					}
+					else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
 				}
-				else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false; }
+				else // is down 
+				{
+					if (App->player->position.y - 7 - position.y > position.x - App->player->position.x + 7)
+					{
+						want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
+					}
+					else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
+				}
 			}
 		}
-		else // is left
+		else
 		{
-			if (position.y > App->player->position.y - 7) // is up
+			// Want to escape from the player / Where is the target -----------------------------
+			if (App->player->position.x + 7 > position.x) //is right
 			{
-				if (position.y - App->player->position.y - 7 > position.x - App->player->position.x + 7)
+				if (position.y > App->player->position.y - 7) // is up
 				{
-					want_go_up = true;  want_go_down = false; want_go_left = false; want_go_right = false;
+					if (position.y - App->player->position.y - 7 > App->player->position.x + 7 - position.x)
+					{
+						want_go_up = false; want_go_down = true; want_go_left = false; want_go_right = false;
+					}
+					else{ want_go_right = false;  want_go_up = false; want_go_down = false; want_go_left = true; }
 				}
-				else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
+				else // is down 
+				{
+					if (App->player->position.y - 7 - position.y > App->player->position.x + 7 - position.x)
+					{
+						want_go_down = false; want_go_left = false; want_go_right = false; want_go_up = true;
+					}
+					else{ want_go_right = false;  want_go_up = false; want_go_down = false; want_go_left = true; }
+				}
 			}
-			else // is down 
+			else // is left
 			{
-				if (App->player->position.y - 7 - position.y > position.x - App->player->position.x + 7)
+				if (position.y > App->player->position.y - 7) // is up
 				{
-					want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
+					if (position.y - App->player->position.y - 7 > position.x - App->player->position.x + 7)
+					{
+						want_go_up = false;  want_go_down = true; want_go_left = false; want_go_right = false;
+					}
+					else{ want_go_left = false; want_go_right = true;  want_go_up = false; want_go_down = false; }
 				}
-				else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
+				else // is down 
+				{
+					if (App->player->position.y - 7 - position.y > position.x - App->player->position.x + 7)
+					{
+						want_go_down = false; want_go_left = false; want_go_right = false; want_go_up = true;
+					}
+					else{ want_go_left = false; want_go_right = true;  want_go_up = false; want_go_down = false; }
+				}
 			}
 		}
 

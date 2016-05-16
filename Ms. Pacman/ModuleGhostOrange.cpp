@@ -59,8 +59,20 @@ ModuleGhostOrange::ModuleGhostOrange()
 
 ModuleGhostOrange::~ModuleGhostOrange()
 {
-	enemy_collision = nullptr;
+	
 }
+
+bool ModuleGhostOrange::CleanUp()
+{
+	LOG("Orange ghost CleanUp");
+	App->textures->Unload(graphics);
+	ghost_down = false;
+	ghost_left = false;
+	ghost_right = false;
+	ghost_up = false;
+	return true;
+}
+
 
 // Load assets
 bool ModuleGhostOrange::Start()
@@ -99,56 +111,53 @@ update_status ModuleGhostOrange::Update()
 	// Collision ------------
 	enemy_collision->SetPos(position.x + 4, position.y + 14);
 
-	//Random direction --------------------------------
-
-	srand(time(NULL));
 
 	// What is the next tile --------------
 	// right
 	if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 	{
-		if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if (((int)position.x + 7) == (p_mid.x * 8) + 4 && ((int)position.y - 7) >= (p_mid.y * 8) + 3 && ((int)position.y - 7) <= (p_mid.y * 8) + 5)
 		{
 			can_go_right = true;
 		}
-		else{ can_go_right = false; }
+		else can_go_right = false;
 	}
-	else{ can_go_right = false; }
+	else can_go_right = false;
 
 	// left
 	if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 	{
-		if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if (((int)position.x + 7) == (p_mid.x * 8) + 4 && ((int)position.y - 7) >= (p_mid.y * 8) + 3 && ((int)position.y - 7) <= (p_mid.y * 8) + 5)
 		{
 			can_go_left = true;
 		}
 		else{ can_go_left = false; }
 	}
-	else{ can_go_left = false; }
+	else can_go_left = false;
 
 	// up
 	if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 	{
-		if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if (((int)position.x + 7) >= (p_mid.x * 8) + 3 && ((int)position.x + 7) <= (p_mid.x * 8) + 5 && ((int)position.y - 7) == (p_mid.y * 8) + 4)
 		{
 			can_go_up = true;
 		}
-		else{ can_go_up = false; }
+		else can_go_up = false;
 	}
-	else{ can_go_up = false; }
+	else can_go_up = false;
 
 	// down
 	if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 	{
-		if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4)
+		if (((int)position.x + 7) >= (p_mid.x * 8) + 3 && ((int)position.x + 7) <= (p_mid.x * 8) + 5 && ((int)position.y - 7) == (p_mid.y * 8) + 4)
 		{
 			can_go_down = true;
 		}
-		else{ can_go_down = false; }
+		else can_go_down = false;
 	}
-	else{ can_go_down = false; }
+	else can_go_down = false;
 
-	// Is the player on an intersection and on the right pixel ?
+	// Is the player on an intersection change direction ------------------
 	if (can_go_left == true || can_go_right == true)
 	{
 		if (can_go_up == false && can_go_down == false)
@@ -156,9 +165,8 @@ update_status ModuleGhostOrange::Update()
 			change_direction = false;
 		}
 		else
-		{
 			change_direction = true;
-		}
+
 	}
 	if (can_go_up == true || can_go_down == true)
 	{
@@ -167,53 +175,251 @@ update_status ModuleGhostOrange::Update()
 			change_direction = false;
 		}
 		else
-		{
 			change_direction = true;
-		}
 	}
-	else{ change_direction = false; }
+	else change_direction = false;
 
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_int_distribution<> dis(1, 5);
-
-	// Choose direction Radom -------------------
-	if (change_direction)
+	// Ghosts follows the player
+	if (App->player->ghost_random == false)
 	{
-		cont = false;
-		while (cont == false)
+		if (is_vulnerable == false)
 		{
-			tmp = dis(gen);
-			if (can_go_right && tmp == 4)
+			// Want to go to the player / Where is the target -----------------------------
+			if (App->player->position.x + 7 > position.x) //is right
 			{
-				position.y = (p_mid.y * 8) + 4 + 7;
-				ghost_right = true; cont = true;
+				if (position.y > App->player->position.y - 7) // is up
+				{
+					if (position.y - App->player->position.y - 7 > App->player->position.x + 7 - position.x)
+					{
+						want_go_up = true; want_go_down = false; want_go_left = false; want_go_right = false;
+					}
+					else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false; }
+				}
+				else // is down 
+				{
+					if (App->player->position.y - 7 - position.y > App->player->position.x + 7 - position.x)
+					{
+						want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
+					}
+					else{ want_go_right = true;  want_go_up = false; want_go_down = false; want_go_left = false; }
+				}
 			}
-			else{ ghost_right = false; }
+			else // is left
+			{
+				if (position.y > App->player->position.y - 7) // is up
+				{
+					if (position.y - App->player->position.y - 7 > position.x - App->player->position.x + 7)
+					{
+						want_go_up = true;  want_go_down = false; want_go_left = false; want_go_right = false;
+					}
+					else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
+				}
+				else // is down 
+				{
+					if (App->player->position.y - 7 - position.y > position.x - App->player->position.x + 7)
+					{
+						want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
+					}
+					else{ want_go_left = true; want_go_right = false;  want_go_up = false; want_go_down = false; }
+				}
+			}
+		}
+		else
+		{
+			// Want to escape from the player / Where is the target -----------------------------
+			if (App->player->position.x + 7 > position.x) //is right
+			{
+				if (position.y > App->player->position.y - 7) // is up
+				{
+					if (position.y - App->player->position.y - 7 > App->player->position.x + 7 - position.x)
+					{
+						want_go_up = false; want_go_down = true; want_go_left = false; want_go_right = false;
+					}
+					else{ want_go_right = false;  want_go_up = false; want_go_down = false; want_go_left = true; }
+				}
+				else // is down 
+				{
+					if (App->player->position.y - 7 - position.y > App->player->position.x + 7 - position.x)
+					{
+						want_go_down = false; want_go_left = false; want_go_right = false; want_go_up = true;
+					}
+					else{ want_go_right = false;  want_go_up = false; want_go_down = false; want_go_left = true; }
+				}
+			}
+			else // is left
+			{
+				if (position.y > App->player->position.y - 7) // is up
+				{
+					if (position.y - App->player->position.y - 7 > position.x - App->player->position.x + 7)
+					{
+						want_go_up = false;  want_go_down = true; want_go_left = false; want_go_right = false;
+					}
+					else{ want_go_left = false; want_go_right = true;  want_go_up = false; want_go_down = false; }
+				}
+				else // is down 
+				{
+					if (App->player->position.y - 7 - position.y > position.x - App->player->position.x + 7)
+					{
+						want_go_down = false; want_go_left = false; want_go_right = false; want_go_up = true;
+					}
+					else{ want_go_left = false; want_go_right = true;  want_go_up = false; want_go_down = false; }
+				}
+			}
+		}
 
-			if (can_go_left && (tmp == 2 || tmp == 5))
+		// Choose direction ----------------------------
+		if (change_direction)
+		{
+			if (want_go_right) // try go right
 			{
-				position.y = (p_mid.y * 8) + 4 + 7;
-				ghost_left = true; cont = true;
+				if (can_go_right && !ghost_left)
+				{
+					ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
+				}
+				else if (can_go_up && can_go_down)
+				{
+					if (position.y > App->player->position.y - 7)
+					{
+						ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
+					}
+					else{ ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false; }
+				}
+				else if (can_go_up && !ghost_down)
+				{
+					ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
+				}
+				else if (can_go_down && !ghost_up)
+				{
+					ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
+				}
+				else{ ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false; }
 			}
-			else{ ghost_left = false; }
 
-			if (can_go_up && tmp == 3)
+			//-------
+			else if (want_go_left) // try go left
 			{
-				position.x = (p_mid.x * 8) + 4 - 7;
-				ghost_up = true; cont = true;
+				if (can_go_left && !ghost_right)
+				{
+					ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+				}
+				else if (can_go_up && can_go_down)
+				{
+					if (position.y > App->player->position.y - 7)
+					{
+						ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
+					}
+					else{ ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false; }
+				}
+				else if (can_go_up && !ghost_down)
+				{
+					ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
+				}
+				else if (can_go_down && !ghost_up)
+				{
+					ghost_down = true; ghost_left = false; ghost_right = false; ghost_up = false;
+				}
+				else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false; }
 			}
-			else{ ghost_up = false; }
 
-			if (can_go_down && tmp == 1)
+			//-------
+			else if (want_go_up) // try go up
 			{
-				position.x = (p_mid.x * 8) + 4 - 7;
-				ghost_down = true; cont = true;
+				if (can_go_up && !ghost_down)
+				{
+					ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
+				}
+				else if (can_go_left && can_go_right)
+				{
+					if (position.x > App->player->position.x + 7)
+					{
+						ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+					}
+					else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false; }
+				}
+				else if (can_go_left && !ghost_right)
+				{
+					ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+				}
+				else if (can_go_right && !ghost_left)
+				{
+					ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
+				}
+				else{ ghost_down = true; ghost_up = false; ghost_right = false; ghost_left = false; }
 			}
-			else{ ghost_down = false; }
+
+			//-------
+			else if (want_go_down) // try go down
+			{
+				if (can_go_down && !ghost_up)
+				{
+					ghost_down = true; ghost_up = false; ghost_right = false; ghost_left = false;
+				}
+				else if (can_go_left && can_go_right)
+				{
+					if (position.x > App->player->position.x + 7)
+					{
+						ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+					}
+					else{ ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false; }
+				}
+				else if (can_go_left && !ghost_right)
+				{
+					ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
+				}
+				else if (can_go_right && !ghost_left)
+				{
+					ghost_right = true; ghost_left = false; ghost_up = false; ghost_down = false;
+				}
+				else{ ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false; }
+			}
 		}
 	}
 
+	// Ghost random ----------
+	else
+	{
+		random_device rd;
+		mt19937 gen(rd());
+		uniform_int_distribution<> dis(1, 4);
+
+		// Choose direction Radom -------------------
+		if (change_direction)
+		{
+			cont = false;
+			while (cont == false)
+			{
+				tmp = dis(gen);
+
+				if (can_go_right && tmp == 4)
+				{
+					position.y = (p_mid.y * 8) + 4 + 7;
+					ghost_right = true; cont = true;
+				}
+				else{ ghost_right = false; }
+
+				if (can_go_left && tmp == 2)
+				{
+					position.y = (p_mid.y * 8) + 4 + 7;
+					ghost_left = true; cont = true;
+				}
+				else{ ghost_left = false; }
+
+				if (can_go_up && tmp == 3)
+				{
+					position.x = (p_mid.x * 8) + 4 - 7;
+					ghost_up = true; cont = true;
+				}
+				else{ ghost_up = false; }
+
+				if (can_go_down && (tmp == 1))
+				{
+					position.x = (p_mid.x * 8) + 4 - 7;
+					ghost_down = true; cont = true;
+				}
+				else{ ghost_down = false; }
+			}
+		}
+	}
 
 
 	// Player tile collision detectors ------------------------------
@@ -233,22 +439,18 @@ update_status ModuleGhostOrange::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	int speed = 1;
 	if (now >= total_time)
 	{
-		if (1)
+		// What direction are we changing
+		if (speed != 0)
 		{
 			if (ghost_right) // right
 			{
 				// What is the next tile
 				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
 				{
-					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_left == true)
-					{
-						position.y = (p_mid.y * 8) + 4 + 7; // Re-position to the center of the tile
-						go_right = true; go_left = false; go_up = false; go_down = false;
-					}
+					position.y = (p_mid.y * 8) + 4 + 7; // Re-position to the center of the tile
+					go_right = true; go_left = false; go_up = false; go_down = false;
 				}
 			}
 			if (ghost_left) // left
@@ -256,12 +458,8 @@ update_status ModuleGhostOrange::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
 				{
-					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 && (position.y - 7) == (p_mid.y * 8) + 4 || (position.y - 7) == (p_mid.y * 8) + 3 || (position.y - 7) == (p_mid.y * 8) + 5 || (position.y - 7) == (p_mid.y * 8) + 2 || (position.y - 7) == (p_mid.y * 8) + 6 || go_right == true)
-					{
-						position.y = (p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
-						go_left = true; go_right = false; go_up = false; go_down = false;
-					}
+					position.y = (int)(p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
+					go_left = true; go_right = false; go_up = false; go_down = false;
 				}
 			}
 			if (ghost_up) // up
@@ -269,12 +467,8 @@ update_status ModuleGhostOrange::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
-					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_down == true)
-					{
-						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
-						go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
-					}
+					position.x = (int)(p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
+					go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
 				}
 			}
 			if (ghost_down) // down
@@ -282,15 +476,12 @@ update_status ModuleGhostOrange::Update()
 				// What is the next tile
 				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
 				{
-					// Is the player near the center-pixel of the tile?
-					if ((position.x + 7) == (p_mid.x * 8) + 4 || (position.x + 7) == (p_mid.x * 8) + 3 || (position.x + 7) == (p_mid.x * 8) + 5 || (position.x + 7) == (p_mid.x * 8) + 2 || (position.x + 7) == (p_mid.x * 8) + 6 && (position.y - 7) == (p_mid.y * 8) + 4 || go_up == true)
-					{
-						position.x = (p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
-						go_down = true; go_right = false; go_left = false; go_up = false;
-					}
+					position.x = (int)(p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
+					go_down = true; go_right = false; go_left = false; go_up = false;
 				}
 			}
 
+			// Move
 			if (go_right)
 			{
 				// What is the next tile
@@ -298,17 +489,11 @@ update_status ModuleGhostOrange::Update()
 				{
 					right.speed = 0.25f;
 
-					if (!is_vulnerable)
-					{
-						current_animation = &right;
-					}
+					if (!is_vulnerable){ current_animation = &right; }
 
-					if (position.x >= 220)
-					{
-						position.x = -10;
-					}
+					if (position.x >= 220){ position.x = -10; }
 
-					position.x += speed;
+					position.x += speed + extra_speed;
 
 					go_left = false; go_up = false; go_down = false;
 				}
@@ -320,23 +505,18 @@ update_status ModuleGhostOrange::Update()
 				{
 					left.speed = 0.25f;
 
-					if (!is_vulnerable)
-					{
-						current_animation = &left;
-					}
+					if (!is_vulnerable){ current_animation = &left; }
 
-					if (position.x <= -10)
-					{
-						position.x = 220;
-					}
+					if (position.x <= -10){ position.x = 220; }
 
-					position.x -= speed;
+					position.x -= speed + extra_speed;
+
 					go_right = false; go_up = false; go_down = false;
 				}
 			}
 			if (go_up)
 			{
-				// What is the next tile
+				// What is the next tilec
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
 				{
 					up.speed = 0.25f;
@@ -346,7 +526,8 @@ update_status ModuleGhostOrange::Update()
 						current_animation = &up;
 					}
 
-					position.y -= speed;
+					position.y -= speed + extra_speed;
+
 					go_right = false; go_left = false; go_down = false;
 				}
 			}
@@ -362,11 +543,13 @@ update_status ModuleGhostOrange::Update()
 						current_animation = &down;
 					}
 
-					position.y += speed;
+					position.y += speed + extra_speed;
+
 					go_right = false; go_left = false; go_up = false;
 				}
 			}
 		}
+		else{ down.speed = 0; up.speed = 0; left.speed = 0; right.speed = 0; }
 	}
 	else{}
 
@@ -395,7 +578,7 @@ update_status ModuleGhostOrange::Update()
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
-	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r);
+	if (can_see){ App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); }
 
 	//App->render->Blit(graphics, (position.x +7), (position.y - 7) + DISTANCEM1, &test, 1.0f); //
 	//App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //

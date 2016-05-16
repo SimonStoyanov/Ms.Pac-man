@@ -59,7 +59,7 @@ bool ModuleBackgroundMap1::Start()
 	App->player->Enable();
 	App->audio->Enable();
 	//App->ghost_blue->Enable();
-	//App->ghost_orange->Enable();
+	App->ghost_orange->Enable();
 	//App->ghost_pink->Enable();
 	App->ghost_red->Enable();
 	App->collision->Enable();
