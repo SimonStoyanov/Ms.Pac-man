@@ -272,84 +272,6 @@ update_status ModuleUI::Update()
 				case 103:
 					App->render->Blit(graphics, i * 8, var * 8, &pacman4);
 					break;
-				case 'x':
-					for (int i = 0; i < 7; ++i){
-						switch (points[i]){
-						case 0:
-							App->render->Blit(graphics, i * 8, var * 8, &tile0);
-							break;
-						case 1:
-							App->render->Blit(graphics, i * 8, var * 8, &tile1);
-							break;
-						case 2:
-							App->render->Blit(graphics, i * 8, var * 8, &tile2);
-							break;
-						case 3:
-							App->render->Blit(graphics, i * 8, var * 8, &tile3);
-							break;
-						case 4:
-							App->render->Blit(graphics, i * 8, var * 8, &tile4);
-							break;
-						case 5:
-							App->render->Blit(graphics, i * 8, var * 8, &tile5);
-							break;
-						case 6:
-							App->render->Blit(graphics, i * 8, var * 8, &tile6);
-							break;
-						case 7:
-							App->render->Blit(graphics, i * 8, var * 8, &tile7);
-							break;
-						case 8:
-							App->render->Blit(graphics, i * 8, var * 8, &tile8);
-							break;
-						case 9:
-							App->render->Blit(graphics, i * 8, var * 8, &tile9);
-							break;
-						case 11:
-							App->render->Blit(graphics, i * 8, var * 8, &tile_);
-							break;
-						}
-					}
-					break;
-				case 'y':
-					for (int i = 0; i < 7; ++i){
-						switch (points[i]){
-						case 0:
-							App->render->Blit(graphics, i * 8, var * 8, &tile0);
-							break;
-						case 1:
-							App->render->Blit(graphics, i * 8, var * 8, &tile1);
-							break;
-						case 2:
-							App->render->Blit(graphics, i * 8, var * 8, &tile2);
-							break;
-						case 3:
-							App->render->Blit(graphics, i * 8, var * 8, &tile3);
-							break;
-						case 4:
-							App->render->Blit(graphics, i * 8, var * 8, &tile4);
-							break;
-						case 5:
-							App->render->Blit(graphics, i * 8, var * 8, &tile5);
-							break;
-						case 6:
-							App->render->Blit(graphics, i * 8, var * 8, &tile6);
-							break;
-						case 7:
-							App->render->Blit(graphics, i * 8, var * 8, &tile7);
-							break;
-						case 8:
-							App->render->Blit(graphics, i * 8, var * 8, &tile8);
-							break;
-						case 9:
-							App->render->Blit(graphics, i * 8, var * 8, &tile9);
-							break;
-						case 11:
-							App->render->Blit(graphics, i * 8, var * 8, &tile_);
-							break;
-						}
-					}
-					break;
 				}
 			}
 			i++;
@@ -537,8 +459,27 @@ update_status ModuleUI::Update()
 			mapUI[1][25] = _sc3;
 			mapUI[1][26] = _sc2;
 			mapUI[1][27] = _sc1;
-
 		}
+	}
+
+	// HighScore
+	if (_score > score){
+		mapUI[1][11] = _sc7;
+		mapUI[1][12] = _sc6;
+		mapUI[1][13] = _sc5;
+		mapUI[1][14] = _sc4;
+		mapUI[1][15] = _sc3;
+		mapUI[1][16] = _sc2;
+		mapUI[1][17] = _sc1;
+	}
+	else{
+		mapUI[1][11] = sc7;
+		mapUI[1][12] = sc6;
+		mapUI[1][13] = sc5;
+		mapUI[1][14] = sc4;
+		mapUI[1][15] = sc3;
+		mapUI[1][16] = sc2;
+		mapUI[1][17] = sc1;
 	}
 
 	 //Lifes
