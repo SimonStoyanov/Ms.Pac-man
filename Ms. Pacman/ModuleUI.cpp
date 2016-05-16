@@ -385,11 +385,32 @@ update_status ModuleUI::Update()
 		{
 			sc1 = score % 10;
 			sc2 = (score / 10) % 10;
-			sc3 = (score / 100) % 10;
-			sc4 = (score / 1000) % 10;
-			sc5 = (score / 10000) % 10;
-			sc6 = (score / 100000) % 10;
-			sc7 = (score / 1000000) % 10;
+		
+			if (scdigits >= 3)
+				sc3 = (score / 100) % 10;
+			else
+				sc3 = '_';
+			
+			if (scdigits >= 4)
+				sc4 = (score / 1000) % 10;
+			else
+				sc4 = '_';
+			
+			if (scdigits >= 5)
+				sc5 = (score / 10000) % 10;
+			else
+				sc5 = '_';
+			
+			if (scdigits >= 6)
+				sc6 = (score / 100000) % 10;
+			else
+				sc6 = '_';
+			
+			if (scdigits == 7)
+				sc7 = (score / 1000000) % 10;
+			else
+				sc7 = '_';
+		
 			mapUI[1][0] = sc7;
 			mapUI[1][1] = sc6;
 			mapUI[1][2] = sc5;

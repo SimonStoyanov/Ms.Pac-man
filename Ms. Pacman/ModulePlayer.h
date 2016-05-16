@@ -57,6 +57,8 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	bool wakawaka;
+
+	int eaten_ghost = 0;
 };
 
 #endif

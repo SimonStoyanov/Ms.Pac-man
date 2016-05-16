@@ -13,6 +13,8 @@
 #include "ModuleGhostRed.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleMenu.h"
+#include "ModuleUI.h"
+#include "ModuleEndScreen.h"
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -325,39 +327,96 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_red->speed = 0;
 		App->player->speed = 0;
-
+		
+		
+		
+				
 		// -------------------------------
 		
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
+		if (eaten_ghost == 0){
+			App->UI->score += 200;
+		}
+		else if (eaten_ghost == 1){
+			App->UI->score += 400;
+		}
+		else if (eaten_ghost == 2){
+			App->UI->score += 800;
+		}
+		else if (eaten_ghost == 3){
+			App->UI->score += 1600;
+		}
 		App->ghost_blue->enemy_collision->to_delete = true;
 		App->ghost_blue->Disable();
 		App->ghost_blue->Enable();
 
 		App->ghost_blue->position.x = 105;
 		App->ghost_blue->position.y = 99;
+		
+		eaten_ghost++;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
+		if (eaten_ghost == 0){
+			App->UI->score += 200;
+		}
+		else if (eaten_ghost == 1){
+			App->UI->score += 400;
+		}
+		else if (eaten_ghost == 2){
+			App->UI->score += 800;
+		}
+		else if (eaten_ghost == 3){
+			App->UI->score += 1600;
+		}
 		App->ghost_orange->enemy_collision->to_delete = true;
 		App->ghost_orange->Disable();
 		App->ghost_orange->Enable();
 
 		App->ghost_orange->position.x = 105;
 		App->ghost_orange->position.y = 99;
+		
+		eaten_ghost++;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
 	{
+		if (eaten_ghost == 0){
+			App->UI->score += 200;
+		}
+		else if (eaten_ghost == 1){
+			App->UI->score += 400;
+		}
+		else if (eaten_ghost == 2){
+			App->UI->score += 800;
+		}
+		else if (eaten_ghost == 3){
+			App->UI->score += 1600;
+		}
 		App->ghost_pink->enemy_collision->to_delete = true;
 		App->ghost_pink->Disable();
 		App->ghost_pink->Enable();
 
 		App->ghost_pink->position.x = 105;
 		App->ghost_pink->position.y = 99;
+		
+		eaten_ghost++;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
 	{
+		if (eaten_ghost == 0){
+			App->UI->score += 200;
+		}
+		else if (eaten_ghost == 1){
+			App->UI->score += 400;
+		}
+		else if (eaten_ghost == 2){
+			App->UI->score += 800;
+		}
+		else if (eaten_ghost == 3){
+			App->UI->score += 1600;
+		}
 		App->ghost_red->enemy_collision->to_delete = true;
 		App->ghost_red->Disable();
 		App->ghost_red->Enable();
@@ -371,6 +430,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		else
 			App->ghost_red->ghost_left = true;
 		
+		eaten_ghost++;
 	}
 }
 
