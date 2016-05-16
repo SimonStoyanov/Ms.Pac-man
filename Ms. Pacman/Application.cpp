@@ -67,6 +67,7 @@ bool Application::Init()
 	collision->Disable();
 	ghost_blue->Disable();
 	player->Disable();
+	player2->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

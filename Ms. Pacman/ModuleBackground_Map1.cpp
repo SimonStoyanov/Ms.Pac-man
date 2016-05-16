@@ -14,6 +14,7 @@
 #include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostOrange.h"
 #include "ModuleGhostPink.h"
@@ -44,6 +45,9 @@ bool ModuleBackgroundMap1::Start()
 	App->player->position.x = 105; //105
 	App->player->position.y = 195; //195
 
+	App->player2->position.x = 105; //105
+	App->player2->position.y = 195; //195
+
 	App->ghost_blue->position.x = 105; //105
 	App->ghost_blue->position.y = 99; //99
 
@@ -58,6 +62,7 @@ bool ModuleBackgroundMap1::Start()
 
 	// Enable and disable modules ---------
 	App->player->Enable();
+	App->player2->Enable();
 	App->audio->Enable();
 	App->ghost_blue->Enable();
 	App->ghost_orange->Enable();
@@ -271,6 +276,41 @@ update_status ModuleBackgroundMap1::Update()
 		App->UI->score++;
 		eaten_pills++;
 		
+		break;
+	default:
+		break;
+	}
+	
+	switch (g_map[App->player2->p_mid.y][App->player2->p_mid.x])
+	{
+	case 27:
+		// Change tile
+		g_map[App->player2->p_mid.y][App->player2->p_mid.x] = 0;
+
+		// Vulnerable
+		App->ghost_blue->passed_time = App->ghost_blue->now;
+		App->ghost_orange->passed_time = App->ghost_orange->now;
+		App->ghost_pink->passed_time = App->ghost_pink->now;
+		App->ghost_red->passed_time = App->ghost_red->now;
+
+		App->ghost_blue->is_vulnerable = true;
+		App->ghost_orange->is_vulnerable = true;
+		App->ghost_pink->is_vulnerable = true;
+		App->ghost_red->is_vulnerable = true;
+
+		// Points
+		App->UI->_score += 5;
+		eaten_pills++;
+
+		break;
+	case 28:
+		// Change tile
+		g_map[App->player2->p_mid.y][App->player2->p_mid.x] = 0;
+
+		// Points
+		App->UI->_score++;
+		eaten_pills++;
+
 		break;
 	default:
 		break;

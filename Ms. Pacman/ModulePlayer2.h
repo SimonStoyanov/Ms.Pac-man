@@ -37,8 +37,8 @@ public:
 
 	bool go_up = false;
 	bool go_down = false;
-	bool go_left = true;
-	bool go_right = false;
+	bool go_left = false;
+	bool go_right = true;
 
 	SDL_Rect test;
 

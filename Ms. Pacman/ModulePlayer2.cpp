@@ -25,34 +25,34 @@ ModulePlayer2::ModulePlayer2()
 	test = { 3, 120, 1, 1 };
 
 	// right animation
-	right.PushBack({ 33, 1, 15, 14 });
-	right.PushBack({ 17, 1, 13, 14 });
-	right.PushBack({ 1, 1, 11, 14 });
+	right.PushBack({ 50, 2, 13, 13 });
+	right.PushBack({ 65, 2, 13, 13 });
+	right.PushBack({ 81, 2, 13, 13 });
 	right.speed = 0.3f;
 
 	// left animation
-	left.PushBack({ 15, 34, 15, 15 });
-	left.PushBack({ 33, 34, 15, 15 });
-	left.PushBack({ 0, 34, 17, 15 });
+	left.PushBack({ 50, 34, 13, 13 });
+	left.PushBack({ 66, 34, 13, 13 });
+	left.PushBack({ 81, 2, 13, 13 });
 	left.speed = 0.3f;
 
 	// up animation
-	up.PushBack({ 33, 51, 14, 15 });
-	up.PushBack({ 17, 51, 14, 13 });
-	up.PushBack({ 1, 51, 14, 11 });
+	up.PushBack({ 50, 53, 13, 9 });
+	up.PushBack({ 65, 51, 13, 12 });
+	up.PushBack({ 81, 2, 13, 13 });
 	up.speed = 0.3f;
 
 	// down animation
-	down.PushBack({ 33, 17, 14, 15 });
-	down.PushBack({ 17, 17, 14, 15 });
-	down.PushBack({ 1, 17, 14, 15 });
+	down.PushBack({ 50, 17, 13, 13 });
+	down.PushBack({ 66, 17, 13, 13 });
+	down.PushBack({ 81, 2, 13, 13 });
 	down.speed = 0.3f;
 
 	// dead animation
-	dead.PushBack({ 17, 1, 13, 14 });
-	dead.PushBack({ 17, 17, 14, 15 });
-	dead.PushBack({ 33, 34, 15, 15 });
-	dead.PushBack({ 17, 51, 14, 13 });
+	dead.PushBack({ 50, 2, 13, 13 });
+	dead.PushBack({ 50, 13, 13, 13 });
+	dead.PushBack({ 50, 34, 13, 13 });
+	dead.PushBack({ 50, 50, 13, 13 });
 	dead.speed = 0.3f;
 }
 
@@ -107,7 +107,7 @@ update_status ModulePlayer2::Update()
 	{
 		if (App->player->total_time <= App->player->now)
 		{
-			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] == false && App->input->keyboard[SDL_SCANCODE_A] == false && App->input->keyboard[SDL_SCANCODE_W] == false) // right
+			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] == false && App->input->keyboard[SDL_SCANCODE_A] == false && App->input->keyboard[SDL_SCANCODE_W] == false) // right
 			{
 				// What is the next tile
 				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
@@ -120,7 +120,7 @@ update_status ModulePlayer2::Update()
 					}
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) // left
+			if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) // left
 			{
 				// What is the next tile
 				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
@@ -133,7 +133,7 @@ update_status ModulePlayer2::Update()
 					}
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A] == false && App->input->keyboard[SDL_SCANCODE_S] == false && App->input->keyboard[SDL_SCANCODE_D] == false) // up
+			if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A] == false && App->input->keyboard[SDL_SCANCODE_S] == false && App->input->keyboard[SDL_SCANCODE_D] == false) // up
 			{
 				// What is the next tile
 				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
@@ -146,7 +146,7 @@ update_status ModulePlayer2::Update()
 					}
 				}
 			}
-			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A] == false) // down
+			if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A] == false) // down
 			{
 				// What is the next tile
 				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
@@ -189,7 +189,7 @@ update_status ModulePlayer2::Update()
 					left.speed = 0.3f;
 					current_animation = &left;
 					position.x -= speed;
-		
+
 					go_right = false; go_up = false; go_down = false;
 
 					// Tunel teleport
@@ -209,7 +209,7 @@ update_status ModulePlayer2::Update()
 					up.speed = 0.3f;
 					current_animation = &up;
 					position.y -= speed;
-				
+
 					go_right = false; go_left = false; go_down = false;
 				}
 				else
@@ -223,7 +223,7 @@ update_status ModulePlayer2::Update()
 					down.speed = 0.3f;
 					current_animation = &down;
 					position.y += speed;
-			
+
 					go_right = false; go_left = false; go_up = false;
 				}
 				else
@@ -375,16 +375,16 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
 		if (eaten_ghost == 0){
-			App->UI->score += 200;
+			App->UI->_score += 200;
 		}
 		else if (eaten_ghost == 1){
-			App->UI->score += 400;
+			App->UI->_score += 400;
 		}
 		else if (eaten_ghost == 2){
-			App->UI->score += 800;
+			App->UI->_score += 800;
 		}
 		else if (eaten_ghost == 3){
-			App->UI->score += 1600;
+			App->UI->_score += 1600;
 		}
 		App->ghost_blue->enemy_collision->to_delete = true;
 		App->ghost_blue->Disable();
@@ -398,16 +398,16 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
 		if (eaten_ghost == 0){
-			App->UI->score += 200;
+			App->UI->_score += 200;
 		}
 		else if (eaten_ghost == 1){
-			App->UI->score += 400;
+			App->UI->_score += 400;
 		}
 		else if (eaten_ghost == 2){
-			App->UI->score += 800;
+			App->UI->_score += 800;
 		}
 		else if (eaten_ghost == 3){
-			App->UI->score += 1600;
+			App->UI->_score += 1600;
 		}
 		App->ghost_orange->enemy_collision->to_delete = true;
 		App->ghost_orange->Disable();
@@ -421,16 +421,16 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
 	{
 		if (eaten_ghost == 0){
-			App->UI->score += 200;
+			App->UI->_score += 200;
 		}
 		else if (eaten_ghost == 1){
-			App->UI->score += 400;
+			App->UI->_score += 400;
 		}
 		else if (eaten_ghost == 2){
-			App->UI->score += 800;
+			App->UI->_score += 800;
 		}
 		else if (eaten_ghost == 3){
-			App->UI->score += 1600;
+			App->UI->_score += 1600;
 		}
 		App->ghost_pink->enemy_collision->to_delete = true;
 		App->ghost_pink->Disable();
@@ -444,16 +444,16 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
 	{
 		if (eaten_ghost == 0){
-			App->UI->score += 200;
+			App->UI->_score += 200;
 		}
 		else if (eaten_ghost == 1){
-			App->UI->score += 400;
+			App->UI->_score += 400;
 		}
 		else if (eaten_ghost == 2){
-			App->UI->score += 800;
+			App->UI->_score += 800;
 		}
 		else if (eaten_ghost == 3){
-			App->UI->score += 1600;
+			App->UI->_score += 1600;
 		}
 		App->ghost_red->enemy_collision->to_delete = true;
 		App->ghost_red->Disable();

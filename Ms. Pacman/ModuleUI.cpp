@@ -59,8 +59,8 @@ bool ModuleUI::Start()
 	
 	char tmp_mapGAME[5][28]
 	{	//1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
-		{ '_','_','_', 1, 'U','P','_','_','_','H','I','G','H','_','S','C','O','R','E', '_','_','_','_','_','_', '_','_','_'}, //1
-		{ 'x','x','x','x','x','x','x', '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_', '_','_','_','_' }, //2
+		{ '_','_','_', 1, 'U','P','_','_','_','H','I','G','H','_','S','C','O','R','E', '_','_','_', 2, 'U','P', '_','_','_'}, //1
+		{ 'x','x','x','x','x','x','x', '_','_','_','_','_','_','_','_','_','_','_','_','_','_','y','y','y','y','y','y','y' }, //2
 		{ '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' }, //3
 		//-------------------------------------------------------------------------------------------------------------//
 		//-------------------------------------------------------------------------------------------------------------//
@@ -311,6 +311,45 @@ update_status ModuleUI::Update()
 						}
 					}
 					break;
+				case 'y':
+					for (int i = 0; i < 7; ++i){
+						switch (points[i]){
+						case 0:
+							App->render->Blit(graphics, i * 8, var * 8, &tile0);
+							break;
+						case 1:
+							App->render->Blit(graphics, i * 8, var * 8, &tile1);
+							break;
+						case 2:
+							App->render->Blit(graphics, i * 8, var * 8, &tile2);
+							break;
+						case 3:
+							App->render->Blit(graphics, i * 8, var * 8, &tile3);
+							break;
+						case 4:
+							App->render->Blit(graphics, i * 8, var * 8, &tile4);
+							break;
+						case 5:
+							App->render->Blit(graphics, i * 8, var * 8, &tile5);
+							break;
+						case 6:
+							App->render->Blit(graphics, i * 8, var * 8, &tile6);
+							break;
+						case 7:
+							App->render->Blit(graphics, i * 8, var * 8, &tile7);
+							break;
+						case 8:
+							App->render->Blit(graphics, i * 8, var * 8, &tile8);
+							break;
+						case 9:
+							App->render->Blit(graphics, i * 8, var * 8, &tile9);
+							break;
+						case 11:
+							App->render->Blit(graphics, i * 8, var * 8, &tile_);
+							break;
+						}
+					}
+					break;
 				}
 			}
 			i++;
@@ -342,7 +381,7 @@ update_status ModuleUI::Update()
 		}
 	}
 
-	// Score
+	// Score P1
 	int tmp_score = score;
 	if (tmp_score <= 9999999)
 	{
@@ -418,6 +457,86 @@ update_status ModuleUI::Update()
 			mapUI[1][4] = sc3;			
 			mapUI[1][5] = sc2;
 			mapUI[1][6] = sc1;
+
+		}
+	}
+
+	// Score P2
+	int _tmp_score = _score;
+	if (_tmp_score <= 9999999)
+	{
+		int _scdigits = 0;
+		int _tmp;
+		while (_tmp_score > 0)
+		{
+			_tmp_score /= 10;
+			_scdigits++;
+		}
+		if (_scdigits == 1)
+		{
+			mapUI[1][27] = _score;
+		}
+		if (_scdigits == 2)
+		{
+			mapUI[1][26] = _score;
+		}
+		if (_scdigits == 3)
+		{
+			mapUI[1][25] = _score;
+		}
+		if (_scdigits == 4)
+		{
+			mapUI[1][24] = _score;
+		}
+		if (_scdigits == 5)
+		{
+			mapUI[1][23] = _score;
+		}
+		if (_scdigits == 6)
+		{
+			mapUI[1][22] = _score;
+		}
+		if (_scdigits == 7)
+		{
+			mapUI[1][21] = _score;
+		}
+		else
+		{
+			_sc1 = _score % 10;
+			_sc2 = (_score / 10) % 10;
+
+			if (_scdigits >= 3)
+				_sc3 = (_score / 100) % 10;
+			else
+				_sc3 = '_';
+
+			if (_scdigits >= 4)
+				_sc4 = (_score / 1000) % 10;
+			else
+				_sc4 = '_';
+
+			if (_scdigits >= 5)
+				_sc5 = (_score / 10000) % 10;
+			else
+				_sc5 = '_';
+
+			if (_scdigits >= 6)
+				_sc6 = (_score / 100000) % 10;
+			else
+				_sc6 = '_';
+
+			if (_scdigits == 7)
+				_sc7 = (_score / 1000000) % 10;
+			else
+				_sc7 = '_';
+
+			mapUI[1][21] = _sc7;
+			mapUI[1][22] = _sc6;
+			mapUI[1][23] = _sc5;
+			mapUI[1][24] = _sc4;
+			mapUI[1][25] = _sc3;
+			mapUI[1][26] = _sc2;
+			mapUI[1][27] = _sc1;
 
 		}
 	}
