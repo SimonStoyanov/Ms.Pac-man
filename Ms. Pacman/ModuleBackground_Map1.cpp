@@ -62,7 +62,7 @@ bool ModuleBackgroundMap1::Start()
 
 	// Enable and disable modules ---------
 	App->player->Enable();
-	//App->player2->Enable();
+	App->player2->Enable();
 	App->audio->Enable();
 	App->ghost_blue->Enable();
 	App->ghost_orange->Enable();

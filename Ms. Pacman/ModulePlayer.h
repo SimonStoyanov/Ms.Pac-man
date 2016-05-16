@@ -20,6 +20,8 @@ public:
 public:
 	float speed = 1.2f;
 
+	bool two_players = true;
+
 	SDL_Texture* graphics = nullptr;
 	Animation* prev_anim;
 	Animation right;

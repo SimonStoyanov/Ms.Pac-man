@@ -292,28 +292,40 @@ update_status ModulePlayer::Update()
 	else if (App->player->is_dead && (now - passed_time) > (8 * 0.5f * 1000.0f))
 	{
 		// Ghost red reset
-		App->ghost_red->enemy_collision->to_delete = true;
-		App->ghost_red->Disable();
-		App->textures->last_texture--; //Carefull with that. Could cause future errors.
-		App->ghost_red->Enable();
+		if (App->ghost_red->IsEnabled())
+		{
+			App->ghost_red->enemy_collision->to_delete = true;
+			App->ghost_red->Disable();
+			App->textures->last_texture--; //Carefull with that. Could cause future errors.
+			App->ghost_red->Enable();
+		}
 
 		// Ghost orange reset
-		App->ghost_orange->enemy_collision->to_delete = true;
-		App->ghost_orange->Disable();
-		App->textures->last_texture--; //Carefull with that. Could cause future errors.
-		App->ghost_orange->Enable();
+		if (App->ghost_orange->IsEnabled())
+		{
+			App->ghost_orange->enemy_collision->to_delete = true;
+			App->ghost_orange->Disable();
+			App->textures->last_texture--; //Carefull with that. Could cause future errors.
+			App->ghost_orange->Enable();
+		}
 
 		// Ghost pink reset
-		App->ghost_pink->enemy_collision->to_delete = true;
-		App->ghost_pink->Disable();
-		App->textures->last_texture--; //Carefull with that. Could cause future errors.
-		App->ghost_pink->Enable();
+		if (App->ghost_pink->IsEnabled())
+		{
+			App->ghost_pink->enemy_collision->to_delete = true;
+			App->ghost_pink->Disable();
+			App->textures->last_texture--; //Carefull with that. Could cause future errors.
+			App->ghost_pink->Enable();
+		}
 
 		// Ghost blue reset
-		App->ghost_blue->enemy_collision->to_delete = true;
-		App->ghost_blue->Disable();
-		App->textures->last_texture--; //Carefull with that. Could cause future errors.
-		App->ghost_blue->Enable();
+		if (App->ghost_blue->IsEnabled())
+		{
+			App->ghost_blue->enemy_collision->to_delete = true;
+			App->ghost_blue->Disable();
+			App->textures->last_texture--; //Carefull with that. Could cause future errors.
+			App->ghost_blue->Enable();
+		}
 	}
 	else if (App->player->is_dead && (now - passed_time) > (5.9 * 0.5f * 1000.0f))
 	{

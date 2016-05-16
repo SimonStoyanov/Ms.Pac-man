@@ -9,8 +9,6 @@
 #include "ModuleEndScreen.h"
 
 
-ModuleAudio::ModuleAudio()
-{}
 
 ModuleAudio::~ModuleAudio()
 {}
@@ -34,13 +32,18 @@ bool ModuleAudio::Start()
 	return true;
 }
 
+ModuleAudio::ModuleAudio()
+{
+	Mix_FreeMusic(start_of_a_game);
+}
+
 // UnLoad assets
 bool ModuleAudio::CleanUp()
 {
 	LOG("Unloading space scene");
 
 	Mix_CloseAudio();
-	Mix_FreeMusic(start_of_a_game);
+
 	//Mix_FreeChunk(wakawaka);
 
 	return true;

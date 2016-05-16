@@ -8,6 +8,7 @@ using namespace std;
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleCollision.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostPink.h"
@@ -103,6 +104,29 @@ bool ModuleGhostPink::Start()
 // Update: draw background
 update_status  ModuleGhostPink::Update()
 {
+	// What player should i chase -----------
+	int p_position_x;
+	int p_position_y;
+
+	if (App->player->two_players)
+	{
+		if (abs(sqrt(((App->player->position.x - position.x) * (App->player->position.x - position.x)) + (App->player->position.y - position.y) * (App->player->position.y - position.y))) < abs(sqrt(((App->player2->position.x - position.x) * (App->player2->position.x - position.x)) + (App->player2->position.y - position.y) * (App->player2->position.y - position.y))))
+		{
+			p_position_x = App->player->position.x;
+			p_position_y = App->player->position.y;
+		}
+		else
+		{
+			p_position_x = App->player2->position.x;
+			p_position_y = App->player2->position.y;
+		}
+	}
+	else
+	{
+		p_position_x = App->player->position.x;
+		p_position_y = App->player->position.y;
+	}
+
 	Animation* current_animation = prev_anim;
 
 	now = SDL_GetTicks() - App->player->start_time;
@@ -184,11 +208,11 @@ update_status  ModuleGhostPink::Update()
 		if (is_vulnerable == false)
 		{
 			// Want to go to the player / Where is the target -----------------------------
-			if (App->player->position.x + 7 > position.x) //is right
+			if (p_position_x + 7 > position.x) //is right
 			{
-				if (position.y > App->player->position.y - 7) // is up
+				if (position.y > p_position_y - 7) // is up
 				{
-					if (position.y - App->player->position.y - 7 > App->player->position.x + 7 - position.x)
+					if (position.y - p_position_y - 7 > p_position_x + 7 - position.x)
 					{
 						want_go_up = true; want_go_down = false; want_go_left = false; want_go_right = false;
 					}
@@ -196,7 +220,7 @@ update_status  ModuleGhostPink::Update()
 				}
 				else // is down 
 				{
-					if (App->player->position.y - 7 - position.y > App->player->position.x + 7 - position.x)
+					if (p_position_y - 7 - position.y > p_position_x + 7 - position.x)
 					{
 						want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
 					}
@@ -205,9 +229,9 @@ update_status  ModuleGhostPink::Update()
 			}
 			else // is left
 			{
-				if (position.y > App->player->position.y - 7) // is up
+				if (position.y > p_position_y - 7) // is up
 				{
-					if (position.y - App->player->position.y - 7 > position.x - App->player->position.x + 7)
+					if (position.y - p_position_y - 7 > position.x - p_position_x + 7)
 					{
 						want_go_up = true;  want_go_down = false; want_go_left = false; want_go_right = false;
 					}
@@ -215,7 +239,7 @@ update_status  ModuleGhostPink::Update()
 				}
 				else // is down 
 				{
-					if (App->player->position.y - 7 - position.y > position.x - App->player->position.x + 7)
+					if (p_position_y - 7 - position.y > position.x - p_position_x + 7)
 					{
 						want_go_down = true; want_go_left = false; want_go_right = false; want_go_up = false;
 					}
@@ -226,11 +250,11 @@ update_status  ModuleGhostPink::Update()
 		else
 		{
 			// Want to escape from the player / Where is the target -----------------------------
-			if (App->player->position.x + 7 > position.x) //is right
+			if (p_position_x + 7 > position.x) //is right
 			{
-				if (position.y > App->player->position.y - 7) // is up
+				if (position.y > p_position_y - 7) // is up
 				{
-					if (position.y - App->player->position.y - 7 > App->player->position.x + 7 - position.x)
+					if (position.y - p_position_y - 7 > p_position_x + 7 - position.x)
 					{
 						want_go_up = false; want_go_down = true; want_go_left = false; want_go_right = false;
 					}
@@ -238,7 +262,7 @@ update_status  ModuleGhostPink::Update()
 				}
 				else // is down 
 				{
-					if (App->player->position.y - 7 - position.y > App->player->position.x + 7 - position.x)
+					if (p_position_y - 7 - position.y > p_position_x + 7 - position.x)
 					{
 						want_go_down = false; want_go_left = false; want_go_right = false; want_go_up = true;
 					}
@@ -247,9 +271,9 @@ update_status  ModuleGhostPink::Update()
 			}
 			else // is left
 			{
-				if (position.y > App->player->position.y - 7) // is up
+				if (position.y > p_position_y - 7) // is up
 				{
-					if (position.y - App->player->position.y - 7 > position.x - App->player->position.x + 7)
+					if (position.y - p_position_y - 7 > position.x - p_position_x + 7)
 					{
 						want_go_up = false;  want_go_down = true; want_go_left = false; want_go_right = false;
 					}
@@ -257,7 +281,7 @@ update_status  ModuleGhostPink::Update()
 				}
 				else // is down 
 				{
-					if (App->player->position.y - 7 - position.y > position.x - App->player->position.x + 7)
+					if (p_position_y - 7 - position.y > position.x - p_position_x + 7)
 					{
 						want_go_down = false; want_go_left = false; want_go_right = false; want_go_up = true;
 					}
@@ -277,7 +301,7 @@ update_status  ModuleGhostPink::Update()
 				}
 				else if (can_go_up && can_go_down)
 				{
-					if (position.y > App->player->position.y - 7)
+					if (position.y > p_position_y - 7)
 					{
 						ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
 					}
@@ -303,7 +327,7 @@ update_status  ModuleGhostPink::Update()
 				}
 				else if (can_go_up && can_go_down)
 				{
-					if (position.y > App->player->position.y - 7)
+					if (position.y > p_position_y - 7)
 					{
 						ghost_up = true; ghost_down = false; ghost_left = false; ghost_right = false;
 					}
@@ -329,7 +353,7 @@ update_status  ModuleGhostPink::Update()
 				}
 				else if (can_go_left && can_go_right)
 				{
-					if (position.x > App->player->position.x + 7)
+					if (position.x > p_position_x + 7)
 					{
 						ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
 					}
@@ -355,7 +379,7 @@ update_status  ModuleGhostPink::Update()
 				}
 				else if (can_go_left && can_go_right)
 				{
-					if (position.x > App->player->position.x + 7)
+					if (position.x > p_position_x + 7)
 					{
 						ghost_left = true; ghost_right = false; ghost_up = false; ghost_down = false;
 					}
