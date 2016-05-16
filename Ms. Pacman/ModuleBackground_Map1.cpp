@@ -11,6 +11,7 @@
 #include "ModuleMenu.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
+#include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
 #include "ModuleGhostBlue.h"
@@ -279,7 +280,7 @@ update_status ModuleBackgroundMap1::Update()
 	// Load scene when all the pills are taken
 	if (eaten_pills <= 223)
 	{
-		App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
+		App->fade->FadeToBlack(App->map1, App->end_screen, 2.0f);
 	}
 
 	// Load scene when press space
