@@ -248,7 +248,11 @@ update_status ModuleMenu::Update()
 	
 	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN)
 	{
-		App->player->two_players = true;
+		if (App->player->two_players == true)
+			App->player->two_players = false;
+		else{
+			App->player->two_players = true;
+		}
 	}
 
 	//Fade To Black

@@ -82,6 +82,7 @@ bool ModuleUI::Start()
 			mapUI[i][y] = tmp_mapGAME[i][y];
 		}
 	}
+
 	return ret;
 
 }
@@ -96,6 +97,32 @@ bool ModuleUI::CleanUp()
 // Update: draw background
 update_status ModuleUI::Update()
 {
+	// One player or Two player
+	if (App->player->two_players == false){
+		mapMENU[0][22] = '_';
+		mapMENU[0][23] = '_';
+		mapMENU[0][24] = '_';
+		mapMENU[1][24] = '_';
+		mapMENU[1][25] = '_';
+		mapUI[0][22] = '_';
+		mapUI[0][23] = '_';
+		mapUI[0][24] = '_';
+		mapUI[1][24] = '_';
+		mapUI[1][25] = '_';
+	}
+	else{
+		mapMENU[0][22] = 2;
+		mapMENU[0][23] = 'U';
+		mapMENU[0][24] = 'P';
+		mapMENU[1][24] = 0;
+		mapMENU[1][25] = 0;
+		mapUI[0][22] = 2;
+		mapUI[0][23] = 'U';
+		mapUI[0][24] = 'P';
+		mapUI[1][24] = 0;
+		mapUI[1][25] = 0;
+	}
+
 	// Draw everything --------------------------------------	
 	int i = 0;
 	if (App->menu->IsEnabled()){
@@ -277,7 +304,6 @@ update_status ModuleUI::Update()
 			i++;
 		}
 	}
-
 
 	// Credit Sistem
  	int tmp_credit = credit;
