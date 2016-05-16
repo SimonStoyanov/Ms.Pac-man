@@ -60,6 +60,7 @@ ModulePlayer::ModulePlayer()
 
 ModulePlayer::~ModulePlayer()
 {
+	player_collision = nullptr;
 }
 
 

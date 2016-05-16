@@ -14,6 +14,7 @@ using namespace std;
 #include "ModuleBackground_Map1.h"
 #include "ModuleAudio.h"
 #include <time.h>
+#include <math.h>
 #include <stdlib.h>
 
 ModuleGhostOrange::ModuleGhostOrange()
@@ -182,7 +183,7 @@ update_status ModuleGhostOrange::Update()
 	// Ghosts follows the player
 	if (App->player->ghost_random == false)
 	{
-		if (is_vulnerable == false)
+		if (is_vulnerable == false && abs((int)App->player->position.x + 7 - (int)position.x) > 20 && abs((int)App->player->position.y + 7 - (int)position.y) > 20)
 		{
 			// Want to go to the player / Where is the target -----------------------------
 			if (App->player->position.x + 7 > position.x) //is right
@@ -224,7 +225,7 @@ update_status ModuleGhostOrange::Update()
 				}
 			}
 		}
-		else
+		else if (is_vulnerable == true || abs((int)App->player->position.x + 7 - (int)position.x) < 20 || abs((int)App->player->position.y + 7 - (int)position.y) < 20)
 		{
 			// Want to escape from the player / Where is the target -----------------------------
 			if (App->player->position.x + 7 > position.x) //is right
