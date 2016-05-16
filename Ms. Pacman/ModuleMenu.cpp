@@ -245,6 +245,11 @@ update_status ModuleMenu::Update()
 	{
 		App->UI->credit++;
 	}
+	
+	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN)
+	{
+		App->player->two_players = true;
+	}
 
 	//Fade To Black
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->UI->credit > 0)

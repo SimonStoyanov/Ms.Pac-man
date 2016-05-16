@@ -62,7 +62,9 @@ bool ModuleBackgroundMap1::Start()
 
 	// Enable and disable modules ---------
 	App->player->Enable();
-	App->player2->Enable();
+	if (App->player->two_players == true){
+		App->player2->Enable();
+	}
 	App->audio->Enable();
 	App->ghost_blue->Enable();
 	App->ghost_orange->Enable();
@@ -125,6 +127,9 @@ bool ModuleBackgroundMap1::CleanUp()
 	LOG("Unloading maps(1) stage.");
 
 	App->player->Disable();
+	if (App->player->two_players == true){
+		App->player2->Disable();
+	}
 	App->ghost_blue->Disable();
 	App->ghost_orange->Disable();
 	App->ghost_pink->Disable();
