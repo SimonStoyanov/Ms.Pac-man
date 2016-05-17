@@ -104,7 +104,7 @@ update_status ModulePlayer2::Update()
 
 
 	// Movement ---------------------------------------
-	if (!App->player->is_dead)
+	if (!App->player->is_dead || speed == 0)
 	{
 		if (App->player->total_time <= App->player->now)
 		{
@@ -361,8 +361,8 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->ghost_red->player_dead = true; //only on red
 			App->player->is_dead = true;
 
-			if (lifes > 0)
-				lifes--;
+			if (App->player->lifes > 0)
+				App->player->lifes--;
 		}
 
 		App->ghost_red->speed = 0;

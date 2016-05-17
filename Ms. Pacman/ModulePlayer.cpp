@@ -55,7 +55,7 @@ ModulePlayer::ModulePlayer()
 	dead.speed = 0.3f;
 
 	total_time = (Uint32)(total_t * 0.5f * 1000.0f);
-	total_time_ghosts_random = (Uint32)(total_t_g_r * 0.5f * 1000.0f);
+	
 }
 
 ModulePlayer::~ModulePlayer()
@@ -132,16 +132,26 @@ update_status ModulePlayer::Update()
 	p_mid.x = (position.x + 6) / 8;
 	p_mid.y = (position.y - 7) / 8;
 
-	if (total_time_ghosts_random <= now)
+	if (now - actual_t_g_r > 8 * 3.0f * 0.5f * 1000.0) //random ghost timer
 	{
 		ghost_random = false;
 	}
+	else
+	{
+		ghost_random = true;
+	}
 
 	// Movement ---------------------------------------
-	if (!is_dead)
+	if (!is_dead || speed == 0)
 	{
 		if (total_time <= now)
 		{
+			if (one_time == false) //reseting random ghosts time
+			{
+				actual_t_g_r = now;
+				one_time = true;
+			}
+
 			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] == false && App->input->keyboard[SDL_SCANCODE_A] == false && App->input->keyboard[SDL_SCANCODE_W] == false) // right
 			{
 				// What is the next tile
