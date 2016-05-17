@@ -12,6 +12,7 @@
 #include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleGhostBlue.h"
 
 ModuleEndScreen::ModuleEndScreen()
@@ -32,8 +33,10 @@ bool ModuleEndScreen::Start()
 
 	// Enable and disable modules
 	App->player->Disable();
+	App->player2->Disable();
 	App->audio->Enable();
 	App->ghost_blue->Disable();
+	App->map1->Disable();
 	return ret;
 }
 

@@ -42,11 +42,14 @@ bool ModuleBackgroundMap1::Start()
 	graphics = App->textures->Load("Tileset 1.png");
 
 	// Positions ---------------
+	App->player->speed = 1.0f;
 	App->player->position.x = 105; //105
 	App->player->position.y = 195; //195
+	App->player->go_left = true; 	App->player->go_right = false; 	App->player->go_up = false; 	App->player->go_down = false;
 
 	App->player2->position.x = 105; //105
 	App->player2->position.y = 195; //195
+	App->player2->go_left = false; 	App->player2->go_right = true; 	App->player2->go_up = false; 	App->player2->go_down = false;
 
 	App->ghost_blue->position.x = 105; //105
 	App->ghost_blue->position.y = 99; //99
@@ -59,6 +62,11 @@ bool ModuleBackgroundMap1::Start()
 
 	App->ghost_red->position.x = 105;
 	App->ghost_red->position.y = 99;
+
+	App->ghost_blue->is_vulnerable = false;
+	App->ghost_orange->is_vulnerable = false;
+	App->ghost_pink->is_vulnerable = false;
+	App->ghost_red->is_vulnerable = false;
 
 	// Enable and disable modules ---------
 	App->player->Enable();
@@ -126,6 +134,8 @@ bool ModuleBackgroundMap1::CleanUp()
 {
 	LOG("Unloading maps(1) stage.");
 
+	App->player->position.x = 105; //105
+	App->player->position.y = 195;
 	App->player->Disable();
 	if (App->player->two_players == true){
 		App->player2->Disable();
@@ -137,12 +147,73 @@ bool ModuleBackgroundMap1::CleanUp()
 	App->audio->Disable();
 	App->collision->Disable();
 
+	char tmp_map[31][28]
+	{	//1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
+		{ 1, 7, 7, 7, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7, 2 }, //1
+		{ 8, 28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 10 }, //2
+		{ 8, 27, 11, 17, 17, 12, 28, 15, 16, 28, 11, 17, 17, 17, 17, 17, 17, 12, 28, 15, 16, 28, 11, 17, 17, 12, 27, 10 }, //3
+		{ 8, 28, 13, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 18, 18, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 14, 28, 10 }, //4
+		{ 8, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //5
+		{ 3, 9, 12, 28, 11, 12, 28, 11, 17, 17, 17, 12, 28, 11, 12, 28, 11, 17, 17, 17, 12, 28, 11, 12, 28, 11, 9, 4 }, //6
+		{ 0, 0, 8, 28, 15, 16, 28, 15, 30, 30, 30, 16, 28, 15, 16, 28, 15, 30, 30, 30, 16, 28, 15, 16, 28, 10, 0, 0 }, //7
+		{ 7, 7, 14, 28, 15, 16, 28, 13, 18, 18, 18, 14, 28, 15, 16, 28, 13, 18, 18, 18, 14, 28, 15, 16, 28, 13, 7, 7 }, //8
+		{ 0, 0, 0, 28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 28, 28, 28, 15, 16, 28, 0, 0, 0 }, //9
+		{ 9, 9, 12, 28, 15, 23, 17, 17, 12, 0, 11, 17, 17, 24, 23, 17, 17, 12, 0, 11, 17, 17, 24, 16, 28, 11, 9, 9 }, //10
+		{ 0, 0, 8, 28, 13, 18, 18, 18, 14, 0, 13, 18, 18, 18, 18, 18, 18, 14, 0, 13, 18, 18, 18, 14, 28, 10, 0, 0 }, //11
+		{ 0, 0, 8, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 10, 0, 0 }, //12
+		{ 0, 0, 8, 28, 11, 17, 17, 17, 12, 0, 19, 9, 9, 29, 29, 9, 9, 20, 0, 11, 17, 17, 17, 12, 28, 10, 0, 0 }, //13
+		{ 0, 0, 8, 28, 15, 25, 18, 18, 14, 0, 10, 0, 0, 0, 0, 0, 0, 8, 0, 13, 18, 18, 26, 16, 28, 10, 0, 0 }, //14
+		{ 0, 0, 8, 28, 15, 16, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 15, 16, 28, 10, 0, 0 }, //15
+		{ 0, 0, 8, 28, 15, 16, 0, 11, 12, 0, 10, 0, 0, 0, 0, 0, 0, 8, 0, 11, 12, 0, 15, 16, 28, 10, 0, 0 }, //16
+		{ 7, 7, 14, 28, 13, 14, 0, 15, 16, 0, 21, 7, 7, 7, 7, 7, 7, 22, 0, 15, 16, 0, 13, 14, 28, 13, 7, 7 }, //17
+		{ 0, 0, 0, 28, 0, 0, 0, 15, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 16, 0, 0, 0, 28, 0, 0, 0 }, //18
+		{ 9, 9, 12, 28, 11, 17, 17, 24, 23, 17, 17, 12, 0, 11, 12, 0, 11, 17, 17, 24, 23, 17, 17, 12, 28, 11, 9, 9 }, //19
+		{ 0, 0, 8, 28, 13, 18, 18, 18, 18, 18, 18, 14, 0, 15, 16, 0, 13, 18, 18, 18, 18, 18, 18, 14, 28, 10, 0, 0 }, //20
+		{ 0, 0, 8, 28, 28, 28, 28, 28, 28, 28, 0, 0, 0, 15, 16, 0, 0, 0, 28, 28, 28, 28, 28, 28, 28, 10, 0, 0 }, //21
+		{ 0, 0, 8, 28, 11, 17, 17, 17, 12, 28, 11, 17, 17, 24, 23, 17, 17, 12, 28, 11, 17, 17, 17, 12, 28, 10, 0, 0 }, //22
+		{ 1, 7, 14, 28, 13, 18, 18, 18, 14, 28, 13, 18, 18, 18, 18, 18, 18, 14, 28, 13, 18, 18, 18, 14, 28, 13, 7, 2 }, //23
+		{ 8, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 0, 0, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //24
+		{ 8, 28, 11, 17, 17, 12, 28, 11, 17, 17, 17, 12, 28, 11, 12, 28, 11, 17, 17, 17, 12, 28, 11, 17, 17, 12, 28, 10 }, //25
+		{ 8, 28, 15, 30, 30, 16, 28, 15, 25, 18, 18, 14, 28, 15, 16, 28, 13, 18, 18, 26, 16, 28, 15, 30, 30, 16, 28, 10 }, //26
+		{ 8, 28, 15, 30, 30, 16, 28, 15, 16, 28, 28, 28, 28, 15, 16, 28, 28, 28, 28, 15, 16, 28, 15, 30, 30, 16, 28, 10 }, //27
+		{ 8, 27, 15, 30, 30, 16, 28, 15, 16, 28, 11, 17, 17, 24, 23, 17, 17, 12, 28, 15, 16, 28, 15, 30, 30, 16, 27, 10 }, //28
+		{ 8, 28, 13, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 18, 18, 18, 18, 14, 28, 13, 14, 28, 13, 18, 18, 14, 28, 10 }, //29
+		{ 8, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //30
+		{ 3, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 4, } //31
+
+	};
+
+	// Passing map to the header --------
+	for (int i = 0; i < 31; i++)
+	{
+		for (int y = 0; y < 28; y++)
+		{
+			g_map[i][y] = tmp_map[i][y];
+		}
+	}
+
 	return true;
 }
 
 // Update: draw background
 update_status ModuleBackgroundMap1::Update()
 {
+
+	// Load scene when all the pills are taken
+	/*if (eaten_pills <= 223)
+	{
+	App->fade->FadeToBlack(App->map1, App->end_screen, 1.0f);
+	}*/
+
+	// Load scene when press space
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	{
+		App->player->speed = 0;
+		App->map1->Disable();
+		App->fade->FadeToBlack(App->map1, App->end_screen, 0.1f);
+	}
+
+
 	// Draw everything --------------------------------------	
 	int i = 0;
 	while (i < 28)
@@ -255,7 +326,8 @@ update_status ModuleBackgroundMap1::Update()
 	{
 	case 27:
 		// Change tile
-		g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
+			g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
+
 
 		// Vulnerable
 		App->ghost_blue->passed_time = App->ghost_blue->now;
@@ -321,18 +393,6 @@ update_status ModuleBackgroundMap1::Update()
 		break;
 	}
 
-
-	// Load scene when all the pills are taken
-	if (eaten_pills <= 223)
-	{
-		App->fade->FadeToBlack(App->map1, App->end_screen, 2.0f);
-	}
-
-	// Load scene when press space
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
-	{
-		App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
-	}
 	return UPDATE_CONTINUE;
 
 }
