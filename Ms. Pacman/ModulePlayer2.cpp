@@ -352,10 +352,10 @@ update_status ModulePlayer2::Update()
 
 void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
-	if ((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
+	if (((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
-		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable))
+		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable)) && App->player->god_mode == false)
 	{
 		// Player die -------------------
 		if (!App->ghost_red->player_dead)

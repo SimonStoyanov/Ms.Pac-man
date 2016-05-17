@@ -250,7 +250,7 @@ update_status ModuleMenu::Update()
 		App->UI->credit++;
 	}
 	
-	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_TAB] == KEY_STATE::KEY_DOWN)
 	{
 		if (App->player->two_players == true)
 			App->player->two_players = false;

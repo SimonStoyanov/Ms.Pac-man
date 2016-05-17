@@ -91,8 +91,16 @@ update_status ModulePlayer::Update()
 	if (god_mode)
 	{
 		speed = 2.0f;
+		if (two_players == true){
+			App->player2->speed = 2.0f;
+		}
 	}
-	else{ speed = 1.0f; }
+	else{ 
+		speed = 1.0f; 
+		if (two_players == true){
+			App->player2->speed = 2.0f;
+		}
+	}
 	
 	// Random ghost timer --------------------------
 	if (now - actual_t_g_r > 8 * 3.0f * 0.5f * 1000.0) //random ghost timer
@@ -104,7 +112,7 @@ update_status ModulePlayer::Update()
 		ghost_random = true;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN){
+	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN){
 		pause = !pause;
 	}
 	if (pause){
