@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleAudio.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleCollision.h"
@@ -97,6 +98,10 @@ update_status ModulePlayer::Update()
 	}
 	if (pause){
 		speed = 0;
+		
+		if (two_players == true){
+			App->player2->speed = 0;
+		}
 		App->ghost_blue->speed = 0;
 		App->ghost_pink->speed = 0;
 		App->ghost_red->speed = 0;
@@ -104,6 +109,9 @@ update_status ModulePlayer::Update()
 	}
 	else{ 
 		speed = 1.0f;
+		if (two_players == true){
+			App->player2->speed = 1.0f;
+		}
 		App->ghost_blue->speed = 1.0f;
 		App->ghost_pink->speed = 1.0f;
 		App->ghost_red->speed = 1.0f;
