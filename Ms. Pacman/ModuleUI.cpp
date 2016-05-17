@@ -119,10 +119,8 @@ update_status ModuleUI::Update()
 		mapUI[0][22] = 2;
 		mapUI[0][23] = 'U';
 		mapUI[0][24] = 'P';
-		mapUI[1][24] = 0;
-		mapUI[1][25] = 0;
+		
 	}
-
 	// Draw everything --------------------------------------	
 	int i = 0;
 	if (App->menu->IsEnabled()){
@@ -405,7 +403,6 @@ update_status ModuleUI::Update()
 			mapUI[1][4] = sc3;			
 			mapUI[1][5] = sc2;
 			mapUI[1][6] = sc1;
-
 		}
 	}
 
@@ -422,7 +419,7 @@ update_status ModuleUI::Update()
 		}
 		if (_scdigits == 1)
 		{
-			mapUI[1][25] = _score;
+			mapUI[1][26] = _score;
 		}
 		if (_scdigits == 2)
 		{
