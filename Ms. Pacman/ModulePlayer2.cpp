@@ -104,7 +104,7 @@ update_status ModulePlayer2::Update()
 
 
 	// Movement ---------------------------------------
-	if (!App->player->is_dead || speed == 0)
+	if (!App->player->is_dead)
 	{
 		if (App->player->total_time <= App->player->now)
 		{
@@ -234,6 +234,9 @@ update_status ModulePlayer2::Update()
 		else{ left.speed = 0.0f; }
 	}
 	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
+	if (speed == 0){
+		down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f;
+	}
 
 	// Change scene when dies
 	if (lifes == 0 && App->map1->IsEnabled())
@@ -392,6 +395,8 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_blue->Disable();
 		App->ghost_blue->Enable();
 
+		App->ghost_blue->is_vulnerable = false;
+
 		App->ghost_blue->position.x = 105;
 		App->ghost_blue->position.y = 99;
 
@@ -414,6 +419,8 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_orange->enemy_collision->to_delete = true;
 		App->ghost_orange->Disable();
 		App->ghost_orange->Enable();
+
+		App->ghost_orange->is_vulnerable = false;
 
 		App->ghost_orange->position.x = 105;
 		App->ghost_orange->position.y = 99;
@@ -438,6 +445,8 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_pink->Disable();
 		App->ghost_pink->Enable();
 
+		App->ghost_pink->is_vulnerable = false;
+
 		App->ghost_pink->position.x = 105;
 		App->ghost_pink->position.y = 99;
 
@@ -460,6 +469,8 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_red->enemy_collision->to_delete = true;
 		App->ghost_red->Disable();
 		App->ghost_red->Enable();
+
+		App->ghost_red->is_vulnerable = false;
 
 		App->ghost_red->position.x = 105;
 		App->ghost_red->position.y = 99;

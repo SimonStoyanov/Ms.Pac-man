@@ -290,6 +290,9 @@ update_status ModulePlayer::Update()
 		else{ left.speed = 0.0f; }
 	}
 	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
+	if (speed == 0){
+		down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f;
+	}
 
 	// Change scene when dies
 	if (lifes == 0 && App->map1->IsEnabled())
