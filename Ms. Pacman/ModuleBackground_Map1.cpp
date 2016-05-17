@@ -37,6 +37,8 @@ ModuleBackgroundMap1::~ModuleBackgroundMap1()
 // Load assets
 bool ModuleBackgroundMap1::Start()
 {
+	eaten_pills = 0;
+
 	LOG("Loading maps(1).");
 	bool ret = true;
 	graphics = App->textures->Load("Tileset 1.png");
@@ -393,6 +395,21 @@ update_status ModuleBackgroundMap1::Update()
 		break;
 	}
 
+<<<<<<< HEAD
+=======
+
+	// Load scene when all the pills are taken
+	if (eaten_pills <= 223)
+	{
+		App->fade->FadeToBlack(App->map1, App->end_screen, 2.0f);
+	}
+
+	/*// Load scene when press space
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	{
+		App->fade->FadeToBlack(App->map1, App->map2, 2.0f);
+	}*/
+>>>>>>> origin/master
 	return UPDATE_CONTINUE;
 
 }
