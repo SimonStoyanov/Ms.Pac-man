@@ -47,6 +47,7 @@ public:
 	int lifes = 5;
 	bool can_see = true;
 	bool god_mode = false;
+	bool pause = false;
 
 	Uint32 now;
 	//Start

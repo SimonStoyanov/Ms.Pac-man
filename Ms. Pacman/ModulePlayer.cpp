@@ -92,6 +92,24 @@ update_status ModulePlayer::Update()
 	}
 	else{ speed = 1.0f; }
 
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN){
+		pause = !pause;
+	}
+	if (pause){
+		speed = 0;
+		App->ghost_blue->speed = 0;
+		App->ghost_pink->speed = 0;
+		App->ghost_red->speed = 0;
+		App->ghost_orange->speed = 0;
+	}
+	else{ 
+		speed = 1.0f;
+		App->ghost_blue->speed = 1.0f;
+		App->ghost_pink->speed = 1.0f;
+		App->ghost_red->speed = 1.0f;
+		App->ghost_orange->speed = 1.0f;
+	}
+
 	Animation* current_animation = prev_anim;
 
 	now = SDL_GetTicks() - start_time;
@@ -508,5 +526,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		
 		eaten_ghost++;
 	}
+
 }
 
