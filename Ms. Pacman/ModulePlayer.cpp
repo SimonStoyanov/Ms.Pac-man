@@ -83,6 +83,7 @@ bool ModulePlayer::Start()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	// God mode --------------------------
 	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN)
 	{
 		god_mode = !god_mode;
@@ -92,6 +93,16 @@ update_status ModulePlayer::Update()
 		speed = 2.0f;
 	}
 	else{ speed = 1.0f; }
+	
+	// Random ghost timer --------------------------
+	if (now - actual_t_g_r > 8 * 3.0f * 0.5f * 1000.0) //random ghost timer
+	{
+		ghost_random = false;
+	}
+	else
+	{
+		ghost_random = true;
+	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN){
 		pause = !pause;
@@ -107,7 +118,7 @@ update_status ModulePlayer::Update()
 		App->ghost_red->speed = 0;
 		App->ghost_orange->speed = 0;
 	}
-	else{ 
+	else if (!pause && !App->ghost_red->player_dead){
 		speed = 1.0f;
 		if (two_players == true){
 			App->player2->speed = 1.0f;
@@ -140,21 +151,14 @@ update_status ModulePlayer::Update()
 	p_mid.x = (position.x + 6) / 8;
 	p_mid.y = (position.y - 7) / 8;
 
-	if (now - actual_t_g_r > 8 * 3.0f * 0.5f * 1000.0) //random ghost timer
-	{
-		ghost_random = false;
-	}
-	else
-	{
-		ghost_random = true;
-	}
 
 	// Movement ---------------------------------------
-	if (!is_dead || speed == 0)
+	if (!is_dead)
 	{
 		if (total_time <= now)
 		{
-			if (one_time == false) //reseting random ghosts time
+			// Reseting random ghosts time
+			if (one_time == false) 
 			{
 				actual_t_g_r = now;
 				one_time = true;
@@ -332,6 +336,8 @@ update_status ModulePlayer::Update()
 		App->player->is_dead = false; //
 		go_left = true; go_right = false;
 		speed = 1.0f;
+
+		actual_t_g_r = now + 4; //reseting random timer
 
 		App->ghost_red->player_dead = false; //Only on red ghost.
 
