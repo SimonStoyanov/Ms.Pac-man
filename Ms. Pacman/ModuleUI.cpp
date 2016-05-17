@@ -33,6 +33,8 @@ ModuleUI::ModuleUI()
 	points[4] = 11;
 	points[5] = 0;
 	points[6] = 0;
+
+	g200 = { 1, 28, 15, 7 }; g400 = { 19, 28, 15, 7 }; g800 = { 37, 28, 15, 7 }; g1600 = { 1, 37, 16, 7 };
 }
 
 ModuleUI::~ModuleUI()
@@ -44,6 +46,7 @@ bool ModuleUI::Start()
 	LOG("Loading maps(1).");
 	bool ret = true;
 	graphics = App->textures->Load("Letters & Numbers.png");
+	gscore = App->textures->Load("Score.png");
 
 	// Temporal map
 	char tmp_mapMENU[5][28]

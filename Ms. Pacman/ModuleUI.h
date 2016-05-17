@@ -19,6 +19,7 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* gscore = nullptr;
 
 	// Tiles
 	SDL_Rect tile0;
@@ -93,6 +94,12 @@ public:
 	int _sc5 = 0;
 	int _sc6 = 0;
 	int _sc7 = 0;
+
+	// ghost score
+	SDL_Rect g200;
+	SDL_Rect g400;
+	SDL_Rect g800;
+	SDL_Rect g1600;
 };
 
 #endif 

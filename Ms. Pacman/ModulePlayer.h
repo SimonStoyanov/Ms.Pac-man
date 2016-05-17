@@ -69,9 +69,9 @@ public:
 
 	int eaten_ghost = 0;
 
-
 	bool one_time = false;
-	
+
+	float gtimer;
 };
 
 #endif

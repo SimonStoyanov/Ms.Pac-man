@@ -68,6 +68,7 @@ bool ModulePlayer2::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("Pac-man & Ghosts.png");
+
 	prev_anim = &left;
 
 	player_collision = App->collision->AddCollider({ position.x - 50, position.y - 50, 10, 10 }, COLLIDER_PLAYER, this);
