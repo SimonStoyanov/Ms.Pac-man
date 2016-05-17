@@ -462,7 +462,7 @@ update_status  ModuleGhostPink::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	if (now >= total_time)
+	if (now >= total_time && !in_box)
 	{
 		// What direction are we changing
 		if (speed != 0)

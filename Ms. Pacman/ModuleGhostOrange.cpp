@@ -467,7 +467,7 @@ update_status ModuleGhostOrange::Update()
 	if (now >= total_time)
 	{
 		// What direction are we changing
-		if (speed != 0)
+		if (speed != 0 && !in_box)
 		{
 			if (ghost_right) // right
 			{

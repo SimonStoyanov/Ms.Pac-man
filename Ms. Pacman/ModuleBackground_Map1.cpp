@@ -56,14 +56,14 @@ bool ModuleBackgroundMap1::Start()
 	App->player2->can_see = true;
 	App->player2->go_left = false; 	App->player2->go_right = true; 	App->player2->go_up = false; 	App->player2->go_down = false;
 
-	App->ghost_blue->position.x = 105; //105
-	App->ghost_blue->position.y = 99; //99
+	App->ghost_blue->position.x = 90; //105 //90
+	App->ghost_blue->position.y = 123; //99 //123
 
-	App->ghost_orange->position.x = 105;
-	App->ghost_orange->position.y = 99;
+	App->ghost_orange->position.x = 120;
+	App->ghost_orange->position.y = 123;
 
 	App->ghost_pink->position.x = 105;
-	App->ghost_pink->position.y = 99;
+	App->ghost_pink->position.y = 123;
 
 	App->ghost_red->position.x = 105;
 	App->ghost_red->position.y = 99;

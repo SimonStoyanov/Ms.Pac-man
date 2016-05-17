@@ -461,7 +461,7 @@ update_status ModuleGhostBlue::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	if (now >= total_time)
+	if (now >= total_time && !in_box)
 	{
 		// What direction are we changing
 		if (speed != 0)
@@ -573,7 +573,10 @@ update_status ModuleGhostBlue::Update()
 		}
 		else{ down.speed = 0; up.speed = 0; left.speed = 0; right.speed = 0; }
 	}
-	else{}
+	else if (now >= total_time && in_box)
+	{
+		
+	}
 
 
 	//Ghost vulnerable animation control -----------------

@@ -82,6 +82,10 @@ public:
 	float passed_time;
 	bool is_vulnerable = false;
 
+	// Box variables
+	float passed_box;
+	bool in_box = true;
+
 	Collider* enemy_collision = nullptr;
 
 };

@@ -84,6 +84,10 @@ public:
 
 	Collider* enemy_collision = nullptr;
 
+	// Box variables
+	float passed_box;
+	bool in_box = true;
+
 };
 
 #endif

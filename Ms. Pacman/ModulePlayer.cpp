@@ -80,6 +80,13 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
+bool ModulePlayer::CleanUp()
+{
+	one_time = false;
+
+	return true;
+}
+
 // Update: draw background
 update_status ModulePlayer::Update()
 {
@@ -165,10 +172,13 @@ update_status ModulePlayer::Update()
 	{
 		if (total_time <= now)
 		{
-			// Reseting random ghosts time
+			// Reseting random ghosts time and box time
 			if (one_time == false) 
 			{
 				actual_t_g_r = now;
+				App->ghost_blue->passed_box = now;
+				App->ghost_orange->passed_box = now;
+				App->ghost_pink->passed_box = now;
 				one_time = true;
 			}
 
