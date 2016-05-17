@@ -116,6 +116,9 @@ bool ModuleMenu::Start()
 	// Seting time of the start
 	start_time = SDL_GetTicks();
 
+	App->UI->score = 0;
+	App->UI->_score = 0;
+
 	return ret;
 }
 

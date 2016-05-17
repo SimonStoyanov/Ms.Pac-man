@@ -82,6 +82,16 @@ bool ModulePlayer::Start()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN)
+	{
+		god_mode = !god_mode;
+	}
+	if (god_mode)
+	{
+		speed = 2.0f;
+	}
+	else{ speed = 1.0f; }
+
 	Animation* current_animation = prev_anim;
 
 	now = SDL_GetTicks() - start_time;
@@ -255,7 +265,6 @@ update_status ModulePlayer::Update()
 		//Red
 		App->ghost_red->position.x = 105;
 		App->ghost_red->position.y = 99;
-		App->ghost_red->player_dead = false; //Only on red ghost.
 		App->ghost_red->can_see = true;
 		App->ghost_red->speed = 1.0f;
 		App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = false; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
@@ -287,6 +296,8 @@ update_status ModulePlayer::Update()
 		App->player->is_dead = false; //
 		go_left = true; go_right = false;
 		speed = 1.0f;
+
+		App->ghost_red->player_dead = false; //Only on red ghost.
 
 	}
 	else if (App->player->is_dead && (now - passed_time) > (8 * 0.5f * 1000.0f))
@@ -359,22 +370,22 @@ update_status ModulePlayer::Update()
 	//App->render->Blit(graphics, position.x, position.y + DISTANCEM1, &test, 1.0f); //
 	//App->render->Blit(graphics, 3, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
-	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
+	if(can_see)
+		App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
 
 	return UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
-	if ((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) || 
+	if (((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
-		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable))
-	{
+		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable)) && god_mode == false){
 		// Player die -------------------
 		if (!App->ghost_red->player_dead)
 		{
-			passed_time = now;
+			App->player->passed_time = App->player->now;
 			App->ghost_red->player_dead = true; //only on red
 			App->player->is_dead = true;
 
@@ -389,7 +400,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		App->player->speed = 0;
 
 		// -------------------------------
-		
+
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{

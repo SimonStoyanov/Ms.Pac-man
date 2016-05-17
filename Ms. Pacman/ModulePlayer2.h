@@ -43,6 +43,7 @@ public:
 	SDL_Rect test;
 
 	int lifes = 5;
+	bool can_see = true;
 
 	Collider* player_collision;
 	void OnCollision(Collider* c1, Collider* c2);

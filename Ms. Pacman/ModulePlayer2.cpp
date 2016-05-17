@@ -341,7 +341,8 @@ update_status ModulePlayer2::Update()
 	//App->render->Blit(graphics, position.x, position.y + DISTANCEM1, &test, 1.0f); //
 	//App->render->Blit(graphics, 3, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
-	App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
+	if(can_see)
+		App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
 
 	return UPDATE_CONTINUE;
 }
