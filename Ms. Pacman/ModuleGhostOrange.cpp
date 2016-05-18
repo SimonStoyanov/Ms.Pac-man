@@ -464,10 +464,22 @@ update_status ModuleGhostOrange::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	if (now >= total_time)
+	if (dead_positioning)
+	{
+		if (position.y > 99)
+		{
+			position.y -= 0.5f;
+			current_animation = &up;
+		}
+		else
+		{
+			dead_positioning = false;
+		}
+	}
+	else if (now >= total_time && !in_box)
 	{
 		// What direction are we changing
-		if (speed != 0 && !in_box)
+		if (speed != 0)
 		{
 			if (ghost_right) // right
 			{
@@ -576,7 +588,59 @@ update_status ModuleGhostOrange::Update()
 		}
 		else{ down.speed = 0; up.speed = 0; left.speed = 0; right.speed = 0; }
 	}
-	else{}
+	// Box Movement ----------------------
+
+	//105 //90
+	//99 //123
+	else if (now >= total_time && in_box) //
+	{
+		if (box_positioning)
+		{
+			if (position.y > 99)
+			{
+				position.y -= 0.5f;
+				current_animation = &up;
+			}
+			else
+			{
+				in_box = false;
+				box_down = false; box_up = true;
+				box_positioning = false;
+			}
+		}
+		else if (now - passed_box > 15 * 0.5f * 1000.0f) // positioning ////////
+		{
+			if (position.x > 105)
+			{
+				position.x -= 0.5f;
+				current_animation = &left;
+			}
+			else
+				box_positioning = true;
+		}
+		else
+		{
+			if (box_up && position.y > 120) // 123 // up
+			{
+				position.y -= 0.5f;
+				current_animation = &up;
+			}
+			else
+			{
+				box_up = false; box_down = true;
+			}
+			if (box_down && position.y < 127) // down
+			{
+				position.y += 0.5f;
+				current_animation = &down;
+			}
+			else
+			{
+				box_down = false; box_up = true;
+			}
+
+		}
+	}
 
 
 	//Ghost vulnerable animation control -----------------

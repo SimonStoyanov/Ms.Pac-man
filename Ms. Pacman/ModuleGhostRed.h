@@ -88,11 +88,10 @@ public:
 
 	bool player_dead = false;
 
-	void reset_directions()
-	{
-		can_go_left = false;
-		go_down = false;
-	}
+	// Dead varables
+	float passed_dead;
+	bool is_dead;
+	bool dead_positioning = false;
 	
 
 };

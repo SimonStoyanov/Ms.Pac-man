@@ -394,12 +394,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		}
 		App->ghost_blue->enemy_collision->to_delete = true;
 		App->ghost_blue->Disable();
-		App->ghost_blue->Enable();
-
+		App->ghost_blue->passed_dead = App->player->now;
+		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
 
 		App->ghost_blue->position.x = 105;
-		App->ghost_blue->position.y = 99;
+		App->ghost_blue->position.y = 123;
 
 		eaten_ghost++;
 	}
@@ -419,12 +419,13 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		}
 		App->ghost_orange->enemy_collision->to_delete = true;
 		App->ghost_orange->Disable();
-		App->ghost_orange->Enable();
+		App->ghost_orange->passed_dead = App->player->now;
+		App->ghost_orange->is_dead = true;
 
 		App->ghost_orange->is_vulnerable = false;
 
 		App->ghost_orange->position.x = 105;
-		App->ghost_orange->position.y = 99;
+		App->ghost_orange->position.y = 123;
 
 		eaten_ghost++;
 	}
@@ -444,12 +445,13 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		}
 		App->ghost_pink->enemy_collision->to_delete = true;
 		App->ghost_pink->Disable();
-		App->ghost_pink->Enable();
+		App->ghost_pink->passed_dead = App->player->now;
+		App->ghost_pink->is_dead = true;
 
 		App->ghost_pink->is_vulnerable = false;
 
 		App->ghost_pink->position.x = 105;
-		App->ghost_pink->position.y = 99;
+		App->ghost_pink->position.y = 123;
 
 		eaten_ghost++;
 	}
@@ -469,14 +471,13 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		}
 		App->ghost_red->enemy_collision->to_delete = true;
 		App->ghost_red->Disable();
-		App->ghost_red->Enable();
+		App->ghost_red->passed_dead = App->player->now;
+		App->ghost_red->is_dead = true;
 
 		App->ghost_red->is_vulnerable = false;
 
 		App->ghost_red->position.x = 105;
-		App->ghost_red->position.y = 99;
-		App->ghost_red->ghost_up = false;
-		App->ghost_red->ghost_down = false;
+		App->ghost_red->position.y = 123;
 		if (App->ghost_red->ghost_left = true)
 			App->ghost_red->ghost_right = false;
 		else

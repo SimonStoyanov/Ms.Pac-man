@@ -105,7 +105,7 @@ update_status ModulePlayer::Update()
 	else{ 
 		speed = 1.0f; 
 		if (two_players == true){
-			App->player2->speed = 2.0f;
+			App->player2->speed = 1.0f;
 		}
 	}
 	
@@ -122,6 +122,8 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN){
 		pause = !pause;
 	}
+
+	// Pause ----------------------------------
 	if (pause){
 		speed = 0;
 		
@@ -134,9 +136,16 @@ update_status ModulePlayer::Update()
 		App->ghost_orange->speed = 0;
 	}
 	else if (!pause && !App->ghost_red->player_dead){
-		speed = 1.0f;
-		if (two_players == true){
-			App->player2->speed = 1.0f;
+		if (!god_mode)
+			speed = 1.0f;
+		else
+			speed = 2.0f;
+		if (two_players == true)
+		{
+			if (!god_mode)
+				App->player2->speed = 1.0f;
+			else
+				App->player2->speed = 2.0f;
 		}
 		App->ghost_blue->speed = 1.0f;
 		App->ghost_pink->speed = 1.0f;
@@ -146,9 +155,9 @@ update_status ModulePlayer::Update()
 
 	Animation* current_animation = prev_anim;
 
-	now = SDL_GetTicks() - start_time;
+	now = SDL_GetTicks() - start_time; //seting now
 
-	player_collision->SetPos(position.x + 3, position.y+11);
+	player_collision->SetPos(position.x + 3, position.y+11); //seting collision
 
 	// Player tile collision detectors with tiles ------
 	p_up.x = (position.x + 7) / 8;
@@ -168,7 +177,7 @@ update_status ModulePlayer::Update()
 
 
 	// Movement ---------------------------------------
-	if (!is_dead)
+	if (!is_dead && speed != 0)
 	{
 		if (total_time <= now)
 		{
@@ -307,10 +316,12 @@ update_status ModulePlayer::Update()
 		}
 		else{ left.speed = 0.0f; }
 	}
-	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
-	if (speed == 0){
-		down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f;
+	else{ 
+		down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; 
 	}
+	//if (speed == 0){
+	//	down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f;
+	/*}*/
 
 	// Change scene when dies
 	if (lifes == 0 && App->map1->IsEnabled())
@@ -381,6 +392,7 @@ update_status ModulePlayer::Update()
 			App->ghost_orange->Disable();
 			App->textures->last_texture--; //Carefull with that. Could cause future errors.
 			App->ghost_orange->Enable();
+			App->ghost_blue->in_box = true;
 		}
 
 		// Ghost pink reset
@@ -390,6 +402,7 @@ update_status ModulePlayer::Update()
 			App->ghost_pink->Disable();
 			App->textures->last_texture--; //Carefull with that. Could cause future errors.
 			App->ghost_pink->Enable();
+			App->ghost_blue->in_box = true;
 		}
 
 		// Ghost blue reset
@@ -399,6 +412,7 @@ update_status ModulePlayer::Update()
 			App->ghost_blue->Disable();
 			App->textures->last_texture--; //Carefull with that. Could cause future errors.
 			App->ghost_blue->Enable();
+			App->ghost_blue->in_box = true;
 		}
 	}
 	else if (App->player->is_dead && (now - passed_time) > (5.9 * 0.5f * 1000.0f))
@@ -433,6 +447,51 @@ update_status ModulePlayer::Update()
 			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g1600, 1.0f);
 		}
 	}
+
+	// Ghost Blue die ------------------------
+	if (App->ghost_blue->is_dead)
+	{
+		if (now - App->ghost_blue->passed_dead > 4 * 0.5f * 1000.0f) //time dead
+		{
+			App->ghost_blue->Enable();
+			App->ghost_blue->dead_positioning = true;
+			App->ghost_blue->is_dead = false;
+		}
+	}
+	// Ghost Orange die ------------------------
+	if (App->ghost_orange->is_dead)
+	{
+		if (now - App->ghost_orange->passed_dead > 4 * 0.5f * 1000.0f) //time dead
+		{
+			App->ghost_orange->Enable();
+			App->ghost_orange->dead_positioning = true;
+			App->ghost_orange->is_dead = false;
+		}
+	}
+
+	// Ghost Pink die ------------------------
+	if (App->ghost_pink->is_dead)
+	{
+		if (now - App->ghost_pink->passed_dead > 4 * 0.5f * 1000.0f) //time dead
+		{
+			App->ghost_pink->Enable();
+			App->ghost_pink->dead_positioning = true;
+			App->ghost_pink->is_dead = false;
+		}
+	}
+
+	// Ghost Red die ------------------------
+	if (App->ghost_red->is_dead)
+	{
+		if (now - App->ghost_red->passed_dead > 4 * 0.5f * 1000.0f) //time dead
+		{
+			App->ghost_red->Enable();
+			App->ghost_red->dead_positioning = true;
+			App->ghost_red->is_dead = false;
+		}
+	}
+
+
 
 
 	// Draw everything --------------------------------------
@@ -502,12 +561,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_blue->enemy_collision->to_delete = true;
 		App->ghost_blue->Disable();
-		App->ghost_blue->Enable();
-
+		App->ghost_blue->passed_dead = now;
+		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
 
 		App->ghost_blue->position.x = 105;
-		App->ghost_blue->position.y = 99;
+		App->ghost_blue->position.y = 123;
 		
 		eaten_ghost++;
 	}
@@ -532,12 +591,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_orange->enemy_collision->to_delete = true;
 		App->ghost_orange->Disable();
-		App->ghost_orange->Enable();
+		App->ghost_orange->passed_dead = now;
+		App->ghost_orange->is_dead = true;
 
 		App->ghost_orange->is_vulnerable = false;
 
 		App->ghost_orange->position.x = 105;
-		App->ghost_orange->position.y = 99;
+		App->ghost_orange->position.y = 123;
 		
 		eaten_ghost++;
 	}
@@ -562,12 +622,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_pink->enemy_collision->to_delete = true;
 		App->ghost_pink->Disable();
-		App->ghost_pink->Enable();
+		App->ghost_pink->passed_dead = now;
+		App->ghost_pink->is_dead = true;
 
 		App->ghost_pink->is_vulnerable = false;
 
 		App->ghost_pink->position.x = 105;
-		App->ghost_pink->position.y = 99;
+		App->ghost_pink->position.y = 123;
 		
 		eaten_ghost++;
 	}
@@ -592,12 +653,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_red->enemy_collision->to_delete = true;
 		App->ghost_red->Disable();
-		App->ghost_red->Enable();
+		App->ghost_red->passed_dead = now;
+		App->ghost_red->is_dead = true;
 
 		App->ghost_red->is_vulnerable = false;
 		
 		App->ghost_red->position.x = 105;
-		App->ghost_red->position.y = 99;
+		App->ghost_red->position.y = 123;
 		App->ghost_red->ghost_up = false;
 		App->ghost_red->ghost_down = false;
 		if (App->ghost_red->ghost_left = true)

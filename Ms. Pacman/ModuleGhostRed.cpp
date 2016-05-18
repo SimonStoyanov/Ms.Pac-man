@@ -464,7 +464,19 @@ update_status ModuleGhostRed::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	if (now >= total_time)
+	if (dead_positioning)
+	{
+		if (position.y > 99)
+		{
+			position.y -= 0.5f;
+			current_animation = &up;
+		}
+		else
+		{
+			dead_positioning = false;
+		}
+	}
+	else if (now >= total_time)
 	{
 		// What direction are we changing
 		if (speed != 0)

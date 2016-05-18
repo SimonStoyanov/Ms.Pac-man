@@ -58,9 +58,11 @@ bool ModuleBackgroundMap1::Start()
 
 	App->ghost_blue->position.x = 90; //105 //90
 	App->ghost_blue->position.y = 123; //99 //123
+	App->ghost_blue->in_box = true;
 
 	App->ghost_orange->position.x = 120;
 	App->ghost_orange->position.y = 123;
+	App->ghost_orange->in_box = true;
 
 	App->ghost_pink->position.x = 105;
 	App->ghost_pink->position.y = 123;

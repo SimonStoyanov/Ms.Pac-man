@@ -85,6 +85,14 @@ public:
 	// Box variables
 	float passed_box;
 	bool in_box = true;
+	bool box_up = true;
+	bool box_down = false;
+	bool box_positioning = false;
+
+	// Dead varables
+	float passed_dead;
+	bool is_dead;
+	bool dead_positioning = false;
 
 	Collider* enemy_collision = nullptr;
 

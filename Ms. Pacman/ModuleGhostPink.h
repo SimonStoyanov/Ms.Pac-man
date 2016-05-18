@@ -87,6 +87,13 @@ public:
 	// Box variables
 	float passed_box;
 	bool in_box = true;
+	bool box_up = false;
+	bool box_down = true;
+
+	// Dead varables
+	float passed_dead;
+	bool is_dead;
+	bool dead_positioning = false;
 
 };
 
