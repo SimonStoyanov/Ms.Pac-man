@@ -644,6 +644,8 @@ update_status ModuleGhostBlue::Update()
 	if (is_vulnerable &&  now > total_time_vuln + passed_time)
 	{
 		is_vulnerable = false;
+		App->player->eaten_ghost = 0;
+		App->player2->eaten_ghost = 0;
 	}
 	else if (is_vulnerable && (total_time_vuln + passed_time) - now < 3.0f * 0.5f * 1000.0)
 	{

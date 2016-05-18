@@ -330,6 +330,21 @@ update_status ModulePlayer2::Update()
 		App->ghost_blue->can_see = false;
 	}
 
+	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0)
+	{
+		if (eaten_ghost == 1){
+			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g200, 1.0f);
+		}
+		else if (eaten_ghost == 2){
+			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g400, 1.0f);
+		}
+		else if (eaten_ghost == 3){
+			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g800, 1.0f);
+		}
+		else if (eaten_ghost == 4){
+			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g1600, 1.0f);
+		}
+	}
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
@@ -380,16 +395,21 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
-		if (eaten_ghost == 0){
+		eaten_ghost++;
+		if (eaten_ghost == 1){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
 		}
-		else if (eaten_ghost == 1){
+		else if (eaten_ghost == 2){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 400;
 		}
-		else if (eaten_ghost == 2){
+		else if (eaten_ghost == 3){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 800;
 		}
-		else if (eaten_ghost == 3){
+		else if (eaten_ghost == 4){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
 		App->ghost_blue->enemy_collision->to_delete = true;
@@ -400,21 +420,24 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_blue->position.x = 105;
 		App->ghost_blue->position.y = 123;
-
-		eaten_ghost++;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
-		if (eaten_ghost == 0){
+		eaten_ghost++;
+		if (eaten_ghost == 1){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
 		}
-		else if (eaten_ghost == 1){
+		else if (eaten_ghost == 2){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 400;
 		}
-		else if (eaten_ghost == 2){
+		else if (eaten_ghost == 3){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 800;
 		}
-		else if (eaten_ghost == 3){
+		else if (eaten_ghost == 4){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
 		App->ghost_orange->enemy_collision->to_delete = true;
@@ -426,21 +449,24 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_orange->position.x = 105;
 		App->ghost_orange->position.y = 123;
-
-		eaten_ghost++;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
 	{
-		if (eaten_ghost == 0){
+		eaten_ghost++;
+		if (eaten_ghost == 1){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
 		}
-		else if (eaten_ghost == 1){
+		else if (eaten_ghost == 2){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 400;
 		}
-		else if (eaten_ghost == 2){
+		else if (eaten_ghost == 3){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 800;
 		}
-		else if (eaten_ghost == 3){
+		else if (eaten_ghost == 4){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
 		App->ghost_pink->enemy_collision->to_delete = true;
@@ -452,21 +478,24 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_pink->position.x = 105;
 		App->ghost_pink->position.y = 123;
-
-		eaten_ghost++;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
 	{
-		if (eaten_ghost == 0){
+		eaten_ghost++;
+		if (eaten_ghost == 1){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
 		}
-		else if (eaten_ghost == 1){
+		else if (eaten_ghost == 2){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 400;
 		}
-		else if (eaten_ghost == 2){
+		else if (eaten_ghost == 3){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 800;
 		}
-		else if (eaten_ghost == 3){
+		else if (eaten_ghost == 4){
+			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
 		App->ghost_red->enemy_collision->to_delete = true;
@@ -482,8 +511,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->ghost_red->ghost_right = false;
 		else
 			App->ghost_red->ghost_left = true;
-
-		eaten_ghost++;
 	}
 }
 
