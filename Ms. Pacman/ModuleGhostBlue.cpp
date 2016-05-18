@@ -469,6 +469,7 @@ update_status ModuleGhostBlue::Update()
 	{
 		if (dead_positioning && !App->player->pause)
 		{
+			is_vulnerable = false;
 			if (position.y > 99)
 			{
 				position.y -= 0.5f;
