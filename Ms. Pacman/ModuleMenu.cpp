@@ -143,6 +143,9 @@ update_status ModuleMenu::Update()
 
 	Uint32 now = SDL_GetTicks() - start_time; //time since start
 	
+	//App->player->lifes = 5;
+	App->player->end_game = false;
+
 	// Red ghost
 	if (now >= total_time_red)
 	{

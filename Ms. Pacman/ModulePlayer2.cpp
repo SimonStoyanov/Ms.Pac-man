@@ -239,96 +239,7 @@ update_status ModulePlayer2::Update()
 		down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f;
 	}
 
-	// Change scene when dies
-	if (lifes == 0 && App->map1->IsEnabled())
-	{
-		//App->fade->FadeToBlack(App->map1, App->menu, 0.0f);
-	}
 
-
-	//Player die -----------------------------
-	if (App->player->is_dead && (App->player->now - App->player->passed_time) > (10 * 0.5f * 1000.0f))
-	{
-		// Start everithing again 
-		//Red
-		App->ghost_red->position.x = 105;
-		App->ghost_red->position.y = 99;
-		App->ghost_red->player_dead = false; //Only on red ghost.
-		App->ghost_red->can_see = true;
-		App->ghost_red->speed = 1.0f;
-		App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = false; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
-
-		//Orange
-		App->ghost_orange->position.x = 105;
-		App->ghost_orange->position.y = 99;
-		App->ghost_orange->can_see = true;
-		App->ghost_orange->speed = 1.0f;
-		App->ghost_orange->ghost_down = false; App->ghost_orange->ghost_left = false; App->ghost_orange->ghost_right = false; App->ghost_orange->ghost_up = false;
-
-		//Pink
-		App->ghost_pink->position.x = 105;
-		App->ghost_pink->position.y = 99;
-		App->ghost_pink->can_see = true;
-		App->ghost_pink->speed = 1.0f;
-		App->ghost_pink->ghost_down = false; App->ghost_pink->ghost_left = false; App->ghost_pink->ghost_right = false; App->ghost_pink->ghost_up = false;
-
-		//Blue
-		App->ghost_blue->position.x = 105;
-		App->ghost_blue->position.y = 99;
-		App->ghost_blue->can_see = true;
-		App->ghost_blue->speed = 1.0f;
-		App->ghost_blue->ghost_down = false; App->ghost_blue->ghost_left = false; App->ghost_blue->ghost_right = false; App->ghost_blue->ghost_up = false;
-
-		//Player
-		App->player->position.x = 105; //105
-		App->player->position.y = 195; //195
-		App->player->is_dead = false; //
-		go_left = true; go_right = false;
-		speed = 1.0f;
-
-	}
-	else if (App->player->is_dead && (App->player->now - App->player->passed_time) > (8 * 0.5f * 1000.0f))
-	{
-		// Ghost red reset
-		App->ghost_red->enemy_collision->to_delete = true;
-		App->ghost_red->Disable();
-		App->textures->last_texture--; //Carefull with that. Could cause future errors.
-		App->ghost_red->Enable();
-
-		// Ghost orange reset
-		App->ghost_orange->enemy_collision->to_delete = true;
-		App->ghost_orange->Disable();
-		App->textures->last_texture--; //Carefull with that. Could cause future errors.
-		App->ghost_orange->Enable();
-
-		// Ghost pink reset
-		App->ghost_pink->enemy_collision->to_delete = true;
-		App->ghost_pink->Disable();
-		App->textures->last_texture--; //Carefull with that. Could cause future errors.
-		App->ghost_pink->Enable();
-
-		// Ghost blue reset
-		App->ghost_blue->enemy_collision->to_delete = true;
-		App->ghost_blue->Disable();
-		App->textures->last_texture--; //Carefull with that. Could cause future errors.
-		App->ghost_blue->Enable();
-	}
-	else if (App->player->is_dead && (App->player->now - App->player->passed_time) > (5.9 * 0.5f * 1000.0f))
-	{
-		dead.speed = 0; //Stop dead animation
-	}
-	else if (App->player->is_dead && (App->player->now - App->player->passed_time) > (3.5 * 0.5f * 1000.0f))
-	{
-		dead.speed = 0.3f;
-		current_animation = &dead;
-	}
-	else if (App->player->is_dead && (App->player->now - App->player->passed_time) > (3 * 0.5f * 1000.0f))
-	{
-		App->ghost_red->can_see = false;
-		App->ghost_orange->can_see = false;
-		App->ghost_pink->can_see = false;
-		App->ghost_blue->can_see = false;
-	}
 
 	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0)
 	{
@@ -389,6 +300,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		App->ghost_pink->speed = 0;
 		App->ghost_blue->speed = 0;
 		App->player->speed = 0;
+		App->player2->speed = 0;
 
 		// -------------------------------
 

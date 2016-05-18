@@ -85,7 +85,7 @@ public:
 	Collider* enemy_collision = nullptr;
 
 	// Box variables
-	float passed_box;
+	float passed_box = 8 * 0.5f * 1000.0f; // to make the ghost stay in the box
 	bool in_box = true;
 	bool box_up = false;
 	bool box_down = true;

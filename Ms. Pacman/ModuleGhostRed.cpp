@@ -464,127 +464,135 @@ update_status ModuleGhostRed::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	if (dead_positioning && !App->player->pause)
+	if (!App->player->is_dead)
 	{
-		if (position.y > 99)
+		if (dead_positioning && !App->player->pause)
 		{
-			position.y -= 0.5f;
-			current_animation = &up;
-		}
-		else
-		{
-			dead_positioning = false;
-		}
-	}
-	else if (now >= total_time)
-	{
-		// What direction are we changing
-		if (speed != 0)
-		{
-			if (ghost_right) // right
+			if (position.y > 99)
 			{
-				// What is the next tile
-				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
+				position.y -= 0.5f;
+				current_animation = &up;
+			}
+			else
+			{
+				dead_positioning = false;
+			}
+		}
+		else if (now >= total_time)
+		{
+			// What direction are we changing
+			if (speed != 0)
+			{
+				if (ghost_right) // right
 				{
+					// What is the next tile
+					if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)
+					{
 						position.y = (p_mid.y * 8) + 4 + 7; // Re-position to the center of the tile
 						go_right = true; go_left = false; go_up = false; go_down = false;
+					}
 				}
-			}
-			if (ghost_left) // left
-			{
-				// What is the next tile
-				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
+				if (ghost_left) // left
 				{
+					// What is the next tile
+					if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27)
+					{
 						position.y = (int)(p_mid.y * 8) + 4 + 7;  // Re-position to the center of the tile
 						go_left = true; go_right = false; go_up = false; go_down = false;
+					}
 				}
-			}
-			if (ghost_up) // up
-			{
-				// What is the next tile
-				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
+				if (ghost_up) // up
 				{
+					// What is the next tile
+					if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
+					{
 						position.x = (int)(p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_up = true; go_right = false; go_left = false; go_up = true; go_down = false;
+					}
 				}
-			}
-			if (ghost_down) // down
-			{
-				// What is the next tile
-				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
+				if (ghost_down) // down
 				{
+					// What is the next tile
+					if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
+					{
 						position.x = (int)(p_mid.x * 8) + 4 - 7;  // Re-position to the center of the tile
 						go_down = true; go_right = false; go_left = false; go_up = false;
+					}
 				}
-			}
 
-			// Move
-			if (go_right)
-			{
-				// What is the next tile
-				if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27 || position.x >= 210)
+				// Move
+				if (go_right)
 				{
-					right.speed = 0.25f;
+					// What is the next tile
+					if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27 || position.x >= 210)
+					{
+						right.speed = 0.25f;
 
-					if (!is_vulnerable){current_animation = &right;}
+						if (!is_vulnerable){ current_animation = &right; }
 
-					if (position.x >= 220){position.x = -10;}
+						if (position.x >= 220){ position.x = -10; }
 
-					position.x += speed + extra_speed;
+						position.x += speed + extra_speed;
 
-					go_left = false; go_up = false; go_down = false;
+						go_left = false; go_up = false; go_down = false;
+					}
 				}
-			}
-			if (go_left)
-			{
-				// What is the next tile
-				if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27 || position.x <= 0)
+				if (go_left)
 				{
-					left.speed = 0.25f;
+					// What is the next tile
+					if (App->map1->g_map[p_left.y][p_left.x - 1] == 0 || App->map1->g_map[p_left.y][p_left.x - 1] == 28 || App->map1->g_map[p_left.y][p_left.x - 1] == 27 || position.x <= 0)
+					{
+						left.speed = 0.25f;
 
-					if (!is_vulnerable){current_animation = &left;}
+						if (!is_vulnerable){ current_animation = &left; }
 
-					if (position.x <= -10){position.x = 220;}
+						if (position.x <= -10){ position.x = 220; }
 
-					position.x -= speed + extra_speed;
+						position.x -= speed + extra_speed;
 
-					go_right = false; go_up = false; go_down = false;
+						go_right = false; go_up = false; go_down = false;
+					}
 				}
-			}
-			if (go_up)
-			{
-				// What is the next tilec
-				if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
+				if (go_up)
 				{
-					up.speed = 0.25f;
+					// What is the next tilec
+					if (App->map1->g_map[p_up.y - 1][p_up.x] == 0 || App->map1->g_map[p_up.y - 1][p_up.x] == 28 || App->map1->g_map[p_up.y - 1][p_up.x] == 27)
+					{
+						up.speed = 0.25f;
 
-					if (!is_vulnerable)
-					{current_animation = &up;}
+						if (!is_vulnerable)
+						{
+							current_animation = &up;
+						}
 
-					position.y -= speed + extra_speed;
+						position.y -= speed + extra_speed;
 
-					go_right = false; go_left = false; go_down = false;
+						go_right = false; go_left = false; go_down = false;
+					}
 				}
-			}
-			if (go_down)
-			{
-				// What is the next tile
-				if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
+				if (go_down)
 				{
-					down.speed = 0.25f;
+					// What is the next tile
+					if (App->map1->g_map[p_down.y + 1][p_down.x] == 0 || App->map1->g_map[p_down.y + 1][p_down.x] == 28 || App->map1->g_map[p_down.y + 1][p_down.x] == 27)
+					{
+						down.speed = 0.25f;
 
-					if (!is_vulnerable)
-					{current_animation = &down;}
+						if (!is_vulnerable)
+						{
+							current_animation = &down;
+						}
 
-					position.y += speed + extra_speed;
+						position.y += speed + extra_speed;
 
-					go_right = false; go_left = false; go_up = false;
+						go_right = false; go_left = false; go_up = false;
+					}
 				}
 			}
+			else{ down.speed = 0; up.speed = 0; left.speed = 0; right.speed = 0; }
 		}
-		else{ down.speed = 0; up.speed = 0; left.speed = 0; right.speed = 0; }
+		else{}
 	}
-	else{}
+	else{ down.speed = 0; up.speed = 0; left.speed = 0; right.speed = 0; }
 
 
 	//Ghost vulnerable animation control -----------------

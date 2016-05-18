@@ -44,6 +44,7 @@ bool ModuleBackgroundMap1::Start()
 	graphics = App->textures->Load("Tileset 1.png");
 
 	// Positions ---------------
+	App->player->passed_time = App->player->now;
 	App->player->speed = 1.0f;
 	App->player->position.x = 105; //105
 	App->player->position.y = 195; //195
@@ -59,16 +60,21 @@ bool ModuleBackgroundMap1::Start()
 	App->ghost_blue->position.x = 90; //105 //90
 	App->ghost_blue->position.y = 123; //99 //123
 	App->ghost_blue->in_box = true;
+	App->ghost_blue->can_see = true;
 
 	App->ghost_orange->position.x = 120;
 	App->ghost_orange->position.y = 123;
 	App->ghost_orange->in_box = true;
+	App->ghost_orange->can_see = true;
 
 	App->ghost_pink->position.x = 105;
 	App->ghost_pink->position.y = 123;
+	App->ghost_pink->in_box = true;
+	App->ghost_pink->can_see = true;
 
 	App->ghost_red->position.x = 105;
 	App->ghost_red->position.y = 99;
+	App->ghost_red->can_see = true;
 
 	App->ghost_blue->is_vulnerable = false;
 	App->ghost_orange->is_vulnerable = false;

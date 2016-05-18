@@ -186,8 +186,9 @@ update_status ModulePlayer::Update()
 			if (one_time == false) 
 			{
 				actual_t_g_r = now;
-				App->ghost_blue->passed_box = now;
+
 				App->ghost_orange->passed_box = now;
+				App->ghost_blue->passed_box = now;
 				App->ghost_pink->passed_box = now;
 				one_time = true;
 			}
@@ -320,112 +321,180 @@ update_status ModulePlayer::Update()
 	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f;}
 
 	// Change scene when dies
-	if (lifes == 0 && App->map1->IsEnabled())
+	if (lifes == 0 && App->map1->IsEnabled() && end_game)
 	{
-		//App->fade->FadeToBlack(App->map1, App->menu, 0.0f);
-	}
+		lifes = 5;
 
-
-	 //Player die -----------------------------
-	if (App->player->is_dead && (now - passed_time) > (10 * 0.5f * 1000.0f))
-	{
 		// Start everithing again 
 		//Red
 		App->ghost_red->position.x = 105;
 		App->ghost_red->position.y = 99;
-		App->ghost_red->can_see = true;
-		App->ghost_red->speed = 1.0f;
+		App->ghost_red->can_see = false;
+		
 		App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = false; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
 
 		//Orange
-		App->ghost_orange->position.x = 105;
-		App->ghost_orange->position.y = 99;
-		App->ghost_orange->can_see = true;
-		App->ghost_orange->speed = 1.0f;
+		App->ghost_orange->position.x = 120;
+		App->ghost_orange->position.y = 123;
+		App->ghost_orange->can_see = false;
+		
 		App->ghost_orange->ghost_down = false; App->ghost_orange->ghost_left = false; App->ghost_orange->ghost_right = false; App->ghost_orange->ghost_up = false;
 
 		//Pink
 		App->ghost_pink->position.x = 105;
-		App->ghost_pink->position.y = 99;
-		App->ghost_pink->can_see = true;
-		App->ghost_pink->speed = 1.0f;
+		App->ghost_pink->position.y = 123;
+		App->ghost_pink->can_see = false;
+		
 		App->ghost_pink->ghost_down = false; App->ghost_pink->ghost_left = false; App->ghost_pink->ghost_right = false; App->ghost_pink->ghost_up = false;
 
 		//Blue
-		App->ghost_blue->position.x = 105;
-		App->ghost_blue->position.y = 99;
-		App->ghost_blue->can_see = true;
-		App->ghost_blue->speed = 1.0f;
+		App->ghost_blue->position.x = 90; //105 //90
+		App->ghost_blue->position.y = 123; //99 //123
+		App->ghost_blue->can_see = false;
+	
 		App->ghost_blue->ghost_down = false; App->ghost_blue->ghost_left = false; App->ghost_blue->ghost_right = false; App->ghost_blue->ghost_up = false;
 
 		//Player
 		App->player->position.x = 105; //105
 		App->player->position.y = 195; //195
+		App->player->can_see = false;
+		go_left = true; go_right = false;
+
+
+		//Player2
+		App->player2->position.x = 105; //105
+		App->player2->position.y = 195; //195
+		App->player2->can_see = false;
+		go_left = false; go_right = true;
+
 		App->player->is_dead = false; //
 		go_left = true; go_right = false;
-		speed = 1.0f;
 
-		actual_t_g_r = now + 4; //reseting random timer
+		
 
 		App->ghost_red->player_dead = false; //Only on red ghost.
 
+		App->fade->FadeToBlack(App->map1, App->end_screen, 1.0f);
 	}
-	else if (App->player->is_dead && (now - passed_time) > (8 * 0.5f * 1000.0f))
-	{
-		// Ghost red reset
-		if (App->ghost_red->IsEnabled())
-		{
-			App->ghost_red->enemy_collision->to_delete = true;
-			App->ghost_red->Disable();
-			App->textures->last_texture--; //Carefull with that. Could cause future errors.
-			App->ghost_red->Enable();
-		}
 
-		// Ghost orange reset
-		if (App->ghost_orange->IsEnabled())
-		{
-			App->ghost_orange->enemy_collision->to_delete = true;
-			App->ghost_orange->Disable();
-			App->textures->last_texture--; //Carefull with that. Could cause future errors.
-			App->ghost_orange->Enable();
-			App->ghost_blue->in_box = true;
-		}
 
-		// Ghost pink reset
-		if (App->ghost_pink->IsEnabled())
+	 //Player die -----------------------------
+	if (!end_game)
+	{
+		if (App->player->is_dead && ((now - passed_time) > (10 * 0.5f * 1000.0f) && lifes == 0))
 		{
-			App->ghost_pink->enemy_collision->to_delete = true;
-			App->ghost_pink->Disable();
-			App->textures->last_texture--; //Carefull with that. Could cause future errors.
-			App->ghost_pink->Enable();
-			App->ghost_blue->in_box = true;
+			end_game = true;
 		}
+		else if (App->player->is_dead && (now - passed_time) > (10 * 0.5f * 1000.0f))
+		{
+			// Start everithing again 
+			//Red
+			App->ghost_red->position.x = 105;
+			App->ghost_red->position.y = 99;
+			App->ghost_red->can_see = true;
+			App->ghost_red->speed = 1.0f;
+			App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = false; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
 
-		// Ghost blue reset
-		if (App->ghost_blue->IsEnabled())
-		{
-			App->ghost_blue->enemy_collision->to_delete = true;
-			App->ghost_blue->Disable();
-			App->textures->last_texture--; //Carefull with that. Could cause future errors.
-			App->ghost_blue->Enable();
+			//Orange
+			App->ghost_orange->position.x = 120;
+			App->ghost_orange->position.y = 123;
+			App->ghost_orange->in_box = true;
+			App->ghost_orange->can_see = true;
+			App->ghost_orange->speed = 1.0f;
+			App->ghost_orange->ghost_down = false; App->ghost_orange->ghost_left = false; App->ghost_orange->ghost_right = false; App->ghost_orange->ghost_up = false;
+
+			//Pink
+			App->ghost_pink->position.x = 105;
+			App->ghost_pink->position.y = 123;
+			App->ghost_pink->in_box = true;
+			App->ghost_pink->can_see = true;
+			App->ghost_pink->speed = 1.0f;
+			App->ghost_pink->ghost_down = false; App->ghost_pink->ghost_left = false; App->ghost_pink->ghost_right = false; App->ghost_pink->ghost_up = false;
+
+			//Blue
+			App->ghost_blue->position.x = 90; //105 //90
+			App->ghost_blue->position.y = 123; //99 //123
 			App->ghost_blue->in_box = true;
+			App->ghost_blue->can_see = true;
+			App->ghost_blue->speed = 1.0f;
+			App->ghost_blue->ghost_down = false; App->ghost_blue->ghost_left = false; App->ghost_blue->ghost_right = false; App->ghost_blue->ghost_up = false;
+
+			//Player
+			App->player->position.x = 105; //105
+			App->player->position.y = 195; //195
+			App->player->is_dead = false; //
+			go_left = true; go_right = false;
+			speed = 1.0f;
+
+			//Player2
+			App->player2->position.x = 105; //105
+			App->player2->position.y = 195; //195
+			go_left = false; go_right = true;
+			speed = 1.0f;
+
+			actual_t_g_r = now + 4; //reseting random timer
+			App->ghost_blue->passed_box = now;
+			App->ghost_orange->passed_box = now;
+			App->ghost_pink->passed_box = now;
+
+			App->ghost_red->player_dead = false; //Only on red ghost.
+
 		}
-	}
-	else if (App->player->is_dead && (now - passed_time) > (5.9 * 0.5f * 1000.0f))
-	{
-		dead.speed = 0; //Stop dead animation
-	}
-	else if (App->player->is_dead && (now - passed_time) > (3.5 * 0.5f * 1000.0f))
-	{
-		dead.speed = 0.3f;
-		current_animation = &dead;
-	}
-	else if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f))
-	{
+		else if (App->player->is_dead && (now - passed_time) > (8 * 0.5f * 1000.0f))
+		{
+			// Ghost red reset
+			if (App->ghost_red->IsEnabled())
+			{
+				App->ghost_red->enemy_collision->to_delete = true;
+				App->ghost_red->Disable();
+				App->textures->last_texture--; //Carefull with that. Could cause future errors.
+				App->ghost_red->Enable();
+			}
+
+			// Ghost orange reset
+			if (App->ghost_orange->IsEnabled())
+			{
+				App->ghost_orange->enemy_collision->to_delete = true;
+				App->ghost_orange->Disable();
+				App->textures->last_texture--; //Carefull with that. Could cause future errors.
+				App->ghost_orange->Enable();
+			}
+
+			// Ghost pink reset
+			if (App->ghost_pink->IsEnabled())
+			{
+				App->ghost_pink->enemy_collision->to_delete = true;
+				App->ghost_pink->Disable();
+				App->textures->last_texture--; //Carefull with that. Could cause future errors.
+				App->ghost_pink->Enable();
+			}
+
+			// Ghost blue reset
+			if (App->ghost_blue->IsEnabled())
+			{
+				App->ghost_blue->enemy_collision->to_delete = true;
+				App->ghost_blue->Disable();
+				App->textures->last_texture--; //Carefull with that. Could cause future errors.
+				App->ghost_blue->Enable();
+			}
+		}
+		else if (App->player->is_dead && (now - passed_time) > (5.9 * 0.5f * 1000.0f))
+		{
+			dead.speed = 0; //Stop dead animation
+		}
+		else if (App->player->is_dead && (now - passed_time) > (3.5 * 0.5f * 1000.0f))
+		{
+			dead.speed = 0.3f;
+			current_animation = &dead;
+		}
+		else if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f))
+		{
 			App->ghost_red->can_see = false;
 			App->ghost_orange->can_see = false;
 			App->ghost_pink->can_see = false;
 			App->ghost_blue->can_see = false;
+		}
+
 	}
 
 	if (gtimer != 0 && now - gtimer < 2 * 1.0f * 0.5f * 1000.0)
@@ -487,8 +556,6 @@ update_status ModulePlayer::Update()
 			App->ghost_red->is_dead = false;
 		}
 	}
-
-
 
 
 	// Draw everything --------------------------------------

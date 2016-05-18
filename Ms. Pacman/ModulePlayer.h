@@ -44,12 +44,14 @@ public:
 
 	SDL_Rect test;
 	
-	int lifes = 5;
+	//
+	int lifes = 1;
 	bool can_see = true;
 	bool god_mode = false;
 	bool pause = false;
 
 	Uint32 now;
+
 	//Start
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
@@ -69,7 +71,9 @@ public:
 
 	int eaten_ghost = 0;
 
+	// Logic
 	bool one_time = false;
+	bool end_game = false;
 
 	float gtimer;
 };
