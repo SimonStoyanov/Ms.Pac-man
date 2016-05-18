@@ -206,7 +206,7 @@ update_status ModuleGhostOrange::Update()
 	// Ghosts follows the player
 	if (App->player->ghost_random == false)
 	{
-		if (!is_vulnerable && abs(sqrt((((int)p_position_x - (int)position.x) * ((int)p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) >= 50)
+		if (!is_vulnerable && abs(sqrt((((int)p_position_x - (int)position.x) * ((int)p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) >= 60)
 		{
 			// Want to go to the player / Where is the target -----------------------------
 			if (p_position_x + 7 > position.x) //is right
@@ -248,7 +248,7 @@ update_status ModuleGhostOrange::Update()
 				}
 			}
 		}
-		else if (is_vulnerable == true || abs(sqrt((((int)p_position_x - (int)position.x) * (p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) < 50)
+		else if (is_vulnerable == true || abs(sqrt((((int)p_position_x - (int)position.x) * (p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) < 60)
 		{
 			// Want to escape from the player / Where is the target -----------------------------
 			if (p_position_x + 7 > position.x) //is right
