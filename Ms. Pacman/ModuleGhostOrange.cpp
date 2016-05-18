@@ -106,7 +106,6 @@ bool ModuleGhostOrange::Start()
 // Update: draw background
 update_status ModuleGhostOrange::Update()
 {
-
 	int p_position_x;
 	int p_position_y;
 
@@ -207,7 +206,7 @@ update_status ModuleGhostOrange::Update()
 	// Ghosts follows the player
 	if (App->player->ghost_random == false)
 	{
-		if (is_vulnerable == false && abs((int)p_position_x + 7 - (int)position.x) > 30 && abs((int)p_position_y + 7 - (int)position.y) > 30)
+		if (!is_vulnerable && abs(sqrt((((int)p_position_x - (int)position.x) * ((int)p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) >= 50)
 		{
 			// Want to go to the player / Where is the target -----------------------------
 			if (p_position_x + 7 > position.x) //is right
@@ -249,7 +248,7 @@ update_status ModuleGhostOrange::Update()
 				}
 			}
 		}
-		else if (is_vulnerable == true || abs((int)p_position_x + 7 - (int)position.x) < 30 || abs((int)p_position_y + 7 - (int)position.y) < 30)
+		else if (is_vulnerable == true || abs(sqrt((((int)p_position_x - (int)position.x) * (p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) < 50)
 		{
 			// Want to escape from the player / Where is the target -----------------------------
 			if (p_position_x + 7 > position.x) //is right
@@ -464,7 +463,7 @@ update_status ModuleGhostOrange::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	if (dead_positioning)
+	if (dead_positioning && !App->player->pause)
 	{
 		if (position.y > 99)
 		{

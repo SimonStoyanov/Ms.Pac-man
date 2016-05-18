@@ -81,10 +81,10 @@ bool ModuleBackgroundMap1::Start()
 		App->player2->Enable();
 	}
 	App->audio->Enable();
-	App->ghost_blue->Enable();
+	//App->ghost_blue->Enable();
 	App->ghost_orange->Enable();
-	App->ghost_pink->Enable();
-	App->ghost_red->Enable();
+	//App->ghost_pink->Enable();
+	//App->ghost_red->Enable();
 	App->collision->Enable();
 
 	// Temporal map ----------

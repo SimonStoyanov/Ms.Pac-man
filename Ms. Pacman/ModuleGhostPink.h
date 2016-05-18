@@ -95,6 +95,10 @@ public:
 	bool is_dead;
 	bool dead_positioning = false;
 
+	//Pink logic variables
+	bool player1;
+	bool player2;
+
 };
 
 #endif

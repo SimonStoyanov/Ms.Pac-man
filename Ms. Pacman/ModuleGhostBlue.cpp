@@ -461,7 +461,7 @@ update_status ModuleGhostBlue::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	if (dead_positioning)
+	if (dead_positioning && !App->player->pause)
 	{
 		if (position.y > 99)
 		{

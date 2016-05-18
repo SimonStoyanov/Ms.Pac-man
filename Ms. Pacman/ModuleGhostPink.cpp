@@ -107,6 +107,7 @@ update_status  ModuleGhostPink::Update()
 	// What player should i chase -----------
 	int p_position_x;
 	int p_position_y;
+	player1 = true; player2 = false;
 
 	if (App->player->two_players)
 	{
@@ -114,11 +115,13 @@ update_status  ModuleGhostPink::Update()
 		{
 			p_position_x = App->player->position.x;
 			p_position_y = App->player->position.y;
+			player1 = true; player2 = false;
 		}
 		else
 		{
 			p_position_x = App->player2->position.x;
 			p_position_y = App->player2->position.y;
+			player2 = true; player1 = false;
 		}
 	}
 	else
@@ -126,6 +129,51 @@ update_status  ModuleGhostPink::Update()
 		p_position_x = App->player->position.x;
 		p_position_y = App->player->position.y;
 	}
+
+	// Reposition target for pink ghost logic ----------
+	if (player1)
+	{
+		if (App->player->go_up)
+		{
+			p_position_x -= 40;
+			p_position_y -= 40;
+		}
+		if (App->player->go_down)
+		{
+			p_position_y += 40;
+		}
+		if (App->player->go_left)
+		{
+			p_position_x -= 40;
+		}
+		if (App->player->go_right)
+		{
+			p_position_x += 40;
+		}
+	}
+	else if (player2)
+	{
+		if (App->player2->go_up)
+		{
+			p_position_x -= 40;
+			p_position_y -= 40;
+		}
+		if (App->player2->go_down)
+		{
+			p_position_y += 40;
+		}
+		if (App->player2->go_left)
+		{
+			p_position_x -= 40;
+		}
+		if (App->player2->go_right)
+		{
+			p_position_x += 40;
+		}
+	}
+
+
+
 
 	Animation* current_animation = prev_anim;
 
@@ -462,7 +510,7 @@ update_status  ModuleGhostPink::Update()
 	p_mid.y = (position.y - 7) / 8;
 
 	// Movement ---------------------------------------
-	if (dead_positioning)
+	if (dead_positioning && !App->player->pause)
 	{
 		if (position.y > 99)
 		{
