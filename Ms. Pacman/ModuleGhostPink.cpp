@@ -53,6 +53,12 @@ ModuleGhostPink::ModuleGhostPink()
 	vulnerable_end.PushBack({ 49, 127, 14, 14 });
 	vulnerable_end.speed = 0.10f;
 
+	// Dead animations
+	dead_up.PushBack({ 65, 129, 12, 5 });
+	dead_left.PushBack({ 95, 130, 12, 5 });
+	dead_right.PushBack({ 65, 135, 12, 5 });
+	dead_downs.PushBack({ 81, 129, 12, 5 });
+
 	total_time_vuln = (Uint32)(time_vulnerable * 0.5f * 1000.0f);
 	total_time = (Uint32)(time_stoped * 0.5f * 1000.0f);
 
@@ -107,74 +113,84 @@ bool ModuleGhostPink::Start()
 update_status  ModuleGhostPink::Update()
 {
 	// What player should i chase -----------
-	int p_position_x;
-	int p_position_y;
+
 	player1 = true; player2 = false;
 
-	if (App->player->two_players)
+	if (!is_dead)
 	{
-		if (abs(sqrt(((App->player->position.x - position.x) * (App->player->position.x - position.x)) + (App->player->position.y - position.y) * (App->player->position.y - position.y))) < abs(sqrt(((App->player2->position.x - position.x) * (App->player2->position.x - position.x)) + (App->player2->position.y - position.y) * (App->player2->position.y - position.y))))
+		if (App->player->two_players)
 		{
-			p_position_x = App->player->position.x;
-			p_position_y = App->player->position.y;
-			player1 = true; player2 = false;
+			if (abs(sqrt(((App->player->position.x - position.x) * (App->player->position.x - position.x)) + (App->player->position.y - position.y) * (App->player->position.y - position.y))) < abs(sqrt(((App->player2->position.x - position.x) * (App->player2->position.x - position.x)) + (App->player2->position.y - position.y) * (App->player2->position.y - position.y))))
+			{
+				p_position_x = App->player->position.x;
+				p_position_y = App->player->position.y;
+				player1 = true; player2 = false;
+			}
+			else
+			{
+				p_position_x = App->player2->position.x;
+				p_position_y = App->player2->position.y;
+				player2 = true; player1 = false;
+			}
 		}
 		else
 		{
-			p_position_x = App->player2->position.x;
-			p_position_y = App->player2->position.y;
-			player2 = true; player1 = false;
+			p_position_x = App->player->position.x;
+			p_position_y = App->player->position.y;
 		}
-	}
-	else
-	{
-		p_position_x = App->player->position.x;
-		p_position_y = App->player->position.y;
-	}
 
-	// Reposition target for pink ghost logic ----------
-	if (player1)
-	{
-		if (App->player->go_up)
+		// Reposition target for pink ghost logic ----------
+		if (player1)
 		{
-			p_position_x -= 40;
-			p_position_y -= 40;
+			if (App->player->go_up)
+			{
+				p_position_x -= 40;
+				p_position_y -= 40;
+			}
+			if (App->player->go_down)
+			{
+				p_position_y += 40;
+			}
+			if (App->player->go_left)
+			{
+				p_position_x -= 40;
+			}
+			if (App->player->go_right)
+			{
+				p_position_x += 40;
+			}
 		}
-		if (App->player->go_down)
+		else if (player2)
 		{
-			p_position_y += 40;
-		}
-		if (App->player->go_left)
-		{
-			p_position_x -= 40;
-		}
-		if (App->player->go_right)
-		{
-			p_position_x += 40;
+			if (App->player2->go_up)
+			{
+				p_position_x -= 40;
+				p_position_y -= 40;
+			}
+			if (App->player2->go_down)
+			{
+				p_position_y += 40;
+			}
+			if (App->player2->go_left)
+			{
+				p_position_x -= 40;
+			}
+			if (App->player2->go_right)
+			{
+				p_position_x += 40;
+			}
 		}
 	}
-	else if (player2)
+	else if (position.y == 99 && (position.x < 78 || position.x > 120))
 	{
-		if (App->player2->go_up)
-		{
-			p_position_x -= 40;
-			p_position_y -= 40;
-		}
-		if (App->player2->go_down)
-		{
-			p_position_y += 40;
-		}
-		if (App->player2->go_left)
-		{
-			p_position_x -= 40;
-		}
-		if (App->player2->go_right)
-		{
-			p_position_x += 40;
-		}
+		p_position_x = 105;
+		p_position_y = 99;
 	}
-
-
+	if (is_dead)
+	{
+		speed = 1.0f;
+		is_vulnerable = false;
+	}
 
 
 	Animation* current_animation = prev_anim;
@@ -253,7 +269,7 @@ update_status  ModuleGhostPink::Update()
 	else change_direction = false;
 
 	// Ghosts follows the player
-	if (App->player->ghost_random == false)
+	if (App->player->ghost_random == false || is_dead)
 	{
 		if (is_vulnerable == false)
 		{
@@ -514,17 +530,36 @@ update_status  ModuleGhostPink::Update()
 	// Movement ---------------------------------------
 	if (!App->player->is_dead)
 	{
+<<<<<<< HEAD
 		if (dead_positioning && !App->player->pause)
+=======
+
+		if (dead_positioning && !App->player->pause && is_dead)
+>>>>>>> origin/master
 		{
 			is_vulnerable = false;
-			if (position.y > 99)
+			if (dead_down)
 			{
-				position.y -= 0.5f;
-				current_animation = &up;
+				if (position.y < 120)
+				{
+					current_animation = &dead_downs;
+					position.y += 0.5f;
+				}
+				else{ dead_down = false; }
 			}
 			else
 			{
-				dead_positioning = false;
+				if (position.y > 99)
+				{
+					position.y -= 0.3f;
+					current_animation = &up;
+				}
+				else
+				{
+					is_dead = false;
+					dead_positioning = false;
+					dead_down = true;
+				}
 			}
 		}
 		else if (now >= total_time && !in_box)
@@ -578,6 +613,7 @@ update_status  ModuleGhostPink::Update()
 						right.speed = 0.25f;
 
 						if (!is_vulnerable){ current_animation = &right; }
+						if (is_dead){ current_animation = &dead_right; }
 
 						if (position.x >= 220){ position.x = -10; }
 
@@ -594,6 +630,7 @@ update_status  ModuleGhostPink::Update()
 						left.speed = 0.25f;
 
 						if (!is_vulnerable){ current_animation = &left; }
+						if (is_dead){ current_animation = &dead_left; }
 
 						if (position.x <= -10){ position.x = 220; }
 
@@ -613,6 +650,7 @@ update_status  ModuleGhostPink::Update()
 						{
 							current_animation = &up;
 						}
+						if (is_dead){ current_animation = &dead_up; }
 
 						position.y -= speed + extra_speed;
 
@@ -630,6 +668,7 @@ update_status  ModuleGhostPink::Update()
 						{
 							current_animation = &down;
 						}
+						if (is_dead){ current_animation = &dead_downs; }
 
 						position.y += speed + extra_speed;
 

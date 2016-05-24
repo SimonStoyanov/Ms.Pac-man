@@ -31,6 +31,10 @@ public:
 	Animation down;
 	Animation vulnerable;
 	Animation vulnerable_end;
+	Animation dead_up;
+	Animation dead_left;
+	Animation dead_right;
+	Animation dead_downs;
 
 	SDL_Rect test;
 
@@ -91,14 +95,16 @@ public:
 	bool box_down = true;
 
 	// Dead varables
-	float passed_dead;
 	bool is_dead;
 	bool dead_positioning = false;
+	bool dead_down = true;
 
 	//Pink logic variables
 	bool player1;
 	bool player2;
 
+	int p_position_x;
+	int p_position_y;
 };
 
 #endif
