@@ -73,7 +73,6 @@ public:
 	bool cont = false;
 	int tmp;
 	bool can_see = true;
-	bool stop_collider = false;
 
 	// Ghost start moving time variables
 	Uint32 now;

@@ -349,7 +349,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		}
 		App->ghost_orange->enemy_collision->to_delete = true;
 		App->ghost_orange->Disable();
-		App->ghost_orange->passed_dead = App->player->now;
 		App->ghost_orange->is_dead = true;
 
 		App->ghost_orange->is_vulnerable = false;
@@ -378,7 +377,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		}
 		App->ghost_pink->enemy_collision->to_delete = true;
 		App->ghost_pink->Disable();
-		App->ghost_pink->passed_dead = App->player->now;
 		App->ghost_pink->is_dead = true;
 
 		App->ghost_pink->is_vulnerable = false;
@@ -407,7 +405,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		}
 		App->ghost_red->enemy_collision->to_delete = true;
 		App->ghost_red->Disable();
-		App->ghost_red->passed_dead = App->player->now;
 		App->ghost_red->is_dead = true;
 
 		App->ghost_red->is_vulnerable = false;

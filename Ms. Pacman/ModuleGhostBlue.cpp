@@ -45,13 +45,14 @@ ModuleGhostBlue::ModuleGhostBlue()
 	vulnerable.PushBack({ 17, 127, 14, 14 });
 	vulnerable.speed = 0.10f;
 
-	//end of vulnerable
+	// end of vulnerable
 	vulnerable_end.PushBack({ 1, 127, 14, 14 });
 	vulnerable_end.PushBack({ 17, 127, 14, 14 });
 	vulnerable_end.PushBack({ 33, 127, 14, 14 });
 	vulnerable_end.PushBack({ 49, 127, 14, 14 });
 	vulnerable_end.speed = 0.10f;
 
+	// Dead animations
 	dead_up.PushBack({65, 129 , 12 , 5});
 	dead_left.PushBack({ 95, 130, 12, 5 });
 	dead_right.PushBack({ 65, 135, 12, 5 });
@@ -228,7 +229,7 @@ update_status ModuleGhostBlue::Update()
 	else change_direction = false;
 
 	// Ghosts follows the player
-	if (App->player->ghost_random == false)
+	if (App->player->ghost_random == false || is_dead)
 	{
 		if (is_vulnerable == false)
 		{
