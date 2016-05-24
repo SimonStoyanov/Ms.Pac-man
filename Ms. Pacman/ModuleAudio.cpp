@@ -23,17 +23,26 @@ bool ModuleAudio::Start()
 
 	start_of_a_game = Mix_LoadMUS("start_of_a_game.ogg");
 	wakawaka = Mix_LoadWAV("wakawaka.wav");
-
+	powerpill = Mix_LoadWAV("PowerPill.wav");
+	eatenghost = Mix_LoadWAV("EatenGhost.wav");
+	ghostmovement = Mix_LoadWAV("GhostMovement.wav"); // Channel 3
+	death = Mix_LoadWAV("Death.wav");
 	if (App->map1->IsEnabled())
 	{
 		Mix_PlayMusic(start_of_a_game, 1);	
 	}
-
+	Mix_PlayChannel(3, App->audio->ghostmovement, -1);
+	Mix_Pause(3);
 	return true;
 }
 
 ModuleAudio::ModuleAudio()
 {
+	Mix_FreeChunk(death);
+	Mix_FreeChunk(ghostmovement);
+	Mix_FreeChunk(eatenghost);
+	Mix_FreeChunk(powerpill);
+	Mix_FreeChunk(wakawaka);
 	Mix_FreeMusic(start_of_a_game);
 }
 
@@ -43,8 +52,7 @@ bool ModuleAudio::CleanUp()
 	LOG("Unloading space scene");
 
 	Mix_CloseAudio();
-
-	//Mix_FreeChunk(wakawaka);
+	
 
 	return true;
 }
@@ -52,10 +60,6 @@ bool ModuleAudio::CleanUp()
 // Update: draw background
 update_status ModuleAudio::Update()
 {
-	/*if (App->player->wakawaka == true)
-	{
-		Mix_PlayChannel(-1, wakawaka, 0);
-	}
-	App->player->wakawaka = false;*/
+
 	return UPDATE_CONTINUE;
 }

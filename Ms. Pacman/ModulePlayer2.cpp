@@ -307,6 +307,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
+		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
@@ -330,6 +331,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
+		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
@@ -359,6 +361,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
 	{
+		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
@@ -388,6 +391,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
 	{
+		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;

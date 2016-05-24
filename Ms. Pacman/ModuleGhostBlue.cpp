@@ -694,17 +694,17 @@ update_status ModuleGhostBlue::Update()
 		down.speed = 0; up.speed = 0; left.speed = 0; right.speed = 0;
 	}
 	//Ghost vulnerable animation control -----------------
-	if (is_vulnerable &&  now > total_time_vuln + passed_time)
+	if (is_vulnerable &&  now > total_time_vuln + passed_time + 1200.0f)
 	{
 		is_vulnerable = false;
 		App->player->eaten_ghost = 0;
 		App->player2->eaten_ghost = 0;
 	}
-	else if (is_vulnerable && (total_time_vuln + passed_time) - now < 3.0f * 0.5f * 1000.0)
+	else if (is_vulnerable && (total_time_vuln + passed_time + 100.0f) - now < 4.0f * 0.5f * 1000.0)
 	{
 		current_animation = &vulnerable_end;
 	}
-	else if (is_vulnerable && (total_time_vuln + passed_time) - now < 1.0f * 0.5f * 1000.0)
+	else if (is_vulnerable && (total_time_vuln + passed_time + 100.0f) - now < 1.0f * 0.5f * 1000.0)
 	{
 		vulnerable_end.speed = 0.20f;
 	}

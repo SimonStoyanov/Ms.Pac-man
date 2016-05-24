@@ -83,7 +83,6 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	one_time = false;
-
 	return true;
 }
 
@@ -126,8 +125,7 @@ update_status ModulePlayer::Update()
 	// Pause ----------------------------------
 	if (pause){
 		speed = 0;
-		
-		
+				
 		if (two_players == true){
 			App->player2->speed = 0;
 		}
@@ -180,6 +178,7 @@ update_status ModulePlayer::Update()
 	// Movement ---------------------------------------
 	if (!is_dead && speed != 0)
 	{
+		Mix_Resume(3);
 		if (total_time <= now)
 		{
 			// Reseting random ghosts time and box time
@@ -254,7 +253,6 @@ update_status ModulePlayer::Update()
 					right.speed = 0.3f;
 					current_animation = &right;
 					position.x += speed;
-					wakawaka = true;
 
 					// Tunel teleport
 					if (position.x >= 220)
@@ -275,7 +273,6 @@ update_status ModulePlayer::Update()
 					left.speed = 0.3f;
 					current_animation = &left;
 					position.x -= speed;
-					wakawaka = true;
 					go_right = false; go_up = false; go_down = false;
 
 					// Tunel teleport
@@ -295,7 +292,6 @@ update_status ModulePlayer::Update()
 					up.speed = 0.3f;
 					current_animation = &up;
 					position.y -= speed;
-					wakawaka = true;
 					go_right = false; go_left = false; go_down = false;
 				}
 				else
@@ -309,7 +305,6 @@ update_status ModulePlayer::Update()
 					down.speed = 0.3f;
 					current_animation = &down;
 					position.y += speed;
-					wakawaka = true;
 					go_right = false; go_left = false; go_up = false;
 				}
 				else
@@ -324,8 +319,8 @@ update_status ModulePlayer::Update()
 	if (lifes == 0 && App->map1->IsEnabled() && end_game)
 	{
 		lifes = 5;
-
-		// Start everithing again 
+		
+		// Start everything again 
 		//Red
 		App->ghost_red->position.x = 105;
 		App->ghost_red->position.y = 99;
@@ -387,7 +382,7 @@ update_status ModulePlayer::Update()
 		}
 		else if (App->player->is_dead && (now - passed_time) > (10 * 0.5f * 1000.0f))
 		{
-			// Start everithing again 
+			// Start everything again 
 			//Red
 			App->ghost_red->position.x = 105;
 			App->ghost_red->position.y = 99;
@@ -489,6 +484,7 @@ update_status ModulePlayer::Update()
 		}
 		else if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f))
 		{
+			Mix_PlayChannel(1, App->audio->death, 0);
 			App->ghost_red->can_see = false;
 			App->ghost_orange->can_see = false;
 			App->ghost_pink->can_see = false;
@@ -593,7 +589,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 				if (lifes > 0)
 					lifes--;
 			}
-
+			Mix_Pause(3);
 			App->ghost_red->speed = 0;
 			App->ghost_orange->speed = 0;
 			App->ghost_pink->speed = 0;
@@ -605,6 +601,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
+		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		if (eaten_ghost == 1){
 			gtimer = now;
@@ -643,6 +640,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
+		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		if (eaten_ghost == 1){
 			gtimer = now;
@@ -674,6 +672,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
 	{
+		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		if (eaten_ghost == 1){
 			gtimer = now;
@@ -704,6 +703,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
 	{
+		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		if (eaten_ghost == 1){
 			gtimer = now;

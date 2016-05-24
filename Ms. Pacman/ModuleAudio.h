@@ -21,8 +21,10 @@ public:
 public:
 	Mix_Music* start_of_a_game;
 	Mix_Chunk* wakawaka;
-
-
+	Mix_Chunk* powerpill;
+	Mix_Chunk* eatenghost;
+	Mix_Chunk* ghostmovement;
+	Mix_Chunk* death;
 };
 
 #endif // __MODULESCENESPACE_H__

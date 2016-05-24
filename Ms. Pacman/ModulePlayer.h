@@ -67,7 +67,7 @@ public:
 	Collider* player_collision;
 	void OnCollision(Collider* c1, Collider* c2);
 
-	bool wakawaka;
+	bool waka_waka = false;
 
 	int eaten_ghost = 0;
 

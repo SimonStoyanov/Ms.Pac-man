@@ -65,7 +65,7 @@ public:
 	// Map array
 	char g_map[31][28];
 
-
+	// Sound ghost
 };
 
 #endif 
