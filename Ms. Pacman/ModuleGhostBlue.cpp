@@ -52,6 +52,11 @@ ModuleGhostBlue::ModuleGhostBlue()
 	vulnerable_end.PushBack({ 49, 127, 14, 14 });
 	vulnerable_end.speed = 0.10f;
 
+	dead_up.PushBack({67, 128 , 10 , 4});
+	dead_left.PushBack({ 95, 129, 10, 4 });
+	dead_right.PushBack({ 82, 129, 10, 4 });
+	dead_downs.PushBack({ 66, 134, 10, 4 });
+
 	total_time_vuln = (Uint32)(time_vulnerable * 0.5f * 1000.0f);
 	total_time = (Uint32)(time_stoped * 0.5f * 1000.0f);
 
@@ -107,28 +112,42 @@ bool ModuleGhostBlue::Start()
 // Update: draw background
 update_status ModuleGhostBlue::Update()
 {
-
-	int p_position_x;
-	int p_position_y;
-
-	if (App->player->two_players)
+	if (position.x > 104 && position.x < 106 && position.y > 98 && position.y < 100 && is_dead && !dead_positioning)
 	{
-		if (abs(sqrt(((App->player->position.x - position.x) * (App->player->position.x - position.x)) + (App->player->position.y - position.y) * (App->player->position.y - position.y))) < abs(sqrt(((App->player2->position.x - position.x) * (App->player2->position.x - position.x)) + (App->player2->position.y - position.y) * (App->player2->position.y - position.y))))
+		position.x = 105;
+		position.y = 99;
+		dead_positioning = true;
+	}
+
+
+	if (!is_dead)
+	{
+		if (App->player->two_players)
+		{
+			if (abs(sqrt(((App->player->position.x - position.x) * (App->player->position.x - position.x)) + (App->player->position.y - position.y) * (App->player->position.y - position.y))) < abs(sqrt(((App->player2->position.x - position.x) * (App->player2->position.x - position.x)) + (App->player2->position.y - position.y) * (App->player2->position.y - position.y))))
+			{
+				p_position_x = App->player->position.x;
+				p_position_y = App->player->position.y;
+			}
+			else
+			{
+				p_position_x = App->player2->position.x;
+				p_position_y = App->player2->position.y;
+			}
+		}
+		else
 		{
 			p_position_x = App->player->position.x;
 			p_position_y = App->player->position.y;
 		}
-		else
-		{
-			p_position_x = App->player2->position.x;
-			p_position_y = App->player2->position.y;
-		}
 	}
-	else
+	else if (position.y == 99 && (position.x < 78 || position.x > 120))
 	{
-		p_position_x = App->player->position.x;
-		p_position_y = App->player->position.y;
+		p_position_x = 105;
+		p_position_y = 99;
 	}
+	if (is_dead)
+		speed = 1.0f;
 
 	Animation* current_animation = prev_anim;
 
@@ -467,17 +486,27 @@ update_status ModuleGhostBlue::Update()
 	// Movement ---------------------------------------
 	if (!App->player->is_dead)
 	{
-		if (dead_positioning && !App->player->pause)
+		if (dead_positioning && !App->player->pause && is_dead)
 		{
 			is_vulnerable = false;
-			if (position.y > 99)
+			if (dead_down)
 			{
-				position.y -= 0.5f;
-				current_animation = &up;
+				if (position.y < 120)
+				{
+					position.y += 0.5f;
+				}
+				else{ dead_down = false; }
 			}
 			else
 			{
-				dead_positioning = false;
+				if (position.y > 99)
+				{
+					position.y -= 0.5f;
+				}
+				else
+				{
+					is_dead = false;
+				}
 			}
 		}
 		else if (now >= total_time && !in_box)
@@ -531,6 +560,7 @@ update_status ModuleGhostBlue::Update()
 						right.speed = 0.25f;
 
 						if (!is_vulnerable){ current_animation = &right; }
+						if (is_dead){ current_animation = &dead_right; }
 
 						if (position.x >= 220){ position.x = -10; }
 
@@ -547,6 +577,7 @@ update_status ModuleGhostBlue::Update()
 						left.speed = 0.25f;
 
 						if (!is_vulnerable){ current_animation = &left; }
+						if (is_dead){ current_animation = &dead_left; }
 
 						if (position.x <= -10){ position.x = 220; }
 
@@ -566,6 +597,7 @@ update_status ModuleGhostBlue::Update()
 						{
 							current_animation = &up;
 						}
+						if (is_dead){ current_animation = &dead_up; }
 
 						position.y -= speed + extra_speed;
 
@@ -583,6 +615,7 @@ update_status ModuleGhostBlue::Update()
 						{
 							current_animation = &down;
 						}
+						if (is_dead){ current_animation = &dead_downs; }
 
 						position.y += speed + extra_speed;
 

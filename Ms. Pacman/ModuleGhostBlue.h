@@ -31,6 +31,10 @@ public:
 	Animation down;
 	Animation vulnerable;
 	Animation vulnerable_end;
+	Animation dead_up;
+	Animation dead_left;
+	Animation dead_right;
+	Animation dead_downs;
 
 	SDL_Rect test;
 
@@ -69,6 +73,7 @@ public:
 	bool cont = false;
 	int tmp;
 	bool can_see = true;
+	bool stop_collider = false;
 
 	// Ghost start moving time variables
 	Uint32 now;
@@ -90,11 +95,14 @@ public:
 	bool box_positioning = false;
 
 	// Dead varables
-	float passed_dead;
 	bool is_dead;
 	bool dead_positioning = false;
+	bool dead_down = true;
 
 	Collider* enemy_collision = nullptr;
+
+	int p_position_x;
+	int p_position_y;
 
 };
 

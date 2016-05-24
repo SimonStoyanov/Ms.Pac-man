@@ -325,13 +325,8 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->UI->_score += 1600;
 		}
 		App->ghost_blue->enemy_collision->to_delete = true;
-		App->ghost_blue->Disable();
-		App->ghost_blue->passed_dead = App->player->now;
 		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
-
-		App->ghost_blue->position.x = 105;
-		App->ghost_blue->position.y = 123;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{

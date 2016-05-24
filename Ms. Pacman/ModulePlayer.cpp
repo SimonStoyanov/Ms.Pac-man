@@ -513,17 +513,6 @@ update_status ModulePlayer::Update()
 		}
 	}
 	
-
-	// Ghost Blue die ------------------------
-	if (App->ghost_blue->is_dead)
-	{
-		if (now - App->ghost_blue->passed_dead > 4 * 0.5f * 1000.0f) //time dead
-		{
-			App->ghost_blue->Enable();
-			App->ghost_blue->dead_positioning = true;
-			App->ghost_blue->is_dead = false;
-		}
-	}
 	// Ghost Orange die ------------------------
 	if (App->ghost_orange->is_dead)
 	{
@@ -585,22 +574,32 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable)) && god_mode == false){
 		// Player die -------------------
-		if (!App->ghost_red->player_dead)
+		if (c2->type == COLLIDER_BLUE && App->ghost_blue->is_dead)
+		{}
+		else if (c2->type == COLLIDER_ORANGE && App->ghost_orange->is_dead)
+		{}
+		else if (c2->type == COLLIDER_PINK && App->ghost_pink->is_dead)
+		{}
+		else if (c2->type == COLLIDER_RED && App->ghost_red->is_dead)
+		{}
+		else
 		{
-			App->player->passed_time = App->player->now;
-			App->ghost_red->player_dead = true; //only on red
-			App->player->is_dead = true;
+			if (!App->ghost_red->player_dead)
+			{
+				App->player->passed_time = App->player->now;
+				App->ghost_red->player_dead = true; //only on red
+				App->player->is_dead = true;
 
-			if (lifes > 0)
-				lifes--;
+				if (lifes > 0)
+					lifes--;
+			}
+
+			App->ghost_red->speed = 0;
+			App->ghost_orange->speed = 0;
+			App->ghost_pink->speed = 0;
+			App->ghost_blue->speed = 0;
+			App->player->speed = 0;
 		}
-
-		App->ghost_red->speed = 0;
-		App->ghost_orange->speed = 0;
-		App->ghost_pink->speed = 0;
-		App->ghost_blue->speed = 0;
-		App->player->speed = 0;
-
 		// -------------------------------
 
 	}
@@ -624,16 +623,23 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			App->UI->score += 1600;
 		}
 
-		App->ghost_blue->enemy_collision->to_delete = true;
-		App->ghost_blue->Disable();
-		App->ghost_blue->passed_dead = now;
+		//App->ghost_blue->enemy_collision->to_delete = true;
 		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
 
-		App->ghost_blue->position.x = 105;
-		App->ghost_blue->position.y = 123;
-		
-		
+		if (App->ghost_blue->is_dead)
+		{
+			if (App->ghost_blue->position.x < 105)
+			{
+				App->ghost_blue->p_position_x = 80;
+				App->ghost_blue->p_position_y = 99;
+			}
+			else
+			{
+				App->ghost_blue->p_position_x = 130;
+				App->ghost_blue->p_position_y = 99;
+			}
+		}
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
