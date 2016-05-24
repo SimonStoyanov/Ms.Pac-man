@@ -530,12 +530,7 @@ update_status  ModuleGhostPink::Update()
 	// Movement ---------------------------------------
 	if (!App->player->is_dead)
 	{
-<<<<<<< HEAD
-		if (dead_positioning && !App->player->pause)
-=======
-
 		if (dead_positioning && !App->player->pause && is_dead)
->>>>>>> origin/master
 		{
 			is_vulnerable = false;
 			if (dead_down)
