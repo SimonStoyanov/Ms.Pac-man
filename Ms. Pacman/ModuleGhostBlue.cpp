@@ -52,10 +52,10 @@ ModuleGhostBlue::ModuleGhostBlue()
 	vulnerable_end.PushBack({ 49, 127, 14, 14 });
 	vulnerable_end.speed = 0.10f;
 
-	dead_up.PushBack({67, 128 , 11 , 5});
-	dead_left.PushBack({ 95, 129, 11, 5 });
-	dead_right.PushBack({ 82, 129, 11, 5 });
-	dead_downs.PushBack({ 66, 134, 11, 5 });
+	dead_up.PushBack({65, 129 , 12 , 5});
+	dead_left.PushBack({ 95, 130, 12, 5 });
+	dead_right.PushBack({ 65, 135, 12, 5 });
+	dead_downs.PushBack({ 81, 129, 12, 5 });
 
 	total_time_vuln = (Uint32)(time_vulnerable * 0.5f * 1000.0f);
 	total_time = (Uint32)(time_stoped * 0.5f * 1000.0f);
@@ -496,6 +496,7 @@ update_status ModuleGhostBlue::Update()
 			{
 				if (position.y < 120)
 				{
+					current_animation = &dead_downs;
 					position.y += 0.5f;
 				}
 				else{ dead_down = false; }
@@ -504,7 +505,7 @@ update_status ModuleGhostBlue::Update()
 			{
 				if (position.y > 99)
 				{
-					position.y -= 0.5f;
+					position.y -= 0.3f;
 					current_animation = &up;
 				}
 				else
