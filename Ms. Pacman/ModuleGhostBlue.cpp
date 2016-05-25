@@ -11,6 +11,7 @@ using namespace std;
 #include "ModulePlayer2.h"
 #include "ModuleCollision.h"
 #include "ModuleGhostBlue.h"
+#include "ModuleGhostRed.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleAudio.h"
 #include <time.h>
@@ -18,7 +19,7 @@ using namespace std;
 
 ModuleGhostBlue::ModuleGhostBlue()
 {
-	test = { 3, 120, 1, 1 };
+	test = { 3, 120, 5, 5 };
 
 	// right animation
 	right.PushBack({ 1, 112, 14, 14 });
@@ -127,19 +128,43 @@ update_status ModuleGhostBlue::Update()
 		{
 			if (abs(sqrt(((App->player->position.x - position.x) * (App->player->position.x - position.x)) + (App->player->position.y - position.y) * (App->player->position.y - position.y))) < abs(sqrt(((App->player2->position.x - position.x) * (App->player2->position.x - position.x)) + (App->player2->position.y - position.y) * (App->player2->position.y - position.y))))
 			{
-				p_position_x = App->player->position.x;
-				p_position_y = App->player->position.y;
+				// Blue ghost target behaveour
+				int x;
+				int y;
+
+				x = App->player->position.x - App->ghost_red->position.x;
+				y = App->player->position.y - App->ghost_red->position.y;
+
+				p_position_x = x + App->player->position.x;
+				p_position_y = y + App->player->position.y;
+				App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f); //
 			}
 			else
 			{
-				p_position_x = App->player2->position.x;
-				p_position_y = App->player2->position.y;
+				// Blue ghost target behaveour
+				int x;
+				int y;
+
+				x = App->player2->position.x - App->ghost_red->position.x;
+				y = App->player2->position.y - App->ghost_red->position.y;
+
+				p_position_x = x + App->player2->position.x;
+				p_position_y = y + App->player2->position.y;
+				App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f); //
 			}
 		}
 		else
 		{
-			p_position_x = App->player->position.x;
-			p_position_y = App->player->position.y;
+			// Blue ghost target behaveour
+			int x;
+			int y;
+
+			x = App->player->position.x - App->ghost_red->position.x;
+			y = App->player->position.y - App->ghost_red->position.y;
+
+			p_position_x = x + App->player->position.x;
+			p_position_y = y + App->player->position.y;
+			//App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f); //
 		}
 	}
 	else if (position.y == 99 && (position.x < 78 || position.x > 120))
