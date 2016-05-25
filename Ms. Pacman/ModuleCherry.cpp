@@ -60,10 +60,12 @@ update_status ModuleCherry::Update()
 	fruit_collision->SetPos(position.x + 1, position.y + 1);
 	// Animation--------------------------------------------------------------
 	if (count == 10){
-		Mix_PlayChannel(4, App->audio->fruitmovement, 0);
+		if (!Mix_Paused(4)){
+			Mix_PlayChannel(4, App->audio->fruitmovement, 0);
+		}
 		position.y += 2;
 	}
-	else if(count == 20){
+	else if (count == 20){
 		position.y -= 2;
 		count = 0;
 	}
