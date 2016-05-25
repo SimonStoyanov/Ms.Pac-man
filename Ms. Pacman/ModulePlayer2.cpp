@@ -16,7 +16,7 @@
 #include "ModuleMenu.h"
 #include "ModuleUI.h"
 #include "ModuleEndScreen.h"
-
+#include "ModuleCherry.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -239,8 +239,10 @@ update_status ModulePlayer2::Update()
 		down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f;
 	}
 
-
-
+	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0){
+		App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
+	}
+	
 	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0)
 	{
 		if (eaten_ghost == 1){
@@ -279,6 +281,13 @@ update_status ModulePlayer2::Update()
 
 void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
+	if (c1 != nullptr && c2->type == COLLIDER_FRUIT){
+		App->cherry->Disable();
+		App->cherry->fruit_collision->to_delete = true;
+		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
+		App->UI->_score += 100;
+		App->player->ftimer = App->player->now;
+	}
 	if (((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||

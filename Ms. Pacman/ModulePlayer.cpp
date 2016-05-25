@@ -121,6 +121,14 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN){
 		pause = !pause;
+		if (!Mix_Paused(3)){
+			Mix_Pause(3);
+			Mix_Pause(4);
+		}
+		else{
+			Mix_Resume(3);
+			Mix_Resume(4);
+		}
 	}
 
 	// Pause ----------------------------------
@@ -134,6 +142,7 @@ update_status ModulePlayer::Update()
 		App->ghost_pink->speed = 0;
 		App->ghost_red->speed = 0;
 		App->ghost_orange->speed = 0;
+		
 	}
 	else if (!pause && !App->ghost_red->player_dead){
 		if (!god_mode)
@@ -180,6 +189,7 @@ update_status ModulePlayer::Update()
 	if (!is_dead && speed != 0)
 	{
 		Mix_Resume(3);
+		Mix_Resume(4);
 		if (total_time <= now)
 		{
 			// Reseting random ghosts time and box time
@@ -313,15 +323,23 @@ update_status ModulePlayer::Update()
 					down.speed = 0.0f;
 			}
 		}
-		else{ left.speed = 0.0f; }
+		else{ 
+			left.speed = 0.0f; 
+			App->ghost_red->speed = 0;
+			if (!Mix_Paused(3)){
+				Mix_Pause(3);
+				Mix_Pause(4);
+			}
+
+			App->render->Blit(App->UI->graphics, position.x - 15, position.y - 35, &App->UI->Ready, 1.0f);
+		}
 	}
-	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f;}
+	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
 
 	// Change scene when dies
-	if (lifes == 0 && App->map1->IsEnabled() && end_game)
+	if (lifes == 4 && App->map1->IsEnabled()) //&& end_game)
 	{
 		lifes = 5;
-		
 		// Start everything again 
 		//Red
 		App->ghost_red->position.x = 105;
@@ -367,9 +385,12 @@ update_status ModulePlayer::Update()
 		App->player->is_dead = false; //
 		go_left = true; go_right = false;
 
-		
-
 		App->ghost_red->player_dead = false; //Only on red ghost.
+
+		{
+			App->render->Blit(App->UI->graphics, position.x - 32, position.y - 35, &App->UI->GameOver, 1.0f);
+			SDL_Delay(5000);
+		}
 
 		App->fade->FadeToBlack(App->map1, App->end_screen, 1.0f);
 	}

@@ -164,7 +164,7 @@ update_status ModuleGhostBlue::Update()
 
 			p_position_x = x + App->player->position.x;
 			p_position_y = y + App->player->position.y;
-			//App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f); //
+			App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f); //
 		}
 	}
 	else if (position.y == 99 && (position.x < 78 || position.x > 120))

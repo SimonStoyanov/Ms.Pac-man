@@ -103,6 +103,12 @@ public:
 
 	// fruit score
 	SDL_Rect f100;
+
+	// Ready!
+	SDL_Rect Ready;
+
+	// Game Over
+	SDL_Rect GameOver;
 };
 
 #endif 
