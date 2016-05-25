@@ -550,12 +550,12 @@ update_status ModulePlayer::Update()
 	if(can_see)
 		App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
 
-	App->render->Blit(graphics, (position.x + 7), (position.y - 7) + DISTANCEM1, &test, 1.0f); //
-	App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	App->render->Blit(graphics, (p_up.x * 8) + 4, (p_up.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (position.x + 7), (position.y - 7) + DISTANCEM1, &test, 1.0f); //
+	//App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (p_up.x * 8) + 4, (p_up.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
 	return UPDATE_CONTINUE;
 }

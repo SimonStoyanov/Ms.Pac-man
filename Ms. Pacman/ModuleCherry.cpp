@@ -53,9 +53,6 @@ bool ModuleCherry::Start()
 // Update: draw background
 update_status ModuleCherry::Update()
 {
-
-	fruit_collision->SetPos(position.x + 1, position.y + 10);
-
 	// Cherry appears when 23 seconds passed
 	if (App->player->now - passed_cherry > 25 * (0.5f * 1000.0f) && !App->player->is_dead) 
 	{
