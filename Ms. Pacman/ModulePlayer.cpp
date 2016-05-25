@@ -190,6 +190,7 @@ update_status ModulePlayer::Update()
 				App->ghost_orange->passed_box = now;
 				App->ghost_blue->passed_box = now;
 				App->ghost_pink->passed_box = now;
+				App->cherry->passed_cherry = now;
 				one_time = true;
 			}
 
@@ -428,7 +429,14 @@ update_status ModulePlayer::Update()
 			go_left = false; go_right = true;
 			speed = 1.0f;
 
-			actual_t_g_r = now + 4; //reseting random timer
+			//Cherry
+			if (App->map1->IsEnabled())
+			{
+				App->cherry->passed_cherry = now;
+				App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
+			}
+
+			actual_t_g_r = now + 5; //reseting random timer
 			App->ghost_blue->passed_box = now;
 			App->ghost_orange->passed_box = now;
 			App->ghost_pink->passed_box = now;
@@ -521,18 +529,29 @@ update_status ModulePlayer::Update()
 	if(can_see)
 		App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
 
+	App->render->Blit(graphics, (position.x + 7), (position.y - 7) + DISTANCEM1, &test, 1.0f); //
+	App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	App->render->Blit(graphics, (p_up.x * 8) + 4, (p_up.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+	App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
+
 	return UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
-	if (c1 != nullptr && c2->type == COLLIDER_FRUIT){
+
+	// Cherry
+	if (c1 != nullptr && c2->type == COLLIDER_FRUIT)
+	{
 		App->cherry->Disable();
 		App->cherry->fruit_collision->to_delete = true;
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
 		App->UI->score += 100;
 		ftimer = now;
 	}
+
 	if (((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
