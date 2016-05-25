@@ -337,7 +337,7 @@ update_status ModulePlayer::Update()
 	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
 
 	// Change scene when dies
-	if (lifes == 4 && App->map1->IsEnabled()) //&& end_game)
+	if (lifes == 0 && App->map1->IsEnabled() && end_game)
 	{
 		lifes = 5;
 		// Start everything again 
