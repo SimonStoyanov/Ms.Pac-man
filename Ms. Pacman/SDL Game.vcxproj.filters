@@ -98,6 +98,9 @@
     <ClInclude Include="ModulePlayer2.h">
       <Filter>Modules\Player &amp; NPC</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleCherry.h">
+      <Filter>Modules\Player &amp; NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -161,6 +164,9 @@
       <Filter>Modules\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="ModulePlayer2.cpp">
+      <Filter>Modules\Player &amp; NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCherry.cpp">
       <Filter>Modules\Player &amp; NPC</Filter>
     </ClCompile>
   </ItemGroup>

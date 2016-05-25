@@ -12,6 +12,7 @@
 #include "ModuleGhostOrange.h"
 #include "ModuleGhostPink.h"
 #include "ModuleGhostRed.h"
+#include "ModuleCherry.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleMenu.h"
 #include "ModuleUI.h"
@@ -509,21 +510,13 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-
+	if (ftimer != 0 && now - ftimer < 2 * 1.0f * 0.5f * 1000.0){
+		App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
+	}
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
-
-	//App->render->Blit(graphics, (position.x +7), (position.y - 7 + DISTANCEM1), &test, 1.0f);
-	//App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_up.x * 8) + 4, (p_up.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-
-	//App->render->Blit(graphics, position.x, position.y + DISTANCEM1, &test, 1.0f); //
-	//App->render->Blit(graphics, 3, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
 	if(can_see)
 		App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
@@ -533,6 +526,13 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
+	if (c1 != nullptr && c2->type == COLLIDER_FRUIT){
+		App->cherry->Disable();
+		App->cherry->fruit_collision->to_delete = true;
+		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
+		App->UI->score += 100;
+		ftimer = now;
+	}
 	if (((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
@@ -587,7 +587,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-
+		SDL_Delay(500);
 		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
 
@@ -625,7 +625,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-
+		SDL_Delay(500);
 		App->ghost_orange->is_dead = true;
 		App->ghost_orange->is_vulnerable = false;
 
@@ -664,7 +664,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-
+		SDL_Delay(500);
 		App->ghost_pink->is_dead = true;
 		App->ghost_pink->is_vulnerable = false;
 
@@ -702,7 +702,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-
+		SDL_Delay(500);
 		App->ghost_red->is_dead = true;
 		App->ghost_red->is_vulnerable = false;
 

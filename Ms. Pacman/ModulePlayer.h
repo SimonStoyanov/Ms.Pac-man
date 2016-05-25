@@ -76,6 +76,7 @@ public:
 	bool end_game = false;
 
 	float gtimer;
+	float ftimer;
 };
 
 #endif

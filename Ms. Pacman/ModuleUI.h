@@ -100,6 +100,9 @@ public:
 	SDL_Rect g400;
 	SDL_Rect g800;
 	SDL_Rect g1600;
+
+	// fruit score
+	SDL_Rect f100;
 };
 
 #endif 

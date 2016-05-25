@@ -19,6 +19,7 @@
 #include "ModuleGhostOrange.h"
 #include "ModuleGhostPink.h"
 #include "ModuleGhostRed.h"
+#include "ModuleCherry.h"
 
 Application::Application()
 {
@@ -39,6 +40,7 @@ Application::Application()
 	modules[i++] = ghost_orange = new ModuleGhostOrange();
 	modules[i++] = ghost_pink = new ModuleGhostPink();
 	modules[i++] = ghost_red = new ModuleGhostRed();
+	modules[i++] = cherry = new ModuleCherry();
 
 	modules[i++] = collision = new ModuleCollision(); //it has to be the second last one
 	modules[i++] = fade = new ModuleFadeToBlack(); //it has to be always the last one 
@@ -60,7 +62,7 @@ bool Application::Init()
 
 	// Disable
 	audio->Disable();
-
+	cherry->Disable();
 	map1->Disable();
 	map2->Disable();
 	end_screen->Disable();

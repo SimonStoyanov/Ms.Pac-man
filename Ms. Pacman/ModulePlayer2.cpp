@@ -325,9 +325,23 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
-		App->ghost_blue->enemy_collision->to_delete = true;
+		SDL_Delay(500);
 		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
+
+		if (App->ghost_blue->is_dead)
+		{
+			if (App->ghost_blue->position.x < 105)
+			{
+				App->ghost_blue->p_position_x = 80;
+				App->ghost_blue->p_position_y = 99;
+			}
+			else
+			{
+				App->ghost_blue->p_position_x = 130;
+				App->ghost_blue->p_position_y = 99;
+			}
+		}
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
@@ -349,14 +363,23 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
-		App->ghost_orange->enemy_collision->to_delete = true;
-		App->ghost_orange->Disable();
+		SDL_Delay(500);
 		App->ghost_orange->is_dead = true;
-
 		App->ghost_orange->is_vulnerable = false;
 
-		App->ghost_orange->position.x = 105;
-		App->ghost_orange->position.y = 123;
+		if (App->ghost_orange->is_dead)
+		{
+			if (App->ghost_orange->position.x < 105)
+			{
+				App->ghost_orange->p_position_x = 80;
+				App->ghost_orange->p_position_y = 99;
+			}
+			else
+			{
+				App->ghost_orange->p_position_x = 130;
+				App->ghost_orange->p_position_y = 99;
+			}
+		}
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
 	{
@@ -378,14 +401,23 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
-		App->ghost_pink->enemy_collision->to_delete = true;
-		App->ghost_pink->Disable();
+		SDL_Delay(500);
 		App->ghost_pink->is_dead = true;
-
 		App->ghost_pink->is_vulnerable = false;
 
-		App->ghost_pink->position.x = 105;
-		App->ghost_pink->position.y = 123;
+		if (App->ghost_pink->is_dead)
+		{
+			if (App->ghost_pink->position.x < 105)
+			{
+				App->ghost_pink->p_position_x = 80;
+				App->ghost_pink->p_position_y = 99;
+			}
+			else
+			{
+				App->ghost_pink->p_position_x = 130;
+				App->ghost_pink->p_position_y = 99;
+			}
+		}
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
 	{
@@ -407,18 +439,23 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
-		App->ghost_red->enemy_collision->to_delete = true;
-		App->ghost_red->Disable();
+		SDL_Delay(500);
 		App->ghost_red->is_dead = true;
-
 		App->ghost_red->is_vulnerable = false;
 
-		App->ghost_red->position.x = 105;
-		App->ghost_red->position.y = 123;
-		if (App->ghost_red->ghost_left = true)
-			App->ghost_red->ghost_right = false;
-		else
-			App->ghost_red->ghost_left = true;
+		if (App->ghost_red->is_dead)
+		{
+			if (App->ghost_red->position.x < 105)
+			{
+				App->ghost_red->p_position_x = 80;
+				App->ghost_red->p_position_y = 99;
+			}
+			else
+			{
+				App->ghost_red->p_position_x = 130;
+				App->ghost_red->p_position_y = 99;
+			}
+		}
 	}
 }
 

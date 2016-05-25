@@ -19,7 +19,7 @@
 #include "ModuleGhostOrange.h"
 #include "ModuleGhostPink.h"
 #include "ModuleGhostRed.h"
-
+#include "ModuleCherry.h"
 
 ModuleBackgroundMap1::ModuleBackgroundMap1()
 {
@@ -82,15 +82,16 @@ bool ModuleBackgroundMap1::Start()
 	App->ghost_red->is_vulnerable = false;
 
 	// Enable and disable modules ---------
-	App->player->Enable();
-	if (App->player->two_players == true){
-		App->player2->Enable();
-	}
 	App->audio->Enable();
+	App->cherry->Enable();
 	App->ghost_blue->Enable();
 	App->ghost_orange->Enable();
 	App->ghost_pink->Enable();
 	App->ghost_red->Enable();
+	App->player->Enable();
+	if (App->player->two_players == true){
+		App->player2->Enable();
+	}
 	App->collision->Enable();
 
 	// Temporal map ----------
@@ -164,7 +165,6 @@ bool ModuleBackgroundMap1::CleanUp()
 // Update: draw background
 update_status ModuleBackgroundMap1::Update()
 {
-
 	// Draw everything --------------------------------------	
 	int i = 0;
 	while (i < 28)
@@ -317,18 +317,20 @@ update_status ModuleBackgroundMap1::Update()
 	case 27:
 		// Change tile
 		g_map[App->player2->p_mid.y][App->player2->p_mid.x] = 0;
+		if (App->ghost_blue->is_vulnerable == false && App->ghost_orange->is_vulnerable == false && App->ghost_pink->is_vulnerable == false && App->ghost_red->is_vulnerable == false){
+			Mix_PlayChannel(1, App->audio->powerpill, 0);
 
-		// Vulnerable
-		App->ghost_blue->passed_time = App->ghost_blue->now;
-		App->ghost_orange->passed_time = App->ghost_orange->now;
-		App->ghost_pink->passed_time = App->ghost_pink->now;
-		App->ghost_red->passed_time = App->ghost_red->now;
+			// Vulnerable
+			App->ghost_blue->passed_time = App->ghost_blue->now;
+			App->ghost_orange->passed_time = App->ghost_orange->now;
+			App->ghost_pink->passed_time = App->ghost_pink->now;
+			App->ghost_red->passed_time = App->ghost_red->now;
 
-		App->ghost_blue->is_vulnerable = true;
-		App->ghost_orange->is_vulnerable = true;
-		App->ghost_pink->is_vulnerable = true;
-		App->ghost_red->is_vulnerable = true;
-
+			App->ghost_blue->is_vulnerable = true;
+			App->ghost_orange->is_vulnerable = true;
+			App->ghost_pink->is_vulnerable = true;
+			App->ghost_red->is_vulnerable = true;
+		}
 		// Points
 		App->UI->_score += 50;
 		eaten_pills++;
