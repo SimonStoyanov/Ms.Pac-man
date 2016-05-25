@@ -566,8 +566,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	// Cherry
 	if (c1 != nullptr && c2->type == COLLIDER_FRUIT)
 	{
-		App->cherry->Disable();
-		App->cherry->fruit_collision->to_delete = true;
+		App->cherry->passed_cherry = now;
+		App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
+
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
 		App->UI->score += 100;
 		ftimer = now;
@@ -577,6 +578,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable)) && god_mode == false){
+		
 		// Player die -------------------
 		if (c2->type == COLLIDER_BLUE && App->ghost_blue->is_dead)
 		{}
@@ -597,6 +599,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 				if (lifes > 0)
 					lifes--;
 			}
+
 			Mix_Pause(3);
 			App->ghost_red->speed = 0;
 			App->ghost_orange->speed = 0;
