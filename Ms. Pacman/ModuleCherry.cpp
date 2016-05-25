@@ -53,7 +53,7 @@ bool ModuleCherry::Start()
 // Update: draw background
 update_status ModuleCherry::Update()
 {
-<<<<<<< HEAD
+
 	fruit_collision->SetPos(position.x + 1, position.y + 10);
 
 	// Cherry appears when 23 seconds passed
@@ -81,22 +81,13 @@ update_status ModuleCherry::Update()
 	if (App->player->now - passed_cherry > 45 * (0.5f * 1000.0f))
 	{
 		random = false;
-=======
+	}
+
 	count++;
-	App->render->Blit(graphics, position.x, position.y, &cherry);
-	fruit_collision->SetPos(position.x + 1, position.y + 1);
-	// Animation--------------------------------------------------------------
-	if (count == 10){
-		if (!Mix_Paused(4)){
-			Mix_PlayChannel(4, App->audio->fruitmovement, 0);
-		}
-		position.y += 2;
-	}
-	else if (count == 20){
-		position.y -= 2;
-		count = 0;
->>>>>>> origin/master
-	}
+
+	fruit_collision->SetPos(position.x + 1, position.y + 14);
+
+
 	if (position.x <= -10)
 	{
 		App->cherry->fruit_collision->to_delete = true;
