@@ -21,7 +21,7 @@ using namespace std;
 
 ModuleGhostRed::ModuleGhostRed()
 {
-	test = { 3, 120, 1, 1 };
+	test = { 3, 75, 3, 3 };
 
 	// right animation
 	right.PushBack({ 1, 66, 14, 15 });
@@ -160,6 +160,9 @@ update_status ModuleGhostRed::Update()
 
 	// Collision ------------
 	enemy_collision->SetPos(position.x + 4, position.y + 14);
+
+	if (App->player->can_see_paths)
+		App->render->Blit(graphics, (p_position_x + 6), (p_position_y - 8) + DISTANCEM1, &test, 1.0f);
 
 	// What is the next tile --------------
 	// right

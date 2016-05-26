@@ -158,6 +158,7 @@ bool ModuleBackgroundMap1::CleanUp()
 	App->ghost_red->Disable();
 	App->audio->Disable();
 	App->collision->Disable();
+	App->cherry->Disable();
 
 	return true;
 }

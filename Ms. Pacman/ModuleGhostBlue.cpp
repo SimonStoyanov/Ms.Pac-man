@@ -19,7 +19,7 @@ using namespace std;
 
 ModuleGhostBlue::ModuleGhostBlue()
 {
-	test = { 3, 120, 5, 5 };
+	test = { 3, 121, 3, 3 };
 
 	// right animation
 	right.PushBack({ 1, 112, 14, 14 });
@@ -149,8 +149,6 @@ update_status ModuleGhostBlue::Update()
 
 				p_position_x = x + App->player2->position.x;
 				p_position_y = y + App->player2->position.y;
-
-				//App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f); //
 			}
 		}
 		else
@@ -164,7 +162,7 @@ update_status ModuleGhostBlue::Update()
 
 			p_position_x = x + App->player->position.x;
 			p_position_y = y + App->player->position.y;
-			//App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f); //
+
 		}
 	}
 	else if (position.y == 99 && (position.x < 78 || position.x > 120))
@@ -185,6 +183,8 @@ update_status ModuleGhostBlue::Update()
 	// Collision ------------
 	enemy_collision->SetPos(position.x + 4, position.y + 14);
 
+	if (App->player->can_see_paths)
+		App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f);
 
 	// What is the next tile --------------
 	// right

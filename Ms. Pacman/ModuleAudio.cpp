@@ -27,8 +27,8 @@ bool ModuleAudio::Start()
 	eatenghost = Mix_LoadWAV("EatenGhost.wav");
 	ghostmovement = Mix_LoadWAV("GhostMovement.wav"); // Channel 3
 	death = Mix_LoadWAV("Death.wav");
-	fruitmovement = Mix_LoadWAV("FruitMovement.wav"); // Channel 4
-	eatenfruit = Mix_LoadWAV("EatenFruit.wav"); // Channel 4
+	fruitmovement = Mix_LoadWAV("FruitMovement.wav"); // Channel 4   DAFUQ?
+	eatenfruit = Mix_LoadWAV("EatenFruit.wav"); // Channel 4   DAFUQ? Simon pls
 	if (App->map1->IsEnabled())
 	{
 		Mix_PlayMusic(start_of_a_game, 1);	
