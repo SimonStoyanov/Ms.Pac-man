@@ -40,14 +40,6 @@ bool ModuleAudio::Start()
 
 ModuleAudio::ModuleAudio()
 {
-	Mix_FreeChunk(eatenfruit);
-	Mix_FreeChunk(fruitmovement);
-	Mix_FreeChunk(death);
-	Mix_FreeChunk(ghostmovement);
-	Mix_FreeChunk(eatenghost);
-	Mix_FreeChunk(powerpill);
-	Mix_FreeChunk(wakawaka);
-	Mix_FreeMusic(start_of_a_game);
 }
 
 // UnLoad assets
@@ -56,7 +48,15 @@ bool ModuleAudio::CleanUp()
 	LOG("Unloading space scene");
 
 	Mix_CloseAudio();
-	
+
+	Mix_FreeChunk(eatenfruit);
+	Mix_FreeChunk(fruitmovement);
+	Mix_FreeChunk(death);
+	Mix_FreeChunk(ghostmovement);
+	Mix_FreeChunk(eatenghost);
+	Mix_FreeChunk(powerpill);
+	Mix_FreeChunk(wakawaka);
+	Mix_FreeMusic(start_of_a_game);
 
 	return true;
 }
