@@ -346,7 +346,7 @@ update_status ModulePlayer::Update()
 	}
 	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
 
-	// Change scene when dies
+	// Change scene when dies ----------------------------
 	if (lifes == 0 && App->map1->IsEnabled() && end_game)
 	{
 		lifes = 5;
@@ -361,6 +361,7 @@ update_status ModulePlayer::Update()
 		//Orange
 		App->ghost_orange->position.x = 120;
 		App->ghost_orange->position.y = 123;
+		App->ghost_orange->in_box = true;
 		App->ghost_orange->can_see = false;
 		
 		App->ghost_orange->ghost_down = false; App->ghost_orange->ghost_left = false; App->ghost_orange->ghost_right = false; App->ghost_orange->ghost_up = false;
@@ -368,6 +369,7 @@ update_status ModulePlayer::Update()
 		//Pink
 		App->ghost_pink->position.x = 105;
 		App->ghost_pink->position.y = 123;
+		App->ghost_pink->in_box = true;
 		App->ghost_pink->can_see = false;
 		
 		App->ghost_pink->ghost_down = false; App->ghost_pink->ghost_left = false; App->ghost_pink->ghost_right = false; App->ghost_pink->ghost_up = false;
@@ -375,6 +377,7 @@ update_status ModulePlayer::Update()
 		//Blue
 		App->ghost_blue->position.x = 90; //105 //90
 		App->ghost_blue->position.y = 123; //99 //123
+		App->ghost_blue->in_box = true;
 		App->ghost_blue->can_see = false;
 	
 		App->ghost_blue->ghost_down = false; App->ghost_blue->ghost_left = false; App->ghost_blue->ghost_right = false; App->ghost_blue->ghost_up = false;
@@ -387,26 +390,29 @@ update_status ModulePlayer::Update()
 
 
 		//Player2
-		App->player2->position.x = 105; //105
-		App->player2->position.y = 195; //195
-		App->player2->can_see = false;
-		go_left = false; go_right = true;
+		if (two_players)
+		{
+			App->player2->position.x = 105; //105
+			App->player2->position.y = 195; //195
+			App->player2->can_see = false;
+			App->player2->go_left = false; App->player2->go_right = true;
+		}
 
 		App->player->is_dead = false; //
-		go_left = true; go_right = false;
+	
 
 		App->ghost_red->player_dead = false; //Only on red ghost.
 
 		{
 			App->render->Blit(App->UI->graphics, position.x - 32, position.y - 35, &App->UI->GameOver, 1.0f);
-			SDL_Delay(5000);
+			SDL_Delay(6000);
 		}
 
 		App->fade->FadeToBlack(App->map1, App->end_screen, 1.0f);
 	}
 
 
-	 //Player die -----------------------------
+//Player die -----------------------------
 	if (!end_game)
 	{
 		//End game when lifes = 0
@@ -462,10 +468,13 @@ update_status ModulePlayer::Update()
 			speed = 1.0f;
 			
 			//Player2
-			App->player2->position.x = 105; //105
-			App->player2->position.y = 195; //195
-			go_left = false; go_right = true;
-			speed = 1.0f;
+			if (two_players)
+			{
+				App->player2->position.x = 105; //105
+				App->player2->position.y = 195; //195
+				App->player2->go_left = false; App->player2->go_right = true;
+				App->player2->speed = 1.0f;
+			}
 
 			//Cherry
 			if (App->map1->IsEnabled())
@@ -549,7 +558,7 @@ update_status ModulePlayer::Update()
 
 	}
 
-	// Score timer and increase puntutaion ---------------------
+// Score timer and increase puntutaion ---------------------
 	if (gtimer != 0 && now - gtimer < 2 * 1.0f * 0.5f * 1000.0 && gtimerIsOn)
 	{
 		if (eaten_ghost == 1){
@@ -576,7 +585,7 @@ update_status ModulePlayer::Update()
 		ftimerIsOn = false;
 	}
 
-	// Draw everything --------------------------------------
+// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
 

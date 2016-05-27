@@ -237,6 +237,9 @@ update_status ModulePlayer2::Update()
 	}
 	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
 
+
+
+	// Player 2 animation dead control ----------------------
 	// 6 sec
 	if (App->player->is_dead && (App->player->now - App->player->passed_time) > (5.9 * 0.5f * 1000.0f))
 	{
@@ -251,17 +254,20 @@ update_status ModulePlayer2::Update()
 		current_animation = &dead;
 	}
 
-
-	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->ftimerIsOn){
+	// Score timer and increase puntutaion ---------------------
+	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->ftimerIsOn)
+	{
 		App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
 	}
-	else{
+	else
+	{
 		App->player->ftimerIsOn = false;
 	}
 	
 	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->gtimerIsOn)
 	{
-		if (eaten_ghost == 1){
+		if (eaten_ghost == 1)
+		{
 			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g200, 1.0f);
 		}
 		else if (eaten_ghost == 2){
@@ -274,11 +280,12 @@ update_status ModulePlayer2::Update()
 			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g1600, 1.0f);
 		}
 	}
-	else{
+	else
+	{
 		App->player->gtimerIsOn = false;
 	}
 
-	// Draw everything --------------------------------------
+// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
 
@@ -288,41 +295,58 @@ update_status ModulePlayer2::Update()
 	return UPDATE_CONTINUE;
 }
 
+// Collisions -----------------------------------------------
 void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
-	if (c1 != nullptr && c2->type == COLLIDER_FRUIT){
-		App->cherry->Disable();
-		App->cherry->fruit_collision->to_delete = true;
+	
+	if (c1 != nullptr && c2->type == COLLIDER_FRUIT)
+	{
+		App->cherry->passed_cherry = App->player->now;
+		App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
+
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
 		App->UI->_score += 100;
 		App->player->ftimer = App->player->now;
 		App->player->ftimerIsOn = true;
 	}
+
+
 	if (((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable)) && App->player->god_mode == false)
 	{
-		// Player die -------------------
-		if (!App->ghost_red->player_dead)
+		if (c2->type == COLLIDER_BLUE && App->ghost_blue->is_dead)
 		{
-			App->player->passed_time = App->player->now;
-			App->ghost_red->player_dead = true; //only on red
-			App->player->is_dead = true;
-
-			if (App->player->lifes > 0)
-				App->player->lifes--;
 		}
+		else if (c2->type == COLLIDER_ORANGE && App->ghost_orange->is_dead)
+		{
+		}
+		else if (c2->type == COLLIDER_PINK && App->ghost_pink->is_dead)
+		{
+		}
+		else if (c2->type == COLLIDER_RED && App->ghost_red->is_dead)
+		{
+		}
+		else
+		{
+			if (!App->ghost_red->player_dead && !App->player->no_more)
+			{
+				App->player->passed_time = App->player->now;
+				App->ghost_red->player_dead = true; //only on red
+				App->player->is_dead = true;
 
-		App->ghost_red->speed = 0;
-		App->ghost_orange->speed = 0;
-		App->ghost_pink->speed = 0;
-		App->ghost_blue->speed = 0;
-		App->player->speed = 0;
-		App->player2->speed = 0;
+				if (App->player->lifes > 0)
+					App->player->lifes--;
+			}
 
-		// -------------------------------
-
+			App->ghost_red->speed = 0;
+			App->ghost_orange->speed = 0;
+			App->ghost_pink->speed = 0;
+			App->ghost_blue->speed = 0;
+			App->player->speed = 0;
+			App->player2->speed = 0;
+		}
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
