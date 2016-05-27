@@ -37,6 +37,9 @@ bool ModuleEndScreen::Start()
 	App->audio->Enable();
 	App->ghost_blue->Disable();
 	App->map1->Disable();
+
+	pressed_once = false;
+
 	return ret;
 }
 
@@ -52,8 +55,9 @@ update_status ModuleEndScreen::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 0, 0, &map1, 1.0f); // end_screen
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && pressed_once == false)
 	{
+		pressed_once = true;
 		App->fade->FadeToBlack(App->end_screen, App->menu, 2.0f);
 	}
 
