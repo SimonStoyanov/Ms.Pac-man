@@ -205,6 +205,7 @@ update_status ModulePlayer::Update()
 			// Reseting random ghosts time and box time
 			if (one_time == false) 
 			{
+				now = 0;
 				actual_t_g_r = now;
 
 				App->ghost_orange->passed_box = now;
@@ -675,7 +676,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-		SDL_Delay(500);
+		//SDL_Delay(500);
 		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
 
@@ -715,7 +716,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-		SDL_Delay(500);
+		//SDL_Delay(500);
 		App->ghost_orange->is_dead = true;
 		App->ghost_orange->is_vulnerable = false;
 
@@ -757,7 +758,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-		SDL_Delay(500);
+		//SDL_Delay(500);
 		App->ghost_pink->is_dead = true;
 		App->ghost_pink->is_vulnerable = false;
 
@@ -798,7 +799,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-		SDL_Delay(500);
+		//SDL_Delay(500);
 		App->ghost_red->is_dead = true;
 		App->ghost_red->is_vulnerable = false;
 

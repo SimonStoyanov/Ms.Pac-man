@@ -77,9 +77,12 @@ bool ModuleGhostPink::CleanUp()
 	ghost_left = false;
 	ghost_right = false;
 	ghost_up = false;
+	go_right = false; go_left = false; go_up = false; go_down = false;
+	passed_box = 8 * 0.5f * 1000.0f;
 
 	in_box = false;
 	box_down = true; box_up = false;
+	passed_box = 0;
 	return true;
 }
 // Load assets

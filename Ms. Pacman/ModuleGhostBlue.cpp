@@ -77,10 +77,13 @@ bool ModuleGhostBlue::CleanUp()
 	ghost_left = false;
 	ghost_right = false;
 	ghost_up = false;
+	go_right = false; go_left = false; go_up = false; go_down = false;
+	passed_box = 8 * 0.5f * 1000.0f;
 
 	in_box = false;
 	box_down = false; box_up = true;
 	box_positioning = false;
+	passed_box = 0;
 	return true;
 }
 
@@ -114,7 +117,7 @@ bool ModuleGhostBlue::Start()
 // Update: draw background
 update_status ModuleGhostBlue::Update()
 {
-	if (position.x > 104 && position.x < 106 && position.y > 98 && position.y < 100 && is_dead && !dead_positioning)
+	if (position.x > 104 && position.x < 106 && position.y > 98 && position.y < 100 && is_dead && !dead_positioning && is_dead)
 	{
 		position.x = 105;
 		position.y = 99;

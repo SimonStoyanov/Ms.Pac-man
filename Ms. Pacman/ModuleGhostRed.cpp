@@ -79,6 +79,7 @@ bool ModuleGhostRed::CleanUp()
 	ghost_left = false; 
 	ghost_right = false; 
 	ghost_up = false;
+	go_right = false; go_left = false; go_up = false; go_down = false;
 
 	return true;
 }

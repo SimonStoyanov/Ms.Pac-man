@@ -26,12 +26,13 @@ ModuleCherry::ModuleCherry()
 
 ModuleCherry::~ModuleCherry()
 {
-	
+	fruit_collision = nullptr;
 }
 
 bool ModuleCherry::CleanUp()
 {
 	LOG("Blue ghost CleanUp");
+
 	App->textures->Unload(graphics);
 	
 	return true;
