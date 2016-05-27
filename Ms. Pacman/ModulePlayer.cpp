@@ -406,7 +406,7 @@ update_status ModulePlayer::Update()
 
 		{
 			App->render->Blit(App->UI->graphics, position.x - 32, position.y - 35, &App->UI->GameOver, 1.0f);
-			SDL_Delay(6000);
+			SDL_Delay(5000);
 		}
 
 		App->fade->FadeToBlack(App->map1, App->end_screen, 1.0f);
@@ -660,6 +660,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
+		SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -676,7 +677,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
+<<<<<<< HEAD
 		//SDL_Delay(500);
+=======
+>>>>>>> origin/master
 		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
 
@@ -700,6 +704,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
+		SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -716,7 +721,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
+<<<<<<< HEAD
 		//SDL_Delay(500);
+=======
+>>>>>>> origin/master
 		App->ghost_orange->is_dead = true;
 		App->ghost_orange->is_vulnerable = false;
 
@@ -742,6 +750,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
+		SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -758,7 +767,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
+<<<<<<< HEAD
 		//SDL_Delay(500);
+=======
+>>>>>>> origin/master
 		App->ghost_pink->is_dead = true;
 		App->ghost_pink->is_vulnerable = false;
 
@@ -783,6 +795,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
+		SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -799,7 +812,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
+<<<<<<< HEAD
 		//SDL_Delay(500);
+=======
+>>>>>>> origin/master
 		App->ghost_red->is_dead = true;
 		App->ghost_red->is_vulnerable = false;
 
