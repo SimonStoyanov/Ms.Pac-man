@@ -46,7 +46,8 @@ bool ModuleEndScreen::CleanUp()
 {
 	LOG("Unloading maps(1) stage.");
 	can_fade = true;
-	return true;
+	 return true;
+	 int a;
 }
 
 // Update: draw background
