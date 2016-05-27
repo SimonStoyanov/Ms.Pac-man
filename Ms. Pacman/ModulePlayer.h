@@ -78,6 +78,8 @@ public:
 
 	float gtimer;
 	float ftimer;
+	bool gtimerIsOn;
+	bool ftimerIsOn;
 
 	bool can_see_paths = false;
 };

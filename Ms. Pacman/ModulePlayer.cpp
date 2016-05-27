@@ -78,6 +78,8 @@ bool ModulePlayer::Start()
 
 	start_time = SDL_GetTicks();
 
+	ftimerIsOn = false;	gtimerIsOn = false;
+
 	return ret;
 }
 
@@ -547,7 +549,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// Score timer and increase puntutaion ---------------------
-	if (gtimer != 0 && now - gtimer < 2 * 1.0f * 0.5f * 1000.0)
+	if (gtimer != 0 && now - gtimer < 2 * 1.0f * 0.5f * 1000.0 && gtimerIsOn)
 	{
 		if (eaten_ghost == 1){
 			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g200, 1.0f);
@@ -562,9 +564,15 @@ update_status ModulePlayer::Update()
 			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g1600, 1.0f);
 		}
 	}
+	else{
+		gtimerIsOn = false;
+	}
 
-	if (ftimer != 0 && now - ftimer < 2 * 1.0f * 0.5f * 1000.0){
+	if (ftimer != 0 && now - ftimer < 2 * 1.0f * 0.5f * 1000.0 && ftimerIsOn){
 		App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
+	}
+	else{
+		ftimerIsOn = false;
 	}
 
 	// Draw everything --------------------------------------
@@ -598,6 +606,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
 		App->UI->score += 100;
 		ftimer = now;
+		ftimerIsOn = true;
 	}
 
 	// Player --------------------
@@ -640,6 +649,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
+		gtimerIsOn = true;
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -679,6 +689,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
+		gtimerIsOn = true;
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -720,6 +731,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
+		gtimerIsOn = true;
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -760,6 +772,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
+		gtimerIsOn = true;
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;

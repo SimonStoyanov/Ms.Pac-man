@@ -93,6 +93,7 @@ bool ModuleBackgroundMap1::Start()
 		App->player2->Enable();
 	}
 	App->collision->Enable();
+	App->UI->Enable();
 
 	// Temporal map ----------
 	char tmp_map[31][28]
@@ -159,6 +160,7 @@ bool ModuleBackgroundMap1::CleanUp()
 	App->audio->Disable();
 	App->collision->Disable();
 	App->cherry->Disable();
+	App->UI->Disable();
 
 	return true;
 }

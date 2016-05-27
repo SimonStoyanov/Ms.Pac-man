@@ -108,6 +108,7 @@ bool ModuleMenu::Start()
 	App->ghost_pink->Disable();
 	App->ghost_red->Disable();
 	App->map1->Disable();
+	App->UI->Enable();
 
 	// Ghosts start position
 	red.x = pink.x = blue.x = orange.x = pacman.x = 250;
