@@ -235,9 +235,6 @@ update_status ModulePlayer2::Update()
 		else{ left.speed = 0.0f; }
 	}
 	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
-	if (speed == 0){
-		down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f;
-	}
 
 	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0){
 		App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);

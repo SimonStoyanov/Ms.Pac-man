@@ -119,6 +119,8 @@ bool ModuleMenu::Start()
 	App->UI->score = 0;
 	App->UI->_score = 0;
 
+	credits_used = 0;
+
 	return ret;
 }
 
@@ -264,8 +266,9 @@ update_status ModuleMenu::Update()
 	}
 
 	//Fade To Black
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->UI->credit > 0)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->UI->credit > 0 && credits_used == 0)
 	{
+		credits_used++;
 		if (App->player->two_players == false){
 			App->UI->credit--;
 			App->fade->FadeToBlack(App->menu, App->map1, 1.0f);
