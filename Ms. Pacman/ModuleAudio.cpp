@@ -49,7 +49,6 @@ bool ModuleAudio::CleanUp()
 
 	Mix_CloseAudio();
 
-	start_of_a_game = Mix_LoadMUS("start_of_a_game.ogg");
 	wakawaka = Mix_LoadWAV("wakawaka.wav");
 	powerpill = Mix_LoadWAV("PowerPill.wav");
 	eatenghost = Mix_LoadWAV("EatenGhost.wav");
