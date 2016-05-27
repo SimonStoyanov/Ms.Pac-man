@@ -43,8 +43,8 @@ ModulePlayer2::ModulePlayer2()
 	up.speed = 0.3f;
 
 	// down animation
-	down.PushBack({ 50, 17, 13, 13 });
-	down.PushBack({ 66, 17, 13, 13 });
+	down.PushBack({ 50, 18, 13, 13 });
+	down.PushBack({ 66, 18, 13, 13 });
 	down.PushBack({ 81, 2, 13, 13 });
 	down.speed = 0.3f;
 
@@ -52,7 +52,7 @@ ModulePlayer2::ModulePlayer2()
 	dead.PushBack({ 50, 2, 13, 13 });
 	dead.PushBack({ 50, 13, 13, 13 });
 	dead.PushBack({ 50, 34, 13, 13 });
-	dead.PushBack({ 50, 50, 13, 13 });
+	dead.PushBack({ 66, 18, 13, 13 });
 	dead.speed = 0.3f;
 }
 
@@ -353,6 +353,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		App->player->gtimerIsOn = true;
+		SDL_Delay(500);
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
@@ -369,7 +370,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
-		SDL_Delay(500);
 		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
 
@@ -392,6 +392,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		App->player->gtimerIsOn = true;
+		SDL_Delay(500);
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
@@ -408,7 +409,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
-		SDL_Delay(500);
 		App->ghost_orange->is_dead = true;
 		App->ghost_orange->is_vulnerable = false;
 
@@ -431,6 +431,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		App->player->gtimerIsOn = true;
+		SDL_Delay(500);
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
@@ -447,7 +448,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
-		SDL_Delay(500);
 		App->ghost_pink->is_dead = true;
 		App->ghost_pink->is_vulnerable = false;
 
@@ -470,6 +470,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		App->player->gtimerIsOn = true;
+		SDL_Delay(500);
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
@@ -486,7 +487,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 1600;
 		}
-		SDL_Delay(500);
 		App->ghost_red->is_dead = true;
 		App->ghost_red->is_vulnerable = false;
 
