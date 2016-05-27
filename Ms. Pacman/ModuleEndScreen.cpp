@@ -38,16 +38,19 @@ bool ModuleEndScreen::Start()
 	App->ghost_blue->Disable();
 	App->map1->Disable();
 	return ret;
-	can_fade = true;
 }
 
 // Load assets
 bool ModuleEndScreen::CleanUp()
 {
 	LOG("Unloading maps(1) stage.");
+<<<<<<< HEAD
 	can_fade = true;
 	 return true;
 	 int a;
+=======
+	return true;
+>>>>>>> parent of ea93cd2... Fade multiple ttimes bug solved
 }
 
 // Update: draw background
@@ -55,10 +58,9 @@ update_status ModuleEndScreen::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 0, 0, &map1, 1.0f); // end_screen
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && can_fade)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->fade->FadeToBlack(App->end_screen, App->menu, 2.0f);
-		can_fade = false;
 	}
 
 	char tmp_map[31][28]

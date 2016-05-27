@@ -26,8 +26,6 @@ public:
 	SDL_Rect background;
 	Animation water;
 	SDL_Rect map1;
-
-	bool can_fade;
 };
 
 #endif 

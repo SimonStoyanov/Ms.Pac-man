@@ -70,8 +70,6 @@ public:
 	Uint32 total_time_pacman = 0;
 	float time_pacman = 20.0f; // pacman timer
 
-	bool can_fade;
-
 };
 
 #endif
