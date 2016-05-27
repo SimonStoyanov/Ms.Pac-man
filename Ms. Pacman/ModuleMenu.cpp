@@ -119,6 +119,8 @@ bool ModuleMenu::Start()
 	App->UI->score = 0;
 	App->UI->_score = 0;
 
+	can_fade = true;
+
 	return ret;
 }
 
@@ -126,6 +128,7 @@ bool ModuleMenu::Start()
 bool ModuleMenu::CleanUp()
 {
 	LOG("Unloading Menu.");
+	can_fade = true;
 	return true;
 }
 
@@ -264,7 +267,7 @@ update_status ModuleMenu::Update()
 	}
 
 	//Fade To Black
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->UI->credit > 0)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->UI->credit > 0 && can_fade)
 	{
 		if (App->player->two_players == false){
 			App->UI->credit--;
@@ -274,6 +277,7 @@ update_status ModuleMenu::Update()
 			App->UI->credit -= 2;
 			App->fade->FadeToBlack(App->menu, App->map1, 1.0f);
 		}
+		can_fade = false;
 	}
 
 	return UPDATE_CONTINUE;

@@ -38,12 +38,14 @@ bool ModuleEndScreen::Start()
 	App->ghost_blue->Disable();
 	App->map1->Disable();
 	return ret;
+	can_fade = true;
 }
 
 // Load assets
 bool ModuleEndScreen::CleanUp()
 {
 	LOG("Unloading maps(1) stage.");
+	can_fade = true;
 	return true;
 }
 
@@ -52,9 +54,10 @@ update_status ModuleEndScreen::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 0, 0, &map1, 1.0f); // end_screen
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && can_fade)
 	{
 		App->fade->FadeToBlack(App->end_screen, App->menu, 2.0f);
+		can_fade = false;
 	}
 
 	char tmp_map[31][28]
