@@ -422,7 +422,7 @@ update_status ModulePlayer::Update()
 		}
 
 		// Solves the bug of dying 2 times
-		else if (App->player->is_dead && (now - passed_time) > (13 * 0.5f * 1000.0f))
+		else if ((now - passed_time) > (13 * 0.5f * 1000.0f))
 		{
 			no_more = false;
 		}
@@ -635,10 +635,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		{}
 		else
 		{
-			if (!App->ghost_red->player_dead && !no_more)
+			if (!is_dead && !no_more)
 			{
 				App->player->passed_time = App->player->now;
-				App->ghost_red->player_dead = true; //only on red
 				App->player->is_dead = true;
 
 				if (lifes > 0)
