@@ -660,7 +660,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
-		SDL_Delay(500);
+		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -677,10 +677,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-<<<<<<< HEAD
+
 		//SDL_Delay(500);
-=======
->>>>>>> origin/master
+
 		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
 
@@ -704,7 +703,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
-		SDL_Delay(500);
+		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -721,10 +720,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-<<<<<<< HEAD
+
 		//SDL_Delay(500);
-=======
->>>>>>> origin/master
+
 		App->ghost_orange->is_dead = true;
 		App->ghost_orange->is_vulnerable = false;
 
@@ -750,7 +748,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
-		SDL_Delay(500);
+		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -767,10 +765,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-<<<<<<< HEAD
+
 		//SDL_Delay(500);
-=======
->>>>>>> origin/master
+
+
 		App->ghost_pink->is_dead = true;
 		App->ghost_pink->is_vulnerable = false;
 
@@ -795,7 +793,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
-		SDL_Delay(500);
+		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
@@ -812,10 +810,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			gtimer = now;
 			App->UI->score += 1600;
 		}
-<<<<<<< HEAD
+
 		//SDL_Delay(500);
-=======
->>>>>>> origin/master
+
 		App->ghost_red->is_dead = true;
 		App->ghost_red->is_vulnerable = false;
 
