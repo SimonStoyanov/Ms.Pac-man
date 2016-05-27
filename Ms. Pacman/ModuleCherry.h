@@ -38,6 +38,7 @@ public:
 	SDL_Rect test;
 
 	SDL_Rect cherry;
+	SDL_Rect strawberry;
 
 	//Animation vars
 	fPoint render_pos;

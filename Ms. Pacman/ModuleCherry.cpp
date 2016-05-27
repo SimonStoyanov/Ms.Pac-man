@@ -12,6 +12,7 @@ using namespace std;
 #include "ModuleCollision.h"
 #include "ModuleCherry.h"
 #include "ModuleBackground_Map1.h"
+#include "ModuleBackground_Map2.h"
 #include "ModuleAudio.h"
 #include <time.h>
 #include <stdlib.h>
@@ -20,6 +21,8 @@ ModuleCherry::ModuleCherry()
 {
 	// Cherry Animation
 	cherry = { 1, 2, 12, 12 };
+	strawberry = { 17, 3, 11, 11 };
+
 
 	test = { 69, 6, 1, 1 };
 }
@@ -492,17 +495,13 @@ update_status ModuleCherry::Update()
 		}
 	//------------------------------------------------------------------------
 
-		if (can_see)
-		App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &cherry);
-
-		/*App->render->Blit(graphics, (position.x +7), (position.y - 7) + DISTANCEM1, &test, 1.0f); 
-		App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); */
-
-		//App->render->Blit(graphics, (p_up.x * 8) + 4, (p_up.y * 8  + DISTANCEM1) + 4, &test, 1.0f); 
-		//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8  + DISTANCEM1) + 4, &test, 1.0f); 
-		//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); 
-		//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); 
-	
-
+		if (can_see){
+			if (App->map1->IsEnabled()){
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &strawberry);
+			}
+			else if (App->map2->IsEnabled()){
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &strawberry);
+			}
+		}
 	return UPDATE_CONTINUE;
 }
