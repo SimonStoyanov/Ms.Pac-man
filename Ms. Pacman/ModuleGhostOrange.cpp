@@ -20,7 +20,7 @@ using namespace std;
 
 ModuleGhostOrange::ModuleGhostOrange()
 {
-	test = { 3, 120, 1, 1 };
+	test = { 2, 90, 3, 3 };
 
 	// right animation
 	right.PushBack({ 1, 82, 14, 14 });
@@ -162,6 +162,8 @@ update_status ModuleGhostOrange::Update()
 	// Collision ------------
 	enemy_collision->SetPos(position.x + 4, position.y + 14);
 
+	if (App->player->can_see_paths)
+		App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f);
 
 	// What is the next tile --------------
 	// right
@@ -233,7 +235,7 @@ update_status ModuleGhostOrange::Update()
 	// Ghosts follows the player
 	if (App->player->ghost_random == false || is_dead)
 	{
-		if ((!is_vulnerable && abs(sqrt((((int)p_position_x - (int)position.x) * ((int)p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) >= 60) || is_dead)
+		if (((!is_vulnerable && abs(sqrt((((int)p_position_x - (int)position.x) * ((int)p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) >= 60)) || is_dead)
 		{
 			// Want to go to the player / Where is the target -----------------------------
 			if (p_position_x + 7 > position.x) //is right
@@ -275,7 +277,7 @@ update_status ModuleGhostOrange::Update()
 				}
 			}
 		}
-		else if (is_vulnerable == true || abs(sqrt((((int)p_position_x - (int)position.x) * (p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) < 60)
+		else if ((is_vulnerable == true || abs(sqrt((((int)p_position_x - (int)position.x) * (p_position_x - (int)position.x)) + ((int)p_position_y - (int)position.y) * ((int)p_position_y - (int)position.y))) < 60) && is_dead == false)
 		{
 			// Want to escape from the player / Where is the target -----------------------------
 			if (p_position_x + 7 > position.x) //is right

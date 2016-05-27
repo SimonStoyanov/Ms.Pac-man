@@ -491,6 +491,7 @@ update_status ModuleCherry::Update()
 		}
 	//------------------------------------------------------------------------
 
+		if (can_see)
 		App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &cherry);
 
 		/*App->render->Blit(graphics, (position.x +7), (position.y - 7) + DISTANCEM1, &test, 1.0f); 
