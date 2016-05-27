@@ -145,16 +145,22 @@ bool ModuleBackgroundMap2::Start()
 // Load assets
 bool ModuleBackgroundMap2::CleanUp()
 {
-	LOG("Unloading maps(2) stage");
+	LOG("Unloading maps(2) stage.");
 
-	// Disable modules ---------
 	App->player->Disable();
+	if (App->player->two_players == true){
+		App->player2->Disable();
+	}
 	App->ghost_blue->Disable();
 	App->ghost_orange->Disable();
 	App->ghost_pink->Disable();
 	App->ghost_red->Disable();
 	App->audio->Disable();
 	App->collision->Disable();
+	App->cherry->Disable();
+	App->UI->Disable();
+
+	App->textures->Unload(graphics);
 
 	return true;
 }
