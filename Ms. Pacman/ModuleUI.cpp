@@ -322,7 +322,12 @@ update_status ModuleUI::Update()
 			tmp_credit /= 10;
 			cddigits++;
 		}
-		if (cddigits == 1)
+		if (credit == 9)
+		{
+			mapMENU[4][10] = 0;
+			mapMENU[4][11] = 9;
+		}
+		else if (cddigits == 1)
 		{
 			mapMENU[4][11] = credit;
 		}
