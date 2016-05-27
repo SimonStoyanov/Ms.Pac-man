@@ -19,7 +19,7 @@ using namespace std;
 
 ModuleGhostPink::ModuleGhostPink()
 {
-	test = { 2, 106, 3, 3 };
+	test = { 3, 120, 1, 1 };
 
 	// right animation
 	right.PushBack({ 1, 97, 14, 14 });
@@ -112,13 +112,6 @@ bool ModuleGhostPink::Start()
 // Update: draw background
 update_status  ModuleGhostPink::Update()
 {
-	if (position.x > 104 && position.x < 106 && position.y > 98 && position.y < 100 && is_dead && !dead_positioning)
-	{
-		position.x = 105;
-		position.y = 99;
-		dead_positioning = true;
-	}
-
 	// What player should i chase -----------
 
 	player1 = true; player2 = false;
@@ -151,44 +144,40 @@ update_status  ModuleGhostPink::Update()
 		{
 			if (App->player->go_up)
 			{
-				p_position_x -= 30;
+				p_position_x -= 40;
 				p_position_y -= 40;
 			}
 			if (App->player->go_down)
 			{
-				p_position_y += 30;
+				p_position_y += 40;
 			}
 			if (App->player->go_left)
 			{
-				p_position_x -= 33;
-				p_position_y -= 8;
+				p_position_x -= 40;
 			}
 			if (App->player->go_right)
 			{
 				p_position_x += 40;
-				p_position_y -= 8;
 			}
 		}
 		else if (player2)
 		{
 			if (App->player2->go_up)
 			{
-				p_position_x -= 30;
+				p_position_x -= 40;
 				p_position_y -= 40;
 			}
 			if (App->player2->go_down)
 			{
-				p_position_y += 30;
+				p_position_y += 40;
 			}
 			if (App->player2->go_left)
 			{
-				p_position_x -= 33;
-				p_position_y -= 8;
+				p_position_x -= 40;
 			}
 			if (App->player2->go_right)
 			{
 				p_position_x += 40;
-				p_position_y -= 8;
 			}
 		}
 	}
@@ -202,9 +191,6 @@ update_status  ModuleGhostPink::Update()
 		speed = 1.0f;
 		is_vulnerable = false;
 	}
-
-	if (App->player->can_see_paths)
-		App->render->Blit(graphics, (p_position_x), (p_position_y) + DISTANCEM1, &test, 1.0f);
 
 
 	Animation* current_animation = prev_anim;
@@ -285,7 +271,7 @@ update_status  ModuleGhostPink::Update()
 	// Ghosts follows the player
 	if (App->player->ghost_random == false || is_dead)
 	{
-		if (is_vulnerable == false || is_dead)
+		if (is_vulnerable == false)
 		{
 			// Want to go to the player / Where is the target -----------------------------
 			if (p_position_x + 7 > position.x) //is right

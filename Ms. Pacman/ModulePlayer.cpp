@@ -90,12 +90,6 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	//Paths mode -------------------------
-	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN)
-	{
-		can_see_paths = !can_see_paths;
-	}
-
 	// God mode --------------------------
 	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN)
 	{
@@ -125,7 +119,6 @@ update_status ModulePlayer::Update()
 		ghost_random = true;
 	}
 
-	// Pause --------------------
 	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN){
 		pause = !pause;
 		if (!Mix_Paused(3)){
@@ -138,6 +131,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	// Pause ----------------------------------
 	if (pause){
 		speed = 0;
 				
@@ -167,7 +161,6 @@ update_status ModulePlayer::Update()
 		App->ghost_red->speed = 1.0f;
 		App->ghost_orange->speed = 1.0f;
 	}
-	// --------------------
 
 	Animation* current_animation = prev_anim;
 
