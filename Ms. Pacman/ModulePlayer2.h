@@ -21,6 +21,7 @@ public:
 	float speed = 1.2f;
 
 	SDL_Texture* graphics = nullptr;
+	Animation* current_animation;
 	Animation* prev_anim;
 	Animation right;
 	Animation left;

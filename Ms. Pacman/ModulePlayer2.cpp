@@ -81,7 +81,7 @@ bool ModulePlayer2::Start()
 // Update: draw background
 update_status ModulePlayer2::Update()
 {
-	Animation* current_animation = prev_anim;
+	current_animation = prev_anim;
 
 	App->player->now = SDL_GetTicks() - App->player->start_time;
 
@@ -236,11 +236,29 @@ update_status ModulePlayer2::Update()
 	}
 	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
 
-	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0){
+	// 6 sec
+	if (App->player->is_dead && (App->player->now - App->player->passed_time) > (5.9 * 0.5f * 1000.0f))
+	{
+		dead.speed = 0; //Stop dead animation
+	}
+
+	// 3.5 sec
+	else if (App->player->is_dead && (App->player->now - App->player->passed_time) > (3.5 * 0.5f * 1000.0f))
+	{
+		// Start dead animation
+		dead.speed = 0.3f;
+		current_animation = &dead;
+	}
+
+
+	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->ftimerIsOn){
 		App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
 	}
+	else{
+		App->player->ftimerIsOn = false;
+	}
 	
-	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0)
+	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->gtimerIsOn)
 	{
 		if (eaten_ghost == 1){
 			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g200, 1.0f);
@@ -255,20 +273,13 @@ update_status ModulePlayer2::Update()
 			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g1600, 1.0f);
 		}
 	}
+	else{
+		App->player->gtimerIsOn = false;
+	}
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
-
-	//App->render->Blit(graphics, (position.x +7), (position.y - 7 + DISTANCEM1), &test, 1.0f);
-	//App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_up.x * 8) + 4, (p_up.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8  + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-
-	//App->render->Blit(graphics, position.x, position.y + DISTANCEM1, &test, 1.0f); //
-	//App->render->Blit(graphics, 3, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
 	if(can_see)
 		App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
@@ -284,6 +295,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
 		App->UI->_score += 100;
 		App->player->ftimer = App->player->now;
+		App->player->ftimerIsOn = true;
 	}
 	if (((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
@@ -315,6 +327,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
+		App->player->gtimerIsOn = true;
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
@@ -353,6 +366,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
+		App->player->gtimerIsOn = true;
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
@@ -391,6 +405,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
+		App->player->gtimerIsOn = true;
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
@@ -429,6 +444,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
+		App->player->gtimerIsOn = true;
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
 			App->UI->_score += 200;
