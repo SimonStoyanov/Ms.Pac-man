@@ -250,6 +250,7 @@ update_status ModuleMenu::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN)
 	{
+		if (App->UI->credit < 99)
 		App->UI->credit++;
 	}
 	

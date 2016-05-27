@@ -406,12 +406,20 @@ update_status ModulePlayer::Update()
 	 //Player die -----------------------------
 	if (!end_game)
 	{
+		//End game when lifes = 0
 		if (App->player->is_dead && ((now - passed_time) > (10 * 0.5f * 1000.0f) && lifes == 0))
 		{
 			end_game = true;
 		}
+
+		// Solves the bug of dying 2 times
+		else if (App->player->is_dead && (now - passed_time) > (13 * 0.5f * 1000.0f))
+		{
+			no_more = false;
+		}
 		else if (App->player->is_dead && (now - passed_time) > (10 * 0.5f * 1000.0f))
 		{
+
 			// Start everything again 
 			//Red
 			App->ghost_red->position.x = 105;
@@ -447,10 +455,9 @@ update_status ModulePlayer::Update()
 			//Player
 			App->player->position.x = 105; //105
 			App->player->position.y = 195; //195
-			App->player->is_dead = false; //
 			go_left = true; go_right = false;
 			speed = 1.0f;
-
+			
 			//Player2
 			App->player2->position.x = 105; //105
 			App->player2->position.y = 195; //195
@@ -470,8 +477,10 @@ update_status ModulePlayer::Update()
 			App->ghost_pink->passed_box = now;
 
 			App->ghost_red->player_dead = false; //Only on red ghost.
-
+			is_dead = false; //
+			no_more = true; // Solves the bug of dying 2 times
 		}
+		// 8 sec
 		else if (App->player->is_dead && (now - passed_time) > (8 * 0.5f * 1000.0f))
 		{
 			// Ghost red reset
@@ -510,15 +519,22 @@ update_status ModulePlayer::Update()
 				App->ghost_blue->Enable();
 			}
 		}
+
+		// 6 sec
 		else if (App->player->is_dead && (now - passed_time) > (5.9 * 0.5f * 1000.0f))
 		{
 			dead.speed = 0; //Stop dead animation
 		}
+
+		// 3.5 sec
 		else if (App->player->is_dead && (now - passed_time) > (3.5 * 0.5f * 1000.0f))
 		{
+			// Start dead animation
 			dead.speed = 0.3f;
 			current_animation = &dead;
 		}
+
+		// 3 sec
 		else if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f))
 		{
 			Mix_PlayChannel(1, App->audio->death, 0);
@@ -530,6 +546,7 @@ update_status ModulePlayer::Update()
 
 	}
 
+	// Score timer and increase puntutaion ---------------------
 	if (gtimer != 0 && now - gtimer < 2 * 1.0f * 0.5f * 1000.0)
 	{
 		if (eaten_ghost == 1){
@@ -554,6 +571,7 @@ update_status ModulePlayer::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	prev_anim = current_animation;
 
+	// Renders ----------------------------------------------
 	if(can_see)
 		App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
 
@@ -567,10 +585,11 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
+// Collisions -----------------------------------------------
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	LOG("\n\n\n------------------I've collided----------------------\n\n\n");
 
-	// Cherry
+	// Cherry ---------------------
 	if (c1 != nullptr && c2->type == COLLIDER_FRUIT)
 	{
 		App->cherry->passed_cherry = now;
@@ -581,12 +600,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		ftimer = now;
 	}
 
+	// Player --------------------
 	if (((c1 != nullptr && c2->type == COLLIDER_BLUE && !App->ghost_blue->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_ORANGE && !App->ghost_orange->is_vulnerable) ||
 		(c1 != nullptr && c2->type == COLLIDER_PINK && !App->ghost_pink->is_vulnerable) ||
-		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable)) && god_mode == false){
+		(c1 != nullptr && c2->type == COLLIDER_RED && !App->ghost_red->is_vulnerable)) && god_mode == false && is_dead == false){
 		
-		// Player die -------------------
 		if (c2->type == COLLIDER_BLUE && App->ghost_blue->is_dead)
 		{}
 		else if (c2->type == COLLIDER_ORANGE && App->ghost_orange->is_dead)
@@ -597,7 +616,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		{}
 		else
 		{
-			if (!App->ghost_red->player_dead)
+			if (!App->ghost_red->player_dead && !no_more)
 			{
 				App->player->passed_time = App->player->now;
 				App->ghost_red->player_dead = true; //only on red
@@ -614,9 +633,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			App->ghost_blue->speed = 0;
 			App->player->speed = 0;
 		}
-		// -------------------------------
-
 	}
+
+	// Blue ghost ------------------------
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
@@ -655,6 +674,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			}
 		}
 	}
+	// Orange ghost ------------------------
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
@@ -694,6 +714,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		}
 		
 	}
+
+	// Pink ghost ------------------------
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
@@ -732,6 +754,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			}
 		}
 	}
+
+	// Red ghost ------------------------
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);

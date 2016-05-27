@@ -62,7 +62,7 @@ public:
 	bool ghost_random = true;
 
 	bool is_dead = false;
-	float passed_time;
+	float passed_time; // dead player time controller
 
 	Collider* player_collision;
 	void OnCollision(Collider* c1, Collider* c2);
@@ -74,6 +74,7 @@ public:
 	// Logic
 	bool one_time = false;
 	bool end_game = false;
+	bool no_more = false;
 
 	float gtimer;
 	float ftimer;
