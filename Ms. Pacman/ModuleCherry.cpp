@@ -499,7 +499,7 @@ update_status ModuleCherry::Update()
 			if (App->map1->IsEnabled()){
 				IsCherry = true;
 				IsStrawberry = false;
-				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &strawberry);
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &cherry);
 			}
 			else if (App->map2->IsEnabled()){
 				IsStrawberry = true;
