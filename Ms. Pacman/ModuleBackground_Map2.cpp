@@ -287,201 +287,72 @@ update_status ModuleBackgroundMap2::Update()
 	case 27:
 		// Change tile
 		App->map1->g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
+		if (App->ghost_blue->is_vulnerable == false && App->ghost_orange->is_vulnerable == false && App->ghost_pink->is_vulnerable == false && App->ghost_red->is_vulnerable == false){
+			Mix_PlayChannel(1, App->audio->powerpill, 0);
 
-		// Vulnerable
-		App->ghost_blue->passed_time = App->ghost_blue->now;
-		App->ghost_orange->passed_time = App->ghost_orange->now;
-		App->ghost_pink->passed_time = App->ghost_pink->now;
-		App->ghost_red->passed_time = App->ghost_red->now;
+			// Vulnerable
+			App->ghost_blue->passed_time = App->ghost_blue->now;
+			App->ghost_orange->passed_time = App->ghost_orange->now;
+			App->ghost_pink->passed_time = App->ghost_pink->now;
+			App->ghost_red->passed_time = App->ghost_red->now;
 
-		App->ghost_blue->is_vulnerable = true;
-		App->ghost_orange->is_vulnerable = true;
-		App->ghost_pink->is_vulnerable = true;
-		App->ghost_red->is_vulnerable = true;
-
+			App->ghost_blue->is_vulnerable = true;
+			App->ghost_orange->is_vulnerable = true;
+			App->ghost_pink->is_vulnerable = true;
+			App->ghost_red->is_vulnerable = true;
+		}
 
 		// Points
+		App->UI->score += 50;
 		eaten_pills++;
-		
-		if (App->UI->points[5] >= 5 && App->UI->points[4] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 1;
-		}
-		else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 0;
-			App->UI->points[3] = 1;
-		}
-		else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[2] = 1;
-		}
-		else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5 && App->UI->points[1] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[2] = 0;
-			App->UI->points[1] = 1;
-		}
-		else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5 && App->UI->points[1] >= 5 && App->UI->points[0] == 11){
-			if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-			if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-			if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-			if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-			if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			App->UI->points[4] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[2] = 0;
-			App->UI->points[1] = 0;
-			App->UI->points[0] = 1;
-		}
-		else if (App->UI->points[5] <= 4){
-			App->UI->points[5] += 5;
-		}
-		else{
-			if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5 && App->UI->points[1] >= 5){
-				App->UI->points[0] += 1;
-				App->UI->points[1] = 0;
-				App->UI->points[2] = 0;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-			else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5 && App->UI->points[2] >= 5){
-				App->UI->points[1] += 1;
-				App->UI->points[2] = 0;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-			else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5 && App->UI->points[3] >= 5){
-				App->UI->points[2] += 1;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-			else if (App->UI->points[5] >= 5 && App->UI->points[4] >= 5){
-				App->UI->points[3] += 1;
-				App->UI->points[4] = 0;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-			else if (App->UI->points[5] >= 5){
-				App->UI->points[4] += 1;
-				if (App->UI->points[5] == 5) App->UI->points[5] = 0;
-				if (App->UI->points[5] == 6) App->UI->points[5] = 1;
-				if (App->UI->points[5] == 7) App->UI->points[5] = 2;
-				if (App->UI->points[5] == 8) App->UI->points[5] = 3;
-				if (App->UI->points[5] == 9) App->UI->points[5] = 4;
-			}
-		}
 
 		break;
 	case 28:
 		// Change tile
 		App->map1->g_map[App->player->p_mid.y][App->player->p_mid.x] = 0;
+		Mix_PlayChannel(-1, App->audio->wakawaka, 0);
 
 		// Points
+		App->UI->score += 10;
 		eaten_pills++;
 
-		if (App->UI->points[5] == 9 && App->UI->points[4] == 11){
-			App->UI->points[4] = 1;
-			App->UI->points[5] = 0;
+		break;
+	default:
+		break;
+	}
+
+	switch (App->map1->g_map[App->player2->p_mid.y][App->player2->p_mid.x])
+	{
+	case 27:
+		// Change tile
+		App->map1->g_map[App->player2->p_mid.y][App->player2->p_mid.x] = 0;
+		if (App->ghost_blue->is_vulnerable == false && App->ghost_orange->is_vulnerable == false && App->ghost_pink->is_vulnerable == false && App->ghost_red->is_vulnerable == false){
+			Mix_PlayChannel(1, App->audio->powerpill, 0);
+
+			// Vulnerable
+			App->ghost_blue->passed_time = App->ghost_blue->now;
+			App->ghost_orange->passed_time = App->ghost_orange->now;
+			App->ghost_pink->passed_time = App->ghost_pink->now;
+			App->ghost_red->passed_time = App->ghost_red->now;
+
+			App->ghost_blue->is_vulnerable = true;
+			App->ghost_orange->is_vulnerable = true;
+			App->ghost_pink->is_vulnerable = true;
+			App->ghost_red->is_vulnerable = true;
 		}
-		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 11){
-			App->UI->points[3] = 1;
-			App->UI->points[4] = 0;
-			App->UI->points[5] = 0;
-		}
-		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 11){
-			App->UI->points[2] = 1;
-			App->UI->points[3] = 0;
-			App->UI->points[4] = 0;
-			App->UI->points[5] = 0;
-		}
-		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 11){
-			App->UI->points[1] = 1;
-			App->UI->points[2] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[4] = 0;
-			App->UI->points[5] = 0;
-		}
-		else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 9 && App->UI->points[0] == 11){
-			App->UI->points[0] = 1;
-			App->UI->points[1] = 0;
-			App->UI->points[2] = 0;
-			App->UI->points[3] = 0;
-			App->UI->points[4] = 0;
-			App->UI->points[5] = 0;
-		}
-		else if (App->UI->points[5] != 9){
-			App->UI->points[5] += 1;
-		}
-		else{
-			if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9 && App->UI->points[1] == 9){
-				App->UI->points[0] += 1;
-				App->UI->points[1] = 0;
-				App->UI->points[2] = 0;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				App->UI->points[5] = 0;
-			}
-			else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9 && App->UI->points[2] == 9){
-				App->UI->points[1] += 1;
-				App->UI->points[2] = 0;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				App->UI->points[5] = 0;
-			}
-			else if (App->UI->points[5] == 9 && App->UI->points[4] == 9 && App->UI->points[3] == 9){
-				App->UI->points[2] += 1;
-				App->UI->points[3] = 0;
-				App->UI->points[4] = 0;
-				App->UI->points[5] = 0;
-			}
-			else if (App->UI->points[5] == 9 && App->UI->points[4] == 9){
-				App->UI->points[3] += 1;
-				App->UI->points[4] = 0;
-				App->UI->points[5] = 0;
-			}
-			else if (App->UI->points[5] == 9){
-				App->UI->points[4] += 1;
-				App->UI->points[5] = 0;
-			}
-		}
+		// Points
+		App->UI->_score += 50;
+		eaten_pills++;
+
+		break;
+	case 28:
+		// Change tile
+		App->map1->g_map[App->player2->p_mid.y][App->player2->p_mid.x] = 0;
+		Mix_PlayChannel(-1, App->audio->wakawaka, 0);
+
+		// Points
+		App->UI->_score += 10;
+		eaten_pills++;
 
 		break;
 	default:
