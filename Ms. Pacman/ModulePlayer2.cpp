@@ -255,9 +255,13 @@ update_status ModulePlayer2::Update()
 	}
 
 	// Score timer and increase puntutaion ---------------------
-	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->ftimerIsOn)
-	{
-		App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
+	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->ftimerIsOn){
+		if (App->cherry->IsCherry){
+			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
+		}
+		else if (App->cherry->IsStrawberry){
+			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f200, 1.0f);
+		}
 	}
 	else
 	{
@@ -305,7 +309,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
 
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
-		App->UI->_score += 100;
+		if (App->cherry->IsCherry){
+			App->UI->_score += 100;
+		}
+		if (App->cherry->IsStrawberry){
+			App->UI->_score += 200;
+		}
 		App->player->ftimer = App->player->now;
 		App->player->ftimerIsOn = true;
 	}

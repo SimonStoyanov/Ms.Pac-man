@@ -40,6 +40,9 @@ public:
 	SDL_Rect cherry;
 	SDL_Rect strawberry;
 
+	bool IsCherry;
+	bool IsStrawberry;
+
 	//Animation vars
 	fPoint render_pos;
 	int pixels_up;

@@ -580,7 +580,12 @@ update_status ModulePlayer::Update()
 	}
 
 	if (ftimer != 0 && now - ftimer < 2 * 1.0f * 0.5f * 1000.0 && ftimerIsOn){
-		App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
+		if (App->cherry->IsCherry){
+			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
+		}
+		else if (App->cherry->IsStrawberry){
+			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f200, 1.0f);
+		}
 	}
 	else{
 		ftimerIsOn = false;
@@ -593,13 +598,6 @@ update_status ModulePlayer::Update()
 	// Renders ----------------------------------------------
 	if(can_see)
 		App->render->Blit(graphics, position.x, position.y + DISTANCEM1 - r.h, &r); //player
-
-	//App->render->Blit(graphics, (position.x + 7), (position.y - 7) + DISTANCEM1, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_mid.x * 8) + 4, (p_mid.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_up.x * 8) + 4, (p_up.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_down.x * 8) + 4, (p_down.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_left.x * 8) + 4, (p_left.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
-	//App->render->Blit(graphics, (p_right.x * 8) + 4, (p_right.y * 8 + DISTANCEM1) + 4, &test, 1.0f); //
 
 	return UPDATE_CONTINUE;
 }
@@ -615,7 +613,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
 
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
-		App->UI->score += 100;
+		if (App->cherry->IsCherry){
+			App->UI->score += 100;
+		}
+		if (App->cherry->IsStrawberry){
+			App->UI->score += 200;
+		}
 		ftimer = now;
 		ftimerIsOn = true;
 	}
