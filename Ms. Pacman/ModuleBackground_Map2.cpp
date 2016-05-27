@@ -18,6 +18,9 @@
 #include "ModuleGhostPink.h"
 #include "ModuleGhostRed.h"
 
+#include "ModuleCherry.h"
+#include "ModulePlayer2.h"
+
 
 
 ModuleBackgroundMap2::ModuleBackgroundMap2()
@@ -41,32 +44,56 @@ bool ModuleBackgroundMap2::Start()
 	graphics = App->textures->Load("Tileset 2.png");
 
 	// Positions ---------------
+	App->player->passed_time = App->player->now;
+	App->player->speed = 1.0f;
 	App->player->position.x = 105; //105
 	App->player->position.y = 195; //195
+	App->player->can_see = true;
+	App->player->go_left = true; 	App->player->go_right = false; 	App->player->go_up = false; 	App->player->go_down = false;
 
-	App->ghost_blue->position.x = 105; //105
-	App->ghost_blue->position.y = 99; //99
+	App->player2->speed = 1.0f;
+	App->player2->position.x = 105; //105
+	App->player2->position.y = 195; //195
+	App->player2->can_see = true;
+	App->player2->go_left = false; 	App->player2->go_right = true; 	App->player2->go_up = false; 	App->player2->go_down = false;
 
-	App->ghost_orange->position.x = 105;
-	App->ghost_orange->position.y = 99;
+	App->ghost_blue->position.x = 90; //105 //90
+	App->ghost_blue->position.y = 123; //99 //123
+	App->ghost_blue->in_box = true;
+	App->ghost_blue->can_see = true;
+
+	App->ghost_orange->position.x = 120;
+	App->ghost_orange->position.y = 123;
+	App->ghost_orange->in_box = true;
+	App->ghost_orange->can_see = true;
 
 	App->ghost_pink->position.x = 105;
-	App->ghost_pink->position.y = 99;
+	App->ghost_pink->position.y = 123;
+	App->ghost_pink->in_box = true;
+	App->ghost_pink->can_see = true;
 
 	App->ghost_red->position.x = 105;
 	App->ghost_red->position.y = 99;
+	App->ghost_red->can_see = true;
 
+	App->ghost_blue->is_vulnerable = false;
+	App->ghost_orange->is_vulnerable = false;
+	App->ghost_pink->is_vulnerable = false;
+	App->ghost_red->is_vulnerable = false;
 
-	// Enable modules ---------
-	App->player->Enable();
+	// Enable and disable modules ---------
 	App->audio->Enable();
+	App->cherry->Enable();
 	App->ghost_blue->Enable();
 	App->ghost_orange->Enable();
 	App->ghost_pink->Enable();
 	App->ghost_red->Enable();
+	App->player->Enable();
+	if (App->player->two_players == true){
+		App->player2->Enable();
+	}
 	App->collision->Enable();
-
-	App->player->go_left = true; App->player->go_right = false;  App->player->go_up = false;  App->player->go_down = false;
+	App->UI->Enable();
 
 	// Temporal map
 	char tmp_map[31][28]
