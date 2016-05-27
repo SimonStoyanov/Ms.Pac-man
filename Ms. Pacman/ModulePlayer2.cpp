@@ -59,6 +59,7 @@ ModulePlayer2::ModulePlayer2()
 ModulePlayer2::~ModulePlayer2()
 {
 	player_collision = nullptr;
+	App->textures->Unload(graphics);
 }
 
 

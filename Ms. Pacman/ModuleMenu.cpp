@@ -129,6 +129,7 @@ bool ModuleMenu::Start()
 bool ModuleMenu::CleanUp()
 {
 	LOG("Unloading Menu.");
+	App->textures->Unload(graphics);
 	return true;
 }
 

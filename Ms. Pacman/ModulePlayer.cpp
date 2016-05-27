@@ -86,6 +86,7 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	one_time = false;
+	App->textures->Unload(graphics);
 	return true;
 }
 

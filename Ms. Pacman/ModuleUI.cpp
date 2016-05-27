@@ -98,6 +98,7 @@ bool ModuleUI::Start()
 bool ModuleUI::CleanUp()
 {
 	LOG("Unloading UI stage.");
+
 	return true;
 }
 

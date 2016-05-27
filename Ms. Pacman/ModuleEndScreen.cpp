@@ -47,6 +47,7 @@ bool ModuleEndScreen::Start()
 bool ModuleEndScreen::CleanUp()
 {
 	LOG("Unloading maps(1) stage.");
+	App->textures->Unload(graphics);
 
 	return true;
 }

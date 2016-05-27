@@ -162,6 +162,9 @@ bool ModuleBackgroundMap1::CleanUp()
 	App->cherry->Disable();
 	App->UI->Disable();
 
+	App->textures->Unload(graphics);
+
+
 	return true;
 }
 

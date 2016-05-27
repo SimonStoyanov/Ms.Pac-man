@@ -186,6 +186,7 @@ update_status ModuleGhostBlue::Update()
 	if (App->player->can_see_paths)
 		App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f);
 
+
 	// What is the next tile --------------
 	// right
 	if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27)

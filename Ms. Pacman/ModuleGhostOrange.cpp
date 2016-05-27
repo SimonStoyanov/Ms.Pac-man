@@ -21,6 +21,7 @@ using namespace std;
 ModuleGhostOrange::ModuleGhostOrange()
 {
 	test = { 2, 90, 3, 3 };
+	test2 = {1, 143, 120 , 120};
 
 	// right animation
 	right.PushBack({ 1, 82, 14, 14 });
@@ -163,7 +164,7 @@ update_status ModuleGhostOrange::Update()
 	enemy_collision->SetPos(position.x + 4, position.y + 14);
 
 	if (App->player->can_see_paths)
-		App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f);
+		App->render->Blit(graphics, (p_position_x-45), (p_position_y-60)+DISTANCEM1, &test2, 1.0f);
 
 	// What is the next tile --------------
 	// right

@@ -37,6 +37,7 @@ public:
 	Animation dead_downs;
 
 	SDL_Rect test;
+	SDL_Rect test2;
 
 	fPoint position;
 	iPoint p_up;
