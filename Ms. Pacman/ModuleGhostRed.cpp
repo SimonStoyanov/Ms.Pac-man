@@ -80,6 +80,13 @@ bool ModuleGhostRed::CleanUp()
 	ghost_right = false; 
 	ghost_up = false;
 	go_right = false; go_left = false; go_up = false; go_down = false;
+	is_dead = false;
+	passed_time = 0;
+
+	left.speed = 0.0f;
+	right.speed = 0.0f;
+	up.speed = 0.10f;
+	down.speed = 0.0f;
 
 	return true;
 }
