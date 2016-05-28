@@ -51,7 +51,6 @@ public:
 	int eaten_ghost = 0;
 
 	float x_aux, y_aux;
-	bool IsP2;
 };
 
 #endif

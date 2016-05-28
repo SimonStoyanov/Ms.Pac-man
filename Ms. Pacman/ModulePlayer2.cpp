@@ -75,7 +75,6 @@ bool ModulePlayer2::Start()
 	player_collision = App->collision->AddCollider({ position.x - 50, position.y - 50, 10, 10 }, COLLIDER_PLAYER, this);
 
 	App->player->start_time = SDL_GetTicks();
-	IsP2 = false;
 
 	return ret;
 }
@@ -256,7 +255,7 @@ update_status ModulePlayer2::Update()
 	}
 
 	// Score timer and increase puntutaion ---------------------
-	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->ftimerIsOn && IsP2){
+	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->ftimerIsOn){
 		if (App->cherry->IsCherry){
 			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f100, 1.0f);
 		}
@@ -267,10 +266,9 @@ update_status ModulePlayer2::Update()
 	else
 	{
 		App->player->ftimerIsOn = false;
-		IsP2 = false;
 	}
 	
-	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->gtimerIsOn && IsP2)
+	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->gtimerIsOn)
 	{
 		if (eaten_ghost == 1)
 		{
@@ -289,7 +287,6 @@ update_status ModulePlayer2::Update()
 	else
 	{
 		App->player->gtimerIsOn = false;
-		IsP2 = false;
 	}
 
 // Draw everything --------------------------------------
@@ -313,7 +310,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
 		x_aux = position.x;		y_aux = position.y + 11;
-		IsP2 = true;
 
 		if (App->cherry->IsCherry){
 			App->UI->_score += 100;
@@ -369,7 +365,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		eaten_ghost++;
 		App->player->gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
-		IsP2 = true;
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
@@ -410,7 +405,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		eaten_ghost++;
 		App->player->gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
-		IsP2 = true;
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
@@ -451,7 +445,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		eaten_ghost++;
 		App->player->gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
-		IsP2 = true;
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
@@ -492,7 +485,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		eaten_ghost++;
 		App->player->gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
-		IsP2 = true;
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			App->player->gtimer = App->player->now;
