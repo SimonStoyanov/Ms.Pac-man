@@ -82,6 +82,9 @@ public:
 	bool ftimerIsOn;
 
 	bool can_see_paths = false;
+
+	float x_aux, y_aux;
+
 };
 
 #endif

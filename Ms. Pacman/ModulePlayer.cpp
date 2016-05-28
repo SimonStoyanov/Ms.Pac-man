@@ -563,16 +563,16 @@ update_status ModulePlayer::Update()
 	if (gtimer != 0 && now - gtimer < 2 * 1.0f * 0.5f * 1000.0 && gtimerIsOn)
 	{
 		if (eaten_ghost == 1){
-			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g200, 1.0f);
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->g200, 1.0f);
 		}
 		else if (eaten_ghost == 2){
-			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g400, 1.0f);
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->g400, 1.0f);
 		}
 		else if (eaten_ghost == 3){
-			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g800, 1.0f);
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->g800, 1.0f);
 		}
 		else if (eaten_ghost == 4){
-			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->g1600, 1.0f);
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->g1600, 1.0f);
 		}
 	}
 	else{
@@ -581,10 +581,10 @@ update_status ModulePlayer::Update()
 
 	if (ftimer != 0 && now - ftimer < 2 * 1.0f * 0.5f * 1000.0 && ftimerIsOn){
 		if (App->cherry->IsCherry){
-			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f100, 1.0f);
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f100, 1.0f);
 		}
 		else if (App->cherry->IsStrawberry){
-			App->render->Blit(App->UI->gscore, position.x, position.y - 3, &App->UI->f200, 1.0f);
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f200, 1.0f);
 		}
 	}
 	else{
@@ -613,6 +613,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
 
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
+		x_aux = position.x;		y_aux = position.y + 11;
 		if (App->cherry->IsCherry){
 			App->UI->score += 100;
 		}
@@ -663,6 +664,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
+		x_aux = position.x;		y_aux = position.y + 11;
+		if (eaten_ghost == 5){
+			eaten_ghost = 1;
+		}
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
@@ -706,6 +711,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
+		x_aux = position.x;		y_aux = position.y + 11;
+		if (eaten_ghost == 5){
+			eaten_ghost = 1;
+		}
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
@@ -751,6 +760,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
+		x_aux = position.x;		y_aux = position.y + 11;
+		if (eaten_ghost == 5){
+			eaten_ghost = 1;
+		}
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
@@ -796,6 +809,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
 		eaten_ghost++;
 		gtimerIsOn = true;
+		x_aux = position.x;		y_aux = position.y + 11;
+		if (eaten_ghost == 5){
+			eaten_ghost = 1;
+		}
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;

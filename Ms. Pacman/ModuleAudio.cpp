@@ -48,7 +48,7 @@ bool ModuleAudio::CleanUp()
 	LOG("Unloading space scene");
 
 	Mix_CloseAudio();
-
+	start_of_a_game = Mix_LoadMUS("start_of_a_game.ogg");
 	wakawaka = Mix_LoadWAV("wakawaka.wav");
 	powerpill = Mix_LoadWAV("PowerPill.wav");
 	eatenghost = Mix_LoadWAV("EatenGhost.wav");
