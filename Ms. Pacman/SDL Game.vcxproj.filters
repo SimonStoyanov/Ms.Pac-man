@@ -104,6 +104,9 @@
     <ClInclude Include="ModuleBackground_Map3.h">
       <Filter>Modules\Background</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleBackground_Map4.h">
+      <Filter>Modules\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -173,6 +176,9 @@
       <Filter>Modules\Player &amp; NPC</Filter>
     </ClCompile>
     <ClCompile Include="ModuleBackground_Map3.cpp">
+      <Filter>Modules\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleBackground_Map4.cpp">
       <Filter>Modules\Background</Filter>
     </ClCompile>
   </ItemGroup>
