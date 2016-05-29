@@ -168,6 +168,7 @@ update_status ModulePlayer::Update()
 				App->player2->speed = 2.0f;
 		}
 		
+		// Maps changing speed --------------------
 		if (!App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll4) && 
 			!App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll1) && !App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll2) && !App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll3) && !App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll4) &&
 			!App->ghost_blue->enemy_collision->CheckCollision(App->map3->coll1) && !App->ghost_blue->enemy_collision->CheckCollision(App->map3->coll2) &&
@@ -264,7 +265,7 @@ update_status ModulePlayer::Update()
 			// Reseting random ghosts time and box time
 			if (one_time == false) 
 			{
-				now = 0;
+				now = 4000;
 				actual_t_g_r = now;
 
 				App->ghost_orange->passed_box = now;
@@ -560,8 +561,6 @@ update_status ModulePlayer::Update()
 			{
 				App->ghost_red->enemy_collision->to_delete = true;
 				App->ghost_red->Disable();
-				//App->textures->last_texture--; //Carefull with that. Could cause future errors.
-				//App->ghost_red->graphics = nullptr;
 				App->ghost_red->Enable();
 			}
 
@@ -570,8 +569,6 @@ update_status ModulePlayer::Update()
 			{
 				App->ghost_orange->enemy_collision->to_delete = true;
 				App->ghost_orange->Disable();
-				//App->textures->last_texture--; //Carefull with that. Could cause future errors.
-				//App->ghost_orange->graphics = nullptr;
 				App->ghost_orange->Enable();
 			}
 
@@ -580,8 +577,6 @@ update_status ModulePlayer::Update()
 			{
 				App->ghost_pink->enemy_collision->to_delete = true;
 				App->ghost_pink->Disable();
-				//App->textures->last_texture--; //Carefull with that. Could cause future errors.
-				//App->ghost_pink->graphics = nullptr;
 				App->ghost_pink->Enable();
 			}
 
@@ -590,8 +585,6 @@ update_status ModulePlayer::Update()
 			{
 				App->ghost_blue->enemy_collision->to_delete = true;
 				App->ghost_blue->Disable();
-				//App->textures->last_texture--; //Carefull with that. Could cause future errors.
-				//App->ghost_blue->graphics = nullptr;
 				App->ghost_blue->Enable();
 			}
 		}

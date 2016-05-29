@@ -623,6 +623,12 @@ update_status  ModuleGhostPink::Update()
 					}
 				}
 
+				// Slow speed when vulnerable
+				if (is_vulnerable && !App->player->pause)
+				{
+					speed = 0.6f;
+				}
+
 				// Move
 				if (go_right)
 				{

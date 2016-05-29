@@ -627,6 +627,14 @@ update_status ModuleGhostOrange::Update()
 						go_right = false; go_left = false; go_down = false;
 					}
 				}
+
+				// Slow speed when vulnerable
+				if (is_vulnerable && !App->player->pause)
+				{
+					speed = 0.6f;
+				}
+
+
 				if (go_down)
 				{
 					// What is the next tile
