@@ -95,6 +95,9 @@ public:
 	bool random = false;
 
 	bool play_audio = false;
+
+	// Map3 control
+	bool first_step = true;
 };
 
 #endif // __MODULESCENESPACE_H__

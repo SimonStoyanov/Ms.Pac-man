@@ -14,6 +14,7 @@ using namespace std;
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
 #include "ModuleBackground_Map3.h"
+#include "ModuleBackground_Map4.h"
 #include "ModuleAudio.h"
 #include <time.h>
 #include <stdlib.h>
@@ -39,6 +40,7 @@ bool ModuleCherry::CleanUp()
 	LOG("Blue ghost CleanUp");
 
 	App->textures->Unload(graphics);
+	first_step = true;
 
 	
 	return true;
@@ -60,32 +62,96 @@ bool ModuleCherry::Start()
 // Update: draw background
 update_status ModuleCherry::Update()
 {
-	// Cherry appears when 23 seconds passed je
+	// Cherry appears when 25 seconds passed
 	if (App->player->now - passed_cherry > 25 * (0.5f * 1000.0f) && !App->player->is_dead) 
 	{
-		p_position_x = 0;
-		p_position_y = 147;
+		if (App->map1->IsEnabled())
+		{
+			p_position_x = 0;
+			p_position_y = 147;
+		}
+		else if (App->map2->IsEnabled())
+		{
+			p_position_x = 0;
+			p_position_y = 195;
+		}
+		else if (App->map3->IsEnabled())
+		{
+			if (first_step)
+			{
+				p_position_x = 60;
+				p_position_y = 120;
+			}
+			else
+			{
+				p_position_x = 0;
+				p_position_y = 83;
+			}
+			if (position.y > 83 && position.x > 105)
+			{
+				first_step = false;
+			}
+			if (position.y < 65)
+			{
+				p_position_x = 60;
+				p_position_y = 120;
+			}
+
+
+		}
+		else if (App->map4->IsEnabled())
+		{
+			p_position_x = 0;
+			p_position_y = 139;
+		}
 		speed = 0.8f;
 		if (!App->player->pause){
 			play_audio = true;
 		}
 	}
+
+	// Cherry stays out of the map waiting
 	else
 	{
-		position.x = 270;
-		position.y = 75;
+		if (App->map1->IsEnabled())
+		{
+			position.x = 270;
+			position.y = 75;
+		}
+		else if (App->map2->IsEnabled())
+		{
+			position.x = 270;
+			position.y = 19;
+		}
+		else if (App->map3->IsEnabled())
+		{
+			position.x = 270;
+			position.y = 83;
+		}
+		else if (App->map4->IsEnabled())
+		{
+			position.x = 270;
+			position.y = 115;
+		}
+
 		speed = 0;
 		go_left = true;
 		play_audio = false;
+		
 	}
-	if (position.x > 210 && App->player->now - passed_cherry > 25 * (0.5f * 1000.0f))
+
+	// Cherry enters the map
+	if (position.x > 210 && App->player->now - passed_cherry > 23 * (0.5f * 1000.0f))
 	{
 		position.x -= 0.8f;
 	}
+
+	//Cherry goes random when 30s passed
 	if (App->player->now - passed_cherry > 30 * (0.5f * 1000.0f))
 	{
 		random = true;
 	}
+	//Cherry goes to the target when 45s passed
 	if (App->player->now - passed_cherry > 45 * (0.5f * 1000.0f))
 	{
 		random = false;
