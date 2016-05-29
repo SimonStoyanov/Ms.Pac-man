@@ -502,12 +502,21 @@ update_status ModuleCherry::Update()
 
 		if (can_see){
 			if (App->map1->IsEnabled()){
+				IsCherry = true;
+				IsStrawberry = false;
+				isOrange = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &cherry);
 			}
 			else if (App->map2->IsEnabled()){
+				IsCherry = false;
+				IsStrawberry = true;
+				isOrange = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &strawberry);
 			}
 			else if (App->map3->IsEnabled()){
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = true;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &orange);
 			}
 		}

@@ -104,6 +104,7 @@ public:
 	// fruit score
 	SDL_Rect f100;
 	SDL_Rect f200;
+	SDL_Rect f500;
 
 	// Ready!
 	SDL_Rect Ready;

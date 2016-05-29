@@ -262,6 +262,9 @@ update_status ModulePlayer2::Update()
 		else if (App->cherry->IsStrawberry){
 			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f200, 1.0f);
 		}
+		else if (App->cherry->isOrange){
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f500, 1.0f);
+		}
 	}
 	else
 	{
@@ -316,6 +319,9 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		}
 		if (App->cherry->IsStrawberry){
 			App->UI->_score += 200;
+		}
+		if (App->cherry->isOrange){
+			App->UI->_score += 500;
 		}
 		App->player->ftimer = App->player->now;
 		App->player->ftimerIsOn = true;

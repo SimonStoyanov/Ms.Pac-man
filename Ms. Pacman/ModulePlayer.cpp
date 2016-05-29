@@ -150,8 +150,7 @@ update_status ModulePlayer::Update()
 		App->ghost_blue->speed = 0;
 		App->ghost_pink->speed = 0;
 		App->ghost_red->speed = 0;
-		App->ghost_orange->speed = 0;
-		
+		App->ghost_orange->speed = 0;	
 	}
 	else if (!pause && !App->ghost_red->player_dead){
 		if (!god_mode)
@@ -590,6 +589,9 @@ update_status ModulePlayer::Update()
 		else if (App->cherry->IsStrawberry){
 			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f200, 1.0f);
 		}
+		else if (App->cherry->isOrange){
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f500, 1.0f);
+		}
 	}
 	else{
 		ftimerIsOn = false;
@@ -624,6 +626,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		}
 		if (App->cherry->IsStrawberry){
 			App->UI->score += 200;
+		}
+		if (App->cherry->isOrange){
+			App->UI->score += 500;
 		}
 		ftimer = now;
 		ftimerIsOn = true;
