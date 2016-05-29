@@ -73,6 +73,7 @@ bool ModuleGhostPink::CleanUp()
 {
 	LOG("Pink ghost CleanUp");
 	App->textures->Unload(graphics);
+
 	ghost_down = false;
 	ghost_left = false;
 	ghost_right = false;

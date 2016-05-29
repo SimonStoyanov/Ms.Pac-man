@@ -75,6 +75,7 @@ bool ModuleGhostRed::CleanUp()
 {
 	LOG("Red ghost CleanUp");
 	App->textures->Unload(graphics);
+
 	ghost_down = false; 
 	ghost_left = false; 
 	ghost_right = false; 

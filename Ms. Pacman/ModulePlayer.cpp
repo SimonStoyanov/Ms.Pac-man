@@ -502,7 +502,7 @@ update_status ModulePlayer::Update()
 				App->ghost_red->enemy_collision->to_delete = true;
 				App->ghost_red->Disable();
 				//App->textures->last_texture--; //Carefull with that. Could cause future errors.
-				App->ghost_red->graphics = nullptr;
+				//App->ghost_red->graphics = nullptr;
 				App->ghost_red->Enable();
 			}
 
@@ -512,7 +512,7 @@ update_status ModulePlayer::Update()
 				App->ghost_orange->enemy_collision->to_delete = true;
 				App->ghost_orange->Disable();
 				//App->textures->last_texture--; //Carefull with that. Could cause future errors.
-				App->ghost_orange->graphics = nullptr;
+				//App->ghost_orange->graphics = nullptr;
 				App->ghost_orange->Enable();
 			}
 
@@ -522,7 +522,7 @@ update_status ModulePlayer::Update()
 				App->ghost_pink->enemy_collision->to_delete = true;
 				App->ghost_pink->Disable();
 				//App->textures->last_texture--; //Carefull with that. Could cause future errors.
-				App->ghost_pink->graphics = nullptr;
+				//App->ghost_pink->graphics = nullptr;
 				App->ghost_pink->Enable();
 			}
 
@@ -532,7 +532,7 @@ update_status ModulePlayer::Update()
 				App->ghost_blue->enemy_collision->to_delete = true;
 				App->ghost_blue->Disable();
 				//App->textures->last_texture--; //Carefull with that. Could cause future errors.
-				App->ghost_blue->graphics = nullptr;
+				//App->ghost_blue->graphics = nullptr;
 				App->ghost_blue->Enable();
 			}
 		}

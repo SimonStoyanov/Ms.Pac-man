@@ -75,6 +75,7 @@ bool ModuleGhostOrange::CleanUp()
 {
 	LOG("Orange ghost CleanUp");
 	App->textures->Unload(graphics);
+
 	ghost_down = false;
 	ghost_left = false;
 	ghost_right = false;

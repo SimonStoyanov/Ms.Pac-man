@@ -37,6 +37,7 @@ bool ModuleCherry::CleanUp()
 	LOG("Blue ghost CleanUp");
 
 	App->textures->Unload(graphics);
+
 	
 	return true;
 }
