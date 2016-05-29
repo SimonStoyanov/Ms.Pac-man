@@ -64,7 +64,7 @@ bool ModuleCherry::Start()
 update_status ModuleCherry::Update()
 {
 	// Cherry appears when 25 seconds passed
-	if (App->player->now - passed_cherry > 25 * (0.5f * 1000.0f) && !App->player->is_dead) 
+	if (App->player->now - passed_cherry > 26 * (0.5f * 1000.0f) && !App->player->is_dead) 
 	{
 		if (App->map1->IsEnabled())
 		{
@@ -97,20 +97,24 @@ update_status ModuleCherry::Update()
 				p_position_x = 60;
 				p_position_y = 120;
 			}
-
-
 		}
 		else if (App->map4->IsEnabled())
 		{
 			p_position_x = 0;
 			p_position_y = 139;
 		}
+
 		speed = 0.8f;
 		if (!App->player->pause){
 			play_audio = true;
 		}
 	}
 
+	// Cherry enters the map
+	else if (position.x > 190 && App->player->now - passed_cherry > 23 * (0.5f * 1000.0f))
+	{
+		position.x -= 0.8f;
+	}
 	// Cherry stays out of the map waiting
 	else
 	{
@@ -141,19 +145,13 @@ update_status ModuleCherry::Update()
 		
 	}
 
-	// Cherry enters the map
-	if (position.x > 210 && App->player->now - passed_cherry > 23 * (0.5f * 1000.0f))
-	{
-		position.x -= 0.8f;
-	}
-
 	//Cherry goes random when 30s passed
-	if (App->player->now - passed_cherry > 30 * (0.5f * 1000.0f))
+	if (App->player->now - passed_cherry > 35 * (0.5f * 1000.0f))
 	{
 		random = true;
 	}
 	//Cherry goes to the target when 45s passed
-	if (App->player->now - passed_cherry > 45 * (0.5f * 1000.0f))
+	if (App->player->now - passed_cherry > 50 * (0.5f * 1000.0f))
 	{
 		random = false;
 	}
@@ -566,6 +564,10 @@ update_status ModuleCherry::Update()
 		else if (count == 20)
 		{
 			pixels_up = -1;
+			count = 0;
+		}
+		else if (count > 20)
+		{
 			count = 0;
 		}
 	//------------------------------------------------------------------------
