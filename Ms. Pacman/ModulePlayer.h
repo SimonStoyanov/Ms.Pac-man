@@ -80,6 +80,7 @@ public:
 	float ftimer;
 	bool gtimerIsOn;
 	bool ftimerIsOn;
+	bool one_time2 = true;
 
 	bool can_see_paths = false;
 

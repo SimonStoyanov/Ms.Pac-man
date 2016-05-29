@@ -89,6 +89,7 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	one_time = false;
+	one_time2 = true;
 	App->textures->Unload(graphics);
 	return true;
 }
@@ -162,12 +163,13 @@ update_status ModulePlayer::Update()
 		}
 		else if (round == 21)
 		{
-			App->fade->FadeToBlack(App->map4, App->end_screen, 1.0f); //1
+			App->fade->FadeToBlack(App->map4, App->end_screen, 1.0f); // End
 		}
 	
 
 		next_round = false;
 	}
+
 	// Paths mode -------------------------
 	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN)
 	{
@@ -480,9 +482,8 @@ update_status ModulePlayer::Update()
 	else{ down.speed = 0.0f; up.speed = 0.0f; left.speed = 0.0f; right.speed = 0.0f; }
 
 	// Change scene when dies ----------------------------
-	if (lifes == 0 && App->map1->IsEnabled() && end_game)
+	if (lifes == 0 && end_game)
 	{
-		lifes = 5;
 		// Start everything again 
 		//Red
 		App->ghost_red->position.x = 105;
@@ -536,12 +537,24 @@ update_status ModulePlayer::Update()
 
 		App->ghost_red->player_dead = false; //Only on red ghost.
 
+		if (App->map1->IsEnabled())
 		{
-			App->render->Blit(App->UI->graphics, position.x - 32, position.y - 35, &App->UI->GameOver, 1.0f);
-			SDL_Delay(5000);
+			App->fade->FadeToBlack(App->map1, App->end_screen, 1.0f);
 		}
-
-		App->fade->FadeToBlack(App->map1, App->end_screen, 1.0f);
+		else if (App->map2->IsEnabled())
+		{
+			App->fade->FadeToBlack(App->map2, App->end_screen, 1.0f);
+		}
+		else if (App->map3->IsEnabled())
+		{
+			App->fade->FadeToBlack(App->map3, App->end_screen, 1.0f);
+		}
+		else if (App->map4->IsEnabled())
+		{
+			App->fade->FadeToBlack(App->map4, App->end_screen, 1.0f);
+		}
+		end_game = false;
+		one_time2 = false;
 	}
 
 
@@ -549,9 +562,12 @@ update_status ModulePlayer::Update()
 	if (!end_game)
 	{
 		//End game when lifes = 0
-		if (App->player->is_dead && ((now - passed_time) > (10 * 0.5f * 1000.0f) && lifes == 0))
+		if (App->player->is_dead && ((now - passed_time) > (10 * 0.5f * 1000.0f)) && lifes == 0)
 		{
-			end_game = true;
+			if (one_time2)
+			{
+				end_game = true;
+			}
 		}
 
 		// Solves the bug of dying 2 times
@@ -683,6 +699,13 @@ update_status ModulePlayer::Update()
 			App->ghost_orange->can_see = false;
 			App->ghost_pink->can_see = false;
 			App->ghost_blue->can_see = false;
+		}
+
+
+		//Game over text
+		if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f) && lifes == 0)
+		{
+			App->render->Blit(App->UI->graphics, 74, 160, &App->UI->GameOver, 1.0f);
 		}
 
 	}
