@@ -215,13 +215,13 @@ update_status ModuleGhostBlue::Update()
 		{
 			if (position.x > 105)
 			{
-				p_position_x = 119;
+				p_position_x = 140;
 				p_position_y = 120;
 				pre_find = false;
 			}
 			else if (position.x < 105)
 			{
-				p_position_x = 79;
+				p_position_x = 65;
 				p_position_y = 120;
 				pre_find = false;
 			}
