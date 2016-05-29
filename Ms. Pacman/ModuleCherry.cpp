@@ -65,7 +65,9 @@ update_status ModuleCherry::Update()
 		p_position_x = 0;
 		p_position_y = 147;
 		speed = 0.8f;
-		play_audio = true;
+		if (!App->player->pause){
+			play_audio = true;
+		}
 	}
 	else
 	{

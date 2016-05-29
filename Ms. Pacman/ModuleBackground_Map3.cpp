@@ -40,7 +40,9 @@ ModuleBackgroundMap3::~ModuleBackgroundMap3()
 // Load assets
 bool ModuleBackgroundMap3::Start()
 {
-	LOG("Loading maps(2).");
+	eaten_pills = 0;
+
+	LOG("Loading maps(3).");
 	bool ret = true;
 	graphics = App->textures->Load("Tileset 3.png");
 
@@ -366,17 +368,20 @@ update_status ModuleBackgroundMap3::Update()
 		break;
 	}
 
-	if (eaten_pills <= 242)
+	if (eaten_pills == 241)
 	{
-		App->fade->FadeToBlack(App->map3, App->end_screen, 2.0f);
+		App->fade->FadeToBlack(App->map3, App->end_screen, 2.1f);
 	}
+	if (eaten_pills == 242){
+		App->player->speed = 0;
+		App->player->can_see = false;
+		App->player->position.x = 105; //105
+		App->player->position.y = 195; //195
 
-	// Load scene when press space
-
-	else if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
-	{
-		App->fade->FadeToBlack(App->map3, App->end_screen, 2.0F);
+		App->player2->speed = 0;
+		App->player2->can_see = false;
+		App->player2->position.x = 105; //105
+		App->player2->position.y = 195; //195
 	}
-
 	return UPDATE_CONTINUE;
 }

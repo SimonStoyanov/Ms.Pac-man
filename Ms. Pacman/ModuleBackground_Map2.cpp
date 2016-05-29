@@ -10,6 +10,7 @@
 
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
+#include "ModuleBackground_Map3.h"
 #include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
@@ -39,6 +40,8 @@ ModuleBackgroundMap2::~ModuleBackgroundMap2()
 // Load assets
 bool ModuleBackgroundMap2::Start()
 {
+	eaten_pills = 0;
+
 	LOG("Loading maps(2).");
 	bool ret = true;
 	graphics = App->textures->Load("Tileset 2.png");
@@ -365,17 +368,23 @@ update_status ModuleBackgroundMap2::Update()
 		break;
 	}
 
-	if (eaten_pills <= 242)
+	if (eaten_pills == 242)
 	{
-		App->fade->FadeToBlack(App->map2, App->end_screen, 2.0f);
+		App->fade->FadeToBlack(App->map2, App->map3, 2.0f);
 	}
 
-	// Load scene when press space
+	if (eaten_pills == 243){
+		App->player->speed = 0;
+		App->player->can_see = false;
+		App->player->position.x = 105; //105
+		App->player->position.y = 195; //195
 
-	else if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
-	{
-		App->fade->FadeToBlack(App->map2, App->end_screen, 2.0F);
+		App->player2->speed = 0;
+		App->player2->can_see = false;
+		App->player2->position.x = 105; //105
+		App->player2->position.y = 195; //195
 	}
+
 
 	return UPDATE_CONTINUE;
 }
