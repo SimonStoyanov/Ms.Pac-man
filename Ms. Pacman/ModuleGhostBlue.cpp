@@ -13,6 +13,9 @@ using namespace std;
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostRed.h"
 #include "ModuleBackground_Map1.h"
+#include "ModuleBackground_Map2.h"
+#include "ModuleBackground_Map3.h"
+#include "ModuleBackground_Map4.h"
 #include "ModuleAudio.h"
 #include <time.h>
 #include <stdlib.h>
@@ -86,6 +89,7 @@ bool ModuleGhostBlue::CleanUp()
 	in_box = false;
 	box_down = false; box_up = true;
 	box_positioning = false;
+	pre_find = true;
 
 	left.speed = 0.0f;
 	right.speed = 0.0f;
@@ -124,14 +128,6 @@ bool ModuleGhostBlue::Start()
 // Update: draw background
 update_status ModuleGhostBlue::Update()
 {
-	if (position.x > 104 && position.x < 106 && position.y > 98 && position.y < 100 && is_dead && !dead_positioning && is_dead)
-	{
-		position.x = 105;
-		position.y = 99;
-		dead_positioning = true;
-	}
-
-
 	if (!is_dead)
 	{
 		if (App->player->two_players)
@@ -175,11 +171,73 @@ update_status ModuleGhostBlue::Update()
 
 		}
 	}
-	else if (position.y == 99 && (position.x < 78 || position.x > 120))
+	// Dead targeting -------------------
+	else if (position.y == 99 && (position.x > 78 || position.x < 120))
 	{
 		p_position_x = 105;
 		p_position_y = 99;
+		pre_find = false;
 	}
+
+	if (is_dead && !dead_positioning && pre_find)
+	{
+		if (App->map1->IsEnabled() || App->map4->IsEnabled())
+		{
+			if (position.x > 105)
+			{
+				p_position_x = 119;
+				p_position_y = 99;
+				pre_find = false;
+			}
+			else if (position.x < 105)
+			{
+				p_position_x = 79;
+				p_position_y = 99;
+				pre_find = false;
+			}
+		}
+		else if (App->map2->IsEnabled())
+		{
+			if (position.x > 105)
+			{
+				p_position_x = 119;
+				p_position_y = 120;
+				pre_find = false;
+			}
+			else if (position.x < 105)
+			{
+				p_position_x = 79;
+				p_position_y = 120;
+				pre_find = false;
+			}
+		}
+		else if (App->map3->IsEnabled())
+		{
+			if (position.x > 105)
+			{
+				p_position_x = 119;
+				p_position_y = 120;
+				pre_find = false;
+			}
+			else if (position.x < 105)
+			{
+				p_position_x = 79;
+				p_position_y = 120;
+				pre_find = false;
+			}
+		}
+	}
+
+	if (position.x > 104 && position.x < 106 && position.y > 98 && position.y < 100 && is_dead && !dead_positioning && is_dead)
+	{
+		position.x = 105;
+		position.y = 99;
+		dead_positioning = true;
+		pre_find = true;
+	}
+
+
+	// ----------------------------------
 	if (is_dead && !IsColliding)
 	{
 		speed = 1.0f;

@@ -98,6 +98,7 @@ public:
 	bool is_dead;
 	bool dead_positioning = false;
 	bool dead_down = true;
+	bool pre_find = true;
 
 	Collider* enemy_collision = nullptr;
 

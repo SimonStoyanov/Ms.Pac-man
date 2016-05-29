@@ -96,6 +96,7 @@ public:
 	bool is_dead;
 	bool dead_positioning = false;
 	bool dead_down = true;
+	bool pre_find = true;
 	
 	int p_position_x;
 	int p_position_y;
