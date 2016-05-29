@@ -265,6 +265,12 @@ update_status ModulePlayer2::Update()
 		else if (App->cherry->isOrange){
 			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f500, 1.0f);
 		}
+		else if (App->cherry->isPretzel){
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f700, 1.0f);
+		}
+		else if (App->cherry->isApple){
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f1000, 1.0f);
+		}
 	}
 	else
 	{
@@ -323,6 +329,15 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		if (App->cherry->isOrange){
 			App->UI->_score += 500;
 		}
+		if (App->cherry->isPretzel)
+		{
+			App->UI->_score += 700;
+		}
+		if (App->cherry->isApple)
+		{
+			App->UI->_score += 1000;
+		}
+
 		App->player->ftimer = App->player->now;
 		App->player->ftimerIsOn = true;
 	}

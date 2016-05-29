@@ -105,6 +105,8 @@ public:
 	SDL_Rect f100;
 	SDL_Rect f200;
 	SDL_Rect f500;
+	SDL_Rect f700;
+	SDL_Rect f1000;
 
 	// Ready!
 	SDL_Rect Ready;
