@@ -164,10 +164,19 @@ update_status ModulePlayer::Update()
 			else
 				App->player2->speed = 2.0f;
 		}
-		App->ghost_blue->speed = 1.0f;
-		App->ghost_pink->speed = 1.0f;
-		App->ghost_red->speed = 1.0f;
-		App->ghost_orange->speed = 1.0f;
+		
+		if (!App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll4)){
+			App->ghost_blue->speed = 1.0f;
+		}
+		if (!App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll4)){
+			App->ghost_orange->speed = 1.0f;
+		}
+		if (!App->ghost_red->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_red->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_red->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_red->enemy_collision->CheckCollision(App->map1->coll4)){
+			App->ghost_red->speed = 1.0f;
+		}
+		if (!App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll4)){
+			App->ghost_pink->speed = 1.0f;
+		}
 	}
 	// --------------------
 

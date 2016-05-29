@@ -15,7 +15,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER][COLLIDER_PINK] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_RED] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_FRUIT] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_TELEPORT] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_TELEPORT] = false;
 
 	// Blue Ghost
 	matrix[COLLIDER_BLUE][COLLIDER_ORANGE] = false;
@@ -56,7 +56,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_FRUIT][COLLIDER_PINK] = false;
 	matrix[COLLIDER_FRUIT][COLLIDER_RED] = false;
 	matrix[COLLIDER_FRUIT][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_FRUIT][COLLIDER_TELEPORT] = true;
+	matrix[COLLIDER_FRUIT][COLLIDER_TELEPORT] = false;
 
 	// Teleport
 	matrix[COLLIDER_TELEPORT][COLLIDER_TELEPORT] = false;
@@ -64,8 +64,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_TELEPORT][COLLIDER_ORANGE] = true;
 	matrix[COLLIDER_TELEPORT][COLLIDER_PINK] = true;
 	matrix[COLLIDER_TELEPORT][COLLIDER_RED] = true;
-	matrix[COLLIDER_TELEPORT][COLLIDER_FRUIT] = true;
-	matrix[COLLIDER_TELEPORT][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_TELEPORT][COLLIDER_FRUIT] = false;
+	matrix[COLLIDER_TELEPORT][COLLIDER_PLAYER] = false;
 }
 
 // Destructor

@@ -180,7 +180,7 @@ update_status ModuleGhostBlue::Update()
 		p_position_x = 105;
 		p_position_y = 99;
 	}
-	if (is_dead)
+	if (is_dead && !IsColliding)
 	{
 		speed = 1.0f;
 		is_vulnerable = false;
@@ -602,7 +602,6 @@ update_status ModuleGhostBlue::Update()
 					if (App->map1->g_map[p_right.y][p_right.x + 1] == 0 || App->map1->g_map[p_right.y][p_right.x + 1] == 28 || App->map1->g_map[p_right.y][p_right.x + 1] == 27 || position.x >= 210)
 					{
 						right.speed = 0.25f;
-
 						if (!is_vulnerable){ current_animation = &right; }
 						if (is_dead){ current_animation = &dead_right; }
 

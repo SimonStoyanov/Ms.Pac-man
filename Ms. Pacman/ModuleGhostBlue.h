@@ -22,6 +22,7 @@ public:
 
 	float speed = 1.0f;
 	float extra_speed = 0;
+	bool IsColliding = false;
 
 	SDL_Texture* graphics = nullptr;
 	Animation* prev_anim;

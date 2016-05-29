@@ -26,6 +26,18 @@ public:
 
 	SDL_Rect Dot1;
 
+	// Collider
+	Collider* teleport_collision1;
+	Collider* teleport_collision2;
+	Collider* teleport_collision3;
+	Collider* teleport_collision4;
+	void OnCollision(Collider* c1, Collider* c2);
+	SDL_Rect coll1;
+	SDL_Rect coll2;
+	SDL_Rect coll3;
+	SDL_Rect coll4;
+
+
 	// Eaten dots
 	int eaten_pills = 0;
 
