@@ -57,7 +57,7 @@ bool ModuleCherry::Start()
 // Update: draw background
 update_status ModuleCherry::Update()
 {
-	// Cherry appears when 23 seconds passed
+	// Cherry appears when 23 seconds passed je
 	if (App->player->now - passed_cherry > 25 * (0.5f * 1000.0f) && !App->player->is_dead) 
 	{
 		p_position_x = 0;
