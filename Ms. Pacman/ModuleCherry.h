@@ -40,10 +40,13 @@ public:
 	SDL_Rect cherry;
 	SDL_Rect strawberry;
 	SDL_Rect orange;
+	SDL_Rect apple;
+
 
 	bool IsCherry;
 	bool IsStrawberry;
 	bool isOrange;
+	bool isApple;
 
 	//Animation vars
 	fPoint render_pos;

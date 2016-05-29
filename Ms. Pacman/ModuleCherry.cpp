@@ -24,6 +24,7 @@ ModuleCherry::ModuleCherry()
 	cherry = { 1, 2, 12, 12 };
 	strawberry = { 17, 3, 11, 11 };
 	orange = { 33, 2, 12, 12 };
+	apple = { 62, 2, 12, 12 };
 
 	test = { 69, 6, 1, 1 };
 }
@@ -507,18 +508,28 @@ update_status ModuleCherry::Update()
 				IsCherry = true;
 				IsStrawberry = false;
 				isOrange = false;
+				isApple = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &cherry);
 			}
 			else if (App->map2->IsEnabled()){
 				IsCherry = false;
 				IsStrawberry = true;
 				isOrange = false;
+				isApple = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &strawberry);
 			}
 			else if (App->map3->IsEnabled()){
 				IsStrawberry = false;
 				IsCherry = false;
 				isOrange = true;
+				isApple = false;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &orange);
+			}
+			else if (App->map3->IsEnabled()){
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = false;
+				isApple = true;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &orange);
 			}
 		}
