@@ -32,9 +32,9 @@ ModuleBackgroundMap1::ModuleBackgroundMap1()
 	tile27 = { 83, 0, 8, 8 };
 
 	coll1 = { 0, 84, 15, 16 };	
-	coll2 = { 209, 84, 15, 16 };	
+	coll2 = { 210, 84, 15, 16 };	
 	coll3 = { 0, 156, 15, 16 };	
-	coll4 = { 209, 156, 15, 16 };
+	coll4 = { 210, 156, 15, 16 };
 }
 
 ModuleBackgroundMap1::~ModuleBackgroundMap1(){
@@ -58,6 +58,7 @@ bool ModuleBackgroundMap1::Start()
 	teleport_collision2 = App->collision->AddCollider(coll2, COLLIDER_TELEPORT, this);
 	teleport_collision3 = App->collision->AddCollider(coll3, COLLIDER_TELEPORT, this);
 	teleport_collision4 = App->collision->AddCollider(coll4, COLLIDER_TELEPORT, this);
+
 	// Positions ---------------
 	App->player->passed_time = App->player->now;
 	App->player->speed = 1.0f;
@@ -412,5 +413,4 @@ void ModuleBackgroundMap1::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK){
 		App->ghost_pink->speed = 0.65f;
 	}
-	
 }

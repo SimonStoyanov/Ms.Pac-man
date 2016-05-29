@@ -32,10 +32,20 @@ ModuleBackgroundMap2::ModuleBackgroundMap2()
 	tile18 = { 64, 0, 8, 8 };	tile19 = { 37, 9, 8, 8 };	tile20 = { 46, 9, 8, 8 };	tile21 = { 55, 9, 8, 8 };	tile22 = { 64, 9, 8, 8 };	 tile23 = { 37, 18, 8, 8 };
 	tile24 = { 46, 18, 8, 8 };	tile25 = { 55, 18, 8, 8 };	tile26 = { 64, 18, 8, 8 };	tilePILL = { 74, 9, 8, 8 };	tilepill = { 74, 18, 8, 8 }; tilehouse = { 74, 27, 8, 8 };
 	tile27 = { 83, 0, 8, 8 };	tile28 = { 83, 9, 8, 8 };   tile29 = { 83, 18, 8, 8 };	tile30 = { 83, 27, 8, 8 };  tile31 = { 92, 0, 8, 8 };
+
+	coll1 = { 0, 28, 15, 16 };
+	coll2 = { 210, 28, 15, 16 };
+	coll3 = { 0, 204, 15, 16 };
+	coll4 = { 210, 204, 15, 16 };
 }
 
 ModuleBackgroundMap2::~ModuleBackgroundMap2()
-{}
+{
+	teleport_collision1 = nullptr;
+	teleport_collision2 = nullptr;
+	teleport_collision3 = nullptr;
+	teleport_collision4 = nullptr;
+}
 
 // Load assets
 bool ModuleBackgroundMap2::Start()
@@ -45,7 +55,13 @@ bool ModuleBackgroundMap2::Start()
 	LOG("Loading maps(2).");
 	bool ret = true;
 	graphics = App->textures->Load("Tileset 2.png");
-
+	
+	// Colliders
+	teleport_collision1 = App->collision->AddCollider(coll1, COLLIDER_TELEPORT, this);
+	teleport_collision2 = App->collision->AddCollider(coll2, COLLIDER_TELEPORT, this);
+	teleport_collision3 = App->collision->AddCollider(coll3, COLLIDER_TELEPORT, this);
+	teleport_collision4 = App->collision->AddCollider(coll4, COLLIDER_TELEPORT, this);
+	
 	// Positions ---------------
 	App->player->passed_time = App->player->now;
 	App->player->speed = 1.0f;
@@ -392,4 +408,19 @@ update_status ModuleBackgroundMap2::Update()
 
 
 	return UPDATE_CONTINUE;
+}
+
+void ModuleBackgroundMap2::OnCollision(Collider* c1, Collider* c2){
+	if (c1 != nullptr && c2->type == COLLIDER_BLUE){
+		App->ghost_blue->speed = 0.65f;
+	}
+	else if (c1 != nullptr && c2->type == COLLIDER_RED){
+		App->ghost_red->speed = 0.65f;
+	}
+	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE){
+		App->ghost_orange->speed = 0.65f;
+	}
+	else if (c1 != nullptr && c2->type == COLLIDER_PINK){
+		App->ghost_pink->speed = 0.65f;
+	}
 }

@@ -11,6 +11,7 @@
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
 #include "ModuleBackground_Map3.h"
+#include "ModuleBackground_Map4.h"
 #include "ModuleMenu.h"
 
 #include "ModulePlayer.h"
@@ -275,7 +276,7 @@ update_status ModuleMenu::Update()
 		credits_used++;
 		if (App->player->two_players == false){
 			App->UI->credit--;
-			App->fade->FadeToBlack(App->menu, App->map1, 1.0f);
+			App->fade->FadeToBlack(App->menu, App->map2, 1.0f);
 		}
 		else if (App->player->two_players == true && App->UI->credit >= 2){
 			App->UI->credit -= 2;
