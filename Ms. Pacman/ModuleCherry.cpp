@@ -113,7 +113,7 @@ update_status ModuleCherry::Update()
 	}
 
 	// Cherry enters the map
-	else if (position.x > 190 && App->player->now - passed_cherry > 23 * (0.5f * 1000.0f))
+	else if (position.x > 190 && App->player->now - passed_cherry > 23 * (0.5f * 1000.0f) && !App->player->is_dead && !App->player->pause)
 	{
 		position.x -= 0.8f;
 	}

@@ -626,11 +626,9 @@ update_status ModulePlayer::Update()
 			}
 
 			//Cherry
-			if (App->map1->IsEnabled())
-			{
-				App->cherry->passed_cherry = now;
-				App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
-			}
+			App->cherry->passed_cherry = now;
+			App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
+			App->cherry->first_step = true;
 
 			actual_t_g_r = now + 5; //reseting random timer
 			App->ghost_blue->passed_box = now;
