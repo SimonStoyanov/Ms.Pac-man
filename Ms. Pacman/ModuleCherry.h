@@ -45,6 +45,8 @@ public:
 	SDL_Rect pear;
 	SDL_Rect banana;
 
+	int FruitRound;
+
 	bool IsCherry;
 	bool IsStrawberry;
 	bool isOrange;

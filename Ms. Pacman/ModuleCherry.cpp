@@ -52,11 +52,37 @@ bool ModuleCherry::CleanUp()
 // Load assets
 bool ModuleCherry::Start()
 {
+	srand(time(NULL));
 	LOG("Loading fruitt textures");
 	bool ret = true;
 	graphics = App->textures->Load("Fruits.png");
 
 	fruit_collision = App->collision->AddCollider({ position.x, position.y, 10, 10 }, COLLIDER_FRUIT, this);
+
+	if (App->player->round == 0){
+		FruitRound = 0;
+	}
+	else if (App->player->round == 1){
+		FruitRound = 1;
+	}
+	else if (App->player->round == 2){
+		FruitRound = 2;
+	}
+	else if (App->player->round == 3){
+		FruitRound = 3;
+	}
+	else if (App->player->round == 4){
+		FruitRound = 4;
+	}
+	else if (App->player->round == 5){
+		FruitRound = 5;
+	}
+	else if (App->player->round == 6){
+		FruitRound = 6;
+	}
+	else{
+		FruitRound = rand() % 7;
+	}
 
 	count = 0;
 	return ret;
@@ -575,7 +601,82 @@ update_status ModuleCherry::Update()
 	//------------------------------------------------------------------------
 
 		if (can_see){
-			if (App->player->round == 0){
+			switch (FruitRound){
+			case 0:
+				IsCherry = true;
+				IsStrawberry = false;
+				isOrange = false;
+				isPretzel = false;
+				isApple = false;
+				isPear = false;
+				isBanana = false;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &cherry);
+				break;
+			case 1:
+				IsCherry = false;
+				IsStrawberry = true;
+				isOrange = false;
+				isPretzel = false;
+				isApple = false;
+				isPear = false;
+				isBanana = false;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &strawberry);
+				break;
+			case 2:
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = true;
+				isPretzel = false;
+				isApple = false;
+				isPear = false;
+				isBanana = false;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &orange);
+				break;
+			case 3:
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = false;
+				isPretzel = true;
+				isApple = false;
+				isPear = false;
+				isBanana = false;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &pretzel);
+				break;
+			case 4:
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = false;
+				isPretzel = false;
+				isApple = true;
+				isPear = false;
+				isBanana = false;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &apple);
+				break;
+			case 5:
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = false;
+				isPretzel = false;
+				isApple = false;
+				isPear = true;
+				isBanana = false;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &pear);
+				break;
+			case 6:
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = false;
+				isPretzel = false;
+				isApple = false;
+				isPear = false;
+				isBanana = true;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &banana);
+				break;
+			default:
+				break;
+			}
+
+		/*	if (App->player->round == 0){
 				IsCherry = true;
 				IsStrawberry = false;
 				isOrange = false;
@@ -644,7 +745,7 @@ update_status ModuleCherry::Update()
 				isPear = false;
 				isBanana = true;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &banana);
-			}
+			}*/
 		}
 	return UPDATE_CONTINUE;
 }
