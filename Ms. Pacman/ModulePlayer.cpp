@@ -568,6 +568,7 @@ update_status ModulePlayer::Update()
 			{
 				end_game = true;
 			}
+			speed = 0;
 		}
 
 		// Solves the bug of dying 2 times
@@ -703,6 +704,8 @@ update_status ModulePlayer::Update()
 		//Game over text
 		if (App->player->is_dead && (now - passed_time) > (3 * 0.5f * 1000.0f) && lifes == 0)
 		{
+			App->player->position.x = 105; //105
+			App->player->position.y = 195; //195
 			App->render->Blit(App->UI->graphics, 74, 160, &App->UI->GameOver, 1.0f);
 		}
 
