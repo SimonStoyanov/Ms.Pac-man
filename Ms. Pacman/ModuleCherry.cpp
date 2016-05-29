@@ -23,10 +23,12 @@ ModuleCherry::ModuleCherry()
 {
 	// Cherry Animation
 	cherry = { 1, 2, 12, 12 };
-	strawberry = { 17, 3, 11, 11 };
+	strawberry = { 17, 2, 11, 11 };
 	orange = { 33, 2, 12, 12 };
 	pretzel = { 49, 2, 14, 13 };
 	apple = { 65, 2, 14, 12 };
+	pear = { 83, 1, 9, 14 };
+	banana = { 97, 2, 12, 13 };
 
 	test = { 69, 6, 1, 1 };
 }
@@ -573,37 +575,75 @@ update_status ModuleCherry::Update()
 	//------------------------------------------------------------------------
 
 		if (can_see){
-			if (App->map1->IsEnabled()){
+			if (App->player->round == 0){
 				IsCherry = true;
 				IsStrawberry = false;
 				isOrange = false;
 				isPretzel = false;
 				isApple = false;
+				isPear = false;
+				isBanana = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &cherry);
 			}
-			else if (App->map2->IsEnabled()){
+			else if (App->player->round == 1){
 				IsCherry = false;
 				IsStrawberry = true;
 				isOrange = false;
 				isPretzel = false;
 				isApple = false;
+				isPear = false;
+				isBanana = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &strawberry);
 			}
-			else if (App->map3->IsEnabled()){
+			else if (App->player->round == 2){
 				IsStrawberry = false;
 				IsCherry = false;
 				isOrange = true;
 				isPretzel = false;
 				isApple = false;
+				isPear = false;
+				isBanana = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &orange);
 			}
-			else if (App->map4->IsEnabled()){
+			else if (App->player->round == 3){
 				IsStrawberry = false;
 				IsCherry = false;
 				isOrange = false;
 				isPretzel = true;
 				isApple = false;
+				isPear = false;
+				isBanana = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &pretzel);
+			}
+			else if (App->player->round == 4){
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = false;
+				isPretzel = false;
+				isApple = true;
+				isPear = false;
+				isBanana = false;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &apple);
+			}
+			else if (App->player->round == 5){
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = false;
+				isPretzel = false;
+				isApple = false;
+				isPear = true;
+				isBanana = false;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &pear);
+			}
+			else if (App->player->round == 6){
+				IsStrawberry = false;
+				IsCherry = false;
+				isOrange = false;
+				isPretzel = false;
+				isApple = false;
+				isPear = false;
+				isBanana = true;
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &banana);
 			}
 		}
 	return UPDATE_CONTINUE;

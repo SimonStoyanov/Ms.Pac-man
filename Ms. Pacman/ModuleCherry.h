@@ -42,13 +42,16 @@ public:
 	SDL_Rect orange;
 	SDL_Rect pretzel;
 	SDL_Rect apple;
-
+	SDL_Rect pear;
+	SDL_Rect banana;
 
 	bool IsCherry;
 	bool IsStrawberry;
 	bool isOrange;
 	bool isPretzel;
 	bool isApple;
+	bool isPear;
+	bool isBanana;
 
 	//Animation vars
 	fPoint render_pos;

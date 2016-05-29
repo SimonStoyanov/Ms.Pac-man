@@ -723,6 +723,12 @@ update_status ModulePlayer::Update()
 		else if (App->cherry->isApple){
 			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f1000, 1.0f);
 		}
+		else if (App->cherry->isPear){
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f2000, 1.0f);
+		}
+		else if (App->cherry->isBanana){
+			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f5000, 1.0f);
+		}
 	}
 	else{
 		ftimerIsOn = false;
@@ -769,7 +775,15 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		{
 			App->UI->score += 1000;
 		}
-		
+		if (App->cherry->isPear)
+		{
+			App->UI->score += 2000;
+		}
+		if (App->cherry->isBanana)
+		{
+			App->UI->score += 5000;
+		}
+
 		ftimer = now;
 		ftimerIsOn = true;
 	}
