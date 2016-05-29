@@ -369,11 +369,11 @@ update_status ModuleBackgroundMap4::Update()
 		break;
 	}
 
-	if (eaten_pills == 241)
+	if (eaten_pills == 237)
 	{
-		App->fade->FadeToBlack(App->map3, App->end_screen, 2.1f);
+		App->fade->FadeToBlack(App->map4, App->end_screen, 2.1f);
 	}
-	if (eaten_pills == 242){
+	if (eaten_pills == 238){
 		App->player->speed = 0;
 		App->player->can_see = false;
 		App->player->position.x = 105; //105
@@ -383,6 +383,17 @@ update_status ModuleBackgroundMap4::Update()
 		App->player2->can_see = false;
 		App->player2->position.x = 105; //105
 		App->player2->position.y = 195; //195
+
+		App->ghost_blue->speed = 0;
+		App->ghost_blue->can_see = false;
+		App->ghost_red->speed = 0;
+		App->ghost_red->can_see = false;
+		App->ghost_orange->speed = 0;
+		App->ghost_orange->can_see = false;
+		App->ghost_pink->speed = 0;
+		App->ghost_pink->can_see = false;
+		
+
 	}
 	return UPDATE_CONTINUE;
 }

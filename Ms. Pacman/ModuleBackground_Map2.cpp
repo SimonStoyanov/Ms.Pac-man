@@ -383,6 +383,11 @@ update_status ModuleBackgroundMap2::Update()
 		App->player2->can_see = false;
 		App->player2->position.x = 105; //105
 		App->player2->position.y = 195; //195
+
+		App->ghost_blue->speed = 0;
+		App->ghost_red->speed = 0;
+		App->ghost_orange->speed = 0;
+		App->ghost_pink->speed = 0;
 	}
 
 

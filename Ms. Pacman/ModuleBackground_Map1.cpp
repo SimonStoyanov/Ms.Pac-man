@@ -11,6 +11,7 @@
 #include "ModuleMenu.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
+#include "ModuleBackground_Map4.h"
 #include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
@@ -360,7 +361,7 @@ update_status ModuleBackgroundMap1::Update()
 	// Load scene when all the pills are taken
 	if (eaten_pills == 223)
 	{
-			App->fade->FadeToBlack(App->map1, App->map2, 2.1f);
+			App->fade->FadeToBlack(App->map1, App->map4, 2.1f);
 	}
 	if (eaten_pills == 224){
 		App->player->speed = 0;
@@ -372,6 +373,12 @@ update_status ModuleBackgroundMap1::Update()
 		App->player2->can_see = false;
 		App->player2->position.x = 105; //105
 		App->player2->position.y = 195; //195
+
+		App->ghost_blue->speed = 0;
+		App->ghost_red->speed = 0;
+		App->ghost_orange->speed = 0;
+		App->ghost_pink->speed = 0;
+
 	}
 
 	return UPDATE_CONTINUE;
