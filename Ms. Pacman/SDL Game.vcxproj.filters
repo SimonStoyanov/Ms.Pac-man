@@ -101,6 +101,9 @@
     <ClInclude Include="ModuleCherry.h">
       <Filter>Modules\Player &amp; NPC</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleBackground_Map3.h">
+      <Filter>Modules\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -168,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="ModuleCherry.cpp">
       <Filter>Modules\Player &amp; NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleBackground_Map3.cpp">
+      <Filter>Modules\Background</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

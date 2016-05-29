@@ -11,6 +11,7 @@
 #include "ModuleMenu.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
+#include "ModuleBackground_Map3.h"
 #include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
@@ -32,6 +33,7 @@ Application::Application()
 	modules[i++] = menu = new ModuleMenu();
 	modules[i++] = map1 = new ModuleBackgroundMap1();
 	modules[i++] = map2 = new ModuleBackgroundMap2();
+	modules[i++] = map3 = new ModuleBackgroundMap3();
 	modules[i++] = end_screen = new ModuleEndScreen();
 	modules[i++] = UI = new ModuleUI();
 	modules[i++] = player = new ModulePlayer();
@@ -65,6 +67,7 @@ bool Application::Init()
 	cherry->Disable();
 	map1->Disable();
 	map2->Disable();
+	map3->Disable();
 	end_screen->Disable();
 	collision->Disable();
 	ghost_blue->Disable();

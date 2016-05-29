@@ -76,6 +76,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleBackground_Map2.h" />
+    <ClInclude Include="ModuleBackground_Map3.h" />
     <ClInclude Include="ModuleCherry.h" />
     <ClInclude Include="ModuleCollision.h" />
     <ClInclude Include="ModuleEndScreen.h" />
@@ -101,6 +102,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleBackground_Map2.cpp" />
+    <ClCompile Include="ModuleBackground_Map3.cpp" />
     <ClCompile Include="ModuleCherry.cpp" />
     <ClCompile Include="ModuleCollision.cpp" />
     <ClCompile Include="ModuleEndScreen.cpp" />

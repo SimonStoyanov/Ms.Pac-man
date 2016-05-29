@@ -13,6 +13,7 @@ using namespace std;
 #include "ModuleCherry.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
+#include "ModuleBackground_Map3.h"
 #include "ModuleAudio.h"
 #include <time.h>
 #include <stdlib.h>
@@ -22,7 +23,7 @@ ModuleCherry::ModuleCherry()
 	// Cherry Animation
 	cherry = { 1, 2, 12, 12 };
 	strawberry = { 17, 3, 11, 11 };
-
+	orange = { 33, 2, 12, 12 };
 
 	test = { 69, 6, 1, 1 };
 }
@@ -501,14 +502,13 @@ update_status ModuleCherry::Update()
 
 		if (can_see){
 			if (App->map1->IsEnabled()){
-				IsCherry = true;
-				IsStrawberry = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &cherry);
 			}
 			else if (App->map2->IsEnabled()){
-				IsStrawberry = true;
-				IsCherry = false;
 				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &strawberry);
+			}
+			else if (App->map3->IsEnabled()){
+				App->render->Blit(graphics, render_pos.x, render_pos.y + DISTANCEM1 - 13, &orange);
 			}
 		}
 	return UPDATE_CONTINUE;
