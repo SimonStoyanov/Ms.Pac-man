@@ -140,7 +140,6 @@ bool ModuleMenu::CleanUp()
 update_status ModuleMenu::Update()
 {
 	// Draw everything --------------------------------------
-
 	App->render->Blit(graphics, 0, 0, &background, 1.0f);
 	App->render->Blit(graphics, 60, 88, &Rectangle.GetCurrentFrame(), 1.0f);
 
