@@ -402,15 +402,15 @@ update_status ModuleBackgroundMap1::Update()
 
 void ModuleBackgroundMap1::OnCollision(Collider* c1, Collider* c2){
 	if (c1 != nullptr && c2->type == COLLIDER_BLUE){
-		App->ghost_blue->speed = 0.65f;
+		App->ghost_blue->speed = 0.5f;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_RED){
-		App->ghost_red->speed = 0.65f;
+		App->ghost_red->speed = 0.5f;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE){
-		App->ghost_orange->speed = 0.65f;
+		App->ghost_orange->speed = 0.5f;
 	}
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK){
-		App->ghost_pink->speed = 0.65f;
+		App->ghost_pink->speed = 0.5f;
 	}
 }

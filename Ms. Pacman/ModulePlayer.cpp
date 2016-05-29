@@ -169,24 +169,64 @@ update_status ModulePlayer::Update()
 		}
 		
 		if (!App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_blue->enemy_collision->CheckCollision(App->map1->coll4) && 
-			!App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll1) && !App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll2) && !App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll3) && !App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll4))
+			!App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll1) && !App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll2) && !App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll3) && !App->ghost_blue->enemy_collision->CheckCollision(App->map2->coll4) &&
+			!App->ghost_blue->enemy_collision->CheckCollision(App->map3->coll1) && !App->ghost_blue->enemy_collision->CheckCollision(App->map3->coll2) &&
+			!App->ghost_blue->enemy_collision->CheckCollision(App->map4->coll1) && !App->ghost_blue->enemy_collision->CheckCollision(App->map4->coll2) && !App->ghost_blue->enemy_collision->CheckCollision(App->map4->coll3) && !App->ghost_blue->enemy_collision->CheckCollision(App->map4->coll4))
 		{
-			App->ghost_blue->speed = 1.0f;
+			if (App->map1->IsEnabled() || App->map2->IsEnabled()){
+				App->ghost_blue->speed = 0.9f;
+			}
+			else if (App->map3->IsEnabled()){
+				App->ghost_blue->speed = 1.0f;
+			}
+			else if (App->map4->IsEnabled()){
+				App->ghost_blue->speed = 1.1f;
+			}
 		}
 		if (!App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll4) && 
-			!App->ghost_orange->enemy_collision->CheckCollision(App->map2->coll1) && !App->ghost_orange->enemy_collision->CheckCollision(App->map2->coll2) && !App->ghost_orange->enemy_collision->CheckCollision(App->map2->coll3) && !App->ghost_orange->enemy_collision->CheckCollision(App->map2->coll4))
+			!App->ghost_orange->enemy_collision->CheckCollision(App->map2->coll1) && !App->ghost_orange->enemy_collision->CheckCollision(App->map2->coll2) && !App->ghost_orange->enemy_collision->CheckCollision(App->map2->coll3) && !App->ghost_orange->enemy_collision->CheckCollision(App->map2->coll4) &&
+			!App->ghost_orange->enemy_collision->CheckCollision(App->map3->coll1) && !App->ghost_orange->enemy_collision->CheckCollision(App->map3->coll2) &&
+			!App->ghost_orange->enemy_collision->CheckCollision(App->map4->coll1) && !App->ghost_orange->enemy_collision->CheckCollision(App->map4->coll2) && !App->ghost_orange->enemy_collision->CheckCollision(App->map4->coll3) && !App->ghost_orange->enemy_collision->CheckCollision(App->map4->coll4))
 		{
-			App->ghost_orange->speed = 1.0f;
+			if (App->map1->IsEnabled() || App->map2->IsEnabled()){
+				App->ghost_orange->speed = 0.9f;
+			}
+			else if (App->map3->IsEnabled()){
+				App->ghost_orange->speed = 1.0f;
+			}
+			else if (App->map4->IsEnabled()){
+				App->ghost_orange->speed = 1.1f;
+			}
 		}
 		if (!App->ghost_red->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_red->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_red->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_red->enemy_collision->CheckCollision(App->map1->coll4) &&
-			!App->ghost_red->enemy_collision->CheckCollision(App->map2->coll1) && !App->ghost_red->enemy_collision->CheckCollision(App->map2->coll2) && !App->ghost_red->enemy_collision->CheckCollision(App->map2->coll3) && !App->ghost_red->enemy_collision->CheckCollision(App->map2->coll4))
+			!App->ghost_red->enemy_collision->CheckCollision(App->map2->coll1) && !App->ghost_red->enemy_collision->CheckCollision(App->map2->coll2) && !App->ghost_red->enemy_collision->CheckCollision(App->map2->coll3) && !App->ghost_red->enemy_collision->CheckCollision(App->map2->coll4) &&
+			!App->ghost_red->enemy_collision->CheckCollision(App->map3->coll1) && !App->ghost_red->enemy_collision->CheckCollision(App->map3->coll2) &&
+			!App->ghost_red->enemy_collision->CheckCollision(App->map4->coll1) && !App->ghost_red->enemy_collision->CheckCollision(App->map4->coll2) && !App->ghost_red->enemy_collision->CheckCollision(App->map4->coll3) && !App->ghost_red->enemy_collision->CheckCollision(App->map4->coll4))
 		{
-			App->ghost_red->speed = 1.0f;
+			if (App->map1->IsEnabled() || App->map2->IsEnabled()){
+				App->ghost_red->speed = 0.9f;
+			}
+			else if (App->map3->IsEnabled()){
+				App->ghost_red->speed = 1.0f;
+			}
+			else if (App->map4->IsEnabled()){
+				App->ghost_red->speed = 1.1f;
+			}
 		}
 		if (!App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll4) && 
-			!App->ghost_pink->enemy_collision->CheckCollision(App->map2->coll1) && !App->ghost_pink->enemy_collision->CheckCollision(App->map2->coll2) && !App->ghost_pink->enemy_collision->CheckCollision(App->map2->coll3) && !App->ghost_pink->enemy_collision->CheckCollision(App->map2->coll4))
+			!App->ghost_pink->enemy_collision->CheckCollision(App->map2->coll1) && !App->ghost_pink->enemy_collision->CheckCollision(App->map2->coll2) && !App->ghost_pink->enemy_collision->CheckCollision(App->map2->coll3) && !App->ghost_pink->enemy_collision->CheckCollision(App->map2->coll4) &&
+			!App->ghost_pink->enemy_collision->CheckCollision(App->map3->coll1) && !App->ghost_pink->enemy_collision->CheckCollision(App->map3->coll2) &&
+			!App->ghost_pink->enemy_collision->CheckCollision(App->map4->coll1) && !App->ghost_pink->enemy_collision->CheckCollision(App->map4->coll2) && !App->ghost_pink->enemy_collision->CheckCollision(App->map4->coll3) && !App->ghost_pink->enemy_collision->CheckCollision(App->map4->coll4))
 		{
-			App->ghost_pink->speed = 1.0f;
+			if (App->map1->IsEnabled() || App->map2->IsEnabled()){
+				App->ghost_pink->speed = 0.9f;
+			}
+			else if (App->map3->IsEnabled()){
+				App->ghost_pink->speed = 1.0f;
+			}
+			else if (App->map4->IsEnabled()){
+				App->ghost_pink->speed = 1.1f;
+			}
 		}
 	}
 	// --------------------

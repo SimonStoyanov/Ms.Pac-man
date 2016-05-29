@@ -26,6 +26,13 @@ public:
 
 	int eaten_dots = 0;
 
+	// Colliders
+	Collider* teleport_collision1;
+	Collider* teleport_collision2;
+	void OnCollision(Collider* c1, Collider* c2);
+	SDL_Rect coll1;
+	SDL_Rect coll2;
+
 	// 220 pills and 4 PowerPills
 
 	SDL_Rect tile0;
