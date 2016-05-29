@@ -192,6 +192,21 @@ update_status ModuleGhostOrange::Update()
 				pre_find = false;
 			}
 		}
+		else if (App->map3->IsEnabled())
+		{
+			if (position.x > 105)
+			{
+				p_position_x = 119;
+				p_position_y = 120;
+				pre_find = false;
+			}
+			else if (position.x < 105)
+			{
+				p_position_x = 79;
+				p_position_y = 120;
+				pre_find = false;
+			}
+		}
 	}
 
 	if (position.x > 104 && position.x < 106 && position.y > 98 && position.y < 100 && is_dead && !dead_positioning && is_dead)
