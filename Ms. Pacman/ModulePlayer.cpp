@@ -181,7 +181,7 @@ update_status ModulePlayer::Update()
 				App->ghost_blue->speed = 1.0f;
 			}
 			else if (App->map4->IsEnabled()){
-				App->ghost_blue->speed = 1.1f;
+				App->ghost_blue->speed = 1.0f;
 			}
 		}
 		if (!App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_orange->enemy_collision->CheckCollision(App->map1->coll4) && 
@@ -196,7 +196,7 @@ update_status ModulePlayer::Update()
 				App->ghost_orange->speed = 1.0f;
 			}
 			else if (App->map4->IsEnabled()){
-				App->ghost_orange->speed = 1.1f;
+				App->ghost_orange->speed = 1.0f;
 			}
 		}
 		if (!App->ghost_red->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_red->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_red->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_red->enemy_collision->CheckCollision(App->map1->coll4) &&
@@ -211,7 +211,7 @@ update_status ModulePlayer::Update()
 				App->ghost_red->speed = 1.0f;
 			}
 			else if (App->map4->IsEnabled()){
-				App->ghost_red->speed = 1.1f;
+				App->ghost_red->speed = 1.0f;
 			}
 		}
 		if (!App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll1) && !App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll2) && !App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll3) && !App->ghost_pink->enemy_collision->CheckCollision(App->map1->coll4) && 
@@ -226,7 +226,7 @@ update_status ModulePlayer::Update()
 				App->ghost_pink->speed = 1.0f;
 			}
 			else if (App->map4->IsEnabled()){
-				App->ghost_pink->speed = 1.1f;
+				App->ghost_pink->speed = 1.0f;
 			}
 		}
 	}
@@ -682,6 +682,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 		}
 		if (App->cherry->isOrange){
 			App->UI->score += 500;
+		}
+		if (App->cherry->isApple)
+		{
+			App->UI->score += 1000;
 		}
 		ftimer = now;
 		ftimerIsOn = true;
