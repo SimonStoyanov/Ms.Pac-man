@@ -88,6 +88,8 @@ public:
 	float p_position_y;
 
 	bool random = false;
+
+	bool play_audio = false;
 };
 
 #endif // __MODULESCENESPACE_H__

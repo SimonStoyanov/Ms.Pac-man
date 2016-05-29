@@ -63,6 +63,7 @@ update_status ModuleCherry::Update()
 		p_position_x = 0;
 		p_position_y = 147;
 		speed = 0.8f;
+		play_audio = true;
 	}
 	else
 	{
@@ -70,6 +71,7 @@ update_status ModuleCherry::Update()
 		position.y = 75;
 		speed = 0;
 		go_left = true;
+		play_audio = false;
 	}
 	if (position.x > 210 && App->player->now - passed_cherry > 25 * (0.5f * 1000.0f))
 	{
@@ -485,6 +487,7 @@ update_status ModuleCherry::Update()
 
 		count++;
 		if (count == 10){
+			if (play_audio)
 			Mix_PlayChannel(4, App->audio->fruitmovement, 0);
 			pixels_up = 1;
 		}
