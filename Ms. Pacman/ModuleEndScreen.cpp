@@ -34,9 +34,7 @@ bool ModuleEndScreen::Start()
 	// Enable and disable modules
 	App->player->Disable();
 	App->player2->Disable();
-	App->audio->Enable();
 	App->ghost_blue->Disable();
-	App->map1->Disable();
 
 	pressed_space = false;
 

@@ -29,10 +29,8 @@ bool ModuleAudio::Start()
 	death = Mix_LoadWAV("Death.wav");
 	fruitmovement = Mix_LoadWAV("FruitMovement.wav"); // Channel 4 
 	eatenfruit = Mix_LoadWAV("EatenFruit.wav"); // Channel 4 
-	if (App->map1->IsEnabled())
-	{
-		Mix_PlayMusic(start_of_a_game, 1);	
-	}
+	
+	Mix_PlayMusic(start_of_a_game, 1);	
 	Mix_PlayChannel(3, App->audio->ghostmovement, -1);
 	Mix_Pause(3);
 	return true;
