@@ -179,6 +179,9 @@ bool ModuleBackgroundMap2::CleanUp()
 	App->cherry->Disable();
 	App->UI->Disable();
 
+	App->player->position.x = 105; //105
+	App->player->position.y = 195; //195
+
 	App->textures->Unload(graphics);
 
 	return true;
@@ -384,7 +387,8 @@ update_status ModuleBackgroundMap2::Update()
 		break;
 	}
 
-	if (eaten_pills == 243 && App->player->can_see){
+	if (eaten_pills == 243 && App->player->can_see)
+	{
 		App->player->speed = 0;
 		App->player->can_see = false;
 		App->player->position.x = 105; //105

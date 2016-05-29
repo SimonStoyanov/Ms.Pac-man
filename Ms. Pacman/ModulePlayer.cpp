@@ -402,6 +402,10 @@ update_status ModulePlayer::Update()
 				}
 			}
 
+			if (!can_see)
+			{
+				speed = 0;
+			}
 			if (go_right)
 			{
 				// What is the next tile
@@ -559,7 +563,7 @@ update_status ModulePlayer::Update()
 
 
 //Player die -----------------------------
-	if (!end_game)
+	if (!end_game && can_see)
 	{
 		//End game when lifes = 0
 		if (App->player->is_dead && ((now - passed_time) > (10 * 0.5f * 1000.0f)) && lifes == 0)
@@ -707,6 +711,11 @@ update_status ModulePlayer::Update()
 			App->player->position.x = 105; //105
 			App->player->position.y = 195; //195
 			App->render->Blit(App->UI->graphics, 74, 160, &App->UI->GameOver, 1.0f);
+		}
+		if (App->player->is_dead)
+		{
+			App->player->position.x = 105; //105
+			App->player->position.y = 195; //195
 		}
 
 	}
