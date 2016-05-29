@@ -284,5 +284,7 @@ update_status ModuleMenu::Update()
 		}
 	}
 
+	App->player->round = 0; //sets the round again to 1
+
 	return UPDATE_CONTINUE;
 }

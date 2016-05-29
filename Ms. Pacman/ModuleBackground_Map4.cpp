@@ -385,11 +385,7 @@ update_status ModuleBackgroundMap4::Update()
 		break;
 	}
 
-	if (eaten_pills == 237)
-	{
-		App->fade->FadeToBlack(App->map4, App->end_screen, 2.1f);
-	}
-	if (eaten_pills == 238){
+	if (eaten_pills == 238 && App->player->can_see){
 		App->player->speed = 0;
 		App->player->can_see = false;
 		App->player->position.x = 105; //105
@@ -409,7 +405,7 @@ update_status ModuleBackgroundMap4::Update()
 		App->ghost_pink->speed = 0;
 		App->ghost_pink->can_see = false;
 		
-
+		App->player->next_round = true;
 	}
 	return UPDATE_CONTINUE;
 }

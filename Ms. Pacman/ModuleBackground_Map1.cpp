@@ -374,11 +374,7 @@ update_status ModuleBackgroundMap1::Update()
 
 
 	// Load scene when all the pills are taken
-	if (eaten_pills == 223)
-	{
-			App->fade->FadeToBlack(App->map1, App->map2, 2.1f);
-	}
-	if (eaten_pills == 224){
+	if (eaten_pills == 224 && App->player->can_see){
 		App->player->speed = 0;
 		App->player->can_see = false;
 		App->player->position.x = 105; //105
@@ -393,6 +389,8 @@ update_status ModuleBackgroundMap1::Update()
 		App->ghost_red->speed = 0;
 		App->ghost_orange->speed = 0;
 		App->ghost_pink->speed = 0;
+
+		App->player->next_round = true;
 
 	}
 

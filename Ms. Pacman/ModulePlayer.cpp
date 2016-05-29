@@ -96,7 +96,79 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	//Paths mode -------------------------
+	// Round control ----------------------
+	if (next_round)
+	{
+		round++;
+		if (round == 1)
+		{
+			App->fade->FadeToBlack(App->map1, App->map1, 1.0f); //2
+		}
+		else if (round == 2)
+		{
+			App->fade->FadeToBlack(App->map1, App->map2, 1.0f); //1
+		}
+		else if (round == 3)
+		{
+			App->fade->FadeToBlack(App->map2, App->map2, 1.0f); //2
+		}
+		else if (round == 4)
+		{
+			App->fade->FadeToBlack(App->map2, App->map3, 1.0f); //1
+		}
+		else if (round == 5)
+		{
+			App->fade->FadeToBlack(App->map3, App->map3, 1.0f); //2
+		}
+		else if (round == 6)
+		{
+			App->fade->FadeToBlack(App->map3, App->map4, 1.0f); //1
+		}
+		else if (round == 7 || round == 8)
+		{
+			App->fade->FadeToBlack(App->map4, App->map4, 1.0f); //2 //3
+		}
+		else if (round == 9)
+		{
+			App->fade->FadeToBlack(App->map3, App->map4, 1.0f); //1
+		}
+		else if (round == 10 || round == 11)
+		{
+			App->fade->FadeToBlack(App->map3, App->map3, 1.0f); //2 //3
+		}
+		else if (round == 12)
+		{
+			App->fade->FadeToBlack(App->map3, App->map4, 1.0f); //1
+		}
+		else if (round == 13 || round == 14)
+		{
+			App->fade->FadeToBlack(App->map4, App->map4, 1.0f); //2 //3
+		}
+		else if (round == 15)
+		{
+			App->fade->FadeToBlack(App->map4, App->map3, 1.0f); //1
+		}
+		else if (round == 16 || round == 17)
+		{
+			App->fade->FadeToBlack(App->map3, App->map3, 1.0f); //2 //3
+		}
+		else if (round == 18)
+		{
+			App->fade->FadeToBlack(App->map3, App->map4, 1.0f); //1
+		}
+		else if (round == 19 || round == 20)
+		{
+			App->fade->FadeToBlack(App->map4, App->map4, 1.0f); //2 //3
+		}
+		else if (round == 21)
+		{
+			App->fade->FadeToBlack(App->map4, App->end_screen, 1.0f); //1
+		}
+	
+
+		next_round = false;
+	}
+	// Paths mode -------------------------
 	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN)
 	{
 		can_see_paths = !can_see_paths;

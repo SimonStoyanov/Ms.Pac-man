@@ -85,6 +85,9 @@ public:
 
 	float x_aux, y_aux;
 
+	int round = 0; // round
+	bool next_round = false;
+
 };
 
 #endif
