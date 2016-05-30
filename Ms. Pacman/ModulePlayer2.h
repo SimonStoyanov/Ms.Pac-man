@@ -50,6 +50,8 @@ public:
 
 	int eaten_ghost = 0;
 
+	bool gtimerIsOn;
+	bool ftimerIsOn;
 	float x_aux, y_aux;
 };
 

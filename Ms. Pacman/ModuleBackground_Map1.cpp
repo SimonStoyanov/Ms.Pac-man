@@ -306,7 +306,6 @@ update_status ModuleBackgroundMap1::Update()
 		
 		if (App->ghost_blue->is_vulnerable == false && App->ghost_orange->is_vulnerable == false && App->ghost_pink->is_vulnerable == false && App->ghost_red->is_vulnerable == false)
 		{
-
 			Mix_PlayChannel(1, App->audio->powerpill, 0);
 
 			// Vulnerable

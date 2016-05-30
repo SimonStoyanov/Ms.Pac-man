@@ -255,7 +255,7 @@ update_status ModulePlayer2::Update()
 	}
 
 	// Score timer and increase puntutaion ---------------------
-	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->ftimerIsOn){
+	if (App->player->ftimer != 0 && App->player->now - App->player->ftimer < 2 * 1.0f * 0.5f * 1000.0 && ftimerIsOn){
 		if (App->cherry->IsCherry){
 			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->f100, 1.0f);
 		}
@@ -283,7 +283,7 @@ update_status ModulePlayer2::Update()
 		App->player->ftimerIsOn = false;
 	}
 	
-	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0 && App->player->gtimerIsOn)
+	if (App->player->gtimer != 0 && App->player->now - App->player->gtimer < 2 * 1.0f * 0.5f * 1000.0)
 	{
 		if (eaten_ghost == 1)
 		{
@@ -299,10 +299,10 @@ update_status ModulePlayer2::Update()
 			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->g1600, 1.0f);
 		}
 	}
-	else
-	{
-		App->player->gtimerIsOn = false;
+	if (gtimerIsOn && !App->ghost_blue->is_vulnerable && !App->ghost_orange->is_vulnerable && !App->ghost_pink->is_vulnerable && !App->ghost_red->is_vulnerable){
+		gtimerIsOn = false;
 	}
+
 
 // Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
@@ -322,7 +322,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	{
 		App->cherry->passed_cherry = App->player->now;
 		App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
-
+	
 		Mix_PlayChannel(4, App->audio->eatenfruit, 0);
 		x_aux = position.x;		y_aux = position.y + 11;
 
@@ -353,7 +353,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 		}
 
 		App->player->ftimer = App->player->now;
-		App->player->ftimerIsOn = true;
+		ftimerIsOn = true;
 	}
 
 
@@ -397,8 +397,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
+		if (!gtimerIsOn){
+			eaten_ghost = 0;
+			x_aux = 999; y_aux = 999;
+		}
 		eaten_ghost++;
-		App->player->gtimerIsOn = true;
+		gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
@@ -437,8 +441,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
+		if (!gtimerIsOn){
+			eaten_ghost = 0;
+			x_aux = 999; y_aux = 999;
+		}
 		eaten_ghost++;
-		App->player->gtimerIsOn = true;
+		gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
@@ -477,8 +485,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
+		if (!gtimerIsOn){
+			eaten_ghost = 0;
+			x_aux = 999; y_aux = 999;
+		}
 		eaten_ghost++;
-		App->player->gtimerIsOn = true;
+		gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
@@ -517,8 +529,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
+		if (!gtimerIsOn){
+			eaten_ghost = 0;
+			x_aux = 999; y_aux = 999;
+		}
 		eaten_ghost++;
-		App->player->gtimerIsOn = true;
+		gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){

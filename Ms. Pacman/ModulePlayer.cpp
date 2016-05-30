@@ -716,7 +716,7 @@ update_status ModulePlayer::Update()
 	}
 
 // Score timer and increase puntutaion ---------------------
-	if (gtimer != 0 && now - gtimer < 2 * 1.0f * 0.5f * 1000.0 && gtimerIsOn)
+	if (gtimer != 0 && now - gtimer < 2 * 1.0f * 0.5f * 1000.0)
 	{
 		if (eaten_ghost == 1){
 			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->g200, 1.0f);
@@ -731,9 +731,10 @@ update_status ModulePlayer::Update()
 			App->render->Blit(App->UI->gscore, x_aux, y_aux, &App->UI->g1600, 1.0f);
 		}
 	}
-	else{
+	if (gtimerIsOn && !App->ghost_blue->is_vulnerable && !App->ghost_orange->is_vulnerable && !App->ghost_pink->is_vulnerable && !App->ghost_red->is_vulnerable){
 		gtimerIsOn = false;
 	}
+
 
 	if (ftimer != 0 && now - ftimer < 2 * 1.0f * 0.5f * 1000.0 && ftimerIsOn){
 		if (App->cherry->IsCherry){
@@ -854,12 +855,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_BLUE && App->ghost_blue->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
+		if (!gtimerIsOn){
+			eaten_ghost = 0;
+			x_aux = 999; y_aux = 999;
+		}
 		eaten_ghost++;
 		gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
-		if (eaten_ghost == 5){
-			eaten_ghost = 1;
-		}
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
@@ -902,12 +904,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_ORANGE && App->ghost_orange->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
+		if (!gtimerIsOn){
+			eaten_ghost = 0;
+			x_aux = 999; y_aux = 999;
+		}
 		eaten_ghost++;
 		gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
-		if (eaten_ghost == 5){
-			eaten_ghost = 1;
-		}
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
@@ -952,12 +955,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_PINK && App->ghost_pink->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
+		if (!gtimerIsOn){
+			eaten_ghost = 0;
+			x_aux = 999; y_aux = 999;
+		}
 		eaten_ghost++;
 		gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
-		if (eaten_ghost == 5){
-			eaten_ghost = 1;
-		}
 		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
@@ -1002,13 +1006,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 	else if (c1 != nullptr && c2->type == COLLIDER_RED && App->ghost_red->is_vulnerable)
 	{
 		Mix_PlayChannel(-1, App->audio->eatenghost, 0);
+		if (!gtimerIsOn){
+			eaten_ghost = 0;
+			x_aux = 999; y_aux = 999;
+		}
 		eaten_ghost++;
 		gtimerIsOn = true;
 		x_aux = position.x;		y_aux = position.y + 11;
-		if (eaten_ghost == 5){
-			eaten_ghost = 1;
-		}
-		//SDL_Delay(500);
 		if (eaten_ghost == 1){
 			gtimer = now;
 			App->UI->score += 200;
