@@ -382,7 +382,7 @@ update_status ModuleBackgroundMap3::Update()
 		break;
 	}
 
-	if (eaten_pills == 243 && App->player->can_see){
+	if (eaten_pills == 242 && App->player->can_see){
 		App->player->speed = 0;
 		App->player->can_see = false;
 		App->player->position.x = 105; //105
