@@ -566,7 +566,11 @@ update_status ModulePlayer::Update()
 	if (!end_game && can_see)
 	{
 		//End game when lifes = 0
-		if (App->player->is_dead && ((now - passed_time) > (10 * 0.5f * 1000.0f)) && lifes == 0)
+		if ((now - passed_time) > (13 * 0.5f * 1000.0f))
+		{
+			no_more = false;
+		}
+		else if (App->player->is_dead && ((now - passed_time) > (11 * 0.5f * 1000.0f)) && lifes == 0)
 		{
 			if (one_time2)
 			{
@@ -575,11 +579,6 @@ update_status ModulePlayer::Update()
 			speed = 0;
 		}
 
-		// Solves the bug of dying 2 times
-		else if ((now - passed_time) > (13 * 0.5f * 1000.0f))
-		{
-			no_more = false;
-		}
 		else if (App->player->is_dead && (now - passed_time) > (10 * 0.5f * 1000.0f))
 		{
 
@@ -635,7 +634,7 @@ update_status ModulePlayer::Update()
 			App->cherry->go_down = false; App->cherry->go_up = false; App->cherry->go_left = false; App->cherry->go_right = false;
 			App->cherry->first_step = true;
 
-			actual_t_g_r = now + 5; //reseting random timer
+			actual_t_g_r = now + 10; //reseting random timer
 			App->ghost_blue->passed_box = now;
 			App->ghost_orange->passed_box = now;
 			App->ghost_pink->passed_box = now;
@@ -712,11 +711,7 @@ update_status ModulePlayer::Update()
 			App->player->position.y = 195; //195
 			App->render->Blit(App->UI->graphics, 74, 160, &App->UI->GameOver, 1.0f);
 		}
-		if (App->player->is_dead)
-		{
-			App->player->position.x = 105; //105
-			App->player->position.y = 195; //195
-		}
+
 
 	}
 

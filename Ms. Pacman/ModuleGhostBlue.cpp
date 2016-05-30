@@ -171,7 +171,7 @@ update_status ModuleGhostBlue::Update()
 
 		}
 	}
-	else if (position.y == 99 && (position.x > 90 && position.x < 110) && App->map2->IsEnabled())
+	else if (position.y == 99 && (position.x > 85 && position.x < 115) && App->map2->IsEnabled())
 	{
 		p_position_x = 105;
 		p_position_y = 99;

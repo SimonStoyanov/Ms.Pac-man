@@ -275,7 +275,7 @@ update_status ModuleMenu::Update()
 		credits_used++;
 		if (App->player->two_players == false){
 			App->UI->credit--;
-			App->fade->FadeToBlack(App->menu, App->map3, 1.0f);
+			App->fade->FadeToBlack(App->menu, App->map2, 1.0f);
 		}
 		else if (App->player->two_players == true && App->UI->credit >= 2){
 			App->UI->credit -= 2;

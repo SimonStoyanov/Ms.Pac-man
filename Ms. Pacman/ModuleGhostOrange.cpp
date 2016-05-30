@@ -91,6 +91,8 @@ bool ModuleGhostOrange::CleanUp()
 	in_box = false;
 	box_down = false; box_up = true;
 	box_positioning = false;
+	dead_positioning = false;
+	cont = false;
 
 	left.speed = 0.0f;
 	right.speed = 0.0f;
@@ -153,7 +155,7 @@ update_status ModuleGhostOrange::Update()
 		}
 	}
 	// Dead targeting -------------------
-	else if (position.y == 99 && (position.x > 90 && position.x < 110) && App->map2->IsEnabled())
+	else if (position.y == 99 && (position.x > 85 && position.x < 115) && App->map2->IsEnabled())
 	{
 		p_position_x = 105;
 		p_position_y = 99;
