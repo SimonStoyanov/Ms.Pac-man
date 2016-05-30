@@ -200,7 +200,14 @@ update_status  ModuleGhostPink::Update()
 		}
 	}
 	// Dead targeting -------------------
-	else if (position.y == 99 && (position.x > 78 || position.x < 120))
+	else if (position.y == 99 && (position.x > 90 && position.x < 110) && App->map2->IsEnabled())
+	{
+		p_position_x = 105;
+		p_position_y = 99;
+		pre_find = false;
+	}
+	// Dead targeting -------------------
+	else if ((position.y == 99 && (position.x > 78 || position.x < 120)) && !App->map2->IsEnabled())
 	{
 		p_position_x = 105;
 		p_position_y = 99;
