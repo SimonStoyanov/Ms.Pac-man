@@ -355,7 +355,7 @@ update_status ModuleBackgroundMap4::Update()
 	case 27:
 		// Change tile
 		App->map1->g_map[App->player2->p_mid.y][App->player2->p_mid.x] = 0;
-		if (App->ghost_blue->is_vulnerable == false && App->ghost_orange->is_vulnerable == false && App->ghost_pink->is_vulnerable == false && App->ghost_red->is_vulnerable == false){
+	
 			Mix_PlayChannel(1, App->audio->powerpill, 0);
 
 			// Vulnerable
@@ -368,7 +368,7 @@ update_status ModuleBackgroundMap4::Update()
 			App->ghost_orange->is_vulnerable = true;
 			App->ghost_pink->is_vulnerable = true;
 			App->ghost_red->is_vulnerable = true;
-		}
+		
 		// Points
 		App->UI->_score += 50;
 		eaten_pills++;
