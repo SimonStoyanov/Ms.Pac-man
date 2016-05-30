@@ -131,7 +131,7 @@ update_status ModulePlayer::Update()
 		}
 		else if (round == 9)
 		{
-			App->fade->FadeToBlack(App->map3, App->map4, 1.0f); //1
+			App->fade->FadeToBlack(App->map4, App->map3, 1.0f); //1
 		}
 		else if (round == 10 || round == 11)
 		{
