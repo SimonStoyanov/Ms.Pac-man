@@ -105,7 +105,7 @@ bool ModuleGhostOrange::Start()
 {
 	LOG("Loading blue ghost textures");
 	bool ret = true;
-	graphics = App->textures->Load("Pac-man & Ghosts.png");
+	graphics = App->textures->Load("Sprites/Pac-man & Ghosts.png");
 	prev_anim = &up;
 
 	srand(time(NULL) * 213);

@@ -50,8 +50,8 @@ bool ModuleUI::Start()
 {
 	LOG("Loading maps(1).");
 	bool ret = true;
-	graphics = App->textures->Load("Letters & Numbers.png");
-	gscore = App->textures->Load("Score.png");
+	graphics = App->textures->Load("Sprites/Letters & Numbers.png");
+	gscore = App->textures->Load("Sprites/Score.png");
 
 	// Temporal map
 	char tmp_mapMENU[5][28]

@@ -55,7 +55,7 @@ bool ModuleCherry::Start()
 	srand(time(NULL));
 	LOG("Loading fruitt textures");
 	bool ret = true;
-	graphics = App->textures->Load("Fruits.png");
+	graphics = App->textures->Load("Sprites/Fruits.png");
 
 	fruit_collision = App->collision->AddCollider({ position.x, position.y, 10, 10 }, COLLIDER_FRUIT, this);
 

@@ -51,7 +51,7 @@ bool ModuleBackgroundMap1::Start()
 
 	LOG("Loading maps(1).");
 	bool ret = true;
-	graphics = App->textures->Load("Tileset 1.png");
+	graphics = App->textures->Load("Sprites/Tileset 1.png");
 
 	// Colliders
 	teleport_collision1 = App->collision->AddCollider(coll1, COLLIDER_TELEPORT, this);

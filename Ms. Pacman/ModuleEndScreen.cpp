@@ -29,7 +29,7 @@ bool ModuleEndScreen::Start()
 {
 	LOG("Loading end screen.");
 	bool ret = true;
-	graphics = App->textures->Load("end_screen.png");
+	graphics = App->textures->Load("Sprites/end_screen.png");
 
 	// Enable and disable modules
 	App->player->Disable();

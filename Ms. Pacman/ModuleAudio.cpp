@@ -21,14 +21,14 @@ bool ModuleAudio::Start()
 	Mix_Init(MIX_INIT_OGG);
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 
-	start_of_a_game = Mix_LoadMUS("start_of_a_game.ogg");
-	wakawaka = Mix_LoadWAV("wakawaka.wav");
-	powerpill = Mix_LoadWAV("PowerPill.wav");
-	eatenghost = Mix_LoadWAV("EatenGhost.wav");
-	ghostmovement = Mix_LoadWAV("GhostMovement.wav"); // Channel 3
-	death = Mix_LoadWAV("Death.wav");
-	fruitmovement = Mix_LoadWAV("FruitMovement.wav"); // Channel 4 
-	eatenfruit = Mix_LoadWAV("EatenFruit.wav"); // Channel 4 
+	start_of_a_game = Mix_LoadMUS("Sounds/start_of_a_game.ogg");
+	wakawaka = Mix_LoadWAV("Sounds/wakawaka.wav");
+	powerpill = Mix_LoadWAV("Sounds/PowerPill.wav");
+	eatenghost = Mix_LoadWAV("Sounds/EatenGhost.wav");
+	ghostmovement = Mix_LoadWAV("Sounds/GhostMovement.wav"); // Channel 3
+	death = Mix_LoadWAV("Sounds/Death.wav");
+	fruitmovement = Mix_LoadWAV("Sounds/FruitMovement.wav"); // Channel 4 
+	eatenfruit = Mix_LoadWAV("Sounds/EatenFruit.wav"); // Channel 4 
 	
 	Mix_PlayMusic(start_of_a_game, 1);	
 	Mix_PlayChannel(3, App->audio->ghostmovement, -1);
@@ -46,14 +46,14 @@ bool ModuleAudio::CleanUp()
 	LOG("Unloading space scene");
 
 	Mix_CloseAudio();
-	start_of_a_game = Mix_LoadMUS("start_of_a_game.ogg");
-	wakawaka = Mix_LoadWAV("wakawaka.wav");
-	powerpill = Mix_LoadWAV("PowerPill.wav");
-	eatenghost = Mix_LoadWAV("EatenGhost.wav");
-	ghostmovement = Mix_LoadWAV("GhostMovement.wav"); // Channel 3
-	death = Mix_LoadWAV("Death.wav");
-	fruitmovement = Mix_LoadWAV("FruitMovement.wav"); // Channel 4 
-	eatenfruit = Mix_LoadWAV("EatenFruit.wav"); // Channel 4 
+	start_of_a_game = Mix_LoadMUS("Sounds/start_of_a_game.ogg");
+	wakawaka = Mix_LoadWAV("Sounds/wakawaka.wav");
+	powerpill = Mix_LoadWAV("Sounds/PowerPill.wav");
+	eatenghost = Mix_LoadWAV("Sounds/EatenGhost.wav");
+	ghostmovement = Mix_LoadWAV("Sounds/GhostMovement.wav"); // Channel 3
+	death = Mix_LoadWAV("Sounds/Death.wav");
+	fruitmovement = Mix_LoadWAV("Sounds/FruitMovement.wav"); // Channel 4 
+	eatenfruit = Mix_LoadWAV("Sounds/EatenFruit.wav"); // Channel 4 
 	Mix_FreeChunk(eatenfruit);
 	Mix_FreeChunk(fruitmovement);
 	Mix_FreeChunk(death);
