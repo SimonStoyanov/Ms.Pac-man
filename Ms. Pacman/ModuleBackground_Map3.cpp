@@ -351,18 +351,19 @@ update_status ModuleBackgroundMap3::Update()
 		App->map1->g_map[App->player2->p_mid.y][App->player2->p_mid.x] = 0;
 		
 			Mix_PlayChannel(1, App->audio->powerpill, 0);
+			if (App->ghost_blue->is_vulnerable == false && App->ghost_orange->is_vulnerable == false && App->ghost_pink->is_vulnerable == false && App->ghost_red->is_vulnerable == false)
+			{
+				// Vulnerable
+				App->ghost_blue->passed_time = App->ghost_blue->now;
+				App->ghost_orange->passed_time = App->ghost_orange->now;
+				App->ghost_pink->passed_time = App->ghost_pink->now;
+				App->ghost_red->passed_time = App->ghost_red->now;
 
-			// Vulnerable
-			App->ghost_blue->passed_time = App->ghost_blue->now;
-			App->ghost_orange->passed_time = App->ghost_orange->now;
-			App->ghost_pink->passed_time = App->ghost_pink->now;
-			App->ghost_red->passed_time = App->ghost_red->now;
-
-			App->ghost_blue->is_vulnerable = true;
-			App->ghost_orange->is_vulnerable = true;
-			App->ghost_pink->is_vulnerable = true;
-			App->ghost_red->is_vulnerable = true;
-		
+				App->ghost_blue->is_vulnerable = true;
+				App->ghost_orange->is_vulnerable = true;
+				App->ghost_pink->is_vulnerable = true;
+				App->ghost_red->is_vulnerable = true;
+			}
 		// Points
 		App->UI->_score += 50;
 		eaten_pills++;

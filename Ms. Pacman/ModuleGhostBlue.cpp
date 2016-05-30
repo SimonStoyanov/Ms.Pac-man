@@ -171,7 +171,7 @@ update_status ModuleGhostBlue::Update()
 
 		}
 	}
-	else if (position.y == 99 && (position.x > 85 && position.x < 115) && App->map2->IsEnabled())
+	else if (position.y == 99 && (position.x > 85 && position.x < 150) && App->map2->IsEnabled())
 	{
 		p_position_x = 105;
 		p_position_y = 99;
@@ -259,6 +259,8 @@ update_status ModuleGhostBlue::Update()
 
 	if (App->player->can_see_paths)
 		App->render->Blit(graphics, (p_position_x), (p_position_y)+DISTANCEM1, &test, 1.0f);
+
+	//App->render->Blit(graphics, (150), (99)+DISTANCEM1, &test, 1.0f);
 
 
 	// What is the next tile --------------

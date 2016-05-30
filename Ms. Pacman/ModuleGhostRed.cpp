@@ -148,7 +148,7 @@ update_status ModuleGhostRed::Update()
 		}
 	}
 	// Dead targeting -------------------
-	else if (position.y == 99 && (position.x > 85 && position.x < 115) && App->map2->IsEnabled())
+	else if (position.y == 99 && (position.x > 85 && position.x < 150) && App->map2->IsEnabled())
 	{
 		p_position_x = 105;
 		p_position_y = 99;
@@ -190,7 +190,7 @@ update_status ModuleGhostRed::Update()
 			else if (position.x < 105)
 			{
 				p_position_x = 145;
-				p_position_y = 90;
+				p_position_y = 95;
 				pre_find = false;
 			}
 		}
