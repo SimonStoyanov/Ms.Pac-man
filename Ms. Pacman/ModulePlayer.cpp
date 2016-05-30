@@ -887,6 +887,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_blue->is_dead = true;
 		App->ghost_blue->is_vulnerable = false;
+		App->ghost_blue->dead_positioning = false;
 
 		if (App->ghost_blue->is_dead)
 		{
@@ -934,6 +935,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_orange->is_dead = true;
 		App->ghost_orange->is_vulnerable = false;
+		App->ghost_orange->dead_positioning = false;
 
 		if (App->ghost_orange->is_dead)
 		{
@@ -984,6 +986,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_pink->is_dead = true;
 		App->ghost_pink->is_vulnerable = false;
+		App->ghost_pink->dead_positioning = false;
 
 		if (App->ghost_pink->is_dead)
 		{
@@ -1032,6 +1035,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 
 		App->ghost_red->is_dead = true;
 		App->ghost_red->is_vulnerable = false;
+		App->ghost_red->dead_positioning = false;
 
 		if (App->ghost_red->is_dead)
 		{
