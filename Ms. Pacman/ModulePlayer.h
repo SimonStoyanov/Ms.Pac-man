@@ -89,6 +89,8 @@ public:
 	int round = 0; // round
 	bool next_round = false;
 
+	int variable = 10000;
+	int _variable = 10000;
 };
 
 #endif

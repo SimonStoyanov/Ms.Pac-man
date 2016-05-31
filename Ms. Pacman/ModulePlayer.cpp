@@ -170,6 +170,18 @@ update_status ModulePlayer::Update()
 		next_round = false;
 	}
 
+	// 10000 score = 1 life
+	if (variable - App->UI->score <= 0 && lifes < 5 && App->UI->score != 0){
+		lifes++;
+		Mix_PlayChannel(5, App->audio->extralife, 0);
+		variable += 10000;
+	}
+	else if (_variable - App->UI->_score <= 0 && lifes < 5 && App->UI->_score != 0){
+		lifes++;
+		Mix_PlayChannel(5, App->audio->extralife, 0);
+		_variable += 10000;
+	}
+
 	// Paths mode -------------------------
 	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN)
 	{

@@ -27,6 +27,7 @@ public:
 	Mix_Chunk* death;
 	Mix_Chunk* fruitmovement;
 	Mix_Chunk* eatenfruit;
+	Mix_Chunk* extralife;
 };
 
 #endif // __MODULESCENESPACE_H__
