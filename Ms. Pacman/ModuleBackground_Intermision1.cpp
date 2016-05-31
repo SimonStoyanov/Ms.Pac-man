@@ -163,6 +163,7 @@ bool ModuleBackgroundIntermision1::Start()
 	blue.x = -60;
 	blue.y = 100;
 
+	one_time = true;
 	return ret;
 }
 
@@ -171,6 +172,23 @@ bool ModuleBackgroundIntermision1::CleanUp()
 {
 	LOG("Unloading Menu.");
 	App->textures->Unload(graphics);
+
+	player.x = 250;
+	player.y = 150;
+
+	player2.x = -30;
+	player2.y = 100;
+
+	claquet.x = 97;
+	claquet.y = 110;
+
+	pink.x = 280;
+	pink.y = 150;
+
+	blue.x = -60;
+	blue.y = 100;
+
+	one_time = true;
 	return true;
 }
 
@@ -178,7 +196,12 @@ bool ModuleBackgroundIntermision1::CleanUp()
 update_status ModuleBackgroundIntermision1::Update()
 {
 	now = SDL_GetTicks() - start_time;
-	if (now > 18.5 * 0.5f * 1000.0f)
+	if (now > 20 * 0.5f * 1000.0f && one_time)
+	{
+		App->fade->FadeToBlack(App->intermision1, App->map2, 1.0f); //1
+		one_time = false;
+	}
+	else if (now > 17.7 * 0.5f * 1000.0f)
 	{
 		App->render->Blit(graphics, player.x, player.y, &right.GetCurrentFrame(), 1.0f);
 		App->render->Blit(graphics, pink.x, pink.y, &rightp.GetCurrentFrame(), 1.0f);
@@ -186,17 +209,17 @@ update_status ModuleBackgroundIntermision1::Update()
 
 		App->render->Blit(graphics, player2.x, player2.y, &left2.GetCurrentFrame(), 1.0f);
 		App->render->Blit(graphics, blue.x, blue.y, &leftb.GetCurrentFrame(), 1.0f);
-		if (now > 19 * 0.5f * 1000.0f)
+		if (now > 18.5 * 0.5f * 1000.0f)
 		{
-			App->render->Blit(misc, player.x+13, player.y-20, &hearth.GetCurrentFrame(), 1.0f);
+			App->render->Blit(misc, player.x+7, player.y-20, &hearth.GetCurrentFrame(), 1.0f);
 		}
-		if (now > 19.5 * 0.5f * 1000.0f)
+		if (now > 19 * 0.5f * 1000.0f)
 		{
 			right.speed = 0;
 			left2.speed = 0;
 		}
 	}
-	else if (now > 16.2 * 0.5f * 1000.0f)
+	else if (now > 15.7 * 0.5f * 1000.0f)
 	{
 		App->render->Blit(graphics, player.x, player.y, &up.GetCurrentFrame(), 1.0f);
 		App->render->Blit(graphics, pink.x, pink.y, &rightp.GetCurrentFrame(), 1.0f);
@@ -207,18 +230,18 @@ update_status ModuleBackgroundIntermision1::Update()
 		player2.y -= 1.2f;
 
 
-		if (now < 16.95 * 0.5f * 1000.0f)
+		if (now < 16.45 * 0.5f * 1000.0f)
 		{
 			blue.x -= 1.4f;
 			pink.x += 1.4f;
 		}
-		else if (now < 17.2 * 0.5f * 1000.0f)
+		else if (now < 16.7 * 0.5f * 1000.0f)
 		{
 			blue.x += 1.7f;
 			pink.x -= 1.7f;
 		}
 	}
-	else if (now > 13 * 0.5f * 1000.0f)
+	else if (now > 12.5 * 0.5f * 1000.0f)
 	{
 		App->render->Blit(graphics, player.x, player.y, &right.GetCurrentFrame(), 1.0f);
 		App->render->Blit(graphics, pink.x, pink.y, &rightp.GetCurrentFrame(), 1.0f);
