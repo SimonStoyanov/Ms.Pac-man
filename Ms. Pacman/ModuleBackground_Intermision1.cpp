@@ -46,7 +46,7 @@ bool ModuleBackgroundIntermision1::Start()
 	App->UI->Disable();
 
 	// Seting time of the start
-	start_time = SDL_GetTicks();
+	//start_time = SDL_GetTicks();
 
 	return ret;
 }
@@ -63,7 +63,7 @@ bool ModuleBackgroundIntermision1::CleanUp()
 update_status ModuleBackgroundIntermision1::Update()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, 0, 0, &background, 1.0f);
+//	App->render->Blit(graphics, 0, 0, &background, 1.0f);
 
 
 	return UPDATE_CONTINUE;
