@@ -45,9 +45,15 @@ bool ModuleAudio::Start()
 	}
 
 	if (App->intermision1->IsEnabled()){
-		Mix_PlayMusic(act3, 1);
+		Mix_PlayMusic(act1, 1);
 	}
-
+	/*if (App->intermision2->IsEnabled()){
+		Mix_PlayMusic(act2, 1);
+	}
+	if (App->intermision3->IsEnabled()){
+		Mix_PlayMusic(act3, 1);
+	}*/
+	
 	return true;
 }
 
