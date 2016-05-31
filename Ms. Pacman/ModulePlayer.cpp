@@ -570,7 +570,7 @@ update_status ModulePlayer::Update()
 		{
 			no_more = false;
 		}
-		else if (App->player->is_dead && ((now - passed_time) > (11 * 0.5f * 1000.0f)) && lifes == 0)
+		else if (is_dead && ((now - passed_time) > (11 * 0.5f * 1000.0f)) && lifes == 0)
 		{
 			if (one_time2)
 			{
@@ -640,6 +640,7 @@ update_status ModulePlayer::Update()
 			App->ghost_pink->passed_box = now;
 
 			App->ghost_red->player_dead = false; //Only on red ghost.
+			if (lifes != 0)
 			is_dead = false; //
 			no_more = true; // Solves the bug of dying 2 times
 		}
