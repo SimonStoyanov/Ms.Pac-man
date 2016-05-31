@@ -64,7 +64,7 @@ bool Application::Init()
 	bool ret = true;
 
 	// Enable
-	App->menu->Enable();
+	App->menu->Disable();
 
 	// Disable
 	audio->Disable();
@@ -73,7 +73,7 @@ bool Application::Init()
 	map2->Disable();
 	map3->Disable();
 	map4->Disable();
-	intermision1->Disable();
+	intermision1->Enable();
 	end_screen->Disable();
 	collision->Disable();
 	ghost_blue->Disable();

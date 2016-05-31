@@ -6,6 +6,9 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleBackground_Map1.h"
+#include "ModuleBackground_Map2.h"
+#include "ModuleBackground_Map3.h"
+#include "ModuleBackground_Map4.h"
 #include "ModuleEndScreen.h"
 
 
@@ -30,8 +33,11 @@ bool ModuleAudio::Start()
 	fruitmovement = Mix_LoadWAV("Sounds/FruitMovement.wav"); // Channel 4 
 	eatenfruit = Mix_LoadWAV("Sounds/EatenFruit.wav"); // Channel 4 
 	
-	Mix_PlayMusic(start_of_a_game, 1);	
-	Mix_PlayChannel(3, App->audio->ghostmovement, -1);
+	if (App->map1->IsEnabled() || App->map2->IsEnabled() || App->map3->IsEnabled() || App->map4->IsEnabled())
+	{
+		Mix_PlayMusic(start_of_a_game, 1);
+		Mix_PlayChannel(3, App->audio->ghostmovement, -1);
+	}
 	Mix_Pause(3);
 	return true;
 }

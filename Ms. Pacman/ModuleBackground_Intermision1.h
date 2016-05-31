@@ -21,11 +21,46 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* misc = nullptr;
+	Animation* prev_anim;
 
-	//Ghosts
+	//Player 1
+	Animation right;
+	Animation left;
+	Animation up;
+	Animation down;
+	fPoint player;
+	
+	//Player 2
+	Animation right2;
+	Animation left2;
+	Animation up2;
+	Animation down2;
+	fPoint player2;
 
+	//Pink
+	Animation rightp;
+	Animation leftp;
+	Animation upp;
+	Animation downp;
+	fPoint pink;
+
+	//Blue
+	Animation rightb;
+	Animation leftb;
+	Animation upb;
+	Animation downb;
+	fPoint blue;
+
+	//Misc
+	Animation claqueta;
+	fPoint claquet;
 
 	//Time control
+	Uint32 now;
+	Uint32 start_time = 0;
+	bool one_time = true;
+
 
 
 	int credits_used;
