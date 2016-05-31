@@ -20,6 +20,9 @@ public:
 
 public:
 	Mix_Music* start_of_a_game;
+	Mix_Music* act1;
+	Mix_Music* act2;
+	Mix_Music* act3;
 	Mix_Chunk* wakawaka;
 	Mix_Chunk* powerpill;
 	Mix_Chunk* eatenghost;

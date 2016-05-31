@@ -10,7 +10,7 @@
 #include "ModuleBackground_Map3.h"
 #include "ModuleBackground_Map4.h"
 #include "ModuleEndScreen.h"
-
+#include "ModuleBackground_Intermision1.h"
 
 
 ModuleAudio::~ModuleAudio()
@@ -25,6 +25,9 @@ bool ModuleAudio::Start()
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 
 	start_of_a_game = Mix_LoadMUS("Sounds/start_of_a_game.ogg");
+	act1 = Mix_LoadMUS("Sounds/act1.ogg");
+	act2 = Mix_LoadMUS("Sounds/act2.ogg");
+	act3 = Mix_LoadMUS("Sounds/act3.ogg");
 	wakawaka = Mix_LoadWAV("Sounds/wakawaka.wav");
 	powerpill = Mix_LoadWAV("Sounds/PowerPill.wav");
 	eatenghost = Mix_LoadWAV("Sounds/EatenGhost.wav");
@@ -41,6 +44,10 @@ bool ModuleAudio::Start()
 		Mix_Pause(3);
 	}
 
+	if (App->intermision1->IsEnabled()){
+		Mix_PlayMusic(act3, 1);
+	}
+
 	return true;
 }
 
@@ -55,6 +62,9 @@ bool ModuleAudio::CleanUp()
 
 	Mix_CloseAudio();
 	start_of_a_game = Mix_LoadMUS("Sounds/start_of_a_game.ogg");
+	act1 = Mix_LoadMUS("Sounds/act1.ogg");
+	act2 = Mix_LoadMUS("Sounds/act2.ogg");
+	act3 = Mix_LoadMUS("Sounds/act3.ogg");
 	wakawaka = Mix_LoadWAV("Sounds/wakawaka.wav");
 	powerpill = Mix_LoadWAV("Sounds/PowerPill.wav");
 	eatenghost = Mix_LoadWAV("Sounds/EatenGhost.wav");
@@ -71,6 +81,9 @@ bool ModuleAudio::CleanUp()
 	Mix_FreeChunk(eatenghost);
 	Mix_FreeChunk(powerpill);
 	Mix_FreeChunk(wakawaka);
+	Mix_FreeMusic(act3);
+	Mix_FreeMusic(act2);
+	Mix_FreeMusic(act1);
 	Mix_FreeMusic(start_of_a_game);
 
 	return true;
