@@ -54,6 +54,7 @@ public:
 
 	//Misc
 	Animation claqueta;
+	Animation hearth;
 	fPoint claquet;
 
 	//Time control

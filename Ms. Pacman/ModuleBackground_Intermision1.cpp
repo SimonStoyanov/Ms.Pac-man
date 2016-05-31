@@ -79,6 +79,9 @@ ModuleBackgroundIntermision1::ModuleBackgroundIntermision1()
 	claqueta.PushBack({ 75, 0, 33, 33 });
 	claqueta.speed = 0.3f;
 
+	hearth.PushBack ({2, 35, 15, 14});
+
+
 	// Pink ------------------------
 	// left animation
 	leftp.PushBack({ 113, 97, 14, 14 });
@@ -175,15 +178,45 @@ bool ModuleBackgroundIntermision1::CleanUp()
 update_status ModuleBackgroundIntermision1::Update()
 {
 	now = SDL_GetTicks() - start_time;
-	if (now > 20.5 * 0.5f * 1000.0f)
+	if (now > 18.5 * 0.5f * 1000.0f)
 	{
 		App->render->Blit(graphics, player.x, player.y, &right.GetCurrentFrame(), 1.0f);
 		App->render->Blit(graphics, pink.x, pink.y, &rightp.GetCurrentFrame(), 1.0f);
-		player.x += 1.4f;
+	
 
 		App->render->Blit(graphics, player2.x, player2.y, &left2.GetCurrentFrame(), 1.0f);
 		App->render->Blit(graphics, blue.x, blue.y, &leftb.GetCurrentFrame(), 1.0f);
-		player2.x -= 1.4f;
+		if (now > 19 * 0.5f * 1000.0f)
+		{
+			App->render->Blit(misc, player.x+13, player.y-20, &hearth.GetCurrentFrame(), 1.0f);
+		}
+		if (now > 19.5 * 0.5f * 1000.0f)
+		{
+			right.speed = 0;
+			left2.speed = 0;
+		}
+	}
+	else if (now > 16.2 * 0.5f * 1000.0f)
+	{
+		App->render->Blit(graphics, player.x, player.y, &up.GetCurrentFrame(), 1.0f);
+		App->render->Blit(graphics, pink.x, pink.y, &rightp.GetCurrentFrame(), 1.0f);
+		player.y -= 1.2f;
+
+		App->render->Blit(graphics, player2.x, player2.y, &up2.GetCurrentFrame(), 1.0f);
+		App->render->Blit(graphics, blue.x, blue.y, &leftb.GetCurrentFrame(), 1.0f);
+		player2.y -= 1.2f;
+
+
+		if (now < 16.95 * 0.5f * 1000.0f)
+		{
+			blue.x -= 1.4f;
+			pink.x += 1.4f;
+		}
+		else if (now < 17.2 * 0.5f * 1000.0f)
+		{
+			blue.x += 1.7f;
+			pink.x -= 1.7f;
+		}
 	}
 	else if (now > 13 * 0.5f * 1000.0f)
 	{
