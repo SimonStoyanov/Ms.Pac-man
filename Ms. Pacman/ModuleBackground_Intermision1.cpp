@@ -284,16 +284,19 @@ update_status ModuleBackgroundIntermision1::Update()
 	{
 		claqueta.speed = 0.0f;
 		App->render->Blit(misc, claquet.x, claquet.y, &claqueta.GetCurrentFrame(), 1.0f);
+		App->render->Blit(App->UI->graphics, claquet.x + 22, claquet.y + 23, &App->UI->tile1, 1.0f);
 	}
 	else if (now > 3 * 0.5f * 1000.0f)
 	{
 		claqueta.speed = 0.3f;
 		App->render->Blit(misc, claquet.x, claquet.y, &claqueta.GetCurrentFrame(), 1.0f);
+		App->render->Blit(App->UI->graphics, claquet.x + 22, claquet.y + 23, &App->UI->tile1, 1.0f);
 	}
 	else if (now > 0.5 * 0.5f * 1000.0f)
 	{
 		claqueta.speed = 0;
 		App->render->Blit(misc, claquet.x, claquet.y, &claqueta.GetCurrentFrame(), 1.0f);
+		App->render->Blit(App->UI->graphics, claquet.x + 22, claquet.y + 23, &App->UI->tile1, 1.0f);
 	}
 
 
