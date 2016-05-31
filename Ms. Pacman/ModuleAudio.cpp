@@ -32,12 +32,19 @@ bool ModuleAudio::Start()
 	death = Mix_LoadWAV("Sounds/Death.wav");
 	fruitmovement = Mix_LoadWAV("Sounds/FruitMovement.wav"); // Channel 4 
 	eatenfruit = Mix_LoadWAV("Sounds/EatenFruit.wav"); // Channel 4 
+<<<<<<< HEAD
 	
 	if (App->map1->IsEnabled() || App->map2->IsEnabled() || App->map3->IsEnabled() || App->map4->IsEnabled())
 	{
 		Mix_PlayMusic(start_of_a_game, 1);
 		Mix_PlayChannel(3, App->audio->ghostmovement, -1);
 	}
+=======
+	extralife = Mix_LoadWAV("Sounds/ExtraLife.wav"); // Channel 5
+
+	Mix_PlayMusic(start_of_a_game, 1);	
+	Mix_PlayChannel(3, App->audio->ghostmovement, -1);
+>>>>>>> origin/master
 	Mix_Pause(3);
 	return true;
 }
@@ -60,6 +67,8 @@ bool ModuleAudio::CleanUp()
 	death = Mix_LoadWAV("Sounds/Death.wav");
 	fruitmovement = Mix_LoadWAV("Sounds/FruitMovement.wav"); // Channel 4 
 	eatenfruit = Mix_LoadWAV("Sounds/EatenFruit.wav"); // Channel 4 
+	extralife = Mix_LoadWAV("Sounds/ExtraLife.wav"); // Channel 5
+	Mix_FreeChunk(extralife);
 	Mix_FreeChunk(eatenfruit);
 	Mix_FreeChunk(fruitmovement);
 	Mix_FreeChunk(death);
