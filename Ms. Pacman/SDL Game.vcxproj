@@ -75,6 +75,7 @@
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleAudio.h" />
+    <ClInclude Include="ModuleBackground_Intermision1.h" />
     <ClInclude Include="ModuleBackground_Map2.h" />
     <ClInclude Include="ModuleBackground_Map3.h" />
     <ClInclude Include="ModuleBackground_Map4.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
+    <ClCompile Include="ModuleBackground_Intermision1.cpp" />
     <ClCompile Include="ModuleBackground_Map2.cpp" />
     <ClCompile Include="ModuleBackground_Map3.cpp" />
     <ClCompile Include="ModuleBackground_Map4.cpp" />
