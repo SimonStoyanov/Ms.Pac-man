@@ -168,7 +168,6 @@ update_status ModulePlayer::Update()
 			App->fade->FadeToBlack(App->map4, App->end_screen, 1.0f); // End
 		}
 	
-
 		next_round = false;
 	}
 
