@@ -178,7 +178,7 @@ update_status ModuleGhostBlue::Update()
 		pre_find = false;
 	}
 	// Dead targeting -------------------
-	else if ((position.y == 99 && (position.x > 78 || position.x < 120)) && !App->map2->IsEnabled())
+	else if ((position.y == 99 && (position.x > 78 || position.x < 140)) && !App->map2->IsEnabled())
 	{
 		p_position_x = 105;
 		p_position_y = 99;
