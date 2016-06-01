@@ -19,6 +19,8 @@ public:
 	bool CleanUp();
 
 public:
+	bool CasualMode;
+	int count;
 
 	SDL_Texture* graphics = nullptr;
 

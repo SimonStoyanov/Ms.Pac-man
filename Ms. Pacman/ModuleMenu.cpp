@@ -105,6 +105,8 @@ bool ModuleMenu::Start()
 	LOG("Loading Menu.");
 	bool ret = true;
 	graphics = App->textures->Load("Sprites/Menu.png");
+	CasualMode = false;
+	count = 0;
 
 	// Enable and disable modules
 	App->player->Disable();
@@ -272,6 +274,30 @@ update_status ModuleMenu::Update()
 			App->player->two_players = true;
 		}
 	}
+	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN && count == 0){
+		count++;
+	}
+	else if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN && count != 0){
+		count = 0;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && (count == 1 || count == 2)){
+		count++;
+	}
+	else if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && (count != 1 || count != 2)){
+		count = 0;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN && count == 3){
+		count++;
+	}
+	else if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN && count != 3){
+		count = 0;
+	}
+	
+	if (count == 4){
+		CasualMode = !CasualMode;
+		count = 0;
+	}
+
 
 	//Fade To Black
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->UI->credit > 0 && one_time)

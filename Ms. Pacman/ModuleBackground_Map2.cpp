@@ -8,6 +8,7 @@
 #include "ModuleCollision.h"
 #include "ModuleUI.h"
 
+#include "ModuleMenu.h"
 #include "ModuleBackground_Map1.h"
 #include "ModuleBackground_Map2.h"
 #include "ModuleBackground_Map3.h"
@@ -149,6 +150,16 @@ bool ModuleBackgroundMap2::Start()
 		{ 8, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 10 }, //30
 		{ 3, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 4 },  //31
 	};
+
+	if (App->menu->CasualMode){
+		for (int i = 0; i < 31; i++){
+			for (int y = 0; y < 28; y++){
+				if (tmp_map[i][y] == 28){
+					tmp_map[i][y] = 27;
+				}
+			}
+		}
+	}
 
 	// Passing map to the header
 	for (int i = 0; i < 31; i++)
