@@ -385,7 +385,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2){
 				if (App->player->lifes > 0)
 					App->player->lifes--;
 			}
-
+			Mix_Pause(3);
 			App->ghost_red->speed = 0;
 			App->ghost_orange->speed = 0;
 			App->ghost_pink->speed = 0;

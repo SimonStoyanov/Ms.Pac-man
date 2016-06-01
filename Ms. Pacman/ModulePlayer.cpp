@@ -872,6 +872,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2){
 			App->ghost_pink->speed = 0;
 			App->ghost_blue->speed = 0;
 			App->player->speed = 0;
+			App->player2->speed = 0;
 		}
 	}
 
