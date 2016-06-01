@@ -83,7 +83,6 @@ bool ModulePlayer::Start()
 	player_collision = App->collision->AddCollider({ position.x - 50, position.y - 50, 10, 10 }, COLLIDER_PLAYER, this);
 
 	start_time = SDL_GetTicks();
-
 	ftimerIsOn = false;	gtimerIsOn = false;
 
 	return ret;
@@ -545,7 +544,6 @@ update_status ModulePlayer::Update()
 		App->player->can_see = false;
 		go_left = true; go_right = false;
 
-
 		//Player2
 		if (two_players)
 		{
@@ -557,24 +555,23 @@ update_status ModulePlayer::Update()
 
 		App->player->is_dead = false; //
 	
-
 		App->ghost_red->player_dead = false; //Only on red ghost.
 
 		if (App->map1->IsEnabled())
 		{
-			App->fade->FadeToBlack(App->map1, App->end_screen, 1.0f);
+			App->fade->FadeToBlack(App->map1, App->end_screen, 0.1f);
 		}
 		else if (App->map2->IsEnabled())
 		{
-			App->fade->FadeToBlack(App->map2, App->end_screen, 1.0f);
+			App->fade->FadeToBlack(App->map2, App->end_screen, 0.1f);
 		}
 		else if (App->map3->IsEnabled())
 		{
-			App->fade->FadeToBlack(App->map3, App->end_screen, 1.0f);
+			App->fade->FadeToBlack(App->map3, App->end_screen, 0.1f);
 		}
 		else if (App->map4->IsEnabled())
 		{
-			App->fade->FadeToBlack(App->map4, App->end_screen, 1.0f);
+			App->fade->FadeToBlack(App->map4, App->end_screen, 0.1f);
 		}
 		end_game = false;
 		one_time2 = false;
