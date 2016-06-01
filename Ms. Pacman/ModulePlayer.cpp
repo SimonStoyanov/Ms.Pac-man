@@ -203,9 +203,9 @@ update_status ModulePlayer::Update()
 		}
 	}
 	else{ 
-		speed = 1.0f; 
+		speed = 1.7f; 
 		if (two_players == true){
-			App->player2->speed = 1.0f;
+			App->player2->speed = 1.7f;
 		}
 	}
 	
