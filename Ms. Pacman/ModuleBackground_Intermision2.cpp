@@ -141,7 +141,7 @@ bool ModuleBackgroundIntermision2::CleanUp()
 update_status ModuleBackgroundIntermision2::Update()
 {
 	now = SDL_GetTicks() - start_time;
-	if (now > 23000.0f && one_time)
+	if (now > 22000.0f && one_time)
 	{
 		App->fade->FadeToBlack(App->intermision2, App->map3, 1.0f); //1
 		one_time = false;
