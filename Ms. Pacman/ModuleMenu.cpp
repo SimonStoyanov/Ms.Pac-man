@@ -14,6 +14,7 @@
 #include "ModuleBackground_Map4.h"
 #include "ModuleBackground_Intermision1.h"
 #include "ModuleBackground_Intermision2.h"
+#include "ModuleBackground_Intermision3.h"
 #include "ModuleMenu.h"
 
 #include "ModulePlayer.h"

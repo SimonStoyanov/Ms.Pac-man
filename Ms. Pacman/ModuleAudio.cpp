@@ -12,6 +12,7 @@
 #include "ModuleEndScreen.h"
 #include "ModuleBackground_Intermision1.h"
 #include "ModuleBackground_Intermision2.h"
+#include "ModuleBackground_Intermision3.h"
 
 ModuleAudio::~ModuleAudio()
 {}
@@ -50,10 +51,10 @@ bool ModuleAudio::Start()
 	if (App->intermision2->IsEnabled()){
 		Mix_PlayMusic(act2, 1);
 	}
-	/*
+	
 	if (App->intermision3->IsEnabled()){
 		Mix_PlayMusic(act3, 1);
-	}*/
+	}
 	
 	return true;
 }
