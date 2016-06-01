@@ -92,6 +92,7 @@ bool ModulePlayer::CleanUp()
 	one_time = false;
 	one_time2 = true;
 	App->textures->Unload(graphics);
+	gtimer = 0;
 	return true;
 }
 
