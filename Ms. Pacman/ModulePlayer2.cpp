@@ -50,9 +50,9 @@ ModulePlayer2::ModulePlayer2()
 
 	// dead animation
 	dead.PushBack({ 50, 2, 13, 13 });
-	dead.PushBack({ 50, 13, 13, 13 });
+	dead.PushBack({ 50, 18, 13, 13 });
 	dead.PushBack({ 50, 34, 13, 13 });
-	dead.PushBack({ 66, 18, 13, 13 });
+	dead.PushBack({ 50, 49, 13, 13 });
 	dead.speed = 0.3f;
 }
 
