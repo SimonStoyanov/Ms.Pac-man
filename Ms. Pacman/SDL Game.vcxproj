@@ -77,6 +77,7 @@
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleBackground_Intermision1.h" />
     <ClInclude Include="ModuleBackground_Intermision2.h" />
+    <ClInclude Include="ModuleBackground_Intermision3.h" />
     <ClInclude Include="ModuleBackground_Map2.h" />
     <ClInclude Include="ModuleBackground_Map3.h" />
     <ClInclude Include="ModuleBackground_Map4.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleBackground_Intermision1.cpp" />
     <ClCompile Include="ModuleBackground_Intermision2.cpp" />
+    <ClCompile Include="ModuleBackground_Intermision3.cpp" />
     <ClCompile Include="ModuleBackground_Map2.cpp" />
     <ClCompile Include="ModuleBackground_Map3.cpp" />
     <ClCompile Include="ModuleBackground_Map4.cpp" />

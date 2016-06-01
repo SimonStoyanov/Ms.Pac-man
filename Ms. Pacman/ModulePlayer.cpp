@@ -12,6 +12,7 @@
 #include "ModuleBackground_Map4.h"
 #include "ModuleBackground_Intermision1.h"
 #include "ModuleBackground_Intermision2.h"
+#include "ModuleBackground_Intermision3.h"
 #include "ModuleCollision.h"
 #include "ModuleGhostBlue.h"
 #include "ModuleGhostOrange.h"
@@ -126,7 +127,7 @@ update_status ModulePlayer::Update()
 		}
 		else if (round == 6)
 		{
-			App->fade->FadeToBlack(App->map3, App->map4, 1.0f); //1
+			App->fade->FadeToBlack(App->map3, App->intermision3, 1.0f); //1
 		}
 		else if (round == 7 || round == 8)
 		{

@@ -15,6 +15,7 @@
 #include "ModuleBackground_Map4.h"
 #include "ModuleBackground_Intermision1.h"
 #include "ModuleBackground_Intermision2.h"
+#include "ModuleBackground_Intermision3.h"
 #include "ModuleEndScreen.h"
 
 #include "ModulePlayer.h"
@@ -40,6 +41,7 @@ Application::Application()
 	modules[i++] = map4 = new ModuleBackgroundMap4();
 	modules[i++] = intermision1 = new ModuleBackgroundIntermision1();
 	modules[i++] = intermision2 = new ModuleBackgroundIntermision2();
+	modules[i++] = intermision3 = new ModuleBackgroundIntermision3();
 	modules[i++] = end_screen = new ModuleEndScreen();
 	modules[i++] = UI = new ModuleUI();
 	modules[i++] = player = new ModulePlayer();
@@ -66,7 +68,7 @@ bool Application::Init()
 	bool ret = true;
 
 	// Enable
-	App->menu->Enable();
+	App->menu->Disable();
 
 	// Disable
 	audio->Disable();
@@ -77,6 +79,7 @@ bool Application::Init()
 	map4->Disable();
 	intermision1->Disable();
 	intermision2->Disable();
+	intermision3->Enable();
 	end_screen->Disable();
 	collision->Disable();
 	ghost_blue->Disable();

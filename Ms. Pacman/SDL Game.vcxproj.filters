@@ -113,6 +113,9 @@
     <ClInclude Include="ModuleBackground_Intermision2.h">
       <Filter>Modules\Background</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleBackground_Intermision3.h">
+      <Filter>Modules\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -191,6 +194,9 @@
       <Filter>Modules\Background</Filter>
     </ClCompile>
     <ClCompile Include="ModuleBackground_Intermision2.cpp">
+      <Filter>Modules\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleBackground_Intermision3.cpp">
       <Filter>Modules\Background</Filter>
     </ClCompile>
   </ItemGroup>
