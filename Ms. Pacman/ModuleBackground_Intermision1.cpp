@@ -172,7 +172,7 @@ bool ModuleBackgroundIntermision1::CleanUp()
 {
 	LOG("Unloading Menu.");
 	App->textures->Unload(graphics);
-
+	App->audio->Disable();
 	player.x = 250;
 	player.y = 150;
 
