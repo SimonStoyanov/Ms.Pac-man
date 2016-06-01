@@ -589,7 +589,12 @@ update_status ModuleGhostRed::Update()
 					is_dead = false;
 					dead_positioning = false;
 					dead_down = true;
-					ghost_left = true;
+
+					ghost_down = false;
+					ghost_left = false;
+					ghost_right = true;
+					ghost_up = false;
+					go_right = false; go_left = false; go_up = false; go_down = false;
 				}
 			}
 		}

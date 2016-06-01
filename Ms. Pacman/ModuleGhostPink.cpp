@@ -644,6 +644,12 @@ update_status  ModuleGhostPink::Update()
 					is_dead = false;
 					dead_positioning = false;
 					dead_down = true;
+
+					ghost_down = false;
+					ghost_left = true;
+					ghost_right = false;
+					ghost_up = false;
+					go_right = false; go_left = false; go_up = false; go_down = false;
 				}
 			}
 		}
@@ -785,7 +791,12 @@ update_status  ModuleGhostPink::Update()
 				else
 				in_box = false;
 				box_down = true; box_up = false;
+
+				ghost_down = false;
+				ghost_left = false;
 				ghost_right = true;
+				ghost_up = false;
+				go_right = false; go_left = false; go_up = false; go_down = false;
 
 			}
 			else
