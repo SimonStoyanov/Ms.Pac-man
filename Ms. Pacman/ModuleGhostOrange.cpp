@@ -81,7 +81,7 @@ bool ModuleGhostOrange::CleanUp()
 
 	ghost_down = false;
 	ghost_left = false;
-	ghost_right = false;
+	ghost_right = true;
 	ghost_up = false;
 	go_right = false; go_left = false; go_up = false; go_down = false;
 	passed_box = 8 * 0.5f * 1000.0f;
@@ -116,11 +116,11 @@ bool ModuleGhostOrange::Start()
 
 	if (tmp == 1)
 	{
-		go_left = true;
+		ghost_left = true;
 	}
 	else if (tmp == 2)
 	{
-		go_right = true;
+		ghost_right = true;
 	}
 
 	enemy_collision = App->collision->AddCollider({ 50, 50, 8, 8 }, COLLIDER_ORANGE, this);
@@ -743,6 +743,7 @@ update_status ModuleGhostOrange::Update()
 					in_box = false;
 					box_down = false; box_up = true;
 					box_positioning = false;
+					ghost_right = true;
 				}
 			}
 			else if (now - passed_box > 15 * 0.5f * 1000.0f) // positioning ////////

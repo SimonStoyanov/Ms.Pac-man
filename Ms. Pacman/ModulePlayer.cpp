@@ -507,7 +507,8 @@ update_status ModulePlayer::Update()
 		App->ghost_red->position.y = 99;
 		App->ghost_red->can_see = false;
 		
-		App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = false; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
+		App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = true; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
+		App->ghost_red->go_down = false; App->ghost_red->go_up = false; App->ghost_red->go_left = false; App->ghost_red->go_right = false;
 
 		//Orange
 		App->ghost_orange->position.x = 120;
@@ -515,7 +516,8 @@ update_status ModulePlayer::Update()
 		App->ghost_orange->in_box = true;
 		App->ghost_orange->can_see = false;
 		
-		App->ghost_orange->ghost_down = false; App->ghost_orange->ghost_left = false; App->ghost_orange->ghost_right = false; App->ghost_orange->ghost_up = false;
+		App->ghost_orange->ghost_down = false; App->ghost_orange->ghost_left = false; App->ghost_orange->ghost_right = true; App->ghost_orange->ghost_up = false;
+		App->ghost_orange->go_down = false; App->ghost_orange->go_up = false; App->ghost_orange->go_left = false; App->ghost_orange->go_right = false;
 
 		//Pink
 		App->ghost_pink->position.x = 105;
@@ -523,7 +525,8 @@ update_status ModulePlayer::Update()
 		App->ghost_pink->in_box = true;
 		App->ghost_pink->can_see = false;
 		
-		App->ghost_pink->ghost_down = false; App->ghost_pink->ghost_left = false; App->ghost_pink->ghost_right = false; App->ghost_pink->ghost_up = false;
+		App->ghost_pink->ghost_down = false; App->ghost_pink->ghost_left = true; App->ghost_pink->ghost_right = false; App->ghost_pink->ghost_up = false;
+		App->ghost_pink->go_down = false; App->ghost_pink->go_up = false; App->ghost_pink->go_left = false; App->ghost_pink->go_right = false;
 
 		//Blue
 		App->ghost_blue->position.x = 90; //105 //90
@@ -531,7 +534,8 @@ update_status ModulePlayer::Update()
 		App->ghost_blue->in_box = true;
 		App->ghost_blue->can_see = false;
 	
-		App->ghost_blue->ghost_down = false; App->ghost_blue->ghost_left = false; App->ghost_blue->ghost_right = false; App->ghost_blue->ghost_up = false;
+		App->ghost_blue->ghost_down = false; App->ghost_blue->ghost_left = false; App->ghost_blue->ghost_right = true; App->ghost_blue->ghost_up = false;
+		App->ghost_blue->go_down = false; App->ghost_blue->go_up = false; App->ghost_blue->go_left = false; App->ghost_blue->go_right = false;
 
 		//Player
 		App->player->position.x = 105; //105
@@ -601,7 +605,8 @@ update_status ModulePlayer::Update()
 			App->ghost_red->position.y = 99;
 			App->ghost_red->can_see = true;
 			App->ghost_red->speed = 1.0f;
-			App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = false; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
+			App->ghost_red->ghost_down = false; App->ghost_red->ghost_left = true; App->ghost_red->ghost_right = false; App->ghost_red->ghost_up = false;
+			App->ghost_red->go_down = false; App->ghost_red->go_up = false; App->ghost_red->go_left = false; App->ghost_red->go_right = false;
 
 			//Orange
 			App->ghost_orange->position.x = 120;
@@ -609,7 +614,8 @@ update_status ModulePlayer::Update()
 			App->ghost_orange->in_box = true;
 			App->ghost_orange->can_see = true;
 			App->ghost_orange->speed = 1.0f;
-			App->ghost_orange->ghost_down = false; App->ghost_orange->ghost_left = false; App->ghost_orange->ghost_right = false; App->ghost_orange->ghost_up = false;
+			App->ghost_orange->ghost_down = false; App->ghost_orange->ghost_left = false; App->ghost_orange->ghost_right = true; App->ghost_orange->ghost_up = false;
+			App->ghost_orange->go_down = false; App->ghost_orange->go_up = false; App->ghost_orange->go_left = false; App->ghost_orange->go_right = false;
 
 			//Pink
 			App->ghost_pink->position.x = 105;
@@ -617,7 +623,8 @@ update_status ModulePlayer::Update()
 			App->ghost_pink->in_box = true;
 			App->ghost_pink->can_see = true;
 			App->ghost_pink->speed = 1.0f;
-			App->ghost_pink->ghost_down = false; App->ghost_pink->ghost_left = false; App->ghost_pink->ghost_right = false; App->ghost_pink->ghost_up = false;
+			App->ghost_pink->ghost_down = false; App->ghost_pink->ghost_left = true; App->ghost_pink->ghost_right = false; App->ghost_pink->ghost_up = false;
+			App->ghost_pink->go_down = false; App->ghost_pink->go_up = false; App->ghost_pink->go_left = false; App->ghost_pink->go_right = false;
 
 			//Blue
 			App->ghost_blue->position.x = 90; //105 //90
@@ -625,7 +632,8 @@ update_status ModulePlayer::Update()
 			App->ghost_blue->in_box = true;
 			App->ghost_blue->can_see = true;
 			App->ghost_blue->speed = 1.0f;
-			App->ghost_blue->ghost_down = false; App->ghost_blue->ghost_left = false; App->ghost_blue->ghost_right = false; App->ghost_blue->ghost_up = false;
+			App->ghost_blue->ghost_down = false; App->ghost_blue->ghost_left = false; App->ghost_blue->ghost_right = true; App->ghost_blue->ghost_up = false;
+			App->ghost_blue->go_down = false; App->ghost_blue->go_up = false; App->ghost_blue->go_left = false; App->ghost_blue->go_right = false;
 
 			//Player
 			App->player->position.x = 105; //105

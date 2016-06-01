@@ -78,7 +78,7 @@ bool ModuleGhostPink::CleanUp()
 	App->textures->Unload(graphics);
 
 	ghost_down = false;
-	ghost_left = false;
+	ghost_left = true;
 	ghost_right = false;
 	ghost_up = false;
 	go_right = false; go_left = false; go_up = false; go_down = false;
@@ -109,11 +109,11 @@ bool ModuleGhostPink::Start()
 
 	if (tmp == 1)
 	{
-		go_left = true;
+		ghost_left = true;
 	}
 	else if (tmp == 2)
 	{
-		go_right = true;
+		ghost_right = true;
 	}
 
 	enemy_collision = App->collision->AddCollider({ 50, 50, 8, 8 }, COLLIDER_PINK, this);
@@ -785,6 +785,7 @@ update_status  ModuleGhostPink::Update()
 				else
 				in_box = false;
 				box_down = true; box_up = false;
+				ghost_right = true;
 
 			}
 			else
