@@ -1,0 +1,6 @@
+{
+  "name": "Ms.pac-man",
+  "tagline": "",
+  "body": "### Ms. Pacman Tribute\r\nIn Ms. Pac-man the player has to take the dots around the map while dodging the ghosts. If the player makes contact with the enemies it will lose lifes. But there are some big dots that revert the ghosts beheavour and allows the player to eat them, giving him extra puntuation. A ghost will respawn time after it has been eaten. You can also get extra points by eating fruits.\r\nAs the level increases, the game gets more difficult. The time of the \"blue state\" is shorter and the ghosts become faster.\r\n\r\n###Team\r\nSimon Stoyanov-Code & Managment: https://github.com/SimonStoyanov\r\nGuillem Sunyer-Code & Managment: https://github.com/Guillemsc\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
